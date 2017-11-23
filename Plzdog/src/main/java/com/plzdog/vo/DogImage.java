@@ -7,8 +7,7 @@ public class DogImage implements Serializable{
 	private String dogImage;
 	private int dogId;
 	
-	public DogImage() {
-	}
+	public DogImage() {}
 
 	public DogImage(String dogImage, int dogId) {
 		this.dogImage = dogImage;
