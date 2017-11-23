@@ -14,6 +14,13 @@ CREATE TABLE MEMBER (
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
 
+insert into member values('suil@naver.com','김동수','1111','서울','마포',12345,'image1','010-7123-1223',0);
+insert into member values('suil1@naver.com','김상민','1121','서울','마포',12345,'image1','010-7123-1223',0);
+insert into member values('suil2@naver.com','김장미','1131','서울','마포',12345,'image1','010-7123-1223',0);
+insert into member values('suil3@naver.com','김수미','1141','서울','마포',12345,'image1','010-7123-1223',0);
+
+select * from member
+
 -- 권한 테이블
 DROP TABLE AUTHORITY 
 	CASCADE CONSTRAINTS;
@@ -25,6 +32,13 @@ CREATE TABLE AUTHORITY (
 	CONSTRAINT FK_AUTHORITY_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ON DELETE CASCADE
 );
 
+insert into AUTHORITY values('suil@naver.com','ROLE_USER');
+insert into AUTHORITY values('suil@naver.com','ROLE_ADMIN');
+insert into AUTHORITY values('suil@naver.com','ROLE_SITTER');
+insert into AUTHORITY values('suil@naver.com','ROLE_ADMIN');
+
+select * from AUTHORITY
+
 --코드 테이블
 DROP TABLE CODE 
 	CASCADE CONSTRAINTS;
@@ -33,7 +47,38 @@ CREATE TABLE CODE (
 	CODE VARCHAR2(20) PRIMARY KEY, /* 코드 */
 	CODE_NAME VARCHAR2(100) NOT NULL, /* 코드이름 */
 	CATEGORY VARCHAR2(100) NOT NULL /* 카테고리 */
-);	
+);
+
+insert into code values('1','반려동물 경험 유무','시터');
+insert into code values('2','펫트너 집에서 보살필 수 있어요','시터');
+insert into code values('3','고객의 집에서 보살필 수 있어요','시터');
+insert into code values('4','투약가능','시터');
+insert into code values('5','노령견 케어 가능','시터');
+insert into code values('6','퍼피 케어 가능','시터');
+insert into code values('7','환자 모니터링 가능','시터');
+INSERT INTO CODE VALUES('8','배변활동','강아지');
+INSERT INTO CODE VALUES('9','심장사상충','강아지');
+INSERT INTO CODE VALUES('10','당뇨','강아지');
+
+select * from code
+
+--강아지정보 테이블
+DROP TABLE DOGINFO 
+	CASCADE CONSTRAINTS;
+
+/* 강아지정보 */
+CREATE TABLE DOGINFO (
+	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
+	CODE VARCHAR2(20) NOT NULL, /* 코드 */
+	CONSTRAINT FK_DOGINFO_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG ON DELETE CASCADE,
+	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE) REFERENCES CODE ON DELETE CASCADE
+);
+
+INSERT INTO DOGINFO VALUES('1','8');
+INSERT INTO DOGINFO VALUES('1','9');
+INSERT INTO DOGINFO VALUES('1','10');
+INSERT INTO DOGINFO VALUES('5','1');
+
 
 -- 강아지 테이블
 DROP TABLE DOG 
@@ -52,6 +97,14 @@ CREATE TABLE DOG (
 	CONSTRAINT FK_DOG_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ON DELETE CASCADE
 );
 
+INSERT INTO DOG VALUES('1','미륵','비숑','암컷',3.5,'20100608','1','suil@naver.com');
+INSERT INTO DOG VALUES('2','미륵1','슈바이처','암컷',4.5,'20100608','2','suil@naver.com');
+INSERT INTO DOG VALUES('3','미륵2','진돗개','수컷',5.5,'20100608','3','suil@naver.com');
+INSERT INTO DOG VALUES('4','미륵3','삽살개','투컷',6.5,'20100608','4','suil@naver.com');
+INSERT INTO DOG VALUES(5,'미륵3','삽살개','투컷',6.5,'20100608','4','suil@naver.com');
+
+SELECT C.CODE_NAME, D.DOG_NAME FROM DOG D , CODE C, DOGINFO I WHERE D.DOG_ID = I.DOG_ID AND I.CODE = C.CODE 
+
 -- 강아지 이미지 테이블 
 DROP TABLE DOG_IMAGE 
 	CASCADE CONSTRAINTS		
@@ -61,6 +114,8 @@ CREATE TABLE DOG_IMAGE (
 	DOG_ID NUMBER(5), /* 강아지ID */
 	CONSTRAINT FK_DOG_IMAGE_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG ON DELETE CASCADE
 );
+
+INSERT INTO DOG_IMAGE VALUES('SDFLKJSDFL','')
 
 -- 시터 테이블
 DROP TABLE SITTER 
@@ -84,7 +139,6 @@ DROP TABLE SKILL
 CREATE TABLE SKILL (
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
 	CODE_SKILL VARCHAR2(20) NOT NULL, /* 코드 */
-	CONSTRAINT PK_SKILL PRIMARY KEY(EMAIL),
 	CONSTRAINT FK_SKILL_MEMBER FOREIGN KEY(EMAIL) REFERENCES SITTER ON DELETE CASCADE,
 	CONSTRAINT FK_SKILL_CODE FOREIGN KEY(CODE_SKILL) REFERENCES CODE ON DELETE CASCADE
 );
@@ -166,6 +220,5 @@ CREATE TABLE CARE_IMAGE (
 	CARE_ID NUMBER(10) NOT NULL, /* 돌봄일지ID */
 	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE ON DELETE CASCADE
 );
-
 		
 select * from RESERVATION
