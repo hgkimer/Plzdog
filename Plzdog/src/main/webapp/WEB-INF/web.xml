@@ -11,9 +11,4 @@
 		<param-name>rootPath</param-name>
 		<param-value>/Plzdog</param-value>
 	</context-param>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:com/mydomain/config/spring/security-context.xml 
-						 classpath:com/mydomain/config/spring/model-context.xml</param-value>
-	</context-param>
 </web-app>
