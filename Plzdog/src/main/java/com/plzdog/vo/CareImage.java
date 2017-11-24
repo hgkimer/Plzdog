@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class CareImage implements Serializable{
 
-	private String care_image;
+	private String careImage;
 	private int careId;
 	
 	public CareImage() {}
 
-	public CareImage(String care_image, int careId) {
-		this.care_image = care_image;
+	public CareImage(String careImage, int careId) {
+		this.careImage = careImage;
 		this.careId = careId;
 	}
 
 	public String getCare_image() {
-		return care_image;
+		return careImage;
 	}
 
-	public void setCare_image(String care_image) {
-		this.care_image = care_image;
+	public void setCare_image(String careImage) {
+		this.careImage = careImage;
 	}
 
 	public int getCareId() {
@@ -31,16 +31,11 @@ public class CareImage implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "CareImage [care_image=" + care_image + ", careId=" + careId + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + careId;
-		result = prime * result + ((care_image == null) ? 0 : care_image.hashCode());
+		result = prime * result + ((careImage == null) ? 0 : careImage.hashCode());
 		return result;
 	}
 
@@ -55,12 +50,16 @@ public class CareImage implements Serializable{
 		CareImage other = (CareImage) obj;
 		if (careId != other.careId)
 			return false;
-		if (care_image == null) {
-			if (other.care_image != null)
+		if (careImage == null) {
+			if (other.careImage != null)
 				return false;
-		} else if (!care_image.equals(other.care_image))
+		} else if (!careImage.equals(other.careImage))
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CareImage [careImage=" + careImage + ", careId=" + careId + "]";
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Care implements Serializable{
 
+	private int careId;
 	private String careContents;
 	private int resId;
 	private Date careDate;
@@ -14,17 +15,27 @@ public class Care implements Serializable{
 
 	public Care() {}
 
-	public Care(String careContents, int resId, Date careDate) {
+	public Care(int careId, String careContents, int resId, Date careDate) {
+		this.careId = careId;
 		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
 	}
 
-	public Care(String careContents, int resId, Date careDate, List<CareImage> careImageList) {
+	public Care(int careId, String careContents, int resId, Date careDate, List<CareImage> careImageList) {
+		this.careId = careId;
 		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
 		this.careImageList = careImageList;
+	}
+
+	public int getCareId() {
+		return careId;
+	}
+
+	public void setCareId(int careId) {
+		this.careId = careId;
 	}
 
 	public String getCareContents() {
@@ -65,6 +76,7 @@ public class Care implements Serializable{
 		int result = 1;
 		result = prime * result + ((careContents == null) ? 0 : careContents.hashCode());
 		result = prime * result + ((careDate == null) ? 0 : careDate.hashCode());
+		result = prime * result + careId;
 		result = prime * result + ((careImageList == null) ? 0 : careImageList.hashCode());
 		result = prime * result + resId;
 		return result;
@@ -89,6 +101,8 @@ public class Care implements Serializable{
 				return false;
 		} else if (!careDate.equals(other.careDate))
 			return false;
+		if (careId != other.careId)
+			return false;
 		if (careImageList == null) {
 			if (other.careImageList != null)
 				return false;
@@ -101,7 +115,7 @@ public class Care implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Care [careContents=" + careContents + ", resId=" + resId + ", careDate=" + careDate + ", careImageList="
-				+ careImageList + "]";
+		return "Care [careId=" + careId + ", careContents=" + careContents + ", resId=" + resId + ", careDate="
+				+ careDate + ", careImageList=" + careImageList + "]";
 	}
 }
