@@ -1,3 +1,4 @@
+
 ------------------------------
 --create
 
@@ -37,18 +38,16 @@ CREATE TABLE DOG (
 	GENDER VARCHAR2(50) NOT NULL, /* 성별 */
 	WEIGHT NUMBER(3, 1) NOT NULL, /* 몸무게 */
 	BIRTH DATE NOT NULL, /* 생년월일 */
-	CODE VARCHAR2(20) NOT NULL, /* 코드 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
-	CONSTRAINT FK_DOG_CODE FOREIGN KEY(CODE) REFERENCES CODE ON DELETE CASCADE,
 	CONSTRAINT FK_DOG_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ON DELETE CASCADE
 );
 
 /* 강아지정보 */
 CREATE TABLE DOGINFO (
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
-	CODE VARCHAR2(20) NOT NULL, /* 코드 */
+	CODE_DOG VARCHAR2(20) NOT NULL, /* 코드 */
 	CONSTRAINT FK_DOGINFO_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG ON DELETE CASCADE,
-	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE) REFERENCES CODE ON DELETE CASCADE
+	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE_DOG) REFERENCES CODE ON DELETE CASCADE
 );
 
 CREATE TABLE DOG_IMAGE (
@@ -82,9 +81,9 @@ CREATE TABLE REVIEW (
 	REVIEW_RATE NUMBER(1), /* 별점 */
 	REVIEW_CONTENTS CLOB NOT NULL, /* 내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
-	EMAIL2 VARCHAR2(100) NOT NULL, /* 시터_이메일 */
+	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
 	CONSTRAINT FK_REVIEW_MEMBER FOREIGN KEY(EMAIL) REFERENCES member ON DELETE CASCADE,
-	CONSTRAINT FK_REVIEW_SITTER FOREIGN KEY(EMAIL2) REFERENCES member ON DELETE CASCADE
+	CONSTRAINT FK_REVIEW_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES member ON DELETE CASCADE
 );
 
 /* 예약 */
@@ -95,9 +94,9 @@ CREATE TABLE RESERVATION (
 	RES_EDATE DATE NOT NULL, /* 종료날짜 */
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
-	EMAIL2 VARCHAR2(100) NOT NULL, /* 시터_이메일 */
+	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
 	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ON DELETE CASCADE,
-	CONSTRAINT FK_RESERVATION_SITTER FOREIGN KEY(EMAIL2) REFERENCES MEMBER ON DELETE CASCADE
+	CONSTRAINT FK_RESERVATION_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES MEMBER ON DELETE CASCADE
 );
 	
 /* 매출 */
@@ -113,9 +112,9 @@ CREATE TABLE SALES (
 /* 서비스 요구사항 */
 CREATE TABLE DEMAND (
 	RES_ID NUMBER(10) NOT NULL, /* 예약ID */
-	CODE VARCHAR2(20) NOT NULL, /* 코드 */
+	CODE_DEMAND VARCHAR2(20) NOT NULL, /* 코드 */
 	CONSTRAINT FK_DEMAND_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION ON DELETE CASCADE,
-	CONSTRAINT FK_DEMAND_CODE FOREIGN KEY(CODE) REFERENCES CODE ON DELETE CASCADE
+	CONSTRAINT FK_DEMAND_CODE FOREIGN KEY(CODE_DEMAND) REFERENCES CODE ON DELETE CASCADE
 );
 
 /* 돌봄일지 */
@@ -212,12 +211,13 @@ create sequence CARE_num_seq;
 -- INSERT
 
 -- MEMBER
-insert into member values('suil@naver.com','김동수','1111','서울','마포',12345,'image1','010-7123-1223',0);
-insert into member values('suil1@naver.com','김상민','1121','서울','마포',12345,'image1','010-7123-1223',0);
-insert into member values('suil2@naver.com','김장미','1131','서울','마포',12345,'image1','010-7123-1223',0);
-insert into member values('suil3@naver.com','김수미','1141','서울','마포',12345,'image1','010-7123-1223',0);
+insert into member values('kim@naver.com','김호규','1111','경기','용인', 52635,'image1','010-7415-6323',0);
+insert into member values('lee@naver.com','이효주','1121','서울','광진',12345,'image2','010-8965-5823',0);
+insert into member values('yoon@naver.com','윤규석','1131','제주도','서귀포',41523,'image3','010-6412-9223',0);
+insert into member values('soo@naver.com','이수일','1141','서울','마포',12345,'image4','010-9123-0223',0);
 
 -- 권한
+<<<<<<< HEAD
 insert into AUTHORITY values('suil@naver.com','ROLE_USER');
 insert into AUTHORITY values('suil@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('suil@naver.com','ROLE_SITTER');
@@ -225,6 +225,15 @@ insert into AUTHORITY values('suil1@naver.com','ROLE_USER');
 insert into AUTHORITY values('suil1@naver.com''ROLE_SITTER');
 insert into AUTHORITY values('suil2@naver.com','ROLE_USER');
 insert into AUTHORITY values('suil3@naver.com','ROLE_USER');
+=======
+insert into AUTHORITY values('kim@naver.com','ROLE_USER');
+insert into AUTHORITY values('kim@naver.com','ROLE_ADMIN');
+insert into AUTHORITY values('kim@naver.com','ROLE_SITTER');
+insert into AUTHORITY values('soo@naver.com','ROLE_SITTER');
+insert into AUTHORITY values('lee@naver.com','ROLE_USER');
+insert into AUTHORITY values('soo@naver.com','ROLE_USER');
+insert into AUTHORITY values('yoon@naver.com','ROLE_USER');
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 -- 코드 테이블 
 insert into code values('code-1','반려동물 경험 유무','시터');
@@ -242,10 +251,10 @@ insert into code values('code-12','도그워킹','예약');
 insert into code values('code-13','강아지목욕','예약');
 
 --강아지
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵','비숑','암컷',3.5,'20100608','code-1','suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵1','슈바이처','암컷',4.5,'20100608','code-2','suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵2','진돗개','수컷',5.5,'20100608','code-3','suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵3','삽살개','투컷',6.5,'20100608','code-4','suil@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'리코','슈바이처','암컷',4.5,'20100608', 'soo@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100608', 'lee@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'까미','삽살개','투컷',6.5,'20100608', 'lee@naver.com');
 
 -- 강아지정보
 INSERT INTO DOGINFO VALUES('1','code-7');
@@ -262,24 +271,24 @@ INSERT INTO DOG_IMAGE VALUES('이미지 경로3 ','2');
 INSERT INTO DOG_IMAGE VALUES('이미지 경로4 ','2');
 
 --시터
-INSERT INTO SITTER VALUES('suil@naver.com','가천대학교','이미지경로1','서울,경기',3.6);
-INSERT INTO SITTER VALUES('suil1@naver.com','대전대학교','이미지경로2','서울,천안',3.1);
+INSERT INTO SITTER VALUES('kim@naver.com','가천대학교','이미지경로1','서울,경기',3.6);
+INSERT INTO SITTER VALUES('soo@naver.com','대전대학교','이미지경로2','서울,천안',3.1);
 
 --스킬
-INSERT INTO SKILL VALUES('suil@naver.com','code-1');
-INSERT INTO SKILL VALUES('suil@naver.com','code-2');
-INSERT INTO SKILL VALUES('suil1@naver.com','code-3');
-INSERT INTO SKILL VALUES('suil1@naver.com','code-4');
+INSERT INTO SKILL VALUES('kim@naver.com','code-1');
+INSERT INTO SKILL VALUES('kim@naver.com','code-2');
+INSERT INTO SKILL VALUES('soo@naver.com','code-3');
+INSERT INTO SKILL VALUES('soo@naver.com','code-4');
 
 --리뷰
-INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','suil3@naver.com','suil@naver.com');
-INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','suil3@naver.com','suil1@naver.com');
+INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
+INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','suil2@naver.com','suil@naver.com');
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','suil2@naver.com','suil@naver.com');
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','suil3@naver.com','suil1@naver.com');
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','suil3@naver.com','suil1@naver.com');
+insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','soo@naver.com');
 
 --서비스 요구사항
 insert into DEMAND values (1,'code-11'); 
@@ -304,8 +313,8 @@ insert into care values(CARE_num_seq.NEXTVAL,'강아지가 너무 사랑스러�
 
 --돌봄일지 이미지
 insert into CARE_IMAGE values('돌봄이미지1',1);
-insert into CARE_IMAGE values('돌봄이미지1',2);
-insert into CARE_IMAGE values('돌봄이미지1',3);
+insert into CARE_IMAGE values('돌봄이미지2',2);
+insert into CARE_IMAGE values('돌봄이미지3',3);
 
 -----------------------------------------------
 --select
@@ -359,3 +368,18 @@ select * from RESERVATION
 select * from SALES
 select * from care
 select * from CARE_IMAGE
+
+------------------------------------test
+select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
+where m.email = s.email and sk.email = s.email and code_skill = code;
+
+select m.email, m.member_name, d.dog_name, di.dog_image from member m, dog d, dog_image di
+where m.email = d.email and di.dog_id = d.dog_id;
+
+select m.email, m.member_name, r.review_contents from member m, review r, sitter s
+where m.email = s.email and m.email = r.email_sitter and s.email = 'soo@naver.com';
+
+select m.email, m.member_name, r.res_type, c.care_contents, ci.care_image, cd.code_name, s.email, s.member_name, sl.total
+from member m, reservation r, care c, care_image ci, code cd, demand d, member s, sales sl
+where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
+and r.email_sitter = s.email and sl.res_id = r.res_id;
