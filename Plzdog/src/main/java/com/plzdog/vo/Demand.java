@@ -1,18 +1,18 @@
 package com.plzdog.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Demand implements Serializable{
 
 	private int resId;
-	private String code;
+	private List<Code> demandList;
 	
-	public Demand() {
-	}
+	public Demand() {}
 
-	public Demand(int resId, String code) {
+	public Demand(int resId, List<Code> codeList) {
 		this.resId = resId;
-		this.code = code;
+		this.demandList = codeList;
 	}
 
 	public int getResId() {
@@ -23,24 +23,19 @@ public class Demand implements Serializable{
 		this.resId = resId;
 	}
 
-	public String getCode() {
-		return code;
+	public List<Code> getCodeList() {
+		return demandList;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	@Override
-	public String toString() {
-		return "Demand [resId=" + resId + ", code=" + code + "]";
+	public void setCodeList(List<Code> codeList) {
+		this.demandList = codeList;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -54,14 +49,18 @@ public class Demand implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Demand other = (Demand) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (demandList == null) {
+			if (other.demandList != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!demandList.equals(other.demandList))
 			return false;
 		if (resId != other.resId)
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Demand [resId=" + resId + ", codeList=" + demandList + "]";
+	}
 }

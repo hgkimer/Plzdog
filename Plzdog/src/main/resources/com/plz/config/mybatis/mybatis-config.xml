@@ -5,9 +5,21 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
-		<package name="com.plz.vo"/>
+		<package name="com.plzdog.vo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/plz/config/mybatis/mapper/authenticationMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/authorityMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/careImageMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/careMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/demandMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/dogImageMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/dogMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/memberMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/reservationMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/reviewMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/salesMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/sitterMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/skillMapper.xml"/>
 	</mappers>
 </configuration>

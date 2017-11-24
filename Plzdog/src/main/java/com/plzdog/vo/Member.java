@@ -1,6 +1,7 @@
 package com.plzdog.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Member implements Serializable {
 
@@ -14,14 +15,14 @@ public class Member implements Serializable {
 	private String phoneNum;
 	private int memberEnable;
 	
-	private Sitter sitter;
-	private Review review;
-	private Authority authority;
-	private Dog dog;
-	private Code code;
+	private Sitter sitter;					//시터
+	private List<Review> reviewList;		//시터
+	private List<Reservation> resList;		//견주, 시터
+	private List<Dog> dogList;				//견주, 시터
+	private Skill skill;					//시터
 	
 	public Member() {}
-	
+
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress,
 			String zipcode, String memberImage, String phoneNum, int memberEnable) {
 		this.email = email;
@@ -34,81 +35,79 @@ public class Member implements Serializable {
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
 	}
-	
-	//TODO 생성자 만들기
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getMemberName() {
 		return memberName;
 	}
-	
+
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getMainAddress() {
 		return mainAddress;
 	}
-	
+
 	public void setMainAddress(String mainAddress) {
 		this.mainAddress = mainAddress;
 	}
-	
+
 	public String getSubAddress() {
 		return subAddress;
 	}
-	
+
 	public void setSubAddress(String subAddress) {
 		this.subAddress = subAddress;
 	}
-	
+
 	public String getZipcode() {
 		return zipcode;
 	}
-	
+
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	
+
 	public String getMemberImage() {
 		return memberImage;
 	}
-	
+
 	public void setMemberImage(String memberImage) {
 		this.memberImage = memberImage;
 	}
-	
+
 	public String getPhoneNum() {
 		return phoneNum;
 	}
-	
+
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	
+
 	public int getMemberEnable() {
 		return memberEnable;
 	}
-	
+
 	public void setMemberEnable(int memberEnable) {
 		this.memberEnable = memberEnable;
 	}
-	
+
 	public Sitter getSitter() {
 		return sitter;
 	}
@@ -117,45 +116,43 @@ public class Member implements Serializable {
 		this.sitter = sitter;
 	}
 
-	public Review getReview() {
-		return review;
+	public List<Review> getReviewList() {
+		return reviewList;
 	}
 
-	public void setReview(Review review) {
-		this.review = review;
+	public void setReviewList(List<Review> reviewList) {
+		this.reviewList = reviewList;
 	}
 
-	public Authority getAuthority() {
-		return authority;
+	public List<Reservation> getResList() {
+		return resList;
 	}
 
-	public void setAuthority(Authority authority) {
-		this.authority = authority;
+	public void setResList(List<Reservation> resList) {
+		this.resList = resList;
 	}
 
-	public Dog getDog() {
-		return dog;
+	public List<Dog> getDogList() {
+		return dogList;
 	}
 
-	public void setDog(Dog dog) {
-		this.dog = dog;
+	public void setDogList(List<Dog> dogList) {
+		this.dogList = dogList;
 	}
 
-	public Code getCode() {
-		return code;
+	public Skill getSkill() {
+		return skill;
 	}
 
-	public void setCode(Code code) {
-		this.code = code;
+	public void setSkill(Skill skill) {
+		this.skill = skill;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((authority == null) ? 0 : authority.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((dog == null) ? 0 : dog.hashCode());
+		result = prime * result + ((dogList == null) ? 0 : dogList.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((mainAddress == null) ? 0 : mainAddress.hashCode());
 		result = prime * result + memberEnable;
@@ -163,8 +160,10 @@ public class Member implements Serializable {
 		result = prime * result + ((memberName == null) ? 0 : memberName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNum == null) ? 0 : phoneNum.hashCode());
-		result = prime * result + ((review == null) ? 0 : review.hashCode());
+		result = prime * result + ((resList == null) ? 0 : resList.hashCode());
+		result = prime * result + ((reviewList == null) ? 0 : reviewList.hashCode());
 		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
+		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
 		result = prime * result + ((subAddress == null) ? 0 : subAddress.hashCode());
 		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
@@ -179,20 +178,10 @@ public class Member implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
-		if (authority == null) {
-			if (other.authority != null)
+		if (dogList == null) {
+			if (other.dogList != null)
 				return false;
-		} else if (!authority.equals(other.authority))
-			return false;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
-		if (dog == null) {
-			if (other.dog != null)
-				return false;
-		} else if (!dog.equals(other.dog))
+		} else if (!dogList.equals(other.dogList))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -226,15 +215,25 @@ public class Member implements Serializable {
 				return false;
 		} else if (!phoneNum.equals(other.phoneNum))
 			return false;
-		if (review == null) {
-			if (other.review != null)
+		if (resList == null) {
+			if (other.resList != null)
 				return false;
-		} else if (!review.equals(other.review))
+		} else if (!resList.equals(other.resList))
+			return false;
+		if (reviewList == null) {
+			if (other.reviewList != null)
+				return false;
+		} else if (!reviewList.equals(other.reviewList))
 			return false;
 		if (sitter == null) {
 			if (other.sitter != null)
 				return false;
 		} else if (!sitter.equals(other.sitter))
+			return false;
+		if (skill == null) {
+			if (other.skill != null)
+				return false;
+		} else if (!skill.equals(other.skill))
 			return false;
 		if (subAddress == null) {
 			if (other.subAddress != null)
@@ -253,7 +252,7 @@ public class Member implements Serializable {
 	public String toString() {
 		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
 				+ mainAddress + ", subAddress=" + subAddress + ", zipcode=" + zipcode + ", memberImage=" + memberImage
-				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", review="
-				+ review + ", authority=" + authority + ", dog=" + dog + ", code=" + code + "]";
+				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", reviewList="
+				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + ", skill=" + skill + "]";
 	}
 }
