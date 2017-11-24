@@ -19,7 +19,7 @@ insert into member values('suil1@naver.com','김상민','1121','서울','마포'
 insert into member values('suil2@naver.com','김장미','1131','서울','마포',12345,'image1','010-7123-1223',0);
 insert into member values('suil3@naver.com','김수미','1141','서울','마포',12345,'image1','010-7123-1223',0);
 
-select * from member
+select * from member;
 
 -- 권한 테이블
 DROP TABLE AUTHORITY 
@@ -39,7 +39,7 @@ insert into AUTHORITY values('suil1@naver.com','ROLE_USER');
 insert into AUTHORITY values('suil2@naver.com','ROLE_USER');
 insert into AUTHORITY values('suil3@naver.com','ROLE_USER');
 
-select * from AUTHORITY
+select * from AUTHORITY;
 
 --코드 테이블
 DROP TABLE CODE 
@@ -60,12 +60,12 @@ insert into code values('code-6','퍼피 케어 가능','시터');
 insert into code values('code-8','환자 모니터링 가능','시터');
 INSERT INTO CODE VALUES('code-7','배변활동','강아지');
 INSERT INTO CODE VALUES('code-9','심장사상충','강아지');
-INSERT INTO CODE VALUES('code-10'l,'당뇨','강아지');
+INSERT INTO CODE VALUES('code-10','당뇨','강아444지');
 
-select * from code
+select * from code;
 
 -- 시퀀스 생성
-drop sequence Dog_num_seq;
+drop sequence dog_num_seq;
 create sequence dog_num_seq;
 
 -- 강아지 테이블
@@ -79,19 +79,21 @@ CREATE TABLE DOG (
 	GENDER VARCHAR2(50) NOT NULL, /* 성별 */
 	WEIGHT NUMBER(3, 1) NOT NULL, /* 몸무게 */
 	BIRTH DATE NOT NULL, /* 생년월일 */
-	CODE VARCHAR2(20) NOT NULL, /* 코드 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
-	CONSTRAINT FK_DOG_CODE FOREIGN KEY(CODE) REFERENCES CODE ON DELETE CASCADE,
 	CONSTRAINT FK_DOG_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ON DELETE CASCADE
 );
 
-INSERT INTO DOG VALUES(dog_num_seq,'미륵','비숑','암컷',3.5,'20100608',select code form code where code.code = 1,'suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq,'미륵1','슈바이처','암컷',4.5,'20100608',select code form code where code.code = 2,'suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq,'미륵2','진돗개','수컷',5.5,'20100608',select code form code where code.code = 3,'suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq,'미륵3','삽살개','투컷',6.5,'20100608',select code form code where code.code = 4,'suil@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq,'미륵3','삽살개','투컷',6.5,'20100608',select code form code where code.code = 5,'suil@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵','비숑','암컷',3.5,'20100608','suil@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵1','슈바이처','암컷',4.5,'20100608','suil@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵2','진돗개','수컷',5.5,'20100608','suil@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵3','삽살개','투컷',6.5,'20100608','suil@naver.com');
+INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵3','삽살개','투컷',6.5,'20100608','suil@naver.com');
 
-SELECT C.CODE_NAME, D.DOG_NAME FROM DOG D , CODE C, DOGINFO I WHERE D.DOG_ID = I.DOG_ID AND I.CODE = C.CODE 
+/* DOG TABLE 전체조회*/
+SELECT * 
+FROM	DOG
+
+SELECT C.CODE_NAME, D.DOG_NAME FROM DOG D , CODE C, DOGINFO I WHERE D.DOG_ID = I.DOG_ID AND I.CODE = C.CODE; 
 
 --강아지정보 테이블
 DROP TABLE DOGINFO 
@@ -130,7 +132,7 @@ INSERT INTO DOG_IMAGE VALUES('이미지 경로2 ','2');
 INSERT INTO DOG_IMAGE VALUES('이미지 경로3 ','2');
 INSERT INTO DOG_IMAGE VALUES('이미지 경로4 ','2');
 
-SELECT DOG_IMAGE.DOG_ID, DOG_IMAGE.DOG_IMAGE  FROM DOG_IMAGE
+SELECT DOG_IMAGE.DOG_ID, DOG_IMAGE.DOG_IMAGE  FROM DOG_IMAGE;
 
 -- 시터 테이블
 DROP TABLE SITTER 
