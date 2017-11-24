@@ -1,4 +1,3 @@
-
 ------------------------------
 --create
 
@@ -217,15 +216,6 @@ insert into member values('yoon@naver.com','윤규석','1131','제주도','서�
 insert into member values('soo@naver.com','이수일','1141','서울','마포',12345,'image4','010-9123-0223',0);
 
 -- 권한
-<<<<<<< HEAD
-insert into AUTHORITY values('suil@naver.com','ROLE_USER');
-insert into AUTHORITY values('suil@naver.com','ROLE_ADMIN');
-insert into AUTHORITY values('suil@naver.com','ROLE_SITTER');
-insert into AUTHORITY values('suil1@naver.com','ROLE_USER');
-insert into AUTHORITY values('suil1@naver.com''ROLE_SITTER');
-insert into AUTHORITY values('suil2@naver.com','ROLE_USER');
-insert into AUTHORITY values('suil3@naver.com','ROLE_USER');
-=======
 insert into AUTHORITY values('kim@naver.com','ROLE_USER');
 insert into AUTHORITY values('kim@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('kim@naver.com','ROLE_SITTER');
@@ -233,7 +223,6 @@ insert into AUTHORITY values('soo@naver.com','ROLE_SITTER');
 insert into AUTHORITY values('lee@naver.com','ROLE_USER');
 insert into AUTHORITY values('soo@naver.com','ROLE_USER');
 insert into AUTHORITY values('yoon@naver.com','ROLE_USER');
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 -- 코드 테이블 
 insert into code values('code-1','반려동물 경험 유무','시터');
