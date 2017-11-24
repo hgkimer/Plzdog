@@ -1,19 +1,20 @@
 package com.plzdog.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Skill implements Serializable {
 
 	private String email;
-	private String codeSkill;
+	private List<Code> skillList;
 	
 	public Skill() {}
 
-	public Skill(String email, String codeSkill) {
+	public Skill(String email, List<Code> skillList) {
 		this.email = email;
-		this.codeSkill = codeSkill;
+		this.skillList = skillList;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -22,20 +23,20 @@ public class Skill implements Serializable {
 		this.email = email;
 	}
 
-	public String getCodeSkill() {
-		return codeSkill;
+	public List<Code> getSkillList() {
+		return skillList;
 	}
 
-	public void setCodeSkill(String codeSkill) {
-		this.codeSkill = codeSkill;
+	public void setSkillList(List<Code> skillList) {
+		this.skillList = skillList;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codeSkill == null) ? 0 : codeSkill.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((skillList == null) ? 0 : skillList.hashCode());
 		return result;
 	}
 
@@ -48,21 +49,21 @@ public class Skill implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Skill other = (Skill) obj;
-		if (codeSkill == null) {
-			if (other.codeSkill != null)
-				return false;
-		} else if (!codeSkill.equals(other.codeSkill))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (skillList == null) {
+			if (other.skillList != null)
+				return false;
+		} else if (!skillList.equals(other.skillList))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Skill [email=" + email + ", codeSkill=" + codeSkill + "]";
+		return "Skill [email=" + email + ", skillList=" + skillList + "]";
 	}
 }

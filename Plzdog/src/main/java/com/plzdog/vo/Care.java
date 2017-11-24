@@ -2,17 +2,17 @@ package com.plzdog.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Care implements Serializable{
 
-	private CareImage careImage;
-	
 	private String careContents;
 	private int resId;
 	private Date careDate;
 	
-	public Care() {
-	}
+	private List<CareImage> careImageList;
+
+	public Care() {}
 
 	public Care(String careContents, int resId, Date careDate) {
 		this.careContents = careContents;
@@ -20,19 +20,11 @@ public class Care implements Serializable{
 		this.careDate = careDate;
 	}
 
-	public Care(CareImage careImage, String careContents, int resId, Date careDate) {
-		this.careImage = careImage;
+	public Care(String careContents, int resId, Date careDate, List<CareImage> careImageList) {
 		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
-	}
-
-	public CareImage getCareImage() {
-		return careImage;
-	}
-
-	public void setCareImage(CareImage careImage) {
-		this.careImage = careImage;
+		this.careImageList = careImageList;
 	}
 
 	public String getCareContents() {
@@ -59,10 +51,12 @@ public class Care implements Serializable{
 		this.careDate = careDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Care [careImage=" + careImage + ", careContents=" + careContents + ", resId=" + resId + ", careDate="
-				+ careDate + "]";
+	public List<CareImage> getCareImageList() {
+		return careImageList;
+	}
+
+	public void setCareImageList(List<CareImage> careImageList) {
+		this.careImageList = careImageList;
 	}
 
 	@Override
@@ -71,7 +65,7 @@ public class Care implements Serializable{
 		int result = 1;
 		result = prime * result + ((careContents == null) ? 0 : careContents.hashCode());
 		result = prime * result + ((careDate == null) ? 0 : careDate.hashCode());
-		result = prime * result + ((careImage == null) ? 0 : careImage.hashCode());
+		result = prime * result + ((careImageList == null) ? 0 : careImageList.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -95,14 +89,19 @@ public class Care implements Serializable{
 				return false;
 		} else if (!careDate.equals(other.careDate))
 			return false;
-		if (careImage == null) {
-			if (other.careImage != null)
+		if (careImageList == null) {
+			if (other.careImageList != null)
 				return false;
-		} else if (!careImage.equals(other.careImage))
+		} else if (!careImageList.equals(other.careImageList))
 			return false;
 		if (resId != other.resId)
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Care [careContents=" + careContents + ", resId=" + resId + ", careDate=" + careDate + ", careImageList="
+				+ careImageList + "]";
+	}
 }

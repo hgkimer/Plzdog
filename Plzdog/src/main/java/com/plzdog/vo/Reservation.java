@@ -2,6 +2,7 @@ package com.plzdog.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Reservation implements Serializable {
 
@@ -13,7 +14,7 @@ public class Reservation implements Serializable {
 	private String memberEmail;
 	private String sitterEmail;
 	
-	private Care care;
+	private List<Care> careList;
 	private Demand demand;
 	private Sales salse;
 	
@@ -56,7 +57,7 @@ public class Reservation implements Serializable {
 	}
 
 	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, Care care, Demand demand, Sales salse) {
+			String sitterEmail, List<Care> careList, Demand demand, Sales salse) {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
@@ -64,7 +65,7 @@ public class Reservation implements Serializable {
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
-		this.care = care;
+		this.careList = careList;
 		this.demand = demand;
 		this.salse = salse;
 	}
@@ -125,12 +126,12 @@ public class Reservation implements Serializable {
 		this.sitterEmail = sitterEmail;
 	}
 
-	public Care getCare() {
-		return care;
+	public List<Care> getCareList() {
+		return careList;
 	}
 
-	public void setCare(Care care) {
-		this.care = care;
+	public void setCareList(List<Care> careList) {
+		this.careList = careList;
 	}
 
 	public Demand getDemand() {
@@ -153,7 +154,7 @@ public class Reservation implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((care == null) ? 0 : care.hashCode());
+		result = prime * result + ((careList == null) ? 0 : careList.hashCode());
 		result = prime * result + ((demand == null) ? 0 : demand.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
@@ -175,10 +176,10 @@ public class Reservation implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
-		if (care == null) {
-			if (other.care != null)
+		if (careList == null) {
+			if (other.careList != null)
 				return false;
-		} else if (!care.equals(other.care))
+		} else if (!careList.equals(other.careList))
 			return false;
 		if (demand == null) {
 			if (other.demand != null)
@@ -226,6 +227,6 @@ public class Reservation implements Serializable {
 	public String toString() {
 		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEdate="
 				+ resEdate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
-				+ sitterEmail + ", care=" + care + ", demand=" + demand + ", salse=" + salse + "]";
+				+ sitterEmail + ", careList=" + careList + ", demand=" + demand + ", salse=" + salse + "]";
 	}
 }

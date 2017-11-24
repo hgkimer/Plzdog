@@ -7,8 +7,7 @@ public class CareImage implements Serializable{
 	private String care_image;
 	private int careId;
 	
-	public CareImage() {
-	}
+	public CareImage() {}
 
 	public CareImage(String care_image, int careId) {
 		this.care_image = care_image;

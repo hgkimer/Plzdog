@@ -2,6 +2,7 @@ package com.plzdog.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Dog implements Serializable{
 	
@@ -9,17 +10,17 @@ public class Dog implements Serializable{
 	private String dogName;
 	private String species;
 	private String gender;
-	private int weight;
+	private double weight;
 	private Date birth;
 	private String code;
 	private String email;
 	
-	private DogImage dogImage;
+	private List<DogImage> dogImageList;
 	private DogInfo dogInfo;
 	
 	public Dog() {}
 
-	public Dog(int dogId, String dogName, String species, String gender, int weight, Date birth, String code,
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String code,
 			String email) {
 		this.dogId = dogId;
 		this.dogName = dogName;
@@ -31,8 +32,8 @@ public class Dog implements Serializable{
 		this.email = email;
 	}
 
-	public Dog(int dogId, String dogName, String species, String gender, int weight, Date birth, String code,
-			String email, DogInfo dogInfo) {
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String code,
+			String email, List<DogImage> dogImageList, DogInfo dogInfo) {
 		this.dogId = dogId;
 		this.dogName = dogName;
 		this.species = species;
@@ -41,33 +42,7 @@ public class Dog implements Serializable{
 		this.birth = birth;
 		this.code = code;
 		this.email = email;
-		this.dogInfo = dogInfo;
-	}
-
-	public Dog(int dogId, String dogName, String species, String gender, int weight, Date birth, String code,
-			String email, DogImage dogImage) {
-		this.dogId = dogId;
-		this.dogName = dogName;
-		this.species = species;
-		this.gender = gender;
-		this.weight = weight;
-		this.birth = birth;
-		this.code = code;
-		this.email = email;
-		this.dogImage = dogImage;
-	}
-
-	public Dog(int dogId, String dogName, String species, String gender, int weight, Date birth, String code,
-			String email, DogImage dogImage, DogInfo dogInfo) {
-		this.dogId = dogId;
-		this.dogName = dogName;
-		this.species = species;
-		this.gender = gender;
-		this.weight = weight;
-		this.birth = birth;
-		this.code = code;
-		this.email = email;
-		this.dogImage = dogImage;
+		this.dogImageList = dogImageList;
 		this.dogInfo = dogInfo;
 	}
 
@@ -103,11 +78,11 @@ public class Dog implements Serializable{
 		this.gender = gender;
 	}
 
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 
@@ -135,12 +110,12 @@ public class Dog implements Serializable{
 		this.email = email;
 	}
 
-	public DogImage getDogImage() {
-		return dogImage;
+	public List<DogImage> getDogImageList() {
+		return dogImageList;
 	}
 
-	public void setDogImage(DogImage dogImage) {
-		this.dogImage = dogImage;
+	public void setDogImageList(List<DogImage> dogImageList) {
+		this.dogImageList = dogImageList;
 	}
 
 	public DogInfo getDogInfo() {
@@ -158,13 +133,15 @@ public class Dog implements Serializable{
 		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + dogId;
-		result = prime * result + ((dogImage == null) ? 0 : dogImage.hashCode());
+		result = prime * result + ((dogImageList == null) ? 0 : dogImageList.hashCode());
 		result = prime * result + ((dogInfo == null) ? 0 : dogInfo.hashCode());
 		result = prime * result + ((dogName == null) ? 0 : dogName.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((species == null) ? 0 : species.hashCode());
-		result = prime * result + weight;
+		long temp;
+		temp = Double.doubleToLongBits(weight);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -189,10 +166,10 @@ public class Dog implements Serializable{
 			return false;
 		if (dogId != other.dogId)
 			return false;
-		if (dogImage == null) {
-			if (other.dogImage != null)
+		if (dogImageList == null) {
+			if (other.dogImageList != null)
 				return false;
-		} else if (!dogImage.equals(other.dogImage))
+		} else if (!dogImageList.equals(other.dogImageList))
 			return false;
 		if (dogInfo == null) {
 			if (other.dogInfo != null)
@@ -219,7 +196,7 @@ public class Dog implements Serializable{
 				return false;
 		} else if (!species.equals(other.species))
 			return false;
-		if (weight != other.weight)
+		if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight))
 			return false;
 		return true;
 	}
@@ -227,7 +204,7 @@ public class Dog implements Serializable{
 	@Override
 	public String toString() {
 		return "Dog [dogId=" + dogId + ", dogName=" + dogName + ", species=" + species + ", gender=" + gender
-				+ ", weight=" + weight + ", birth=" + birth + ", code=" + code + ", email=" + email + ", dogImage="
-				+ dogImage + ", dogInfo=" + dogInfo + "]";
+				+ ", weight=" + weight + ", birth=" + birth + ", code=" + code + ", email=" + email + ", dogImageList="
+				+ dogImageList + ", dogInfo=" + dogInfo + "]";
 	}
 }	
