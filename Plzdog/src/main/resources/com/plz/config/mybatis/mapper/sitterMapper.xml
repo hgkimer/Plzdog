@@ -1,3 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.plz.config.mybatis.mapper.sitterMapper"></mapper>
+<mapper namespace="com.plz.config.mybatis.mapper.sitterMapper">
+	
+	<sql id="sitter-select-sql">
+		select email, school, CERTIFICATION, SERVICE_ADDRESS, SITTER_RATE from sitter
+	</sql>
+	
+	<resultMap id="sitter-resultmap" type="sales">
+		<id column="email" property="resId"/>
+		<result column="school" property="total"/>
+		<result column="CERTIFICATION" property="pay"/>
+		<result column="SERVICE_ADDRESS" property="commission"/>
+		<result column="sales_date" property="salesDate"/>
+	</resultMap>
+	
+	<select id="selectSitterByResId" parameterType="string" resultMap="sitter-resultmap">
+		<include refid="sitter-select-sql"/>
+		where email = #{email}
+	</select>
+</mapper>
