@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.authorityMapper">
+	<sql id="authority-select-sql">
+		select email, authority from authority
+	</sql>
+	
+	<resultMap id="member-resultMap" type="member">
+		<id column="email" property="email"/>
+		<result column="member_name" property="memberName"/>
+		<result column="password" property="password"/>
+		<result column="main_address" property="mainAddress"/>
+		<result column="sub_address" property="subAddress"/>
+		<result column="zipcode" property="zipcode"/>
+		<result column="member_image" property="memberImage"/>
+		<result column="phonenum" property="phoneNum"/>
+		<result column="member_enable" property="memberEnable"/>
+	</resultMap>
+	
+	<resultMap id="authority-resultmap" type="authority">
+		<id column="email" property="email"/>
+		<result column="authority" property="authority"/>
+	</resultMap>
+	
+	<select id="selectAuthorityByEmail" parameterType="string" resultMap="member-resultMap">
+		<include refid="authority-select-sql"/>
+		where email = #{value}
+	</select>
+	
+	<insert id="insertAuthority" parameterType="authority">
+	 	insert into authority (email, authority) values(#{email}, #{authority})
+	</insert>
 </mapper>

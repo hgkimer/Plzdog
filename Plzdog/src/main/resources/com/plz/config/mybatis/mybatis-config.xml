@@ -8,7 +8,6 @@
 		<package name="com.plzdog.vo"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="com/plz/config/mybatis/mapper/authenticationMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/authorityMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/careImageMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/careMapper.xml"/>
