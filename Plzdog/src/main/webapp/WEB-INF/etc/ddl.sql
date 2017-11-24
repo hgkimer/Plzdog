@@ -34,7 +34,7 @@ CREATE TABLE CODE (
 
 
 --강아지
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
+
 CREATE TABLE DOG (
 	DOG_ID NUMBER(5) PRIMARY KEY, /* 강아지ID */
 	DOG_NAME VARCHAR2(30) NOT NULL, /* 이름 */
@@ -47,18 +47,7 @@ CREATE TABLE DOG (
 );
 
 
-/* DOG TABLE 전체조회*/
-SELECT * 
-FROM	DOG
-
-SELECT C.CODE_NAME, D.DOG_NAME FROM DOG D , CODE C, DOGINFO I WHERE D.DOG_ID = I.DOG_ID AND I.CODE = C.CODE; 
-
---강아지정보 테이블
-DROP TABLE DOGINFO 
-	CASCADE CONSTRAINTS;
-
-
-/* 강아지정보 */
+--강아지 정보
 CREATE TABLE DOGINFO (
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
 	CODE_DOG VARCHAR2(20) NOT NULL, /* 코드 */
@@ -66,6 +55,8 @@ CREATE TABLE DOGINFO (
 	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE_DOG) REFERENCES CODE ON DELETE CASCADE
 );
 
+
+--강아지 이미지
 CREATE TABLE DOG_IMAGE (
 	DOG_IMAGE VARCHAR2(100) NOT NULL, /* 이미지이름(경로) */
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
@@ -333,48 +324,48 @@ select
 -- 회원에 해당하는 code의 이름을 조회
 select m.email, m.member_name, c.code, c.code_name 
 from member m , sitter s, skill k , code c 
-where s.email = m.email and s.email = k.email and k.code_skill = c.code and s.email = 'suil@naver.com'
+where s.email = m.email and s.email = k.email and k.code_skill = c.code and s.email = 'suil@naver.com';
 
 -- 회원이 신청한 예약을 조회
 select m.member_name , s.member_name
 from member m, member s, RESERVATION r
-where m.email = r.email and s.email = r.email2 and m.email = 'suil2@naver.com' 
+where m.email = r.email and s.email = r.email2 and m.email = 'suil2@naver.com';
 
 -- 회원이 신청한 예약한 요구를 조회
 select m.member_name, c.code_name from member m, demand d, RESERVATION r, code c
-where m.email = r.email and r.res_id = d.res_id and d.code = c.code and m.email = 'suil3@naver.com'
+where m.email = r.email and r.res_id = d.res_id and d.code = c.code and m.email = 'suil3@naver.com';
 
 -- 회원에서 강아지 이름과 강아지 이미지 조회
 select m.member_name , d.dog_name , i.dog_image
 from member m, dog d, DOG_IMAGE i where m.email = d.email and d.dog_id = i.dog_id 
-and m.email ='suil@naver.com' and d.dog_name = '미륵'
+and m.email ='suil@naver.com' and d.dog_name = '미륵';
 
 -- 회원에서 학교명과 스킬 조회
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
-where m.email = s.email and sk.email = s.email and code_skill = code
+where m.email = s.email and sk.email = s.email and code_skill = code;
 
 -- 회원에서 강아지 정보 조회   
 select m.email, m.member_name, d.dog_name, di.dog_image from member m, dog d, dog_image di
-where m.email = d.email and di.dog_id = d.dog_id
+where m.email = d.email and di.dog_id = d.dog_id;
 
 -- 회원에서 리뷰 조회
 select m.email, m.member_name, r.review_contents from member m, review r, sitter s
-where m.email = s.email and m.email = r.email2 and s.email = 'suil@naver.com'
+where m.email = s.email and m.email = r.email2 and s.email = 'suil@naver.com';
 
 -- 회원에서 강아지 
 
-select * from AUTHORITY
-select * from code
-select * from DOG
-select * from DOGINFO
-select * from DOG_IMAGE
-select * from SITTER
-select * from SKILL
-select * from REVIEW
-select * from RESERVATION
-select * from SALES
-select * from care
-select * from CARE_IMAGE
+select * from AUTHORITY;
+select * from code;
+select * from DOG;
+select * from DOGINFO;
+select * from DOG_IMAGE;
+select * from SITTER;
+select * from SKILL;
+select * from REVIEW;
+select * from RESERVATION;
+select * from SALES;
+select * from care;
+select * from CARE_IMAGE;
 
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
