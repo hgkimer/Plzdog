@@ -381,6 +381,11 @@ from member m, reservation r, care c, care_image ci, code cd, demand d, member s
 where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
 and r.email_sitter = s.email and sl.res_id = r.res_id;
 
+-- 1번 돌봄일지와 돌봄이미지 조회
+select	c.care_contents, c.care_date, i.care_image
+from	care c, care_image i
+where	c.care_id = i.care_id and c.care_id = 1
+
 -- 펫시터의 정보를 조회
 select			m.email,
 				m.member_name, 
