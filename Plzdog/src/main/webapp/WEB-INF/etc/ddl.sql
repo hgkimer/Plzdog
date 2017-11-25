@@ -412,3 +412,19 @@ select			m.email,
 		from    reservation r, demand d, code c
 		where   r.res_id = d.res_id
 		and 	d.code_demand = c.code
+		
+		--<!--Email로 해당 예약의 시터의 급여를 조회 -->
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    s.total,
+			    s.pay,
+			    s.commission,
+			    s.sales_date
+		from    reservation r, sales s
+		where   r.res_id = s.res_id
+		and 	r.email_sitter = 'kim@naver.com'

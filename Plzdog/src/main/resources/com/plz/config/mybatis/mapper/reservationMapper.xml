@@ -40,9 +40,10 @@
 			    r.res_contents,
 			    r.email,
 			    r.email_sitter,
-			    c.code,
-			    c.code_name,
-			    c.category
+			    s.total,
+			    s.pay,
+			    s.commission,
+			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
 	</sql>
