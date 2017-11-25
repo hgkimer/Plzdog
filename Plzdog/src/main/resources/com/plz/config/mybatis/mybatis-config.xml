@@ -9,7 +9,6 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/plz/config/mybatis/mapper/authorityMapper.xml"/>
-		<mapper resource="com/plz/config/mybatis/mapper/careImageMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/careMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/dogMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/memberMapper.xml"/>

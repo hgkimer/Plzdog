@@ -10,7 +10,6 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 <context:component-scan base-package="com.plz.service.impl,com.plz.dao.impl"/>
-
 	<!-- mybatis 설정 -->
 	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
 		p:driverClassName="oracle.jdbc.driver.OracleDriver" p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
