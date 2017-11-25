@@ -39,4 +39,36 @@
 	<delete id="deleteDog" parameterType="_int">
 		delete from dog where dog_id = #{value}
 	</delete>
+	
+	<!-- dogImage mapper -->
+	<sql id="dogImage-select-sql">
+		select DOG_IMAGE, DOG_ID from DOG_IMAGE
+	</sql>
+	
+	<resultMap id="dogImage-resultmap" type="dogImage">
+		<id column="DOG_IMAGE" property="dogImage"/>
+		<result column="DOG_ID" property="dogId"/>
+	</resultMap>
+	
+	<select id="selectDogImageByDogImage" parameterType="string" resultMap="dogImage-resultmap">
+		<include refid="dogImage-select-sql"/>
+		where dog_image = #{value}
+	</select>
+	
+	<insert id="insertDogImage" parameterType="dogImage">
+		insert into dog_image values(#{dogId}, #{dogImage})
+	</insert>
+	
+	<!-- dogImage명으로 수정 -->
+	<update id="updateDogImage" parameterType="DogImage">
+		update 	DOG_IMAGE
+		set 	DOG_ID = #{dogId},
+			    DOG_IMAGE = #{dogImage}
+		where 	DOG_IMAGE = #{dogImage}
+	</update>
+	
+	<!-- dogImage명으로 삭제 -->
+	<delete id="deleteDogImage" parameterType="string">
+		delete from DOG_IMAGE where DOG_IMAGE = #{value} 
+	</delete>
 </mapper>

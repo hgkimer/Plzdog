@@ -48,6 +48,23 @@
 		where   r.res_id = s.res_id
 	</sql>
 	
+	<sql id="reservation-join-care-sql">
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    c.care_id,
+			    c.care_contents,
+			    c.care_date,
+			    i.care_image
+		from    reservation r, care c, care_image i
+		where   r.res_id = c.res_id
+		and		c.care_id = i.care_id
+	</sql>
+	
 	<!-- reservation resultmap -->
 	<resultMap id="reservation-resultmap" type="Reservation">
 		<id column="res_id" property="resId"/>
@@ -74,12 +91,26 @@
 	
 	<!-- 해당 시터의 급여를 조회하는 resultmap -->
 	<resultMap id="reservation-join-sales-resultmap" type="Reservation" extends="reservation-resultmap">
-		<collection property ="sales" ofType ="sales">
+		<association property ="sales" javaType ="sales">
 			<id column = "res_id" property ="resId"/>
 			<result column="total" property="total"/>
 			<result column="pay" property="pay"/>
 			<result column="commisson" property="commission"/>
 			<result column="salesDate" property="salesDate"/>
+		</association>
+	</resultMap>
+	
+	<!-- 해당 예약의 돌봄일지를 조회 -->
+	<resultMap id="reservation-join-care-resultmap" type="Reservation" extends="reservation-resultmap">
+		<collection property ="careList" ofType="Care">
+			<id column = "care_id" property ="careId"/>
+			<result column="care_contents" property="careContents"/>
+			<result column="res_id" property="resId"/>
+			<result column="care_date" property="careDate"/>
+			<collection property="careImageList" ofType="CareImage">
+				<id column ="care_id" property="careId"/>
+				<result column="care_image" property="careImage"/>
+			</collection>
 		</collection>
 	</resultMap>
 	
@@ -120,8 +151,14 @@
 	
 	<!--Email로 해당 예약의 시터의 급여를 조회 -->
 	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-join-sales-resultmap">
-		<include refid="reservation-sql"/>
+		<include refid="reservation-join-sales-sql"/>
 		and r.email_sitter = #{email}
+	</select>
+	
+	<!-- 회원(견주)의 Email로 돌봄일지를 조회 -->
+	<select id="selectMemberCareByEmail" parameterType="string" resultMap ="reservation-join-care-resultmap">
+		<include refid="reservation-join-care-sql"/>
+		and r.email = #{email}
 	</select>
 	
 	<!-- 회원이 예약을 추가 -->
