@@ -1,3 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.plz.config.mybatis.mapper.memberMapper"></mapper>
+<mapper namespace="com.plz.config.mybatis.mapper.memberMapper">
+
+	<insert id="insertMember" parameterType="member">
+		insert into member 
+		values(#{email}, #{memberName}, #{password}, #{mainAddress}, #{subAddress}, #{zipcode}, #{memberImage}, #{phoneNum}, #{memberEnable})
+	</insert>
+	
+	<sql id="member-select-sql">
+		select	email, 
+				member_name, 
+				main_address, 
+				sub_address, 
+				zipcode, 
+				member_image, 
+				phonenum 
+		from	member
+	</sql>
+	
+	<sql id="member-sitter-sql">
+		select	m.email,
+				m.member_name, 
+				m.main_address, 
+				m.sub_address, 
+				m.zipcode, 
+				m.member_image, 
+				m.phonenum,
+				s.school,
+				s.certification,
+				s.service_address,
+				s.sitter_rate
+		from	member, sitter s
+		where	m.email = s.email 
+	</sql>
+	
+	<sql id="member-review-sql">
+		select	r.review_rate,
+				r.reivew_contents
+		from	member m, review r
+		where	m.email = r.email_sitter 
+	</sql>
+	
+	<resultMap type="member" id="member-resultmap">
+		<id column="email" property="email"/>
+		<result column="member_name" property="memberName"/>
+		<result column="main_address" property="mainAddress"/>
+		<result column="sub_address" property="subAddress"/>
+		<result column="zipcode" property="zipcode"/>
+		<result column="member_image" property="memberImage"/>
+		<result column="phonenum" property="phoneNum"/>
+	</resultMap>
+	
+	<resultMap type="member" id="member-join-sitter-resultmap" extends="member-resultmap">
+		<association property="sitter" javaType="sitter">
+			<id column="email" property="email"/>
+			<result column="school" property="school"/>
+			<result column="certification" property="certification"/>
+			<result column="service_address" property="serviceAddress"/>
+			<result column="sitter_rate" property="sitterRate"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="member" id="member-join-review-resultmap" extends="member-resultmap">
+		<collection property="reviewList" ofType="Review">
+			<id column="review_id" property="reviewId"/>
+			<result column="review_rate" property="reviewRate"/>
+			<result column="review_contents" property="reviewContents"/>
+			<result column="email" property="memberEmail"/>
+			<result column="email_sitter" property="sitterEmail"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectAllMember" resultMap="member-resultmap">
+		<include refid="member-select-sql"/>
+	</select>
+	
+	<select id="selectMemberByEmail" parameterType="string" resultMap="member-resultmap">
+		<include refid="member-select-sql"/>
+		where id = #{value}
+	</select>
+	
+	<select id="selectMemberByName" parameterType="string" resultMap="member-resultmap">
+		<include refid="member-select-sql"/>
+		where name like '%'||#{value}||'%'
+	</select>
+	
+	<select id="selectAllMemberJoinSitter" resultMap="member-join-sitter-resultmap">
+		<include refid="member-sitter-sql"/>
+	</select>
+	
+	<select id="selectMemberJoinSitterByEmail" parameterType="string" resultMap="member-join-sitter-resultmap">
+		<include refid="member-sitter-sql"/>
+		and where m.email = #{value}
+	</select>
+	
+	<select id="selectMemberJoinSitterByName" parameterType="string" resultMap="member-join-sitter-resultmap">
+		<include refid="member-sitter-sql"/>
+		and where m.name like '%'||#{value}||'%'
+	</select>
+	
+	<select id="selectMemberJoinReview" parameterType="string" resultMap="member-join-review-resultmap">
+		<include refid="member-review-sql"/>
+		and m.email = #{value}
+	</select>
+	
+	<update id="updateMember" parameterType="member">
+		update	member
+		set		member_name = #{memberName}, 
+				password = #{password},
+				main_address = #{mainAddress}, 
+				sub_address = #{subAddress}, 
+				zipcode = #{zipcode}, 
+				member_image = #{memberImage}, 
+				phonenum = #{phoneNum}
+		where	email = #{email}
+	</update>
+	
+	<delete id="deleteMember" parameterType="string">
+		delete from member where email = #{value}
+	</delete>
+</mapper>

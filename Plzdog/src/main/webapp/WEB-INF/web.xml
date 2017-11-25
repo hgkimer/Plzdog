@@ -18,7 +18,7 @@
 					 classpath:com/plz/config/spring/model-context.xml
 		</param-value>
 	</context-param>
-	<!-- 이게 뭐죠? -->
+	<!-- Bootstraps the root web application context before servlet initialization -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

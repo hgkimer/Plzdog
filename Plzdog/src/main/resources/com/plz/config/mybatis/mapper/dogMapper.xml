@@ -2,4 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.dogMapper">
 
+	<insert id="insertDog" parameterType="Dog">
+		<selectKey keyProperty="dogId" resultType="_int" order="BEFORE">
+			select dog_id_seq.nextval from dual
+		</selectKey>
+		insert into dog values(#{dogId}, #{dogName}, #{species}, #{weight}, #{birth}, #{email})
+	</insert>
+	
+	<resultMap type="dog" id="dog-resultmap">
+		<id column="dog_id" property="dogId"/>
+		<result column="dog_name" property="dogName"/>
+		<result column="species" property="species"/>
+		<result column="gender" property="gender"/>
+		<result column="weight" property="weight"/>
+		<result column="birth" property="birth"/>
+		<result column="email" property="email"/>
+	</resultMap>
+	
+	<resultMap type="dog" id="dog-join-dog_image-resultmap" extends="dog-resultmap">
+		<collection property="dogImageList" ofType="DogImage">
+			<id column="dog_image" property="dogImage"/>
+			<result column="dog_id" property="dogId"/>
+		</collection>
+	</resultMap>
+	
+	<update id="updateDog" parameterType="dog">
+		update	dog
+		set		dog_name = #{dogName},
+				species = #{species},
+				gender = #{gender},
+				weight = #{weight},
+				birth = #{birth}
+		where	dog_id = #{dogId}
+	</update>
+	
+	<delete id="deleteDog" parameterType="_int">
+		delete from dog where dog_id = #{value}
+	</delete>
 </mapper>

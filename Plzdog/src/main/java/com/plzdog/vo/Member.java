@@ -19,7 +19,6 @@ public class Member implements Serializable {
 	private List<Review> reviewList;		//시터
 	private List<Reservation> resList;		//견주, 시터
 	private List<Dog> dogList;				//견주, 시터
-	private Skill skill;					//시터
 	
 	public Member() {}
 
@@ -140,14 +139,6 @@ public class Member implements Serializable {
 		this.dogList = dogList;
 	}
 
-	public Skill getSkill() {
-		return skill;
-	}
-
-	public void setSkill(Skill skill) {
-		this.skill = skill;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -163,7 +154,6 @@ public class Member implements Serializable {
 		result = prime * result + ((resList == null) ? 0 : resList.hashCode());
 		result = prime * result + ((reviewList == null) ? 0 : reviewList.hashCode());
 		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
-		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
 		result = prime * result + ((subAddress == null) ? 0 : subAddress.hashCode());
 		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
@@ -230,11 +220,6 @@ public class Member implements Serializable {
 				return false;
 		} else if (!sitter.equals(other.sitter))
 			return false;
-		if (skill == null) {
-			if (other.skill != null)
-				return false;
-		} else if (!skill.equals(other.skill))
-			return false;
 		if (subAddress == null) {
 			if (other.subAddress != null)
 				return false;
@@ -253,6 +238,6 @@ public class Member implements Serializable {
 		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
 				+ mainAddress + ", subAddress=" + subAddress + ", zipcode=" + zipcode + ", memberImage=" + memberImage
 				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", reviewList="
-				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + ", skill=" + skill + "]";
+				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
 	}
 }
