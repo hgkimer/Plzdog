@@ -1,21 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.sitterMapper">
-	
+
 	<sql id="sitter-select-sql">
 		select email, school, CERTIFICATION, SERVICE_ADDRESS, SITTER_RATE from sitter
 	</sql>
 	
-	<resultMap id="sitter-resultmap" type="sales">
-		<id column="email" property="resId"/>
-		<result column="school" property="total"/>
-		<result column="CERTIFICATION" property="pay"/>
-		<result column="SERVICE_ADDRESS" property="commission"/>
-		<result column="sales_date" property="salesDate"/>
+	<sql id="sitter-join-skill-sql">
+		select sitter
+			   s.email,
+			   s.school,
+			   s.CERTIFICATION,
+			   s.SERVICE_ADDRESS,
+			   s.sitter_Rate,
+			   c.code,
+			   c.code_name,
+			   c.category	
+		from   sitter s, skill k, code c
+		where  s.email = k.email
+		and    k.code_skill = c.code
+	</sql>
+	
+	<resultMap id="sitter-resultmap" type="sitter">
+		<id column="email" property="email"/>
+		<result column="school" property="school"/>
+		<result column="CERTIFICATION" property="certification"/>
+		<result column="SERVICE_ADDRESS" property="serviceAddress"/>
+		<result column="sitter_Rate" property="sitterRate"/>
 	</resultMap>
 	
-	<select id="selectSitterByResId" parameterType="string" resultMap="sitter-resultmap">
+	<!-- sitter -> skill -> code로 조회 -->
+	<resultMap id="sitter-join-skill-resultmap" type="sitter" extends="sitter-resultmap">
+		<!-- property는 VO의 변수명 , ofType : VO명 -->
+		<collection property ="skillList" ofType ="Skill">
+			<id property ="email" column = "email"/>
+				
+			<association property="code" javaType="code">
+				<id property="codeName" column="code_name"/>
+				<result property="category" column="category"/>
+			</association>
+		</collection>
+	</resultMap>
+	
+	<select id="selectSitterByEmail" parameterType="string" resultMap="sitter-resultmap">
 		<include refid="sitter-select-sql"/>
 		where email = #{email}
 	</select>
+	
+	<select id="selectSitterAndSkillList" parameterType="string" resultMap="sitter-join-skill-resultmap">
+		<include refid="sitter-join-skill-sql"/>
+		where email = #{email}
+	</select> 
+	
+	<insert id ="insertSitter" parameterType="Sitter">
+		insert into sitter values(#{email}, #{school}, #{CERTIFICATION}, #{serviceAddress}, #{sitterRate})
+	</insert>
+	
+	<update id="updateSitter" parameterType="Sitter">
+		update 	sitter
+		set 	school = #{school},
+			    CERTIFICATION = #{certification},
+			    SERVICE_ADDRESS = #{serviceAddress},
+			    sitterRate = #{sitterRate}
+		where 	email = #{email}
+	</update>
+	
+	<delete id ="deleteSitter" parameterType="sitter">
+		delete from sitter where #{email} = #{email}
+	</delete>
+	
+	
 </mapper>

@@ -1,6 +1,7 @@
 package com.plzdog.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +15,9 @@ public class Reservation implements Serializable {
 	private String memberEmail;
 	private String sitterEmail;
 	
-	private List<Care> careList;
-	private Demand demand;
-	private Sales salse;
+	private ArrayList<Care> careList;
+	private List<Demand> demandList;
+	private Sales sales;
 	
 	public Reservation() {}
 
@@ -32,7 +33,8 @@ public class Reservation implements Serializable {
 	}
 
 	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, Demand demand) {
+			String sitterEmail, List<Demand> demandList) {
+		super();
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
@@ -40,24 +42,12 @@ public class Reservation implements Serializable {
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
-		this.demand = demand;
+		this.demandList = demandList;
 	}
 
 	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, Demand demand, Sales salse) {
-		this.resId = resId;
-		this.resType = resType;
-		this.resSDate = resSDate;
-		this.resEdate = resEdate;
-		this.resContents = resContents;
-		this.memberEmail = memberEmail;
-		this.sitterEmail = sitterEmail;
-		this.demand = demand;
-		this.salse = salse;
-	}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, List<Care> careList, Demand demand, Sales salse) {
+			String sitterEmail, ArrayList<Care> careList) {
+		super();
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
@@ -66,8 +56,48 @@ public class Reservation implements Serializable {
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
 		this.careList = careList;
-		this.demand = demand;
-		this.salse = salse;
+	}
+
+	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
+			String sitterEmail, Sales sales) {
+		super();
+		this.resId = resId;
+		this.resType = resType;
+		this.resSDate = resSDate;
+		this.resEdate = resEdate;
+		this.resContents = resContents;
+		this.memberEmail = memberEmail;
+		this.sitterEmail = sitterEmail;
+		this.sales = sales;
+	}
+
+	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
+			String sitterEmail, List<Demand> demandList, Sales sales) {
+		super();
+		this.resId = resId;
+		this.resType = resType;
+		this.resSDate = resSDate;
+		this.resEdate = resEdate;
+		this.resContents = resContents;
+		this.memberEmail = memberEmail;
+		this.sitterEmail = sitterEmail;
+		this.demandList = demandList;
+		this.sales = sales;
+	}
+
+	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
+			String sitterEmail, ArrayList<Care> careList, List<Demand> demandList, Sales sales) {
+		super();
+		this.resId = resId;
+		this.resType = resType;
+		this.resSDate = resSDate;
+		this.resEdate = resEdate;
+		this.resContents = resContents;
+		this.memberEmail = memberEmail;
+		this.sitterEmail = sitterEmail;
+		this.careList = careList;
+		this.demandList = demandList;
+		this.sales = sales;
 	}
 
 	public int getResId() {
@@ -130,24 +160,31 @@ public class Reservation implements Serializable {
 		return careList;
 	}
 
-	public void setCareList(List<Care> careList) {
+	public void setCareList(ArrayList<Care> careList) {
 		this.careList = careList;
 	}
 
-	public Demand getDemand() {
-		return demand;
+	public List<Demand> getDemandList() {
+		return demandList;
 	}
 
-	public void setDemand(Demand demand) {
-		this.demand = demand;
+	public void setDemandList(List<Demand> demandList) {
+		this.demandList = demandList;
 	}
 
-	public Sales getSalse() {
-		return salse;
+	public Sales getsales() {
+		return sales;
 	}
 
-	public void setSalse(Sales salse) {
-		this.salse = salse;
+	public void setsales(Sales sales) {
+		this.sales = sales;
+	}
+
+	@Override
+	public String toString() {
+		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEdate="
+				+ resEdate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
+				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + "]";
 	}
 
 	@Override
@@ -155,14 +192,14 @@ public class Reservation implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((careList == null) ? 0 : careList.hashCode());
-		result = prime * result + ((demand == null) ? 0 : demand.hashCode());
+		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
 		result = prime * result + ((resEdate == null) ? 0 : resEdate.hashCode());
 		result = prime * result + resId;
 		result = prime * result + ((resSDate == null) ? 0 : resSDate.hashCode());
 		result = prime * result + resType;
-		result = prime * result + ((salse == null) ? 0 : salse.hashCode());
+		result = prime * result + ((sales == null) ? 0 : sales.hashCode());
 		result = prime * result + ((sitterEmail == null) ? 0 : sitterEmail.hashCode());
 		return result;
 	}
@@ -181,10 +218,10 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!careList.equals(other.careList))
 			return false;
-		if (demand == null) {
-			if (other.demand != null)
+		if (demandList == null) {
+			if (other.demandList != null)
 				return false;
-		} else if (!demand.equals(other.demand))
+		} else if (!demandList.equals(other.demandList))
 			return false;
 		if (memberEmail == null) {
 			if (other.memberEmail != null)
@@ -210,10 +247,10 @@ public class Reservation implements Serializable {
 			return false;
 		if (resType != other.resType)
 			return false;
-		if (salse == null) {
-			if (other.salse != null)
+		if (sales == null) {
+			if (other.sales != null)
 				return false;
-		} else if (!salse.equals(other.salse))
+		} else if (!sales.equals(other.sales))
 			return false;
 		if (sitterEmail == null) {
 			if (other.sitterEmail != null)
@@ -221,12 +258,5 @@ public class Reservation implements Serializable {
 		} else if (!sitterEmail.equals(other.sitterEmail))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEdate="
-				+ resEdate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
-				+ sitterEmail + ", careList=" + careList + ", demand=" + demand + ", salse=" + salse + "]";
 	}
 }

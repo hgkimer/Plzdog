@@ -5,17 +5,17 @@
 		select DOG_IMAGE,DOG_ID from DOG_IMAGE
 	</sql>
 	
-	<resultMap id="DogImage-resultmap" type="DogImage">
-		<id column="DOG_ID" property="dogId"/>
-		<result column="DOG_IMAGE" property="dogImage"/>
+	<resultMap id="DogImage-resultmap" type="dogImage">
+		<id column="DOG_IMAGE" property="dogImage"/>
+		<result column="DOG_ID" property="dogId"/>
 	</resultMap>
 	
 	<select id="selectDogImageByDogImage" parameterType="string" resultMap="DogImage-resultmap">
 		<include refid="DogImage-select-sql"/>
-		where Dog_Image = #{DogImage}
+		where Dog_Image = #{dogImage}
 	</select>
 	
-	<insert id="insertDogImage" parameterType="DogImage">
+	<insert id="insertDogImage" parameterType="dogImage">
 		insert into Dog_Image values(#{dogId}, #{dogImage})
 	</insert>
 	
