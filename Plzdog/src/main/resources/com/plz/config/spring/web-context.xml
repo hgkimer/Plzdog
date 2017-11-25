@@ -19,9 +19,9 @@
 		p:driverClassName="oracle.jdbc.driver.OracleDriver" p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
 		p:username="dog" p:password="god" p:initialSize="1" p:maxTotal="100" />
 	<bean name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"
-		p:dataSource-ref="dataSource" p:configLocation="classpath:com/plz/config/mybatis/mybatis-config.xml" />
+		p:dataSource-ref="dataSource" p:configLocation="classpath:com/plz/config/mybatis/mybatis-config.xml"/>
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
-		c:sqlSessionFactory-ref="sqlSessionFactoryBean" />
+		c:sqlSessionFactory-ref="sqlSessionFactoryBean" /> 
 
 	<!-- Transaction -->
 	<bean name="transactionManager"

@@ -18,6 +18,8 @@ import java.util.List;
 /*src/test/java
 
 junit test case 클릭 -> browse에서 해당 Dao 선택
+
+짜증난다.
 */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/com/plz/config/spring/model-context.xml")

@@ -7,14 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.plz.service.CareService;
-<<<<<<< HEAD
-import com.plz.service.impl.CareServiceImpl;
 import com.plzdog.vo.Care;
-
-
-=======
-import com.plzdog.vo.Care;
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 public class test {
 	
