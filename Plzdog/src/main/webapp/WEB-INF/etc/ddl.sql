@@ -90,13 +90,7 @@ CREATE TABLE CODE (
 	CATEGORY VARCHAR2(100) NOT NULL /* 카테고리 */
 );
 
-
-<<<<<<< HEAD
 --강아지
-=======
---강아지
-
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 CREATE TABLE DOG (
 	DOG_ID NUMBER(5) PRIMARY KEY, /* 강아지ID */
 	DOG_NAME VARCHAR2(30) NOT NULL, /* 이름 */
@@ -371,7 +365,7 @@ select * from RESERVATION;
 select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
-
+select * from member;
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
 where m.email = s.email and sk.email = s.email and code_skill = code;
@@ -386,3 +380,35 @@ select m.email, m.member_name, r.res_type, c.care_contents, ci.care_image, cd.co
 from member m, reservation r, care c, care_image ci, code cd, demand d, member s, sales sl
 where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
 and r.email_sitter = s.email and sl.res_id = r.res_id;
+
+-- 펫시터의 정보를 조회
+select			m.email,
+				m.member_name, 
+				m.main_address, 
+				m.sub_address, 
+				m.zipcode, 
+				m.member_image, 
+				m.phonenum,
+				s.school,
+				s.certification,
+				s.service_address,
+				s.sitter_rate,
+				c.code,
+				c.code_name,
+				c.category
+		from	member m, sitter s, skill k, code c
+		where	m.email = s.email
+		and 	s.email = k.email
+		and     k.code_skill = c.code 
+		
+		--<!-- 예약상태를 조회(reservation-> demand -> code) -->
+		select  
+				r.res_id,
+			    r.email,
+			    r.email_sitter,
+			    c.code,
+			    c.code_name,
+			    c.category
+		from    reservation r, demand d, code c
+		where   r.res_id = d.res_id
+		and 	d.code_demand = c.code

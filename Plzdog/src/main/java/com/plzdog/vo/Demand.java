@@ -6,13 +6,13 @@ import java.util.List;
 public class Demand implements Serializable{
 
 	private int resId;
-	private List<Code> demandList;
+	private List<Code> codeList;
 	
 	public Demand() {}
 
 	public Demand(int resId, List<Code> codeList) {
 		this.resId = resId;
-		this.demandList = codeList;
+		this.codeList = codeList;
 	}
 
 	public int getResId() {
@@ -24,18 +24,18 @@ public class Demand implements Serializable{
 	}
 
 	public List<Code> getCodeList() {
-		return demandList;
+		return codeList;
 	}
 
 	public void setCodeList(List<Code> codeList) {
-		this.demandList = codeList;
+		this.codeList = codeList;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
+		result = prime * result + ((codeList == null) ? 0 : codeList.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -49,10 +49,10 @@ public class Demand implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Demand other = (Demand) obj;
-		if (demandList == null) {
-			if (other.demandList != null)
+		if (codeList == null) {
+			if (other.codeList != null)
 				return false;
-		} else if (!demandList.equals(other.demandList))
+		} else if (!codeList.equals(other.codeList))
 			return false;
 		if (resId != other.resId)
 			return false;
@@ -61,6 +61,6 @@ public class Demand implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Demand [resId=" + resId + ", codeList=" + demandList + "]";
+		return "Demand [resId=" + resId + ", codeList=" + codeList + "]";
 	}
 }
