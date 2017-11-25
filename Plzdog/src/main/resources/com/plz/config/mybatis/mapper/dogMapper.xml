@@ -9,6 +9,11 @@
 		insert into dog values(#{dogId}, #{dogName}, #{species}, #{weight}, #{birth}, #{email})
 	</insert>
 	
+	<sql id="dog-join-dog_image-sql">
+		select	d.dog_name, d.species, d.gender, d.weight, d.birth, i.dog_image
+		from	dog d, member m, dog_image i
+	</sql>
+	
 	<resultMap type="dog" id="dog-resultmap">
 		<id column="dog_id" property="dogId"/>
 		<result column="dog_name" property="dogName"/>
@@ -25,6 +30,11 @@
 			<result column="dog_id" property="dogId"/>
 		</collection>
 	</resultMap>
+	
+	<select id="selectDogByEmail" parameterType="string" resultMap="dog-join-dog_image-resultmap">
+		<include refid="dog-join-dog_image-sql"/>
+		where m.email = d.email and d.dog_id = i.dog_id
+	</select>
 	
 	<update id="updateDog" parameterType="dog">
 		update	dog
