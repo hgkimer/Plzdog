@@ -16,6 +16,23 @@
 		from    reservation
 	</sql>
 	
+	<sql id="reservation-join-demand-sql">
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    c.code,
+			    c.code_name,
+			    c.category
+		from    reservation r, demand d, code c
+		where   r.res_id = d.res_id
+		and 	d.code_demand = c.code
+	</sql>
+	
+	<!-- reservation resultmap -->
 	<resultMap id="reservation-resultmap" type="Reservation">
 		<id column="res_id" property="resId"/>
 		<result column="res_type" property="resType"/>
@@ -25,6 +42,47 @@
 		<result column="email" property="memberEmail"/>
 		<result column="email_sitter" property="sitterEmail"/>
 	</resultMap>
+	
+	<!-- 회원의 예약 상태를 조회하는 resultmap -->
+	<resultMap id="reservation-join-demand-resultmap" type="Reservation" extends="reservation-resultmap">
+		<collection property ="demandList" ofType ="Demand">
+			<id column = "res_id" property ="resId"/>
+			
+			<association property="codeList" javaType="Code">
+				<id column="code" property="code"/>
+				<result column="code_name" property="codeName"/>
+				<result column="category" property="category"/>
+			</association>
+		</collection>
+	</resultMap>
+	
+	<!-- 해당 시터의 급여를 조회하는 resultmap -->
+	<resultMap id="reservation-join-sales-resultmap" type="Reservation" extends="reservation-resultmap">
+		<collection property ="sales" ofType ="sales">
+			<id column = "res_id" property ="resId"/>
+			<result column="total" property="total"/>
+			<result column="pay" property="pay"/>
+			<result column="commisson" property="commission"/>
+			<result column="salesDate" property="salesDate"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 예약에 해당하는 회원을 조회하는 resultmap -->
+	<!-- <resultMap id="reservation-join-member-resultmap" type="Reservation" extends="com.plz.config.mybatis.mapper.memberMapper.member-join-sitter-resultmap">
+		<collection property ="" ofType ="">
+			<id column = "" property =""/>
+				
+			<association property="" javaType="">
+				<id column="" property=""/>
+				<result column="" property=""/>
+			</association>
+		</collection>
+	</resultMap> -->
+	
+	<!-- 예약 전체 조회 -->
+	<select id="selectAllReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
+		<include refid="reservation-sql"/>
+	</select>
 	
 	<!-- 회원에서 이메일로 예약조회 -->
 	<select id="selectMemberReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
@@ -38,7 +96,17 @@
 		where email_sitter = #{email}
 	</select>
 	
+	<!--Email 예약상태를 조회(reservation-> demand -> code) -->
+	<select id="selectAllReservationJoinDemandByEmail" parameterType="string" resultMap="reservation-join-demand-resultmap">
+		<include refid="reservation-join-demand-sql"/>
+		where email = #{email}
+	</select> 
+	
+	<!-- 회원이 예약을 추가 -->
 	<insert id ="insertReservation" parameterType="Reservation">
+		<selectKey keyProperty="resId" resultType="_int" order="BEFORE">
+        	select res_id_seq.nextval from dual
+      	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
 		#{resEdate}, #{resContents},#{memberEmail},#{sitterEmail})
 	</insert>
