@@ -42,7 +42,7 @@
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
-				<value>classpath:com/mydomain/config/tiles/tiles-config.xml</value>
+				<value>classpath:com/plz/config/mybatis/tiles-config.xml</value>
 			</list>
 		</property>
 	</bean>
