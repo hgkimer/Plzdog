@@ -12,7 +12,6 @@ public class Dog implements Serializable{
 	private String gender;
 	private double weight;
 	private Date birth;
-	private String code;
 	private String email;
 	
 	private List<DogImage> dogImageList;
@@ -20,28 +19,23 @@ public class Dog implements Serializable{
 	
 	public Dog() {}
 
-	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String code,
-			String email) {
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email) {
 		this.dogId = dogId;
 		this.dogName = dogName;
 		this.species = species;
 		this.gender = gender;
 		this.weight = weight;
 		this.birth = birth;
-		this.code = code;
 		this.email = email;
 	}
 
-	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String code,
-			String email, List<DogImage> dogImageList, List<DogInfo> dogInfoList) {
-		super();
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email, List<DogImage> dogImageList, DogInfo dogInfo) {
 		this.dogId = dogId;
 		this.dogName = dogName;
 		this.species = species;
 		this.gender = gender;
 		this.weight = weight;
 		this.birth = birth;
-		this.code = code;
 		this.email = email;
 		this.dogImageList = dogImageList;
 		this.dogInfoList = dogInfoList;
@@ -95,14 +89,6 @@ public class Dog implements Serializable{
 		this.birth = birth;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -128,18 +114,10 @@ public class Dog implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "Dog [dogId=" + dogId + ", dogName=" + dogName + ", species=" + species + ", gender=" + gender
-				+ ", weight=" + weight + ", birth=" + birth + ", code=" + code + ", email=" + email + ", dogImageList="
-				+ dogImageList + ", dogInfoList=" + dogInfoList + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + dogId;
 		result = prime * result + ((dogImageList == null) ? 0 : dogImageList.hashCode());
 		result = prime * result + ((dogInfoList == null) ? 0 : dogInfoList.hashCode());
@@ -166,11 +144,6 @@ public class Dog implements Serializable{
 			if (other.birth != null)
 				return false;
 		} else if (!birth.equals(other.birth))
-			return false;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
 			return false;
 		if (dogId != other.dogId)
 			return false;
@@ -208,4 +181,12 @@ public class Dog implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Dog [dogId=" + dogId + ", dogName=" + dogName + ", species=" + species + ", gender=" + gender
+				+ ", weight=" + weight + ", birth=" + birth + ", email=" + email + ", dogImageList=" + dogImageList
+				+ ", dogInfoList=" + dogInfoList + "]";
+	}
+	
 }	
