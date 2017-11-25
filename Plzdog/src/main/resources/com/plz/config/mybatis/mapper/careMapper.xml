@@ -26,7 +26,7 @@
 	<select id="selectCareJoinCareImage" parameterType="_int" resultMap="care-join-care_image-resultmap">
 		select	c.care_contents, c.care_date, i.care_image
 		from	care c, care_image i
-		where	c.care_id = i.care_id 
+		where	c.care_id = i.care_id and c.care_id = #{value}
 	</select>
 	
 	<update id="updateCare" parameterType="Care">
@@ -39,5 +39,18 @@
 	
 	<delete id="deleteCare" parameterType="_int">
 		delete from care where care_id = #{value}
+	</delete>
+	
+	<!-- 이미지 관리 -->
+	<insert id="insertCareImage" parameterType="CareImage">
+		insert into care_image values(#{careImage}, #{careId})
+	</insert>
+	
+	<update id="updateCareImage" parameterType="CareImage">
+		update care_image set care_image = #{careImage} where care_id = #{careId}
+	</update>
+	
+	<delete id="deleteCareImage" parameterType="string">
+		delete from care_image where care_image = #{value}
 	</delete>
 </mapper>
