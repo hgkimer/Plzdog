@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.reservationMapper">
+	<!-- 
+		사용자가 예약을 수정,삭제,조회,추가   
+		code테이블에 예약상태 (예약대기/예약확정/예약종료)가 들어간다.
+	-->
+	<sql id="reservation-sql">
+		select  res_id,
+			    res_type,
+			    res_sdate,
+			    res_edate,
+			    res_contents,
+			    email,
+			    email_sitter
+		from    reservation
+	</sql>
+	
+	<resultMap id="reservation-resultmap" type="Reservation">
+		<id column="res_id" property="resId"/>
+		<result column="res_type" property="resType"/>
+		<result column="res_sdate" property="resSDate"/>
+		<result column="res_edate" property="resEdate"/>
+		<result column="res_contents" property="resContents"/>
+		<result column="email" property="memberEmail"/>
+		<result column="email_sitter" property="sitterEmail"/>
+	</resultMap>
+	
+	<!-- 회원에서 이메일로 예약조회 -->
+	<select id="selectMemberReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
+		<include refid="reservation-sql"/>
+		where email = #{email}
+	</select>
+	
+	<!-- 시터에서 이메일로 예약조회 -->
+	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
+		<include refid="reservation-sql"/>
+		where email_sitter = #{email}
+	</select>
+	
+	<insert id ="insertReservation" parameterType="Reservation">
+		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
+		#{resEdate}, #{resContents},#{memberEmail},#{sitterEmail})
+	</insert>
+	
+	<!-- 예약ID를 통해 수정한다. -->
+	<update id="updateReservation" parameterType="Reservation">
+		update   reservation 	
+		set 	 res_type = #{resType},
+			     res_sDate = #{resSDate},
+			     res_eDate = #{resEDate},
+			     res_contents = #{resContents},
+			     member_Email = #{memberEmail},
+			     sitter_email = #{sitterEmail}
+		where    res_id = #{resId}
+	</update>
+	
+	<delete id ="deleteReservation" parameterType="string">
+		delete from reservation where res_id = #{resId}
+	</delete>	
 </mapper>
