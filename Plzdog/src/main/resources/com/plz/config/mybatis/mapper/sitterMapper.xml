@@ -41,14 +41,15 @@
 		</collection>
 	</resultMap>
 	
+	<!-- select  -->
 	<select id="selectSitterByEmail" parameterType="string" resultMap="sitter-resultmap">
 		<include refid="sitter-select-sql"/>
-		where email = #{email}
+		where s.email = #{email}
 	</select>
 	
-	<select id="selectSitterAndSkillList" parameterType="string" resultMap="sitter-join-skill-resultmap">
+	<select id="selectSitterSkillListByEmail" parameterType="string" resultMap="sitter-join-skill-resultmap">
 		<include refid="sitter-join-skill-sql"/>
-		where email = #{email}
+		where s.email = #{email}
 	</select> 
 	
 	<insert id ="insertSitter" parameterType="Sitter">

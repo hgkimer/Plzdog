@@ -32,6 +32,21 @@
 		and 	d.code_demand = c.code
 	</sql>
 	
+	<sql id="reservation-join-sales-sql">
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    c.code,
+			    c.code_name,
+			    c.category
+		from    reservation r, sales s
+		where   r.res_id = s.res_id
+	</sql>
+	
 	<!-- reservation resultmap -->
 	<resultMap id="reservation-resultmap" type="Reservation">
 		<id column="res_id" property="resId"/>
@@ -87,20 +102,26 @@
 	<!-- 회원에서 이메일로 예약조회 -->
 	<select id="selectMemberReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
-		where email = #{email}
+		where r.email = #{email}
 	</select>
 	
 	<!-- 시터에서 이메일로 예약조회 -->
 	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
-		where email_sitter = #{email}
+		where r.email_sitter = #{email}
 	</select>
 	
-	<!--Email 예약상태를 조회(reservation-> demand -> code) -->
+	<!--Email로 회원의 예약상태를 조회(reservation-> demand -> code) -->
 	<select id="selectAllReservationJoinDemandByEmail" parameterType="string" resultMap="reservation-join-demand-resultmap">
 		<include refid="reservation-join-demand-sql"/>
-		where email = #{email}
+		and r.email = #{email}
 	</select> 
+	
+	<!--Email로 해당 예약의 시터의 급여를 조회 -->
+	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-join-sales-resultmap">
+		<include refid="reservation-sql"/>
+		and r.email_sitter = #{email}
+	</select>
 	
 	<!-- 회원이 예약을 추가 -->
 	<insert id ="insertReservation" parameterType="Reservation">
