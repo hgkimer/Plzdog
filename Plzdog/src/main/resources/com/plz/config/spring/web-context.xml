@@ -11,8 +11,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<context:component-scan
-		base-package="com.plz.service.impl,com.plz.dao.impl,com.plz.controller,com.plz.dao,com.plz.service" />
+	<context:component-scan base-package="com.plz.service.impl,com.plz.dao.impl,com.plz.controller" />
 	<mvc:annotation-driven />
 	<!-- mybatis 설정 -->
 	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
@@ -64,7 +63,7 @@
 
 	<!-- Tiles 설정 -->
 	<!-- TilesConfigurer -->
-	<bean name="tilesConfig"
+<!-- 	<bean name="tilesConfig"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
@@ -73,5 +72,5 @@
 		</property>
 	</bean>
 	<bean name="tilesViewResolver"
-		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" /> -->
 </beans>

@@ -17,7 +17,7 @@ public class CareDaoImpl implements CareDao {
 	private SqlSessionTemplate session;
 	
 	private String makeSqlId(String id) {
-		return "careMapper."+id;
+		return "com.plz.config.mybatis.mapper.careMapper."+id;
 	}
 	
 	@Override
