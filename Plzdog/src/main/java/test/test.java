@@ -19,7 +19,7 @@ public class test {
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("com/plz/config/spring/web-context.xml");
 		CareService service = (CareService) ctx.getBean("careServiceImpl");
-		List<Care> list = service.selectCareJoinCareImage(1);
+		List<Care> list = service.selectCareJoinCareImage(2);
 		System.out.println(list);
 	}
 }
