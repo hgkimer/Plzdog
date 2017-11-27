@@ -15,6 +15,9 @@
 
 	<!-- 메인페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
+	<mvc:view-controller path="/member/join_form.do" view-name="member/join_form.tiles"/>
+	<mvc:view-controller path="/product/register_form.do" view-name="product/register_form.tiles"/>
+	<mvc:view-controller path="/no_tiles.do" view-name="/WEB-INF/view/no_tiles.jsp"/>
 
 	<!-- Tiles 설정 -->
 	<!-- TilesConfigurer -->
