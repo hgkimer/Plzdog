@@ -13,11 +13,11 @@
 								#{memberImage},
 								#{phoneNum},
 								#{memberEnable}
-							)
+								)
 
 	</insert>
 
-	<!-- 전체회원을 조회 -->
+	<!-- 회원의 모든 정보(MEMBER+SITTER+SKILL+CODE+DOG+DOG_IMAGE 조회 -->
 	<sql id="member-select-sql">
 		select email,
 		member_name,
@@ -72,15 +72,8 @@
 	</resultMap>
 
 	<!-- member-join-sitter-resultmap -->
-	<resultMap type="member" id="member-join-sitter-resultmap">
-		<id column="email" property="email" />
-		<result column="member_name" property="memberName" />
-		<result column="main_address" property="mainAddress" />
-		<result column="sub_address" property="subAddress" />
-		<result column="zipcode" property="zipcode" />
-		<result column="member_image" property="memberImage" />
-		<result column="phonenum" property="phoneNum" />
-		<association property="sitter" javaType="com.plzdog.vo.Sitter">
+	<resultMap type="member" id="member-join-sitter-resultmap" extends="member-resultmap">
+			<association property="sitter" javaType="com.plzdog.vo.Sitter">
 			<id column="email" property="email" />
 			<result column="school" property="school" />
 			<result column="certification" property="certification" />
@@ -88,8 +81,9 @@
 			<result column="sitter_rate" property="sitterRate" />
 			<collection property="skillList" ofType="Skill">
 				<id property="email" column="email"/>
-				<association property="code" javaType="code">
-					<id property="codeName" column="code_name" />
+				<association property="codeSkill" javaType="code">
+					<id property="code" column="code" />
+					<result property="codeName" column="code_name"/>
 					<result property="category" column="category" />
 				</association>
 			</collection>
@@ -107,7 +101,7 @@
 			<result column="email_sitter" property="sitterEmail" />
 		</collection>
 	</resultMap>
-
+		
 	<!-- 전체 멤버 조회 -->
 	<select id="selectAllMember" resultMap="member-resultmap">
 		<include refid="member-select-sql" />

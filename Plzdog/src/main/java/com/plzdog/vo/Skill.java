@@ -6,14 +6,13 @@ import java.util.List;
 public class Skill implements Serializable {
 
 	private String email;
-	private Code code;
+	private Code codeSkill;
 	
 	public Skill() {}
 
-	public Skill(String email, Code code) {
-		super();
+	public Skill(String email, Code codeSkill) {
 		this.email = email;
-		this.code = code;
+		this.codeSkill = codeSkill;
 	}
 
 	public String getEmail() {
@@ -24,24 +23,24 @@ public class Skill implements Serializable {
 		this.email = email;
 	}
 
-	public Code getCode() {
-		return code;
+	public Code getCodeSkill() {
+		return codeSkill;
 	}
 
-	public void setCode(Code code) {
-		this.code = code;
+	public void setCodeSkill(Code codeSkill) {
+		this.codeSkill = codeSkill;
 	}
 
 	@Override
 	public String toString() {
-		return "Skill [email=" + email + ", code=" + code + "]";
+		return "Skill [email=" + email + ", codeSkill=" + codeSkill + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((codeSkill == null) ? 0 : codeSkill.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
@@ -55,10 +54,10 @@ public class Skill implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Skill other = (Skill) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (codeSkill == null) {
+			if (other.codeSkill != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!codeSkill.equals(other.codeSkill))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -67,6 +66,7 @@ public class Skill implements Serializable {
 			return false;
 		return true;
 	}
+	
 
 	
 }

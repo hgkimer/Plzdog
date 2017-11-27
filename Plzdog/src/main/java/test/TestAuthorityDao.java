@@ -11,7 +11,7 @@ import com.plzdog.vo.Authority;
 
 public class TestAuthorityDao {
 	public static void main(String [] args) {
-	ApplicationContext ctx = new ClassPathXmlApplicationContext("com/plz/config/spring/web-context.xml");
+	ApplicationContext ctx = new ClassPathXmlApplicationContext("com/plz/config/spring/model-context.xml");
 	//Authority Test ----- 완료
 	AuthorityService authService = (AuthorityServiceImpl) ctx.getBean("authorityServiceImpl");
 	String email = "kim@naver.com";
