@@ -5,9 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+	* {
+		margin:0 auto;
+		padding:0;
+		list-style:none;
+		text-decoration:none;
+	}
+</style>
 </head>
 
 <body>
-<tiles:insertAttribute name="header"/>
+
 </body>
 </html>
