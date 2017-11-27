@@ -1,15 +1,12 @@
 package test;
 
-
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-import com.plz.service.AuthorityService;
 import com.plz.service.CareService;
-import com.plzdog.vo.Authority;
 import com.plzdog.vo.Care;
 
 public class test {
@@ -24,10 +21,6 @@ public class test {
 		CareService service = (CareService) ctx.getBean("careServiceImpl");
 		List<Care> list = service.selectCareJoinCareImage(2);
 		System.out.println(list);
-		
-		
-
-		
 		
 	}
 }

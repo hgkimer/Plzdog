@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.plz.dao.AuthorityDao;
 import com.plzdog.vo.Authority;
@@ -18,6 +20,7 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	private String makeSqlId(String id) {
 		return "com.plz.config.mybatis.mapper.authorityMapper." + id;
 	}
+	
 	@Override
 	public int insertAuthority(Authority authority) {
 		return session.insert(makeSqlId("insertAuthority"), authority);
