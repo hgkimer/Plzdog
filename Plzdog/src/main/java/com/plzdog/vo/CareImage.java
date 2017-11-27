@@ -14,11 +14,11 @@ public class CareImage implements Serializable{
 		this.careId = careId;
 	}
 
-	public String getCare_image() {
+	public String getCareImage() {
 		return careImage;
 	}
 
-	public void setCare_image(String careImage) {
+	public void setCareImage(String careImage) {
 		this.careImage = careImage;
 	}
 

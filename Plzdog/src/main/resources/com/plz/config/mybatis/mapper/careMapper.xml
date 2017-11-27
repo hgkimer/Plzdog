@@ -46,8 +46,8 @@
 		insert into care_image values(#{careImage}, #{careId})
 	</insert>
 	
-	<update id="updateCareImage" parameterType="CareImage">
-		update care_image set care_image = #{careImage} where care_id = #{careId}
+	<update id="updateCareImage" parameterType="map">
+		update care_image set care_image = #{careImage} where care_id = #{careId} and care_image = #{originalImage}
 	</update>
 	
 	<delete id="deleteCareImage" parameterType="string">

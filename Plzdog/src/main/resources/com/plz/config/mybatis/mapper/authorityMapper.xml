@@ -29,6 +29,6 @@
 	</update>
 	
 	<delete id="deleteAuthority" parameterType="string">
-		delete from authority where email = #{value}
+		delete from authority where email = #{value} 
 	</delete>
 </mapper>

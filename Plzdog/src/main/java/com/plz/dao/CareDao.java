@@ -44,10 +44,10 @@ public interface CareDao {
 	
 	/**
 	 * 돌봄일지 이미지 수정
-	 * @param careImage
+	 * @param careImage, originalImage
 	 * @return
 	 */
-	int updateCareImage(CareImage careImage);
+	int updateCareImage(CareImage careImage, String originalImage);
 	
 	/**
 	 * 돌봄일지 이미지 삭제

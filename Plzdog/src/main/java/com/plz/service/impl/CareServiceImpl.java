@@ -42,8 +42,8 @@ public class CareServiceImpl implements CareService {
 	}
 
 	@Override
-	public void updateCareImage(CareImage careImage) {
-		careDao.updateCareImage(careImage);
+	public void updateCareImage(CareImage careImage, String originalImage) {
+		careDao.updateCareImage(careImage, originalImage);
 	}
 
 	@Override

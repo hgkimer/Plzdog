@@ -17,7 +17,7 @@ public interface CareService {
 	
 	void insertCareImage(CareImage careImage);
 	
-	void updateCareImage(CareImage careImage);
+	void updateCareImage(CareImage careImage, String originalImage);
 	
 	void deleteCareImage(String careImage);
 }

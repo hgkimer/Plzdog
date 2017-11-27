@@ -1,5 +1,6 @@
 package com.plz.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,8 +47,12 @@ public class CareDaoImpl implements CareDao {
 	}
 
 	@Override
-	public int updateCareImage(CareImage careImage) {
-		return session.update(makeSqlId("updateCareImage"), careImage);
+	public int updateCareImage(CareImage careImage, String originalImage) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("originalImage", originalImage);
+		params.put("careImage", careImage.getCareImage());
+		params.put("careId", careImage.getCareId());
+		return session.update(makeSqlId("updateCareImage"), params);
 	}
 
 	@Override
