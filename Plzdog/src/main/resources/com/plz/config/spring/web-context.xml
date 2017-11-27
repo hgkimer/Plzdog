@@ -17,7 +17,9 @@
 	<mvc:view-controller path="/member/join_form.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/product/register_form.do" view-name="product/register_form.tiles"/>
 	<mvc:view-controller path="/no_tiles.do" view-name="/WEB-INF/view/no_tiles.jsp"/>
-
+	<mvc:view-controller path="/dog_test.do" view-name="/WEB-INF/view/content/dog_test.tiles"/>
+	<!-- test폼 -->
+	<mvc:view-controller path="/care/select_care.do" view-name="care/select_care.tiles"/>
 	<!-- Tiles 설정 -->
 	<!-- TilesConfigurer -->
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
