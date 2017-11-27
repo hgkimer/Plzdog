@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
 @Controller
@@ -19,4 +20,5 @@ public class MemberController {
 		service.addMember(member);
 		return new ModelAndView("redirect:/join_success.do", "memberEmail", member.getEmail());
 	}
+
 }
