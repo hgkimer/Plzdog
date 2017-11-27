@@ -29,7 +29,8 @@ public class Dog implements Serializable{
 		this.email = email;
 	}
 
-	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email, List<DogImage> dogImageList, DogInfo dogInfo) {
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email,
+			List<DogImage> dogImageList, List<DogInfo> dogInfoList) {
 		this.dogId = dogId;
 		this.dogName = dogName;
 		this.species = species;
@@ -188,5 +189,4 @@ public class Dog implements Serializable{
 				+ ", weight=" + weight + ", birth=" + birth + ", email=" + email + ", dogImageList=" + dogImageList
 				+ ", dogInfoList=" + dogInfoList + "]";
 	}
-	
 }	

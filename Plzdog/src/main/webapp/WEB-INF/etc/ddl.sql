@@ -204,6 +204,7 @@ CREATE TABLE CARE_IMAGE (
 --강아지 시퀀스 생성
 drop sequence Dog_id_seq;
 create sequence dog_id_seq;	
+select dog_id_seq.nextval from dual
 
 --예약 시퀀스 생성
 drop sequence RESERVATION_id_seq;
@@ -254,9 +255,9 @@ INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100608', 'lee@naver.com');
 
 -- 강아지정보
-INSERT INTO DOGINFO VALUES('1','code-7');
-INSERT INTO DOGINFO VALUES('1','code-9');
-INSERT INTO DOGINFO VALUES('1','code-10');
+INSERT INTO DOGINFO VALUES(4 ,'code-7');
+INSERT INTO DOGINFO VALUES(4, 'code-9');
+INSERT INTO DOGINFO VALUES(4,'code-10');
 
 --강아지 이미지
 INSERT INTO DOG_IMAGE VALUES('SDFLKJSDFL','1');
@@ -382,12 +383,23 @@ from member m, reservation r, care c, care_image ci, code cd, demand d, member s
 where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
 and r.email_sitter = s.email and sl.res_id = r.res_id;
 
--- 1번 돌봄일지와 돌봄이미지 조회
+-- n번 돌봄일지와 돌봄이미지 조회
 select	c.care_id, c.care_contents, c.care_date, i.care_image
 from	care c, care_image i
 where	c.care_id = i.care_id and c.care_id = 7
 
 select * from care_image
+
+-- 강아지와 강아지 이미지 조회
+select	d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth, i.dog_image, c.code_dog
+from	dog d, dog_image i, doginfo c
+where 	d.email = 'soo@naver.com' and  d.dog_id = i.dog_id(+) and d.dog_id = c.dog_id
+
+insert into dog_image values('꼬미사진', 4)
+
+select * from dog_image
+select * from dog
+select * from doginfo
 
 -- 펫시터의 정보를 조회
 select			m.email,

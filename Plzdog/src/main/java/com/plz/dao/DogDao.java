@@ -3,6 +3,7 @@ package com.plz.dao;
 import java.util.List;
 
 import com.plzdog.vo.Dog;
+import com.plzdog.vo.DogImage;
 
 public interface DogDao {
 	
@@ -34,5 +35,25 @@ public interface DogDao {
 	 */
 	int deleteDog(int dogId);
 	
+	/**
+	 * 강아지 이미지 등록
+	 * @param dogImage
+	 * @return
+	 */
+	int insertDogImage(DogImage dogImage);
 	
+	/**
+	 * 강아지 이미지 수정
+	 * @param dogImage
+	 * @param originalImage
+	 * @return
+	 */
+	int updateDogImage(DogImage dogImage, String originalImage);
+	
+	/**
+	 * 강아지 이미지 삭제
+	 * @param dogImage
+	 * @return
+	 */
+	int deleteDogImage(String dogImage);
 }

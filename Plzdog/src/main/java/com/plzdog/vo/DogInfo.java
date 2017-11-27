@@ -6,13 +6,13 @@ import java.util.List;
 public class DogInfo implements Serializable {
 
 	private int dogId;
-	private List<Code> dogInfoList;
+	private String codeDog;
 	
 	public DogInfo() {}
 
-	public DogInfo(int dogId, List<Code> dogInfoList) {
+	public DogInfo(int dogId, String codeDog) {
 		this.dogId = dogId;
-		this.dogInfoList = dogInfoList;
+		this.codeDog = codeDog;
 	}
 
 	public int getDogId() {
@@ -23,20 +23,20 @@ public class DogInfo implements Serializable {
 		this.dogId = dogId;
 	}
 
-	public List<Code> getDogInfoList() {
-		return dogInfoList;
+	public String getCodeDog() {
+		return codeDog;
 	}
 
-	public void setDogInfoList(List<Code> dogInfoList) {
-		this.dogInfoList = dogInfoList;
+	public void setCodeDog(String codeDog) {
+		this.codeDog = codeDog;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((codeDog == null) ? 0 : codeDog.hashCode());
 		result = prime * result + dogId;
-		result = prime * result + ((dogInfoList == null) ? 0 : dogInfoList.hashCode());
 		return result;
 	}
 
@@ -49,18 +49,18 @@ public class DogInfo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		DogInfo other = (DogInfo) obj;
-		if (dogId != other.dogId)
-			return false;
-		if (dogInfoList == null) {
-			if (other.dogInfoList != null)
+		if (codeDog == null) {
+			if (other.codeDog != null)
 				return false;
-		} else if (!dogInfoList.equals(other.dogInfoList))
+		} else if (!codeDog.equals(other.codeDog))
+			return false;
+		if (dogId != other.dogId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "DogInfo [dogId=" + dogId + ", dogInfoList=" + dogInfoList + "]";
+		return "DogInfo [dogId=" + dogId + ", codeDog=" + codeDog + "]";
 	}
 }
