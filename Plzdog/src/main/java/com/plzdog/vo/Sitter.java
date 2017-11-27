@@ -10,12 +10,11 @@ public class Sitter implements Serializable {
 	private String certification;
 	private String serviceAddress;
 	private double sitterRate;
-	
-	private List<Skill> skillList;
-	
-	public Sitter() {}
 
-	
+	private List<Skill> skillList;
+
+	public Sitter() {
+	}
 
 	public Sitter(String email, String school, String certification, String serviceAddress, double sitterRate) {
 		super();
@@ -25,7 +24,7 @@ public class Sitter implements Serializable {
 		this.serviceAddress = serviceAddress;
 		this.sitterRate = sitterRate;
 	}
-	
+
 	public Sitter(String email, String school, String certification, String serviceAddress, double sitterRate,
 			List<Skill> skillList) {
 		super();
@@ -37,79 +36,53 @@ public class Sitter implements Serializable {
 		this.skillList = skillList;
 	}
 
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
-
 	public String getSchool() {
 		return school;
 	}
-
-
 
 	public void setSchool(String school) {
 		this.school = school;
 	}
 
-
-
 	public String getCertification() {
 		return certification;
 	}
-
-
 
 	public void setCertification(String certification) {
 		this.certification = certification;
 	}
 
-
-
 	public String getServiceAddress() {
 		return serviceAddress;
 	}
-
-
 
 	public void setServiceAddress(String serviceAddress) {
 		this.serviceAddress = serviceAddress;
 	}
 
-
-
 	public double getSitterRate() {
 		return sitterRate;
 	}
-
-
 
 	public void setSitterRate(double sitterRate) {
 		this.sitterRate = sitterRate;
 	}
 
-
-
 	public List<Skill> getSkillList() {
 		return skillList;
 	}
 
-
-
 	public void setSkillList(List<Skill> skillList) {
 		this.skillList = skillList;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -117,8 +90,6 @@ public class Sitter implements Serializable {
 				+ ", serviceAddress=" + serviceAddress + ", sitterRate=" + sitterRate + ", skillList=" + skillList
 				+ "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -134,8 +105,6 @@ public class Sitter implements Serializable {
 		result = prime * result + ((skillList == null) ? 0 : skillList.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {

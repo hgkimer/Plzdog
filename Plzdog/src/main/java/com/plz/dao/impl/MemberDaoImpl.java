@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.plz.dao.MemberDao;
 import com.plzdog.vo.Member;
-
+@Repository
 public class MemberDaoImpl implements MemberDao{
 	@Autowired
 	private SqlSessionTemplate session;
@@ -21,7 +22,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public int insertMember(Member member) {
-		return session.insert(makeSqlId("insertMember"));
+		return session.insert(makeSqlId("insertMember"), member);
 	}
 
 	@Override
@@ -30,8 +31,8 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int updateMemeber(Member member) {
-		return session.update(makeSqlId("updateMemeber"), member);
+	public int updateMember(Member member) {
+		return session.update(makeSqlId("updateMember"), member);
 	}
 
 	@Override
@@ -65,8 +66,8 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public List<Member> selectMemberJoinReview(String name) {
-		return session.selectList(makeSqlId("selectMemberJoinReview"), name);
+	public List<Member> selectMemberJoinReviewByEmail(String email) {
+		return session.selectList(makeSqlId("selectMemberJoinReview"), email);
 	}
 
 }
