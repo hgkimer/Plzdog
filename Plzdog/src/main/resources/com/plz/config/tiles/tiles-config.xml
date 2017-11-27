@@ -4,14 +4,23 @@
 		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="template" template="/WEB-INF/view/layout/template.jsp">
+	<!-- <definition name="layout" template="/WEB-INF/view/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/> -->
+	<definition name="layout" template="/WEB-INF/view/layout/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>
+		<put-attribute name="contents" value="/WEB-INF/view/layout/contents.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp"/>
 	</definition>
-	<definition name="*.tiles" extends="template">
-		<put-attribute name="content" value="/WEB-INF/view/content/{1}.jsp"/>
+	<definition name="main.tiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/view/content/main.jsp"/>
 	</definition>
-	<definition name="*/*.tiles" extends="template">
-		<put-attribute name="content" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
+	<definition name="member/join_form.tiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/view/content/member/join_form.jsp"/>
+	</definition>
+	<definition name="member/join_success.tiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/view/content/member/join_success.jsp"/>
+	</definition>
+	<definition name="product/register_form.tiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/view/content/product/register_form.jsp"/>
 	</definition>
 </tiles-definitions>
