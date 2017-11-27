@@ -194,7 +194,7 @@ CREATE TABLE CARE (
 CREATE TABLE CARE_IMAGE (
 	CARE_IMAGE VARCHAR2(30) NOT NULL, /* 이미지경로 */
 	CARE_ID NUMBER(10) NOT NULL, /* 돌봄일지ID */
-	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE ON DELETE CASCADE
+	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE 
 );
 
 
@@ -211,9 +211,9 @@ drop sequence RESERVATION_num_seq;
 create sequence RESERVATION_num_seq;
 
 --돌봄일지 시퀀스 생성
-drop sequence CARE_num_seq;
-create sequence CARE_num_seq;	
-
+drop sequence CARE_id_seq;
+create sequence CARE_id_seq;	
+select care_id_seq.nextval from dual
 ---------------------------------------------------
 -- INSERT
 
@@ -382,9 +382,9 @@ where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r
 and r.email_sitter = s.email and sl.res_id = r.res_id;
 
 -- 1번 돌봄일지와 돌봄이미지 조회
-select	c.care_contents, c.care_date, i.care_image
-from	care c, care_image i
-where	c.care_id = i.care_id and c.care_id = 1
+select	c.care_id, c.care_contents, c.care_date, i.care_image
+		from	care c, care_image i
+		where	c.care_id = i.care_id and c.care_id = 4
 
 -- 펫시터의 정보를 조회
 select			m.email,

@@ -17,8 +17,8 @@ public class CareServiceImpl implements CareService {
 	private CareDao careDao;
 	
 	@Override
-	public int insertCare(Care care) {
-		return careDao.insertCare(care);
+	public void insertCare(Care care) {
+		careDao.insertCare(care);
 	}
 
 	@Override
@@ -27,27 +27,27 @@ public class CareServiceImpl implements CareService {
 	}
 
 	@Override
-	public int updateCare(Care care) {
-		return careDao.updateCare(care);
+	public void updateCare(Care care) {
+		careDao.updateCare(care);
 	}
 
 	@Override
-	public int deleteCare(int careId) {
-		return careDao.deleteCare(careId);
+	public void deleteCare(int careId) {
+		careDao.deleteCare(careId);
 	}
 
 	@Override
-	public int insertCareImage(CareImage careImage) {
-		return careDao.insertCareImage(careImage);
+	public void insertCareImage(CareImage careImage) {
+		careDao.insertCareImage(careImage);
 	}
 
 	@Override
-	public int updateCareImage(CareImage careImage) {
-		return careDao.updateCareImage(careImage);
+	public void updateCareImage(CareImage careImage) {
+		careDao.updateCareImage(careImage);
 	}
 
 	@Override
-	public int deleteCareImage(String careImage) {
-		return careDao.deleteCareImage(careImage);
+	public void deleteCareImage(String careImage) {
+		careDao.deleteCareImage(careImage);
 	}
 }

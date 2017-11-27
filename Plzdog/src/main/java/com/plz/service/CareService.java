@@ -7,17 +7,17 @@ import com.plzdog.vo.CareImage;
 
 public interface CareService {
 
-	int insertCare(Care care);
+	void insertCare(Care care);
 	
 	List<Care> selectCareJoinCareImage(int careId);
 	
-	int updateCare(Care care);
+	void updateCare(Care care);
 	
-	int deleteCare(int careId);
+	void deleteCare(int careId);
 	
-	int insertCareImage(CareImage careImage);
+	void insertCareImage(CareImage careImage);
 	
-	int updateCareImage(CareImage careImage);
+	void updateCareImage(CareImage careImage);
 	
-	int deleteCareImage(String careImage);
+	void deleteCareImage(String careImage);
 }

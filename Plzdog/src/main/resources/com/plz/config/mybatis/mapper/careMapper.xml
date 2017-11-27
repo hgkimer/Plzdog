@@ -3,10 +3,10 @@
 <mapper namespace="com.plz.config.mybatis.mapper.careMapper">
 	
 	<insert id="insertCare" parameterType="Care">
-		<selectKey keyProperty="careId" resultType="_int" order="BEFORE">
+ 		<selectKey keyProperty="careId" resultType="_int" order="BEFORE">
 			select care_id_seq.nextval from dual
 		</selectKey>
-		insert into care values(#{careContents}, #{resId}, #{careDate})
+		insert into care values(#{careId}, #{careContents}, #{resId}, #{careDate})
 	</insert>
 	
 	<resultMap type="care" id="care-resultmap">
@@ -24,7 +24,7 @@
 	</resultMap>
 	
 	<select id="selectCareJoinCareImage" parameterType="_int" resultMap="care-join-care_image-resultmap">
-		select	c.care_contents, c.care_date, i.care_image
+		select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
 		from	care c, care_image i
 		where	c.care_id = i.care_id and c.care_id = #{value}
 	</select>
