@@ -22,7 +22,7 @@ public interface MemberDao {
 	 * @param member
 	 * @return
 	 */
-	int updateMemeber(Member member);
+	int updateMember(Member member);
 	/**
 	 * 전체 회원을 조회하는 메소드
 	 * @return
@@ -66,7 +66,6 @@ public interface MemberDao {
 	 * @param name
 	 * @return
 	 */
-	//TODO: 어디에 쓰는 SELECT문??
-	List<Member> selectMemberJoinReview(String name);
+	List<Member> selectMemberJoinReviewByEmail(String email);
 
 }
