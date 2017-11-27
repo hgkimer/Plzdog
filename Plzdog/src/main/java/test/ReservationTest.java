@@ -49,9 +49,16 @@ public class ReservationTest {
 		
 		//insert, delete , update Demand
 		//service.addDemand(new Demand(4,"code-11"));
-		service.addDemand(new Demand(4,"code-2"));
-		service.addDemand(new Demand(4,"code-1"));
-		service.updateDemand(new Demand(4,"code-11"));
+		//service.addDemand(new Demand(4,"code-2"));
+		//service.addDemand(new Demand(4,"code-1")); //update
+		//service.updateDemand(new Demand(3,"code-11"), "code-1");
+		//service.updateDemand(new Demand(3,"code-12"), "code-2");
+		//service.updateDemand(new Demand(3,"code-11"), "code-3");
+		//service.updateDemand(new Demand(4,"code-10"),"code-1");
+		//service.updateDemand(new Demand(4,"code-12"),"code-10");
+		//service.updateDemand(new Demand(1,"code-1"),"code-11");
+		service.removeDemand(4);
+		
 		list = service.findReservationJoinDemandByEmail("lee@naver.com");
 		printReservation(list, "회원 해당 예약상태 조회");
 	}

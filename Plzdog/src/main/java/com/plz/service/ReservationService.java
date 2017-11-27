@@ -68,7 +68,7 @@ public interface ReservationService {
 	
 	void addDemand(Demand demand);
 	
-	void updateDemand(Demand demand);
-	
 	void removeDemand(int resId);
+	
+	void updateDemand(Demand demand, String originalCodeDemand);
 }

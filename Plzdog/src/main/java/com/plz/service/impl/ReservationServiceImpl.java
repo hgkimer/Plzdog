@@ -73,8 +73,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
-	public void updateDemand(Demand demand) {
-		dao.updateDemand(demand);
+	public void updateDemand(Demand demand, String originalCodeDemand) {
+		dao.updateDemand(demand, originalCodeDemand);
 	}
 	
 	@Override

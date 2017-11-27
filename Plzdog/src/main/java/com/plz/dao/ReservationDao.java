@@ -71,7 +71,7 @@ public interface ReservationDao {
 	
 	int insertDemand(Demand demand);
 	
-	int updateDemand(Demand demand);
-	
 	int deleteDemand(int resId);
+	
+	int updateDemand(Demand demand, String originalCodeDemand);
 }

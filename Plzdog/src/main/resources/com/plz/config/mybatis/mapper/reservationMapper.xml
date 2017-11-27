@@ -213,14 +213,14 @@
 	 	insert into demand values(#{resId}, #{codeDemand})
 	 </insert>
 	 
-	 <update id = "updateDemand" parameterType ="Demand">
+	 <update id = "updateDemand" parameterType ="map">
 	 	update  demand
 	 	set     code_demand = #{codeDemand}
 	 	where   res_id = #{resId} 
-	 	and 	code_demand = #{codeDemand}
+	 	and 	code_demand = #{originalCodeDemand}
 	 </update>
-	 
+
 	 <delete id = "deleteDemand" parameterType="_int">
-	 	delete from Demand and res_id = #{resId}
+	 	delete from Demand where res_id = #{resId}
 	 </delete>
 </mapper>
