@@ -164,7 +164,7 @@
 	<!-- 회원이 예약을 추가 -->
 	<insert id ="insertReservation" parameterType="Reservation">
 		<selectKey keyProperty="resId" resultType="_int" order="BEFORE">
-        	select res_id_seq.nextval from dual
+        	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
 		#{resEdate}, #{resContents},#{memberEmail},#{sitterEmail})
