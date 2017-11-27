@@ -3,15 +3,15 @@
 <mapper namespace="com.plz.config.mybatis.mapper.sitterMapper">
 
 	<sql id="sitter-select-sql">
-		select email, school, CERTIFICATION, SERVICE_ADDRESS, SITTER_RATE from sitter
+		select email, school, certification, service_address, sitter_rate from sitter
 	</sql>
 	
 	<sql id="sitter-join-skill-sql">
 		select s.email,
 			   s.school,
-			   s.CERTIFICATION,
-			   s.SERVICE_ADDRESS,
-			   s.sitter_Rate,
+			   s.certification,
+			   s.service_address,
+			   s.sitter_rate,
 			   c.code,
 			   c.code_name,
 			   c.category	
@@ -31,41 +31,44 @@
 	<!-- sitter -> skill -> code로 조회 -->
 	<resultMap id="sitter-join-skill-resultmap" type="sitter" extends="sitter-resultmap">
 		<!-- property는 VO의 변수명 , ofType : VO명 -->
-		<collection property ="skillList" ofType ="Skill">
+		<collection property ="skillList" ofType ="skill">
 			<id property ="email" column = "email"/>
-			<association property="code" javaType="code">
-				<id property="codeName" column="code_name"/>
+			<association property="codeSkill" javaType="com.plzdog.vo.Code">
+				<id property="code" column="code"/>
+				<result property="codeName" column="code_name"/>
 				<result property="category" column="category"/>
 			</association>
 		</collection>
 	</resultMap>
 	
-	<!-- select  -->
+	<!-- ##########################데이터 조회 쿼리##################################  -->
 	<select id="selectSitterByEmail" parameterType="string" resultMap="sitter-resultmap">
 		<include refid="sitter-select-sql"/>
-		where s.email = #{email}
+		where email = #{email}
 	</select>
 	
 	<select id="selectSitterSkillListByEmail" parameterType="string" resultMap="sitter-join-skill-resultmap">
 		<include refid="sitter-join-skill-sql"/>
-		where s.email = #{email}
+		and s.email = #{email}
 	</select> 
 	
+	
+	<!-- ##########################데이터 변경 쿼리################################ -->
 	<insert id ="insertSitter" parameterType="Sitter">
-		insert into sitter values(#{email}, #{school}, #{CERTIFICATION}, #{serviceAddress}, #{sitterRate})
+		insert into sitter values(#{email}, #{school}, #{certification}, #{serviceAddress}, #{sitterRate})
 	</insert>
 	
 	<update id="updateSitter" parameterType="Sitter">
 		update 	sitter
 		set 	school = #{school},
-			    CERTIFICATION = #{certification},
-			    SERVICE_ADDRESS = #{serviceAddress},
-			    sitterRate = #{sitterRate}
+			    certification = #{certification},
+			    service_address = #{serviceAddress},
+			    sitter_rate = #{sitterRate}
 		where 	email = #{email}
 	</update>
 	
 	<delete id ="deleteSitter" parameterType="sitter">
-		delete from sitter where #{email} = #{email}
+		delete from sitter where email = #{email}
 	</delete>
 	
 	
