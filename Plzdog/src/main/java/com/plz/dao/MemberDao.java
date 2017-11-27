@@ -68,4 +68,5 @@ public interface MemberDao {
 	 */
 	//TODO: 어디에 쓰는 SELECT문??
 	List<Member> selectMemberJoinReview(String name);
+
 }
