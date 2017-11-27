@@ -2,6 +2,7 @@ package com.plz.dao;
 
 import java.util.List;
 
+import com.plzdog.vo.Demand;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
@@ -17,7 +18,7 @@ public interface ReservationDao {
 	 * @param resId
 	 * @return
 	 */
-	int deleteReservation(String resId);
+	int deleteReservation(int resId);
 	/**
 	 * 매개변수로 받은 예약의 정보를 수정하는 메소드
 	 * @param reservation
@@ -36,6 +37,12 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectMemberReservationByEmail(String email);
 	/**
+	 * 매개변수로 받은 email로 시터의 예약을 조회하는 메소드
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectSitterReservationByEmail(String email);
+	/**
 	 * 매개변수로 받은 이메일과 일치하는 회원의 예약의 상태을 조회하는 메소드
 	 * @param email
 	 * @return
@@ -46,7 +53,7 @@ public interface ReservationDao {
 	 * @param email
 	 * @return
 	 */
-	Reservation selectSitterReservationByEmail(String sitterEmail);
+	Reservation selectSitterReservationSalesByResId(int ResId);
 	
 	/**
 	 * 매개변수로 받은 회원의 이메일로 해당 예약의 돌봄일지를 조회
@@ -54,4 +61,17 @@ public interface ReservationDao {
 	 * @return
 	 */
 	List<Reservation> selectMemberCareByEmail(String email);
+	
+	/**
+	 * 매개변수로 받은 시터의 이메일로 해당 예약의 돌봄일지를 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectSitterCareByEmail(String sitterEmail);
+	
+	int insertDemand(Demand demand);
+	
+	int updateDemand(Demand demand);
+	
+	int deleteDemand(int resId);
 }

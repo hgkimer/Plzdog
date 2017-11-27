@@ -106,6 +106,7 @@ CREATE TABLE DOG (
 CREATE TABLE DOGINFO (
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
 	CODE_DOG VARCHAR2(20) NOT NULL, /* 코드 */
+	CONSTRAINT PK_DOGINFO PRIMARY KEY(DOG_ID, CODE_DOG),
 	CONSTRAINT FK_DOGINFO_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG,
 	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE_DOG) REFERENCES CODE
 );
@@ -134,6 +135,7 @@ CREATE TABLE SITTER (
 CREATE TABLE SKILL (
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
 	CODE_SKILL VARCHAR2(20) NOT NULL, /* 코드 */
+	CONSTRAINT PK_SKILL PRIMARY KEY(EMAIL, CODE_SKILL),
 	CONSTRAINT FK_SKILL_MEMBER FOREIGN KEY(EMAIL) REFERENCES SITTER,
 	CONSTRAINT FK_SKILL_CODE FOREIGN KEY(CODE_SKILL) REFERENCES CODE
 );
@@ -158,7 +160,7 @@ CREATE TABLE RESERVATION (
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
-	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER,
+	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ,
 	CONSTRAINT FK_RESERVATION_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES MEMBER
 );
 	
@@ -169,15 +171,16 @@ CREATE TABLE SALES (
 	PAY NUMBER(15), /* 시터 수입 */
 	COMMISSION NUMBER(15) NOT NULL, /* 수수료 */
 	SALES_DATE DATE NOT NULL, /* 결제날짜 */
-	CONSTRAINT FK_SALES_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION
+	CONSTRAINT FK_SALES_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION on delete cascade
 );
 
 /* 서비스 요구사항 */
 CREATE TABLE DEMAND (
-	RES_ID NUMBER(10) NOT NULL, /* 예약ID */
-	CODE_DEMAND VARCHAR2(20) NOT NULL, /* 코드 */
+	RES_ID NUMBER(10) not null, /* 예약ID */
+	CODE_DEMAND VARCHAR2(20) not null, /* 코드 */
+	CONSTRAINT PK_DEMAND PRIMARY KEY(RES_ID, CODE_DEMAND),
 	CONSTRAINT FK_DEMAND_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION,
-	CONSTRAINT FK_DEMAND_CODE FOREIGN KEY(CODE_DEMAND) REFERENCES CODE
+	CONSTRAINT FK_DEMAND_CODE FOREIGN KEY(CODE_DEMAND) REFERENCES CODE on delete cascade
 );
 
 /* 돌봄일지 */
@@ -244,9 +247,9 @@ insert into code values('code-8','환자 모니터링 가능','시터');
 INSERT INTO CODE VALUES('code-7','배변활동','강아지');
 INSERT INTO CODE VALUES('code-9','심장사상충','강아지');
 INSERT INTO CODE VALUES('code-10','당뇨','강아지');
-insert into code values('code-11','투약여부','예약');
-insert into code values('code-12','도그워킹','예약');
-insert into code values('code-13','강아지목욕','예약');
+insert into code values('code-11','예약대기','예약');
+insert into code values('code-12','예약확정','예약');
+insert into code values('code-13','결제완료','예약');
 
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
@@ -291,12 +294,16 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/0
 --서비스 요구사항
 
 insert into DEMAND values (1,'code-11'); 
-insert into DEMAND values (1,'code-12'); 
-insert into DEMAND values (1,'code-13'); 
 insert into DEMAND values (2,'code-11'); 
-insert into DEMAND values (2,'code-12');
-insert into DEMAND values (3,'code-11'); 
-insert into DEMAND values (3,'code-13'); 
+insert into DEMAND values (3,'code-11');
+insert into DEMAND values (3,'code-1');
+insert into DEMAND values (3,'code-2');
+insert into DEMAND values (3,'code-3');
+insert into Demand values (4,'code-12');
+insert into Demand values (5,'code-12');
+insert into Demand values (6,'code-12');
+insert into Demand values (6,'code-11');
+insert into Demand values (6,'code-13');
 
 --매출
 insert into SALES values(1 ,100000 ,90000 ,10000, '2017/07/03');
@@ -309,12 +316,27 @@ insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 귀여워용',1
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 이뻐용',2,'2017/08/09');
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 아름다워요',3,'2017/08/09');
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요',3,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요1',3,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요2',4,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요3',4,'2017/08/09');
+select * from care
 
 --돌봄일지 이미지
 insert into CARE_IMAGE values('돌봄이미지1',1);
+insert into CARE_IMAGE values('돌봄이미지4',1);
 insert into CARE_IMAGE values('돌봄이미지2',2);
 insert into CARE_IMAGE values('돌봄이미지3',3);
-
+insert into CARE_IMAGE values('돌봄이미지5',3);
+insert into CARE_IMAGE values('돌봄이미지6',4);
+insert into CARE_IMAGE values('돌봄이미지7',4);
+insert into CARE_IMAGE values('돌봄이미지7',4);
+insert into CARE_IMAGE values('돌봄이미지7',4);
+insert into care_image values('돌봄이미지8',20);
+insert into care_image values('돌봄이미지9',20);
+insert into care_image values('돌봄이미지8',21);	
 -----------------------------------------------
 --select
 
@@ -358,6 +380,7 @@ where m.email = s.email and m.email = r.email2 and s.email = 'suil@naver.com';
 select * from AUTHORITY;
 select * from code;
 select * from DOG;
+select * from DEMAND;
 select * from DOGINFO;
 select * from DOG_IMAGE;
 select * from SITTER;
@@ -448,3 +471,52 @@ select			m.email,
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
 		and 	r.email_sitter = 'kim@naver.com'
+		
+		-- <!--Email로 해당 예약의 상태를 조회 -->
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    c.code,
+			    c.code_name,
+			    c.category
+		from    reservation r, demand d, code c
+		where   r.res_id = d.res_id
+		and     d.code_demand = c.code
+		and 	r.email = 'yoon@naver.com'
+		
+		-- 해당 예약의 돌봄일지를 조회
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    c.care_id,
+			    c.care_contents,
+			    c.care_date,
+			    i.care_image
+		from    reservation r, care c, care_image i
+		where   r.res_id = c.res_id
+		and		c.care_id = i.care_id(+)
+		and	    r.email = 'lee@naver.com'
+		
+		-- 해당 예약의 급여를 조회
+		select  r.res_id,
+			    r.res_type,
+			    r.res_sdate,
+			    r.res_edate,
+			    r.res_contents,
+			    r.email,
+			    r.email_sitter,
+			    s.total,
+			    s.pay,
+			    s.commission,
+			    s.sales_date
+		from    reservation r, sales s
+		where   r.res_id = s.res_id
+		and     r.res_id = 2

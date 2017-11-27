@@ -7,13 +7,14 @@ import com.plzdog.vo.Member;
 public interface MemberService{
 	/**
 	 * 한 명의 회원을 등록하는 메소드
+	 * @param member
 	 */
-	void addMember();
+	void addMember(Member member);
 	/**
 	 * 매개변수로 받은 회원의 정보를 삭제하는 메소드
 	 * @param email
 	 */
-	void deleteMember(Member member);
+	void deleteMember(String email);
 	/**
 	 * 매개변수로 받은 회원의 정보를 수정하는 메소드
 	 * @param member
@@ -57,9 +58,8 @@ public interface MemberService{
 	List<Member> findMemberJoinSitterByName(String name);
 	/**
 	 * 매개 변수로 받은 이름과 일치하는 기본회원 정보와 리뷰정보를 조회하는 메소드........
-	 * TODO:음.... 어따 쓰지
 	 * @param name
 	 * @return
 	 */
-	List<Member> findMemberJoinReview(String name);
+	List<Member> findMemberJoinReviewByEmail(String email);
 }

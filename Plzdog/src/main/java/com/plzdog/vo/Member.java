@@ -10,20 +10,50 @@ public class Member implements Serializable {
 	private String password;
 	private String mainAddress;
 	private String subAddress;
-	private String zipcode;
+	private int zipcode;
 	private String memberImage;
 	private String phoneNum;
 	private int memberEnable;
-	
-	private Sitter sitter;					//시터
-	private List<Review> reviewList;		//시터
-	private List<Reservation> resList;		//견주, 시터
-	private List<Dog> dogList;				//견주, 시터
-	
-	public Member() {}
 
-	public Member(String email, String memberName, String password, String mainAddress, String subAddress,
-			String zipcode, String memberImage, String phoneNum, int memberEnable) {
+	private Sitter sitter; // 시터
+	private List<Review> reviewList; // 시터
+	private List<Reservation> resList; // 견주, 시터
+	private List<Dog> dogList; // 견주, 시터
+
+	public Member() {
+	}
+
+	
+	 //회원의 기본정보만 update하기 위한 생성자(memberEnable 변수 떄문에 객체 생성이 안되서)
+	
+	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
+			String memberImage, String phoneNum) {
+		this.email = email;
+		this.memberName = memberName;
+		this.password = password;
+		this.mainAddress = mainAddress;
+		this.subAddress = subAddress;
+		this.zipcode = zipcode;
+		this.memberImage = memberImage;
+		this.phoneNum = phoneNum;
+	}
+	//등록한 이미지 값이 없을때 사용하는 생성자.
+	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
+			String phoneNum, int memberEnable) {
+		this.email = email;
+		this.memberName = memberName;
+		this.password = password;
+		this.mainAddress = mainAddress;
+		this.subAddress = subAddress;
+		this.zipcode = zipcode;
+		this.phoneNum = phoneNum;
+		this.memberEnable = memberEnable;
+	}
+
+
+	// 전체 회원 기본 정보를 갖는 생성자
+	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
+			String memberImage, String phoneNum, int memberEnable) {
 		this.email = email;
 		this.memberName = memberName;
 		this.password = password;
@@ -75,11 +105,11 @@ public class Member implements Serializable {
 		this.subAddress = subAddress;
 	}
 
-	public String getZipcode() {
+	public int getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(String zipcode) {
+	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 
@@ -155,7 +185,7 @@ public class Member implements Serializable {
 		result = prime * result + ((reviewList == null) ? 0 : reviewList.hashCode());
 		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
 		result = prime * result + ((subAddress == null) ? 0 : subAddress.hashCode());
-		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
+		result = prime * result + zipcode;
 		return result;
 	}
 
@@ -225,10 +255,7 @@ public class Member implements Serializable {
 				return false;
 		} else if (!subAddress.equals(other.subAddress))
 			return false;
-		if (zipcode == null) {
-			if (other.zipcode != null)
-				return false;
-		} else if (!zipcode.equals(other.zipcode))
+		if (zipcode != other.zipcode)
 			return false;
 		return true;
 	}
@@ -240,4 +267,5 @@ public class Member implements Serializable {
 				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", reviewList="
 				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
 	}
+
 }

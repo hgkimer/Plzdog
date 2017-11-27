@@ -2,69 +2,67 @@ package com.plz.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.plz.dao.MemberDao;
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
 
-public class MemberServiceImpl implements MemberService{
+@Service
+public class MemberServiceImpl implements MemberService {
+	@Autowired
+	private MemberDao dao;
 
 	@Override
-	public void addMember() {
-		// TODO Auto-generated method stub
-		
+	public void addMember(Member member) {
+		dao.insertMember(member);
 	}
 
 	@Override
-	public void deleteMember(Member member) {
-		// TODO Auto-generated method stub
-		
+	public void deleteMember(String email) {
+		dao.deleteMember(email);
 	}
 
 	@Override
 	public void updateMember(Member member) {
-		// TODO Auto-generated method stub
-		
+		dao.updateMember(member);
 	}
 
 	@Override
 	public List<Member> findAllMember() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.selectAllMember();
 	}
 
 	@Override
 	public Member findMemberByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectMemberByEmail(email);
 	}
 
 	@Override
 	public List<Member> findMemberByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectMemberByName(name);
 	}
 
 	@Override
 	public List<Member> findMemberJoinSiiter() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectAllMemberJoinSitter();
 	}
 
 	@Override
 	public Member findMemberJoinSitterByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectMemberJoinSitterByEmail(email);
 	}
 
 	@Override
 	public List<Member> findMemberJoinSitterByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectMemberJoinSitterByName(name);
 	}
 
 	@Override
-	public List<Member> findMemberJoinReview(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> findMemberJoinReviewByEmail(String email) {
+		return dao.selectMemberJoinReviewByEmail(email);
 	}
 
 }

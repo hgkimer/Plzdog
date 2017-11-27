@@ -17,8 +17,6 @@ public class Code implements Serializable{
 		this.category = category;
 	}
 	
-	
-	
 	public String getCode() {
 		return code;
 	}

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.plz.dao.ReservationDao;
+import com.plzdog.vo.Demand;
 import com.plzdog.vo.Reservation;
 
 @Repository
@@ -25,7 +26,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 
 	@Override
-	public int deleteReservation(String resId) {
+	public int deleteReservation(int resId) {
 		return session.delete(makeSqlId("deleteReservation"),resId);
 	}
 
@@ -33,7 +34,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	public int updateReservation(Reservation reservation) {
 		return session.update(makeSqlId("updateReservation"),reservation);
 	}
-
+	
 	@Override
 	public List<Reservation> selectAllReservation() {
 		return session.selectList(makeSqlId("selectAllReservation"));
@@ -50,12 +51,36 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 
 	@Override
-	public Reservation selectSitterReservationByEmail(String sitterEmail) {
-		return session.selectOne(makeSqlId("selectSitterReservationByEmail"),sitterEmail);
+	public List<Reservation> selectSitterReservationByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectSitterReservationByEmail"), sitterEmail);
+	}
+
+	@Override
+	public Reservation selectSitterReservationSalesByResId(int resId) {
+		return session.selectOne(makeSqlId("selectSitterReservationSalesByResId"), resId);
 	}
 
 	@Override
 	public List<Reservation> selectMemberCareByEmail(String email) {
 		return session.selectList(makeSqlId("selectMemberCareByEmail"),email);
+	}
+
+	@Override
+	public List<Reservation> selectSitterCareByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectSitterCareByEmail"),sitterEmail);
+	}
+	
+	//서비스 요구 사항을 추가, 수정 , 삭제
+	@Override
+	public int insertDemand(Demand demand) {
+		return session.insert(makeSqlId("insertDemand"),demand);
+	}
+	@Override
+	public int updateDemand(Demand demand) {
+		return session.update(makeSqlId("updateDemand"),demand);
+	}
+	@Override
+	public int deleteDemand(int resId) {
+		return session.delete(makeSqlId("deleteDemand"),resId);
 	}
 }

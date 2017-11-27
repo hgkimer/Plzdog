@@ -23,9 +23,9 @@
 	<resultMap id="sitter-resultmap" type="sitter">
 		<id column="email" property="email"/>
 		<result column="school" property="school"/>
-		<result column="CERTIFICATION" property="certification"/>
-		<result column="SERVICE_ADDRESS" property="serviceAddress"/>
-		<result column="sitter_Rate" property="sitterRate"/>
+		<result column="certification" property="certification"/>
+		<result column="service_address" property="serviceAddress"/>
+		<result column="sitter_rate" property="sitterRate"/>
 	</resultMap>
 	
 	<!-- sitter -> skill -> code로 조회 -->
@@ -33,7 +33,6 @@
 		<!-- property는 VO의 변수명 , ofType : VO명 -->
 		<collection property ="skillList" ofType ="Skill">
 			<id property ="email" column = "email"/>
-				
 			<association property="code" javaType="code">
 				<id property="codeName" column="code_name"/>
 				<result property="category" column="category"/>
