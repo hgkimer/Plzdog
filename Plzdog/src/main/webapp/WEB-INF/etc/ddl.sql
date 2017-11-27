@@ -59,7 +59,6 @@ DROP TABLE CARE_IMAGE
 	
 --------------------------------------------------
 --create
-
 --회원 
 CREATE TABLE MEMBER (
 	EMAIL VARCHAR2(100) PRIMARY KEY, /* 이메일 */
@@ -203,16 +202,16 @@ CREATE TABLE CARE_IMAGE (
 -- 시퀀스
 
 --강아지 시퀀스 생성
-drop sequence Dog_num_seq;
-create sequence dog_num_seq;	
+drop sequence Dog_id_seq;
+create sequence dog_id_seq;	
 
 --예약 시퀀스 생성
-drop sequence RESERVATION_num_seq;
-create sequence RESERVATION_num_seq;
+drop sequence RESERVATION_id_seq;
+create sequence RESERVATION_id_seq;
 
 --돌봄일지 시퀀스 생성
-drop sequence CARE_num_seq;
-create sequence CARE_num_seq;	
+drop sequence CARE_id_seq;
+create sequence CARE_id_seq;	
 
 ---------------------------------------------------
 -- INSERT
@@ -248,10 +247,10 @@ insert into code values('code-12','도그워킹','예약');
 insert into code values('code-13','강아지목욕','예약');
 
 --강아지
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'리코','슈바이처','암컷',4.5,'20100608', 'soo@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100608', 'lee@naver.com');
-INSERT INTO DOG VALUES(dog_num_seq.nextval,'까미','삽살개','투컷',6.5,'20100608', 'lee@naver.com');
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100608', 'soo@naver.com');
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100608', 'lee@naver.com');
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100608', 'lee@naver.com');
 
 -- 강아지정보
 INSERT INTO DOGINFO VALUES('1','code-7');
@@ -282,12 +281,13 @@ INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
 INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','soo@naver.com');
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_num_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','soo@naver.com');
 
 --서비스 요구사항
+
 insert into DEMAND values (1,'code-11'); 
 insert into DEMAND values (1,'code-12'); 
 insert into DEMAND values (1,'code-13'); 
@@ -303,10 +303,10 @@ insert into SALES values(3,100000,90000,10000,'2017/07/05');
 insert into SALES values(4,100000,90000,10000,'2017/07/06');
 
 --돌봄일지
-insert into care values(CARE_num_seq.NEXTVAL,'강아지가 너무 귀여워용',1,'2017/08/09');
-insert into care values(CARE_num_seq.NEXTVAL,'강아지가 너무 이뻐용',2,'2017/08/09');
-insert into care values(CARE_num_seq.NEXTVAL,'강아지가 너무 아름다워요',3,'2017/08/09');
-insert into care values(CARE_num_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 귀여워용',1,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 이뻐용',2,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 아름다워요',3,'2017/08/09');
+insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
 
 --돌봄일지 이미지
 insert into CARE_IMAGE values('돌봄이미지1',1);
