@@ -19,6 +19,6 @@ public class TestSales {
 		SalesService service = (SalesService) ctx.getBean("salesServiceImpl");
 //		service.insertSales(new Sales(1, 1000, 100, 2000, new Date()));
 //		service.updateSales(new Sales(1, 2000, 200, 4000, new Date()));
-		service.deleteSales(1);
+//		service.deleteSales(1);
 	}
 }
