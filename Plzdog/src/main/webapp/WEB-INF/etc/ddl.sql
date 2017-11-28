@@ -200,8 +200,6 @@ CREATE TABLE CARE_IMAGE (
 	CARE_ID NUMBER(10) NOT NULL, /* 돌봄일지ID */
 	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE 
 );
-
-
 	
 --------------------------------------------------
 -- 시퀀스

@@ -1,6 +1,7 @@
 package com.plz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,10 +18,4 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping("join_member") 
-	public ModelAndView joinMember(@ModelAttribute Member member ) {
-		service.addMember(member);
-		return new ModelAndView("redirect:/join_success.do", "memberEmail", member.getEmail());
-	}
-
 }

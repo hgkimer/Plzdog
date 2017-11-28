@@ -79,6 +79,7 @@
 				<li class="navi"><a href="#">FAQ</a></li>
 				<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
 				<li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
+				<li class="navi"><a href="${initParam.rootPath }/logout.do">로그아웃</a></li>
 			</ul>
 	</header>
 </body>

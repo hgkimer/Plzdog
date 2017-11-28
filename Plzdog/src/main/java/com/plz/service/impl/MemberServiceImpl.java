@@ -1,5 +1,7 @@
 package com.plz.service.impl;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +20,28 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao dao;
 	
 	@Autowired
-	private AuthorityDao dao1;
+	private AuthorityDao daoAuthority;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public void addMember(Member member) {
+	public void addMember(Member member, String role) {
 		//패스워드 암호화 처리
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		//member 테이블 insert
 		dao.insertMember(member);
 		//Authority 테이블 insert
-		dao1.insertAuthority(new Authority(member.getEmail(),"ROLE_MEMBER"));
+		daoAuthority.insertAuthority(new Authority(member.getEmail(),role));
+		if(role.equals("ROLE_ADMIN")){
+			List<Authority> list = daoAuthority.selectAuthorityByEmail(member.getEmail());
+			for(Authority a : list) {
+				if(a.getAuthority() == null) {	
+					daoAuthority.insertAuthority(new Authority(member.getEmail(), "ROLE_MEMBER"));
+					daoAuthority.insertAuthority(new Authority(member.getEmail(), "ROLE_SITTER"));
+				}
+			}
+		}
 	}
 
 	@Override
