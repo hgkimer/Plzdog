@@ -42,7 +42,7 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	}
 
 	@Override
-	public Authority selectAuthorityByEmail(String email) {
-		return session.selectOne(makeSqlId("selectAuthorityByEmail"), email);
+	public List<Authority> selectAuthorityByEmail(String email) {
+		return session.selectList(makeSqlId("selectAuthorityByEmail"), email);
 	}
 }

@@ -37,7 +37,6 @@ public interface AuthorityDao {
 	 * @param email
 	 * @return
 	 */
-	Authority selectAuthorityByEmail(String email);
-	
+	List<Authority> selectAuthorityByEmail(String email);
 	
 }

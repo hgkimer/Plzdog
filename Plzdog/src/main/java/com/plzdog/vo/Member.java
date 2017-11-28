@@ -22,10 +22,8 @@ public class Member implements Serializable {
 
 	public Member() {
 	}
-
 	
 	 //회원의 기본정보만 update하기 위한 생성자(memberEnable 변수 떄문에 객체 생성이 안되서)
-	
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
 			String memberImage, String phoneNum) {
 		this.email = email;
@@ -49,8 +47,6 @@ public class Member implements Serializable {
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
 	}
-
-
 	// 전체 회원 기본 정보를 갖는 생성자
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
 			String memberImage, String phoneNum, int memberEnable) {
