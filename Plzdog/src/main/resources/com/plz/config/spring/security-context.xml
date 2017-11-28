@@ -9,7 +9,7 @@
 
 	<!-- Spring Security 관련 설정 파일, root-context파일에만 설정 -->
 	<context:component-scan base-package="com.plz">
-		<!-- 모든 파일들을 거쳐가게 설정했으므로 Controller만 거쳐가지 말라고 뺀 설정 -->
+		<!-- 위에서 com.plz내 모든 파일들을 거쳐가게 설정함 ☞ 로그인 없이 테스트하는데 방해돼서 Controller만 거쳐가지 말라고 뺀 설정 -->
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 

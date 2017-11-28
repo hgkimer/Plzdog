@@ -8,10 +8,10 @@
 </head>
 <body>
 <form action="${initParam.rootPath }/care/select_care.do" method="post">
-	<sec:csrfInput/> <!-- post, 로그인, 로그아웃 방식은 sec를 꼭 붙여준다. 토큰을 보내줘야한다. -->
+	<!-- post, 로그인, 로그아웃 방식은 sec를 꼭 붙여준다. 토큰을 보내줘야한다. -->
+	<sec:csrfInput/>
 	<input type="number" id="careId" name="careId">
 	<button type="submit">전송</button>
 </form>
-
 </body>
 </html>

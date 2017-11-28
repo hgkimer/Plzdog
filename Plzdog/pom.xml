@@ -37,18 +37,6 @@
 		<jackson.version>2.9.2</jackson.version>
 	</properties>
 	<dependencies>
-		<!-- 스프링 Security 관련 core, web, taglib, config 필요 (core와 web은 의존 라이브러리로 
-			받는다.) -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring-security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>${spring-security.version}</version>
-		</dependency>
 		<!-- Spring API 모듈 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -59,6 +47,17 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<!-- 스프링 Security 관련 core, web, taglib, config 필요 (core와 web은 의존 라이브러리로 받는다.) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
 		</dependency>
 		<!-- mybatis API 모듈 -->
 		<dependency>
