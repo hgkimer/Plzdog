@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC 
-		"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
-		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
-
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+		
 <tiles-definitions>
-	<!-- <definition name="layout" template="/WEB-INF/view/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/> -->
-	<definition name="layout" template="/WEB-INF/view/layout/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>
-		<put-attribute name="contents" value="/WEB-INF/view/layout/contents.jsp"/>
+
+	<!-- <definition>은 하나의 화면 설정을 한다. -->
+	<definition name="layout" template="/WEB-INF/view/layout/layout.jsp">		<!-- 틀이 될 페이지 -->
+ 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>	<!-- name으로 부르면 value jsp를 붙인다. -->
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp"/>
 	</definition>
-	<definition name="main.tiles" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/view/content/main.jsp"/>
+
+	<definition name="*.tiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/view/content/{1}.jsp"/>
 	</definition>
-	<definition name="member/join_form.tiles" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/view/content/member/join_form.jsp"/>
+
+	<definition name="*/*.tiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
 	</definition>
-	<definition name="member/join_success.tiles" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/view/content/member/join_success.jsp"/>
-	</definition>
-	<definition name="product/register_form.tiles" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/view/content/product/register_form.jsp"/>
-	</definition>
+
 </tiles-definitions>

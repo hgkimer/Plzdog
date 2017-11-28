@@ -10,16 +10,16 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<context:component-scan base-package="com.plz.service.impl,com.plz.dao.impl,com.plz.controller" />
+
 	<mvc:annotation-driven />
 
-	<!-- 메인페이지 -->
+	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
-	<mvc:view-controller path="/member/join_form.do" view-name="member/join_form.tiles"/>
-	<mvc:view-controller path="/product/register_form.do" view-name="product/register_form.tiles"/>
-	<mvc:view-controller path="/no_tiles.do" view-name="/WEB-INF/view/no_tiles.jsp"/>
+	
+	<!-- 테스트 페이지 -->
+	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />
 
-	<!-- Tiles 설정 -->
-	<!-- TilesConfigurer -->
+	<!-- TilesConfigurer : tiles 설정 파일의 위치 지정-->
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
@@ -27,12 +27,13 @@
 			</list>
 		</property>
 	</bean>
-	<bean name="tilesVR"
-		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+	
+	<!-- TilesViewResolver : view를 찾아서 응답해주는 tiles 만들어줌 -->
+	<bean name="tilesVR" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
 		<property name="order" value="1" />
 	</bean>
-	<bean name="internalVR"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	
+	<bean name="internalVR" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="2" />
 	</bean>
 </beans>

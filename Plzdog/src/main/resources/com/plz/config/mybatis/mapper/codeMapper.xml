@@ -18,14 +18,14 @@
 	</select>
 	
 	<insert id="insertCode" parameterType="Code">
-		insert into code values(#{code}, #{code_name}, #{category})
+		insert into code values(#{code}, #{codeName}, #{category})
 	</insert>
 	
 	<!-- code명으로 수정 -->
 	<update id="updateCode" parameterType="Code">
 		update 	code
-		set     code_name = #{code_name},
-				category = #{category},
+		set     code_name = #{codeName},
+				category = #{category}
 		where 	code = #{code}
 	</update>
 	

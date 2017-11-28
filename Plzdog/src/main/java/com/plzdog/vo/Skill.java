@@ -6,11 +6,11 @@ import java.util.List;
 public class Skill implements Serializable {
 
 	private String email;
-	private Code codeSkill;
+	private String codeSkill;
 	
 	public Skill() {}
 
-	public Skill(String email, Code codeSkill) {
+	public Skill(String email, String codeSkill) {
 		this.email = email;
 		this.codeSkill = codeSkill;
 	}
@@ -23,17 +23,12 @@ public class Skill implements Serializable {
 		this.email = email;
 	}
 
-	public Code getCodeSkill() {
+	public String getCodeSkill() {
 		return codeSkill;
 	}
 
-	public void setCodeSkill(Code codeSkill) {
+	public void setCodeSkill(String codeSkill) {
 		this.codeSkill = codeSkill;
-	}
-
-	@Override
-	public String toString() {
-		return "Skill [email=" + email + ", codeSkill=" + codeSkill + "]";
 	}
 
 	@Override
@@ -66,7 +61,10 @@ public class Skill implements Serializable {
 			return false;
 		return true;
 	}
-	
 
-	
+	@Override
+	public String toString() {
+		return "Skill [email=" + email + ", codeSkill=" + codeSkill + "]";
+	}
+
 }
