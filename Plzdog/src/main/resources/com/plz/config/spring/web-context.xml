@@ -13,34 +13,52 @@
 
 	<mvc:annotation-driven />
 	
-	<!-- 단순 링크 처리 -->
+	<!--
+	#################################################################################################### 
+		단순 링크 처리 
+	####################################################################################################
+	-->
 	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
-	
 	<!-- 회원가입 페이지 -->
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
-	
 	<!-- 로그인 페이지 -->
 	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
-	
 	<!-- 테스트 페이지 -->
 	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />
-	
 	<!-- 도그시터 신청 페이지 -->
 	<mvc:view-controller path="/member/sitter_register.do" view-name="member/sitter_register.tiles"/>
-	
 	<!-- 시터 찾기 페이지(기본 - 시터 검색페이지) -->
 	<mvc:view-controller path="/member/search_sitter.do" view-name="member/search_sitter.tiles"/>
-	
 	<!-- 도그시터 추천받기(직접 의뢰 작성 폼) 페이지-->
 	<mvc:view-controller path="/member/recommend_sitter.do" view-name="member/recommend_sitter.tiles"/>
-	
 	<!-- 회원 마이페이지 -->
-	<mvc:view-controller path="/member/edit_member.do" view-name="member/edit_member.tiles"/>
-	
-	<!-- 회원정보 수정 페이지 -->
-	<mvc:view-controller path="/member/"/>
-	
+	<mvc:view-controller path="/member/mypage.do" view-name="member/mypage.tiles"/>
+	<!-- 회원정보 수정 페이지(수정 폼) -->
+	<mvc:view-controller path="/member/edit_member_form.do" view-name="member/edit_member.tiles"/>
+	<!-- 반려견 조회 페이지 -->
+	<mvc:view-controller path="/member/mydog.do" view-name="member/mydog.tiles"/>
+	<!-- 반려견 등록 (반려견 등록폼) -->
+	<mvc:view-controller path="/member/mydog_register_form.do" view-name="member/mydog_register_form.tiles"/>
+	<!-- 반려견 수정(반려견 수정폼)-->
+	<mvc:view-controller path="/member/mydog_edit_form.do" view-name="member/mydog_edit_form.tiles"/>
+	<!-- 예약 조회 -->
+	<mvc:view-controller path="/member/search_reservation.do" view-name="member/search_reservation.tiles"/>
+	<!-- 내게온 예약 조회 -->
+	<mvc:view-controller path="/sitter/search_reservation_me.do" view-name="sitter/search_reservation_me.tiles"/>
+	<!-- 돌봄일지 조회 -->
+	<mvc:view-controller path="/member/care.do" view-name="member/care.tiles"/>
+	<!-- 돌봄일지 등록(돌봄일지 등록 폼) -->
+	<mvc:view-controller path="/sitter/care_register_form.do" view-name="sitter/care_register_form.tiles"/>
+	<!-- 돌봄일지 수정(돌봄일지 수정 폼) -->
+	<mvc:view-controller path="/sitter/care_eidt_form.do" view-name="sitter/care_edit_form.tiles"/>
+	<!-- FAQ  -->
+	<mvc:view-controller path="/faq.do" view-name="/faq.tiles"/>
+	<!-- 관리자(주요 기능 구현 후 추가 작성) -->
+	<mvc:view-controller path="/admin/admin.do" view-name="/admin/admin.tiles"/>
+	<!-- 
+	####################################################################################################
+	 -->
 	<!-- TilesConfigurer : tiles 설정 파일의 위치 지정-->
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
