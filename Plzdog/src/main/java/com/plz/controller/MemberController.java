@@ -15,7 +15,7 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping("join_member")
+	@RequestMapping("join_member") 
 	public ModelAndView joinMember(@ModelAttribute Member member ) {
 		service.addMember(member);
 		return new ModelAndView("redirect:/join_success.do", "memberEmail", member.getEmail());
