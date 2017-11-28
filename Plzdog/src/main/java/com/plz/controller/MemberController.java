@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
 @Controller
-@RequestMapping("/member/")
+//@RequestMapping("/member/")
 public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping("join_member")
+	@RequestMapping("/member/join_member")
 	public ModelAndView joinMember(@ModelAttribute Member member ) {
 		service.addMember(member);
 		return new ModelAndView("redirect:/join_success.do", "memberEmail", member.getEmail());
