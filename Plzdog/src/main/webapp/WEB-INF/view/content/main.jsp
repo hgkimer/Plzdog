@@ -9,4 +9,3 @@
 	 <!-- Authentication의 getPrincipal() 호출 - User 리턴 -->
 	<sec:authentication property="principal.email"/> 님 환영합니다.<br>
 </sec:authorize>
-

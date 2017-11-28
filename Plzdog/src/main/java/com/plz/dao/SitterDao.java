@@ -28,7 +28,7 @@ public interface SitterDao {
 	 */
 	Sitter selectSitterByEmail(String email);
 	/**
-	 * 매개변수로 받은  email로 스킬을 포함한 시터정보릘 조회하는 메소드
+	 * 매개변수로 받은  email로 스킬을 포함한 시터정보를 조회하는 메소드
 	 * 	+ skill 조인
 	 * @param email
 	 * @return

@@ -18,6 +18,7 @@
 		height: auto;
 		padding: 15px;
 	}
+	
 	.content {
 		height: auto;
 	}
@@ -25,6 +26,6 @@
 </style>
 </head>
 <body>
-	<tiles:insertAttribute name="header" />
+	<%-- <tiles:insertAttribute name="header" /> --%>
 </body>
 </html>

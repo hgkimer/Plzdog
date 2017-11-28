@@ -43,7 +43,7 @@ public class ReservationTest {
 		printReservation(list, "회원 해당 예약상태 조회");
 		
 		//resId로 해당 시터의 급여를 조회
-		Reservation r = service.findSitterReservationSalesByResId(1);
+		Reservation r = service.findSitterReservationSalesByEmail("a@.com");
 		System.out.println("================");
 		System.out.println(r);
 		

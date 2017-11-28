@@ -62,8 +62,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public Reservation findSitterReservationSalesByResId(int resId) {
-		return dao.selectSitterReservationSalesByResId(resId);
+	public Reservation findSitterReservationSalesByEmail(String email) {
+		return dao.selectSitterReservationSalesByEmail(email);
 	}
 	
 	//서비스 요구 사항을 추가, 수정 , 삭제
