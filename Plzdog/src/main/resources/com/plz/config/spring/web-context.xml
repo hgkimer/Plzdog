@@ -18,7 +18,13 @@
 	
 	<!-- 테스트 페이지 -->
 	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />
-
+	
+	<!-- 도그시터 신청 페이지 -->
+	<mvc:view-controller path="/member/sitter_register.do" view-name="member/sitter_register.tiles"/>
+	
+	<!-- 시터 찾기 페이지(기본 - 시터 검색페이지) -->
+	<mvc:view-controller path="/member/search_sitter.do" view-name="member/search_sitter.tiles"/>
+	
 	<!-- TilesConfigurer : tiles 설정 파일의 위치 지정-->
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
