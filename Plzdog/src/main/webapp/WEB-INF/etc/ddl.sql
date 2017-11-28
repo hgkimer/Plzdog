@@ -306,7 +306,7 @@ insert into Demand values (6,'code-11');
 insert into Demand values (6,'code-13');
 
 --매출
-insert into SALES values(1 ,100000 ,90000 ,10000, '2017/07/03');
+insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
 insert into SALES values(2,100000,90000,10000,'2017/07/04');
 insert into SALES values(3,100000,90000,10000,'2017/07/05');
 insert into SALES values(4,100000,90000,10000,'2017/07/06');
@@ -322,7 +322,6 @@ insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요',3,'2
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요1',3,'2017/08/09');
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요2',4,'2017/08/09');
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요3',4,'2017/08/09');
-select * from care
 
 --돌봄일지 이미지
 insert into CARE_IMAGE values('돌봄이미지1',1);

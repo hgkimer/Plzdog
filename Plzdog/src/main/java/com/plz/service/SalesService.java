@@ -1,5 +1,15 @@
 package com.plz.service;
 
-public interface SalesService {
+import java.util.List;
 
+import com.plzdog.vo.Sales;
+
+public interface SalesService {
+	
+	void insertSales(Sales sales);
+	
+	void updateSales(Sales sales);
+	
+	void deleteSales(int resId);
+	
 }

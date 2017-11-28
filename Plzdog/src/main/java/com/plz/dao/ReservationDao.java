@@ -53,7 +53,7 @@ public interface ReservationDao {
 	 * @param email
 	 * @return
 	 */
-	Reservation selectSitterReservationSalesByResId(int ResId);
+	Reservation selectSitterReservationSalesByEmail(String email);
 	
 	/**
 	 * 매개변수로 받은 회원의 이메일로 해당 예약의 돌봄일지를 조회

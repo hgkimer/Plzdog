@@ -73,6 +73,7 @@
 		<div class="container">
 			<div class="logo"></div>
 			<ul class="nav">
+				<li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="image/foot.png">펫트너 신청하기</a></li>
 				<li class="navi"><a href="${initParam.rootPath}/main.do">메인페이지</a></li>
 				<li class="navi"><a href="#"><img src="image/foot.png">펫트너 신청하기</a></li>
 				<li class="navi"><a href="#"><img src="image/search.png">펫트너 찾기</a></li>
