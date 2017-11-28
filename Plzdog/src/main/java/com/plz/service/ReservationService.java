@@ -64,7 +64,7 @@ public interface ReservationService {
 	 * @param sitterEmail
 	 * @return
 	 */
-	Reservation findSitterReservationSalesByResId(int resId);
+	Reservation findSitterReservationSalesByEmail(String email);
 	
 	void addDemand(Demand demand);
 	

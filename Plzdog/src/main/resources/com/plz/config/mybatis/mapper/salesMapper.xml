@@ -40,7 +40,7 @@
 	</select>
 	
 	<insert id="insertSales" parameterType="sales">
-		insert into sales values(#{res_id}, #{total}, #{pay}, #{commission}, #{sales_date})
+		insert into sales values(#{resId}, #{total}, #{pay}, #{commission}, #{salesDate})
 	</insert>
 	
 	<update id="updateSales" parameterType="sales">

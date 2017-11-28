@@ -1,5 +1,8 @@
 package com.plz.dao;
 
+import java.util.Date;
+import java.util.List;
+
 import com.plzdog.vo.Sales;
 
 public interface SalesDao {
@@ -23,26 +26,6 @@ public interface SalesDao {
 	 * @param resId
 	 * @return
 	 */
-	int deleteSales(String resId);
-	
-	/**
-	 * 금액의 합계를 구하는 메소드
-	 * @param sales
-	 * @return
-	 */
-	Sales selectAllToTal(int sales);
-	
-	/**
-	 * 수수료의 합계를 구하는 메소드
-	 * @param sales
-	 * @return
-	 */
-	Sales selectAllCommission(int sales);
-	
-	/**
-	 * Sales 테이블내의 모든 내용을 조회하는 메소드
-	 * @param sales
-	 * @return
-	 */
-	Sales selectAllSales(Sales sales);
+	int deleteSales(int resId);
+
 }

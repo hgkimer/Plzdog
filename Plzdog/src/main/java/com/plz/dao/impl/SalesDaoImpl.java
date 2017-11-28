@@ -1,12 +1,14 @@
 package com.plz.dao.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.plz.dao.SalesDao;
 import com.plzdog.vo.Sales;
-import com.plzdog.vo.Sitter;
 
 @Repository
 public class SalesDaoImpl implements SalesDao{
@@ -28,22 +30,7 @@ public class SalesDaoImpl implements SalesDao{
 	}
 	
 	@Override
-	public int deleteSales(String resId) {
+	public int deleteSales(int resId) {
 		return session.insert(makeSqlId("deleteSales"), resId);
-	}
-	
-	@Override
-	public Sales selectAllToTal(int sales) {
-		return session.selectOne(makeSqlId("selectAllToTal"), sales);
-	}
-	
-	@Override
-	public Sales selectAllCommission(int sales) {
-		return session.selectOne(makeSqlId("selectAllCommission"), sales);
-	}
-	
-	@Override
-	public Sales selectAllSales(Sales sales) {
-		return session.selectOne(makeSqlId("selectAllSales"), sales);
 	}
 }
