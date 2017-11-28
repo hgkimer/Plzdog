@@ -3,7 +3,11 @@ package com.plzdog.vo;
 import java.io.Serializable;
 
 public class Code implements Serializable{
-
+	/*#####################################################################################
+	 * Code객체 타입의 code와 String타입의 code 혼동하지 않기!! 여러분은 똑똑하니까
+	 * ####################################################################################
+	 */
+	
 	private String code;
 	private String codeName;
 	private String category;
