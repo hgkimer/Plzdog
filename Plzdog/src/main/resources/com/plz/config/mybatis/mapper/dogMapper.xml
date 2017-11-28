@@ -54,7 +54,7 @@
 	
 	<!-- dogImage명으로 수정 -->
 	<update id="updateDogImage" parameterType="map">
-		update 	dog_image set dog_image = #{dogImage} where dog_id = #{dogId} and dog_image = #{originalImage}
+		update dog_image set dog_image = #{dogImage} where dog_id = #{dogId} and dog_image = #{originalImage}
 	</update>
 	
 	<!-- dogImage명으로 삭제 -->

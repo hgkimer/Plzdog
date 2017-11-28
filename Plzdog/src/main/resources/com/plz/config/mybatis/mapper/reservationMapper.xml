@@ -48,6 +48,10 @@
 		where   r.res_id = s.res_id
 	</sql>
 	
+	<!-- 
+		이미지가 없는 돌봄일지도 있으므로
+		외부 조인을 한다.
+	 -->
 	<sql id="reservation-join-care-sql">
 		select  r.res_id,
 			    r.res_type,
@@ -62,7 +66,7 @@
 			    i.care_image
 		from    reservation r, care c, care_image i
 		where   r.res_id = c.res_id
-		and		c.care_id = i.care_id
+		and		c.care_id = i.care_id(+)
 	</sql>
 	
 	<!-- reservation resultmap -->
@@ -76,12 +80,15 @@
 		<result column="email_sitter" property="sitterEmail"/>
 	</resultMap>
 	
-	<!-- 회원의 예약 상태를 조회하는 resultmap -->
+	<!-- 
+		회원의 예약 상태 + 시터 스킬 + 시터 환경를 조회하는 resultmap 
+		<result column="res_id" property="resId"/>
+		join되는 demand의 id를 또 지정하게 되면 demand를 여러개 가져올 수 없다. 
+	-->
 	<resultMap id="reservation-join-demand-resultmap" type="Reservation" extends="reservation-resultmap">
 		<collection property ="demandList" ofType ="Demand">
-			<id column = "res_id" property ="resId"/>
 			
-			<association property="codeList" javaType="Code">
+			<association property="code" javaType="Code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
 				<result column="category" property="category"/>
@@ -90,13 +97,13 @@
 	</resultMap>
 	
 	<!-- 해당 시터의 급여를 조회하는 resultmap -->
-	<resultMap id="reservation-join-sales-resultmap" type="Reservation" extends="reservation-resultmap">
+	<resultMap id="reservation-join-sales-resultmap" type = "Reservation" extends="reservation-resultmap">
 		<association property ="sales" javaType ="sales">
-			<id column = "res_id" property ="resId"/>
+			<result column ="res_id" property ="resId"/>
 			<result column="total" property="total"/>
 			<result column="pay" property="pay"/>
-			<result column="commisson" property="commission"/>
-			<result column="salesDate" property="salesDate"/>
+			<result column="commission" property="commission"/>
+			<result column="sales_Date" property="salesDate"/>
 		</association>
 	</resultMap>
 	
@@ -105,10 +112,10 @@
 		<collection property ="careList" ofType="Care">
 			<id column = "care_id" property ="careId"/>
 			<result column="care_contents" property="careContents"/>
-			<result column="res_id" property="resId"/>
+			<result column="res_id" property="resId"/>  
 			<result column="care_date" property="careDate"/>
 			<collection property="careImageList" ofType="CareImage">
-				<id column ="care_id" property="careId"/>
+				<!-- <id column ="care_id" property="careId"/> -->
 				<result column="care_image" property="careImage"/>
 			</collection>
 		</collection>
@@ -127,14 +134,20 @@
 	</resultMap> -->
 	
 	<!-- 예약 전체 조회 -->
-	<select id="selectAllReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
+	<select id="selectAllReservation" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
 	</select>
 	
 	<!-- 회원에서 이메일로 예약조회 -->
 	<select id="selectMemberReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
-		where r.email = #{email}
+		where email = #{email}
+	</select>
+	
+	<!-- 시터의 이메일로 예약조회 -->
+	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
+		<include refid="reservation-sql"/>
+		where email_sitter = #{email}
 	</select>
 	
 	<!-- 시터에서 이메일로 예약조회 -->
@@ -144,15 +157,15 @@
 	</select> -->
 	
 	<!--Email로 회원의 예약상태를 조회(reservation-> demand -> code) -->
-	<select id="selectAllReservationJoinDemandByEmail" parameterType="string" resultMap="reservation-join-demand-resultmap">
+	<select id="selectReservationJoinDemandByEmail" parameterType="string" resultMap="reservation-join-demand-resultmap">
 		<include refid="reservation-join-demand-sql"/>
 		and r.email = #{email}
 	</select> 
 	
-	<!--Email로 해당 예약의 시터의 급여를 조회 -->
-	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-join-sales-resultmap">
+	<!--ResID로 해당 예약의 시터의 급여를 조회 -->
+	<select id="selectSitterReservationSalesByResId" parameterType="_int" resultMap="reservation-join-sales-resultmap">
 		<include refid="reservation-join-sales-sql"/>
-		and r.email_sitter = #{email}
+		and r.res_id = #{resId}
 	</select>
 	
 	<!-- 회원(견주)의 Email로 돌봄일지를 조회 -->
@@ -161,10 +174,16 @@
 		and r.email = #{email}
 	</select>
 	
+	<!-- 시터의 Email로 돌봄일지를 조회 -->
+	<select id="selectSitterCareByEmail" parameterType="string" resultMap ="reservation-join-care-resultmap">
+		<include refid="reservation-join-care-sql"/>
+		and r.email_sitter = #{email}
+	</select>
+	
 	<!-- 회원이 예약을 추가 -->
 	<insert id ="insertReservation" parameterType="Reservation">
 		<selectKey keyProperty="resId" resultType="_int" order="BEFORE">
-        	select res_id_seq.nextval from dual
+        	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
 		#{resEdate}, #{resContents},#{memberEmail},#{sitterEmail})
@@ -177,12 +196,31 @@
 			     res_sDate = #{resSDate},
 			     res_eDate = #{resEDate},
 			     res_contents = #{resContents},
-			     member_Email = #{memberEmail},
-			     sitter_email = #{sitterEmail}
+			     email = #{memberEmail},
+			     email_sitter = #{sitterEmail}
 		where    res_id = #{resId}
 	</update>
 	
-	<delete id ="deleteReservation" parameterType="string">
+	<delete id ="deleteReservation" parameterType="_int">
 		delete from reservation where res_id = #{resId}
-	</delete>	
+	</delete>
+	
+	<!-- 
+		서비스 요구 사항(demand) insert , update, delete  
+	 -->
+	 
+	 <insert id = "insertDemand" parameterType="Demand">
+	 	insert into demand values(#{resId}, #{codeDemand})
+	 </insert>
+	 
+	 <update id = "updateDemand" parameterType ="map">
+	 	update  demand
+	 	set     code_demand = #{codeDemand}
+	 	where   res_id = #{resId} 
+	 	and 	code_demand = #{originalCodeDemand}
+	 </update>
+
+	 <delete id = "deleteDemand" parameterType="_int">
+	 	delete from Demand where res_id = #{resId}
+	 </delete>
 </mapper>

@@ -2,7 +2,6 @@
 <!DOCTYPE tiles-definitions PUBLIC 
 		"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
 		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
-<!-- <put-attribute name="contents" value="/WEB-INF/view/layout/contents.jsp"/> -->
 <tiles-definitions>
 	<definition name="layout" template="/WEB-INF/view/layout/layout.jsp">
  		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>
@@ -22,5 +21,5 @@
 	</definition>
 	<definition name="product/register_form.tiles" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/view/content/product/register_form.jsp"/>
-	</definition> -->
+	</definition>
 </tiles-definitions>

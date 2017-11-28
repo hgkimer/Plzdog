@@ -10,7 +10,7 @@ public class Reservation implements Serializable {
 	private int resId;
 	private int resType;
 	private Date resSDate;
-	private Date resEdate;
+	private Date resEDate;
 	private String resContents;
 	private String memberEmail;
 	private String sitterEmail;
@@ -26,7 +26,7 @@ public class Reservation implements Serializable {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
@@ -38,7 +38,7 @@ public class Reservation implements Serializable {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
@@ -51,7 +51,7 @@ public class Reservation implements Serializable {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
@@ -64,7 +64,7 @@ public class Reservation implements Serializable {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
@@ -77,7 +77,7 @@ public class Reservation implements Serializable {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
@@ -91,7 +91,7 @@ public class Reservation implements Serializable {
 		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
@@ -125,11 +125,11 @@ public class Reservation implements Serializable {
 	}
 
 	public Date getResEdate() {
-		return resEdate;
+		return resEDate;
 	}
 
 	public void setResEdate(Date resEdate) {
-		this.resEdate = resEdate;
+		this.resEDate = resEdate;
 	}
 
 	public String getResContents() {
@@ -156,7 +156,7 @@ public class Reservation implements Serializable {
 		this.sitterEmail = sitterEmail;
 	}
 
-	public List<Care> getCareList() {
+	public ArrayList<Care> getCareList() {
 		return careList;
 	}
 
@@ -172,18 +172,18 @@ public class Reservation implements Serializable {
 		this.demandList = demandList;
 	}
 
-	public Sales getsales() {
+	public Sales getSales() {
 		return sales;
 	}
 
-	public void setsales(Sales sales) {
+	public void setSales(Sales sales) {
 		this.sales = sales;
 	}
 
 	@Override
 	public String toString() {
 		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEdate="
-				+ resEdate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
+				+ resEDate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
 				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + "]";
 	}
 
@@ -195,7 +195,7 @@ public class Reservation implements Serializable {
 		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
-		result = prime * result + ((resEdate == null) ? 0 : resEdate.hashCode());
+		result = prime * result + ((resEDate == null) ? 0 : resEDate.hashCode());
 		result = prime * result + resId;
 		result = prime * result + ((resSDate == null) ? 0 : resSDate.hashCode());
 		result = prime * result + resType;
@@ -233,10 +233,10 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!resContents.equals(other.resContents))
 			return false;
-		if (resEdate == null) {
-			if (other.resEdate != null)
+		if (resEDate == null) {
+			if (other.resEDate != null)
 				return false;
-		} else if (!resEdate.equals(other.resEdate))
+		} else if (!resEDate.equals(other.resEDate))
 			return false;
 		if (resId != other.resId)
 			return false;
