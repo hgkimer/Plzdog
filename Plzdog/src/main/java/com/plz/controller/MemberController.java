@@ -15,6 +15,8 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+	
+	
 	@RequestMapping("/member/join_member")
 	public ModelAndView joinMember(@ModelAttribute Member member ) {
 		service.addMember(member);
