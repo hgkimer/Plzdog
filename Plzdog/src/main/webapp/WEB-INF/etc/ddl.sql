@@ -407,9 +407,9 @@ where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r
 and r.email_sitter = s.email and sl.res_id = r.res_id;
 
 -- n번 돌봄일지와 돌봄이미지 조회
-select	c.care_id, c.care_contents, c.care_date, i.care_image
+select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
 from	care c, care_image i
-where	c.care_id = i.care_id and c.care_id = 7
+where	c.care_id = 7 and c.care_id = i.care_id(+)
 
 select * from care_image
 
