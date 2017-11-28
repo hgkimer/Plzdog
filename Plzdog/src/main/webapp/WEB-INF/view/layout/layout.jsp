@@ -9,7 +9,7 @@
 
 <body>
 	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="contents" /> 
+	<tiles:insertAttribute name="content" />
 	<a href="${initParam.rootPath }/dog_test.do">테스트</a>
  	<tiles:insertAttribute name="footer" />
 </body>

@@ -77,8 +77,8 @@
 				<li class="navi"><a href="#"><img src="image/foot.png">펫트너 신청하기</a></li>
 				<li class="navi"><a href="#"><img src="image/search.png">펫트너 찾기</a></li>
 				<li class="navi"><a href="#">FAQ</a></li>
-				<li class="navi"><a href="${initParam.rootPath }/product/register_form.do">회원가입</a></li>
-				<li class="navi"><a href="${initParam.rootPath }/member/join_form.do">로그인</a></li>
+				<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
+				<li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
 			</ul>
 	</header>
 </body>
