@@ -33,5 +33,5 @@ public interface AuthorityService {
 	 * @param email
 	 * @return
 	 */
-	Authority findAuthorityByEmail(String email);
+	List<Authority> findAuthorityByEmail(String email);
 }

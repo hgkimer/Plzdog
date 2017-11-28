@@ -14,19 +14,20 @@
 								#{phoneNum},
 								#{memberEnable}
 								)
-
 	</insert>
 
 	<!-- 회원의 모든 정보(MEMBER+SITTER+SKILL+CODE+DOG+DOG_IMAGE 조회 -->
 	<sql id="member-select-sql">
 		select email,
-		member_name,
-		main_address,
-		sub_address,
-		zipcode,
-		member_image,
-		phonenum
-		from member
+			   member_name,
+			   password,
+			   main_address,
+			   sub_address,
+			   zipcode,
+			   member_image,
+			   phonenum,
+			   member_enable
+	   from member
 	</sql>
 
 	<!-- 펫시터 전체 조회 -->
@@ -111,14 +112,14 @@
 	<select id="selectMemberByEmail" parameterType="string"
 		resultMap="member-resultmap">
 		<include refid="member-select-sql" />
-		where email = #{value}
+		where email = #{email}
 	</select>
 
 	<!-- 이름으로 회원 조회 -->
 	<select id="selectMemberByName" parameterType="string"
 		resultMap="member-resultmap">
 		<include refid="member-select-sql" />
-		where member_name like '%'||#{value}||'%'
+		where member_name like '%'||#{memberName}||'%'
 	</select>
 
 	<!-- 펫시터 전체 조회 -->

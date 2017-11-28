@@ -12,9 +12,16 @@
 	<context:component-scan base-package="com.plz.service.impl,com.plz.dao.impl,com.plz.controller" />
 
 	<mvc:annotation-driven />
-
+	
+	<!-- 단순 링크 처리 -->
 	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
+	
+	<!-- 회원가입 페이지 -->
+	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
+	
+	<!-- 로그인 페이지 -->
+	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
 	
 	<!-- 테스트 페이지 -->
 	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />

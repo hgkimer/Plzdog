@@ -72,6 +72,8 @@ CREATE TABLE MEMBER (
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
 
+select * from member
+
 -- 권한
 
 CREATE TABLE AUTHORITY (
@@ -339,7 +341,7 @@ insert into care_image values('돌봄이미지9',20);
 insert into care_image values('돌봄이미지8',21);	
 -----------------------------------------------
 --select
-
+update member set password='$2a$10$e.aM7GT5qtQ/PNTyj3tYT.G4LgunBx6OkAvP0am1o4zgEb9ljP/66'
 -- 시터에 등록된 review를 조회
 
 select 
@@ -423,6 +425,8 @@ insert into dog_image values('꼬미사진', 4)
 select * from dog_image
 select * from dog
 select * from doginfo
+
+select * from authority where email='kim@naver.com'
 
 -- 펫시터의 정보를 조회
 select			m.email,
