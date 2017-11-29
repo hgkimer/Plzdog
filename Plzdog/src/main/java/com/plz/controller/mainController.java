@@ -1,6 +1,8 @@
 package com.plz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,17 +22,13 @@ public class mainController {
 	private MemberService service;
 	
 	@RequestMapping("join_member")
-	public String joinMember(@ModelAttribute Member member, ModelMap model ) {
+	public String joinMember(@ModelAttribute Member member, 
+			ModelMap model ) throws AuthenticationException{
 		//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
 		member.setMemberEnable(1);
 		//DB
-			/*if(member.getPassword().equals(passwordTest)) { 
-				
-			} */
-		System.out.println(member);
 				service.insertMember(member, "ROLE_MEMBER");
-		//rquest영역
-		model.addAttribute(member);
-		return "member/join_success.tiles";
+				model.addAttribute(member);
+				return "member/join_success.tiles";
+			} 
 	}
-}

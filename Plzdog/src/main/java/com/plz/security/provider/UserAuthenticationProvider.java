@@ -50,9 +50,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		//ID 체크
 		String email = authentication.getName();//사용자가 입력한 ID
-		System.out.println("email : " +email);
 		Member member = dao.selectMemberByEmail(email);
-		System.out.println("member : "+ member);
 		if(member == null){ //없는 id => 로그인실패
 			throw new UsernameNotFoundException("ID를 확인하세요");
 		}
@@ -77,7 +75,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 		for(Authority au : list){
 			authList.add(new SimpleGrantedAuthority(au.getAuthority()));
 		}
-		
 		//인증한 사용자 정보(Principal), 패스워드, 인증된사용자의 권한들 을 넣어 Authentication객체 생성해 리턴
 		return new UsernamePasswordAuthenticationToken(member, null, authList);
 	}
