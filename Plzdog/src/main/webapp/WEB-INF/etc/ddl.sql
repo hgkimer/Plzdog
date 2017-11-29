@@ -57,8 +57,16 @@ DROP TABLE CARE
 DROP TABLE CARE_IMAGE 
 	CASCADE CONSTRAINTS;
 	
+-- 시터 대기자 테이블
+DROP TABLE WAITING
+	CASCADE CONSTRAINTS;
 --------------------------------------------------
 --create
+--시터 대기자
+CREATE TABLE WAITING (
+	EMAIL VARCHAR2(100) PRIMARY KEY
+);
+	
 --회원 
 CREATE TABLE MEMBER (
 	EMAIL VARCHAR2(100) PRIMARY KEY, /* 이메일 */
@@ -71,11 +79,6 @@ CREATE TABLE MEMBER (
 	PHONENUM VARCHAR2(20) NOT NULL, /* 연락처 */
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
-<<<<<<< HEAD
-
-
-=======
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 -- 권한
 

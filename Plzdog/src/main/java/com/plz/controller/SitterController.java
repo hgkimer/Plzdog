@@ -1,6 +1,9 @@
 package com.plz.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +12,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.AuthorityService;
 import com.plz.service.MemberService;
 import com.plz.service.SitterService;
+import com.plz.service.WaitingService;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Sitter;
@@ -28,7 +33,19 @@ public class SitterController {
 	
 	@Autowired
 	private AuthorityService authorityService;
+	
+	@Autowired
+	private WaitingService waitingService;
 
+	@RequestMapping("/admin/select_waiting")
+	public ModelAndView selectWaiting(HttpServletRequest request) {
+		List<String> waitingList = waitingService.selectAllWaiting();
+		List<Member> memberList = new ArrayList<>();
+		for(String email : waitingList) {
+			memberList.add(memberService.selectMemberByEmail(email));
+		}
+		return new ModelAndView("admin/select_waiting_result.do", "memberList", memberList);
+	}
 	/**
 	 * 관리자 승인 : 시터등록을 신청한 사람들의 권한을 견주에서 시터로 바꿔주는 메소드
 	 * @param authority 시터 권한으로 받는다.
@@ -37,7 +54,7 @@ public class SitterController {
 	 */
 	@RequestMapping("/admin/enroll_sitter")
 	public String enrollSitter(@ModelAttribute Authority authority, ModelMap model) {
-		authorityService.updateAuthority(authority);
+		authorityService.addAuthority(authority);
 		model.addAttribute(authority.getEmail());
 		return "admin/sitter_enroll_result.tiles";
 	}
@@ -51,8 +68,8 @@ public class SitterController {
 	 */
 	@RequestMapping("/member/insert_sitter")
 	public String insertSitter(@ModelAttribute Sitter sitter, ModelMap model) {
-		System.out.println(sitter);
 		sitterService.insertSitter(sitter);
+		waitingService.insertWaiting(sitter.getEmail());
 		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
 	}
@@ -77,7 +94,7 @@ public class SitterController {
 	
 	@RequestMapping("/member/select_all_sitter")
 	public String selectAllSitter(ModelMap model) {
-		List<Member> sitterList = memberService.selectAllSiiter();
+		List<Member> sitterList = memberService.selectAllSitter();
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}
