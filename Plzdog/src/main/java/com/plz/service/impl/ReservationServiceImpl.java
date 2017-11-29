@@ -81,6 +81,11 @@ public class ReservationServiceImpl implements ReservationService{
 	public void removeDemand(int resId) {
 		dao.deleteDemand(resId);
 	}
+
+	@Override
+	public Reservation findReservationById(int resId) {
+		return dao.selectReservationById(resId);
+	}
 	
 	
 }

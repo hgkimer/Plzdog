@@ -17,10 +17,11 @@ search_reservation_result.do<br>
 <c:forEach var="res" items="${requestScope.mresList }">
 	예약 번호 : ${res.resId }<br>
 	예약 상태 : ${res.resType }<br>
-	리뷰 : ${res.resContents }<br>
+	의뢰 상세 : ${res.resContents }<br>
 	견주 이메일 : ${res.memberEmail }<br>
 	시터 이메일  : ${res.sitterEmail }<br>
 	<form action="${initParam.rootPath }/member/delete_reservation.do" method="post">
+		<sec:csrfInput/>
 		<input type="hidden" value="${res.resId }" name="resId">
 		<button type="submit">예약 삭제</button>
 	</form>
@@ -31,7 +32,7 @@ search_reservation_result.do<br>
 <c:forEach var="res" items="${requestScope.sresList }">
 	예약 번호 : ${res.resId }<br>
 	예약 상태 : ${res.resType }<br>
-	리뷰 : ${res.resContents }<br>
+	의뢰 상세 : ${res.resContents }<br>
 	견주 이메일 : ${res.memberEmail }<br>
 	시터 이메일  : ${res.sitterEmail }<br>
 	<form action="${initParam.rootPath }/member/delete_reservation.do" method="post">

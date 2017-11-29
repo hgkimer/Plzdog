@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Reservation;
@@ -25,7 +26,7 @@ public class ReservationController {
 	/**
 	 * 예약 관련 Controller 
 	 * 1. 예약 등록(견주, 시터) 
-	 * 2. 예약 상태 변경 
+	 * 2. 예약 상태 변경==> 
 	 * 3. 예약 전체(로그인한 Email로 /견주,시터) 조회
 	 * 4. 예약 삭제 
 	 * 5.
@@ -41,28 +42,11 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/reservation_register")
 	public String addReservation(@ModelAttribute Reservation res) {
+		//1. 요청파라미터 받기(매개변수)
+		//2. Business Logic
 		service.addReservation(res);
+		//3. View로 이동
 		return "member/add_reservation_success.tiles";
-	}
-	
-	@RequestMapping
-	public String changeReservation() {
-		return null;
-	}
-
-	/**
-	 * 4. 예약 삭제 Controller
-	 * 사용자가 예약 취소버튼을 누르게 되면 요청파라미터로 받은 예약 번호에 해당하는 예약을 삭제
-	 * 실제 사용은 예약 취소 버튼을 누르면 이동하게끔
-	 * 삭제하면 바로 리스트에서 없어지도록  해야 함 AJAX 처리 필요
-	 * @param resId
-	 * @return
-	 */
-	@RequestMapping("/member/delete_reservation")
-	public String removeReservation(@RequestParam int resId) {
-		System.out.println(resId);
-		service.removeReservation(resId);
-		return "member/delete_reservation_result.tiles";
 	}
 	
 	/**
@@ -97,6 +81,24 @@ public class ReservationController {
 			model.addAttribute("mresList", rlist);
 			return "member/search_reservation_result.tiles";
 		}
+	}
+	/**
+	 * 4. 예약 삭제 Controller
+	 * 사용자가 예약 취소버튼을 누르게 되면 요청파라미터로 받은 예약 번호에 해당하는 예약을 삭제
+	 * 실제 사용은 예약 취소 버튼을 누르면 이동하게끔
+	 * 삭제하면 바로 리스트에서 없어지도록  해야 함 AJAX 처리 필요
+	 * @param resId
+	 * @return
+	 */
+	@RequestMapping("/member/delete_reservation")
+	public ModelAndView removeReservation(@RequestParam int resId) {
+		System.out.println(resId);
+		if(service.findReservationById(resId) == null) {
+			String error = "삭제할 예약이 없습니다.";
+		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
+		}
+		service.removeReservation(resId);
+		return new ModelAndView("member/delete_reservation_result.tiles");
 	}
 }
 

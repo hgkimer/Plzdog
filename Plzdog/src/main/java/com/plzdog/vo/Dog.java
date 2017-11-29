@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Dog implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -12,6 +14,7 @@ public class Dog implements Serializable{
 	private String species;
 	private String gender;
 	private double weight;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date birth;
 	private String email;
 	
