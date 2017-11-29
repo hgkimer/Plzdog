@@ -67,8 +67,8 @@
 		where 	email = #{email}
 	</update>
 	
-	<delete id ="deleteSitter" parameterType="sitter">
-		delete from sitter where email = #{email}
+	<delete id ="deleteSitter" parameterType="string">
+		delete from sitter where email = #{value}
 	</delete>
 	
 	

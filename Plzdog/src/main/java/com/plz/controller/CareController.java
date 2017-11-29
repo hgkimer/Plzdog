@@ -26,7 +26,7 @@ public class CareController {
 	@Autowired
 	private CareService service;
 	
-	@RequestMapping("/care/select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
+	@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
 	//request.getParameter
 	public String selectCareJoinCareImage(@RequestParam int careId, ModelMap model) throws Exception {
 		List<Care> list = service.selectCareJoinCareImage(careId);
@@ -35,7 +35,7 @@ public class CareController {
 		}
 		//request.Dispatcher
 		model.addAttribute("list", list);
-		return "test/care_success.tiles";
+		return "sitter/care_success.tiles";
 	}
 	
 	@RequestMapping("insert_care")
@@ -43,9 +43,9 @@ public class CareController {
 		service.insertCare(care);
 		if(service.selectCareJoinCareImage(care.getCareId()) != null) {
 			model.addAttribute(model);
-			return "test/care_success.tiles";
+			return "sitter/care_success.tiles";
 		} else {
-			return "test/fail.tiles";
+			return "sitter/fail.tiles";
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class CareController {
 	@RequestMapping("care_image_result")
 	public ModelAndView uploadSuccess(@RequestParam int careId) {
 		List<Care> careList = service.selectCareJoinCareImage(careId);
-		return new ModelAndView("test/care_success.tiles", "careList", careList);
+		return new ModelAndView("sitter/care_success.tiles", "careList", careList);
 	}
 	
 	@RequestMapping("update_care")
@@ -79,9 +79,9 @@ public class CareController {
 //			
 			service.updateCare(care);
 			model.addAttribute(care);
-			return "test/care_success.tiles";
+			return "sitter/care_success.tiles";
 		} else {
-			return "test/fail.tiles";
+			return "sitter/fail.tiles";
 		}
 	}
 }
