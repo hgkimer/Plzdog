@@ -8,7 +8,7 @@
 <title>Tiles Exam</title>
 <%--Bootsrap/jQuery 등록 --%>
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
-<script src="${initParam.rootPath }/jquery/jquery-3.2.1.min.js"></script>
+<script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <style>
 
@@ -30,6 +30,5 @@
 	<tiles:insertAttribute name="content" />
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
 <%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
- 	<tiles:insertAttribute name="footer" />
 </body>
 </html>

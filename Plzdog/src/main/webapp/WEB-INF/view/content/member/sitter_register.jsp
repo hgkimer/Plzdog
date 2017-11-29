@@ -20,7 +20,7 @@
 		<input type="text" name="serviceAddress" id="serviceAddress" class="form-controller" required="required">
 	</div>
 	<input type="hidden" name="authority" value="member">
-	<input type="submit" value="전송" class="btn btn-default">
+	<input type="submit" value="전송" id="sitterBtn" name="sitterBtn" class="btn btn-default">
 </form>
 </body>
 </html>
