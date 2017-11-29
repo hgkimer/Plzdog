@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-quit.do
+mydog_edit_form
 </body>
 </html>

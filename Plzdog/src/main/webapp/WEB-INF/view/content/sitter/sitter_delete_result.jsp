@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-write_reservation.do
+
 </body>
 </html>

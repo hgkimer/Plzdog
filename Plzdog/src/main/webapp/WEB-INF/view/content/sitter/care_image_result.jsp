@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-mydog_delete.do
+등록된 이미지 이름 : ${requestScope.ci.imageName }
 </body>
 </html>

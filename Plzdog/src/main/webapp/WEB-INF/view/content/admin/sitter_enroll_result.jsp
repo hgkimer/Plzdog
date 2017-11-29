@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-mydog_register.do
+
 </body>
 </html>

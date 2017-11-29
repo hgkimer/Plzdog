@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Authority implements Serializable {
 
 	private String email;
+	
 	private String authority;
 	
 	public Authority() {}

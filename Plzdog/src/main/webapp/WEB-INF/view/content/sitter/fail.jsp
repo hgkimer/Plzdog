@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-mydog_edit.do
+실패화면
 </body>
 </html>
