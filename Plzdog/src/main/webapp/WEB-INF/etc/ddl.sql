@@ -298,10 +298,6 @@ insert into DEMAND values (3,'code-1');
 insert into DEMAND values (3,'code-2');
 insert into DEMAND values (3,'code-3');
 insert into Demand values (4,'code-12');
-insert into Demand values (5,'code-12');
-insert into Demand values (6,'code-12');
-insert into Demand values (6,'code-11');
-insert into Demand values (6,'code-13');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
@@ -331,9 +327,6 @@ insert into CARE_IMAGE values('돌봄이미지6',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
-insert into care_image values('돌봄이미지8',20);
-insert into care_image values('돌봄이미지9',20);
-insert into care_image values('돌봄이미지8',21);	
 -----------------------------------------------
 --select
 update member set password='$2a$10$e.aM7GT5qtQ/PNTyj3tYT.G4LgunBx6OkAvP0am1o4zgEb9ljP/66'
