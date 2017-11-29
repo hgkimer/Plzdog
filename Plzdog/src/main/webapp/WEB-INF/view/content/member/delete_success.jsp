@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-sitter_register.do
+<h2>회원 탈퇴 완료</h2>
 </body>
 </html>

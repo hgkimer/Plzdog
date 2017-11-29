@@ -71,8 +71,11 @@ CREATE TABLE MEMBER (
 	PHONENUM VARCHAR2(20) NOT NULL, /* 연락처 */
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
+<<<<<<< HEAD
 
-select * from member
+
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 -- 권한
 
@@ -80,7 +83,7 @@ CREATE TABLE AUTHORITY (
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
 	AUTHORITY VARCHAR2(20) NOT NULL, /* 권한 */
 	CONSTRAINT PK_AUTHORITY PRIMARY KEY(EMAIL,AUTHORITY),
-	CONSTRAINT FK_AUTHORITY_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER
+	CONSTRAINT FK_AUTHORITY_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade
 );
 
 --코드
@@ -100,7 +103,7 @@ CREATE TABLE DOG (
 	WEIGHT NUMBER(3, 1) NOT NULL, /* 몸무게 */
 	BIRTH DATE NOT NULL, /* 생년월일 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
-	CONSTRAINT FK_DOG_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER
+	CONSTRAINT FK_DOG_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade
 );
 
 
@@ -109,8 +112,8 @@ CREATE TABLE DOGINFO (
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
 	CODE_DOG VARCHAR2(20) NOT NULL, /* 코드 */
 	CONSTRAINT PK_DOGINFO PRIMARY KEY(DOG_ID, CODE_DOG),
-	CONSTRAINT FK_DOGINFO_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG,
-	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE_DOG) REFERENCES CODE
+	CONSTRAINT FK_DOGINFO_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG on delete cascade,
+	CONSTRAINT FK_DOGINFO_CODE FOREIGN KEY(CODE_DOG) REFERENCES CODE on delete cascade
 );
 
 
@@ -118,7 +121,7 @@ CREATE TABLE DOGINFO (
 CREATE TABLE DOG_IMAGE (
 	DOG_IMAGE VARCHAR2(100) NOT NULL, /* 이미지이름(경로) */
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
-	CONSTRAINT FK_DOG_IMAGE_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG
+	CONSTRAINT FK_DOG_IMAGE_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG on delete cascade
 );
 
 
@@ -130,7 +133,7 @@ CREATE TABLE SITTER (
 	SERVICE_ADDRESS CLOB NOT NULL, /* 서비스가능지역 */
 	SITTER_RATE NUMBER(2, 1), /* 평점 */
 	CONSTRAINT PK_SITTER PRIMARY KEY(EMAIL),
-	CONSTRAINT FK_SITTER_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER
+	CONSTRAINT FK_SITTER_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade
 );
 
 /* 스킬 */
@@ -138,8 +141,8 @@ CREATE TABLE SKILL (
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
 	CODE_SKILL VARCHAR2(20) NOT NULL, /* 코드 */
 	CONSTRAINT PK_SKILL PRIMARY KEY(EMAIL, CODE_SKILL),
-	CONSTRAINT FK_SKILL_MEMBER FOREIGN KEY(EMAIL) REFERENCES SITTER,
-	CONSTRAINT FK_SKILL_CODE FOREIGN KEY(CODE_SKILL) REFERENCES CODE
+	CONSTRAINT FK_SKILL_MEMBER FOREIGN KEY(EMAIL) REFERENCES SITTER on delete cascade,
+	CONSTRAINT FK_SKILL_CODE FOREIGN KEY(CODE_SKILL) REFERENCES CODE on delete cascade
 );
 
 /* 리뷰 */
@@ -149,8 +152,8 @@ CREATE TABLE REVIEW (
 	REVIEW_CONTENTS CLOB NOT NULL, /* 내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
-	CONSTRAINT FK_REVIEW_MEMBER FOREIGN KEY(EMAIL) REFERENCES member,
-	CONSTRAINT FK_REVIEW_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES member
+	CONSTRAINT FK_REVIEW_MEMBER FOREIGN KEY(EMAIL) REFERENCES member on delete cascade,
+	CONSTRAINT FK_REVIEW_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES member on delete cascade
 );
 
 /* 예약 */
@@ -162,8 +165,8 @@ CREATE TABLE RESERVATION (
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
-	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER ,
-	CONSTRAINT FK_RESERVATION_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES MEMBER
+	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade ,
+	CONSTRAINT FK_RESERVATION_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES MEMBER on delete cascade
 );
 	
 /* 매출 */
@@ -181,7 +184,7 @@ CREATE TABLE DEMAND (
 	RES_ID NUMBER(10) not null, /* 예약ID */
 	CODE_DEMAND VARCHAR2(20) not null, /* 코드 */
 	CONSTRAINT PK_DEMAND PRIMARY KEY(RES_ID, CODE_DEMAND),
-	CONSTRAINT FK_DEMAND_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION,
+	CONSTRAINT FK_DEMAND_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION on delete cascade,
 	CONSTRAINT FK_DEMAND_CODE FOREIGN KEY(CODE_DEMAND) REFERENCES CODE on delete cascade
 );
 
@@ -191,14 +194,14 @@ CREATE TABLE CARE (
 	CARE_CONTENTS CLOB NOT NULL, /* 내용 */
 	RES_ID NUMBER(10) NOT NULL, /* 예약ID */
 	CARE_DATE DATE NOT NULL, /* 작성일 */
-	CONSTRAINT FK_CARE_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION
+	CONSTRAINT FK_CARE_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION on delete cascade
 );
 
 /* 돌봄일지 이미지 */
 CREATE TABLE CARE_IMAGE (
 	CARE_IMAGE VARCHAR2(30) NOT NULL, /* 이미지경로 */
 	CARE_ID NUMBER(10) NOT NULL, /* 돌봄일지ID */
-	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE 
+	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE on delete cascade
 );
 	
 --------------------------------------------------
@@ -207,7 +210,6 @@ CREATE TABLE CARE_IMAGE (
 --강아지 시퀀스 생성
 drop sequence Dog_id_seq;
 create sequence dog_id_seq;	
-select dog_id_seq.nextval from dual
 
 --예약 시퀀스 생성
 drop sequence RESERVATION_id_seq;
@@ -216,7 +218,6 @@ create sequence RESERVATION_id_seq;
 --돌봄일지 시퀀스 생성
 drop sequence CARE_id_seq;
 create sequence CARE_id_seq;	
-select care_id_seq.nextval from dual
 
 ---------------------------------------------------
 -- INSERT
@@ -428,22 +429,13 @@ where s.email = m.email and s.email = d.email and k.code_skill = c.code and s.em
 -- n번 돌봄일지와 돌봄이미지 조회
 select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
 from	care c, care_image i
-where	c.care_id = 7 and c.care_id = i.care_id(+)
-
-select * from care_image
+where	c.care_id = 7 and c.care_id = i.care_id(+);
 
 -- 강아지와 강아지 이미지 조회
 select	d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth, i.dog_image, c.code_dog
 from	dog d, dog_image i, doginfo c
-where 	d.email = 'soo@naver.com' and  d.dog_id = i.dog_id(+) and d.dog_id = c.dog_id
+where 	d.email = 'soo@naver.com' and  d.dog_id = i.dog_id(+) and d.dog_id = c.dog_id;
 
-insert into dog_image values('꼬미사진', 4)
-
-select * from dog_image
-select * from dog
-select * from doginfo
-
-select * from authority where email='kim@naver.com'
 
 -- 펫시터의 정보를 조회
 select			m.email,
@@ -463,7 +455,7 @@ select			m.email,
 		from	member m, sitter s, skill k, code c
 		where	m.email = s.email
 		and 	s.email = k.email
-		and     k.code_skill = c.code 
+		and     k.code_skill = c.code;
 		
 		--<!-- 예약상태를 조회(reservation-> demand -> code) -->
 		select  
@@ -475,7 +467,7 @@ select			m.email,
 			    c.category
 		from    reservation r, demand d, code c
 		where   r.res_id = d.res_id
-		and 	d.code_demand = c.code
+		and 	d.code_demand = c.code;
 		
 		--<!--Email로 해당 예약의 시터의 급여를 조회 -->
 		select  r.res_id,
@@ -491,7 +483,7 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
-		and 	r.email_sitter = 'kim@naver.com'
+		and 	r.email_sitter = 'kim@naver.com';
 		
 		-- <!--Email로 해당 예약의 상태를 조회 -->
 		select  r.res_id,
@@ -507,7 +499,7 @@ select			m.email,
 		from    reservation r, demand d, code c
 		where   r.res_id = d.res_id
 		and     d.code_demand = c.code
-		and 	r.email = 'yoon@naver.com'
+		and 	r.email = 'yoon@naver.com';
 		
 		-- 해당 예약의 돌봄일지를 조회
 		select  r.res_id,
@@ -524,7 +516,7 @@ select			m.email,
 		from    reservation r, care c, care_image i
 		where   r.res_id = c.res_id
 		and		c.care_id = i.care_id(+)
-		and	    r.email = 'lee@naver.com'
+		and	    r.email = 'lee@naver.com';
 		
 		-- 해당 예약의 급여를 조회
 		select  r.res_id,
@@ -540,4 +532,21 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
+<<<<<<< HEAD
+		and     r.res_id = 2;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+=======
 		and     r.res_id = 2
+		
+		delete from member where email = 'kim@naver.com';
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git

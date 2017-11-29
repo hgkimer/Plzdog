@@ -17,8 +17,8 @@
 	</div>
 	<div class="form-group">
 		<label for="gender">성별 : </label>
-		<laber><input type="radio" name="gender" id="gendermale" class="form-controller"/>수컷</laber>
-		<laber><input type="radio" name="gender" id="genderfemale" class="form-controller"/>암컷</laber>
+		<label><input type="radio" name="gender" id="gendermale" class="form-controller"/>수컷</label>
+		<label><input type="radio" name="gender" id="genderfemale" class="form-controller"/>암컷</label>
 	</div>
 	<div class="form-group">
 		<label for="weight">몸무게 : </label>
