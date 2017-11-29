@@ -16,20 +16,20 @@
 								)
 	</insert>
 
-	<!-- 회원의 모든 정보(MEMBER+SITTER+SKILL+CODE+DOG+DOG_IMAGE 조회 -->
 	<sql id="member-select-sql">
-		select email,
-			   member_name,
-			   password,
-			   main_address,
-			   sub_address,
-			   zipcode,
-			   member_image,
-			   phonenum,
-			   member_enable
-	   from member
+		select	email,
+			   	member_name,
+			   	password,
+			   	main_address,
+			   	sub_address,
+			   	zipcode,
+			   	member_image,
+			   	phonenum,
+			   	member_enable
+	   from		member
 	</sql>
 
+	<!-- 회원의 모든 정보(MEMBER+SITTER+SKILL+CODE+DOG+DOG_IMAGE 조회 -->
 	<!-- 펫시터 전체 조회 -->
 	<sql id="member-sitter-sql">
 		SELECT	m.email,

@@ -2,24 +2,41 @@ package com.plzdog.vo;
 
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CareImage implements Serializable{
 
-	private String careImage;
+	private MultipartFile imageCare;
+	private String imageName;
 	private int careId;
 	
 	public CareImage() {}
 
-	public CareImage(String careImage, int careId) {
-		this.careImage = careImage;
+	public CareImage(MultipartFile imageCare, int careId) {
+		this.imageCare = imageCare;
 		this.careId = careId;
 	}
 
-	public String getCareImage() {
-		return careImage;
+	public CareImage(MultipartFile imageCare, String imageName, int careId) {
+		this.imageCare = imageCare;
+		this.imageName = imageName;
+		this.careId = careId;
 	}
 
-	public void setCareImage(String careImage) {
-		this.careImage = careImage;
+	public MultipartFile getImageCare() {
+		return imageCare;
+	}
+
+	public void setImageCare(MultipartFile imageCare) {
+		this.imageCare = imageCare;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	public int getCareId() {
@@ -35,7 +52,7 @@ public class CareImage implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + careId;
-		result = prime * result + ((careImage == null) ? 0 : careImage.hashCode());
+		result = prime * result + ((imageName == null) ? 0 : imageName.hashCode());
 		return result;
 	}
 
@@ -50,16 +67,16 @@ public class CareImage implements Serializable{
 		CareImage other = (CareImage) obj;
 		if (careId != other.careId)
 			return false;
-		if (careImage == null) {
-			if (other.careImage != null)
+		if (imageName == null) {
+			if (other.imageName != null)
 				return false;
-		} else if (!careImage.equals(other.careImage))
+		} else if (!imageName.equals(other.imageName))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CareImage [careImage=" + careImage + ", careId=" + careId + "]";
+		return "CareImage [imageName=" + imageName + ", careId=" + careId + "]";
 	}
 }

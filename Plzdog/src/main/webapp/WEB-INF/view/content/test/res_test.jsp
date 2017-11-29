@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>돌봄일지</title>
+<title>Insert title here</title>
 </head>
 <body>
-<form action="${initParam.rootPath }/care/select_care.do" method="post">
-	<!-- post, 로그인, 로그아웃 방식은 sec를 꼭 붙여준다. 토큰을 보내줘야한다. -->
+<form action="${initParam.rootPath }/reservation/select.do" method="post">
 	<sec:csrfInput/>
-	<input type="number" id="careId" name="careId">
+	<input type="text" id="email" name="email">
 	<button type="submit">전송</button>
 </form>
 </body>

@@ -26,9 +26,10 @@
 </style>
 </head>
 <body>
-	<tiles:insertAttribute name="header" ignore="true"/>
-	<tiles:insertAttribute name="content" ignore="true"/>
-	<a href="${initParam.rootPath }/dog_test.do">테스트</a>
- 	<tiles:insertAttribute name="footer" ignore="true"/>
+	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="content" />
+	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
+<%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
+ 	<tiles:insertAttribute name="footer" />
 </body>
 </html>

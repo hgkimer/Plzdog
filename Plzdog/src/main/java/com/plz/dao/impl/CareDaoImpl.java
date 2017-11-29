@@ -50,7 +50,7 @@ public class CareDaoImpl implements CareDao {
 	public int updateCareImage(CareImage careImage, String originalImage) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("originalImage", originalImage);
-		params.put("careImage", careImage.getCareImage());
+		params.put("imageName", careImage.getImageName());
 		params.put("careId", careImage.getCareId());
 		return session.update(makeSqlId("updateCareImage"), params);
 	}

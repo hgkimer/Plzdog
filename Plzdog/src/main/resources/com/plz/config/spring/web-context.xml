@@ -24,8 +24,6 @@
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
 	<!-- 로그인 페이지 -->
 	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
-	<!-- 테스트 페이지 -->
-	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />
 	<!-- 도그시터 신청 페이지 -->
 	<mvc:view-controller path="/member/sitter_register.do" view-name="member/sitter_register.tiles"/>
 	<!-- 시터 찾기 페이지(기본 - 시터 검색페이지) -->
@@ -52,6 +50,8 @@
 	<mvc:view-controller path="/sitter/care_register_form.do" view-name="sitter/care_register_form.tiles"/>
 	<!-- 돌봄일지 수정(돌봄일지 수정 폼) -->
 	<mvc:view-controller path="/sitter/care_eidt_form.do" view-name="sitter/care_edit_form.tiles"/>
+	<!-- 돌봄일지 테스트 -->
+	<mvc:view-controller path="/sitter/care_test.do" view-name="sitter/care_test.tiles" />
 	<!-- FAQ  -->
 	<mvc:view-controller path="/faq.do" view-name="/faq.tiles"/>
 	<!-- 관리자(주요 기능 구현 후 추가 작성) -->

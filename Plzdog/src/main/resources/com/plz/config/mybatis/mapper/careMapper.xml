@@ -18,7 +18,7 @@
 	
 	<resultMap type="care" id="care-join-care_image-resultmap" extends="care-resultmap">
 		<collection property="careImageList" ofType="CareImage">
-			<id column="care_image" property="careImage"/>
+			<id column="care_image" property="imageName"/>
 			<result column="care_id" property="careId"/>
 		</collection>
 	</resultMap>
@@ -43,11 +43,11 @@
 	
 	<!-- 이미지 관리 -->
 	<insert id="insertCareImage" parameterType="CareImage">
-		insert into care_image values(#{careImage}, #{careId})
+		insert into care_image values(#{imageName}, #{careId})
 	</insert>
 	
 	<update id="updateCareImage" parameterType="map">
-		update care_image set care_image = #{careImage} where care_id = #{careId} and care_image = #{originalImage}
+		update care_image set care_image = #{imageName} where care_id = #{careId} and care_image = #{originalImage}
 	</update>
 	
 	<delete id="deleteCareImage" parameterType="string">
