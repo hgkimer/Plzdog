@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="${initParam.rootPath }/sitter_register.do" method="post">
+<form action="${initParam.rootPath }/sitter/insert_sitter.do" method="post">
 	<div class="form-group">
 		<label for="schoolName">학교이름 : </label>
 		<input type="text" name="schoolName" id="schoolName" class="form-controller" required="required">
