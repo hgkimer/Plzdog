@@ -137,7 +137,11 @@
 	<select id="selectAllReservation" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
 	</select>
-	
+	<!-- 예약 id로 예약 조회 -->
+	<select id="selectReservationById">
+		<include refid="reservation-sql"></include>
+		where res_id = #{resId}
+	</select>
 	<!-- 회원에서 이메일로 예약조회 -->
 	<select id="selectMemberReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>

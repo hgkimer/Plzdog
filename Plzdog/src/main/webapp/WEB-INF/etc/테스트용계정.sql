@@ -13,7 +13,6 @@ select * from care;
 select * from CARE_IMAGE;
 select * from member;
 
-insert into AUTHORITY values('hgkimer@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_SITTER');
 

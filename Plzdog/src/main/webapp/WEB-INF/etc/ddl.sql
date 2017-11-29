@@ -71,11 +71,6 @@ CREATE TABLE MEMBER (
 	PHONENUM VARCHAR2(20) NOT NULL, /* 연락처 */
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
-<<<<<<< HEAD
-
-
-=======
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 -- 권한
 
