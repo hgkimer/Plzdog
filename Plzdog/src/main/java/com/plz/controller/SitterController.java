@@ -47,6 +47,7 @@ public class SitterController {
 	 */
 	@RequestMapping("insert_sitter")
 	public String insertSitter(@ModelAttribute Member sitter, @RequestParam String role, ModelMap model) {
+		System.out.println(sitter.getEmail());
 		service.insertMember(sitter, role);
 		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
