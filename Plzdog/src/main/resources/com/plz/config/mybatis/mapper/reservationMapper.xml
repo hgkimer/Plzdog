@@ -74,7 +74,7 @@
 		<id column="res_id" property="resId"/>
 		<result column="res_type" property="resType"/>
 		<result column="res_sdate" property="resSDate"/>
-		<result column="res_edate" property="resEdate"/>
+		<result column="res_edate" property="resEDate"/>
 		<result column="res_contents" property="resContents"/>
 		<result column="email" property="memberEmail"/>
 		<result column="email_sitter" property="sitterEmail"/>
@@ -190,7 +190,7 @@
         	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
-		#{resEdate}, #{resContents},#{memberEmail},#{sitterEmail})
+		#{resEDate}, #{resContents},#{memberEmail},#{sitterEmail})
 	</insert>
 	
 	<!-- 예약ID를 통해 수정한다. -->

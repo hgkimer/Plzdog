@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-성공
+성공<br>
+${requestScope.reservation }
 </body>
 </html>
