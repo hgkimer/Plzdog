@@ -17,5 +17,6 @@
 		<mapper resource="com/plz/config/mybatis/mapper/reviewMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/salesMapper.xml"/>
 		<mapper resource="com/plz/config/mybatis/mapper/sitterMapper.xml"/>
+		<mapper resource="com/plz/config/mybatis/mapper/skillMapper.xml"/>
 	</mappers>
 </configuration>

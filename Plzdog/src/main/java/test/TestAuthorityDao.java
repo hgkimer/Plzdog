@@ -25,7 +25,7 @@ public class TestAuthorityDao {
 	System.out.println("-----수정 완료-----");
 	List<Authority> list2 =  authService.findAllAuthority();
 	System.out.println(list2);
-	Authority newA = authService.findAuthorityByEmail(email);
+	List<Authority> newA = authService.findAuthorityByEmail(email);
 	System.out.println(newA);
 	}
 }

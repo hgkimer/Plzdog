@@ -33,7 +33,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 	}
 
 	@Override
-	public Authority findAuthorityByEmail(String email) {
+	public List<Authority> findAuthorityByEmail(String email) {
 		return dao.selectAuthorityByEmail(email);
 	}
 

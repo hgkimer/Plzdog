@@ -72,6 +72,8 @@ CREATE TABLE MEMBER (
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
 
+select * from member
+
 -- 권한
 
 CREATE TABLE AUTHORITY (
@@ -198,8 +200,6 @@ CREATE TABLE CARE_IMAGE (
 	CARE_ID NUMBER(10) NOT NULL, /* 돌봄일지ID */
 	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE 
 );
-
-
 	
 --------------------------------------------------
 -- 시퀀스
@@ -306,7 +306,7 @@ insert into Demand values (6,'code-11');
 insert into Demand values (6,'code-13');
 
 --매출
-insert into SALES values(1 ,100000 ,90000 ,10000, '2017/07/03');
+insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
 insert into SALES values(2,100000,90000,10000,'2017/07/04');
 insert into SALES values(3,100000,90000,10000,'2017/07/05');
 insert into SALES values(4,100000,90000,10000,'2017/07/06');
@@ -322,7 +322,6 @@ insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요',3,'2
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요1',3,'2017/08/09');
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요2',4,'2017/08/09');
 insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요3',4,'2017/08/09');
-select * from care
 
 --돌봄일지 이미지
 insert into CARE_IMAGE values('돌봄이미지1',1);
@@ -339,7 +338,7 @@ insert into care_image values('돌봄이미지9',20);
 insert into care_image values('돌봄이미지8',21);	
 -----------------------------------------------
 --select
-
+update member set password='$2a$10$e.aM7GT5qtQ/PNTyj3tYT.G4LgunBx6OkAvP0am1o4zgEb9ljP/66'
 -- 시터에 등록된 review를 조회
 
 select 
@@ -423,6 +422,8 @@ insert into dog_image values('꼬미사진', 4)
 select * from dog_image
 select * from dog
 select * from doginfo
+
+select * from authority where email='kim@naver.com'
 
 -- 펫시터의 정보를 조회
 select			m.email,

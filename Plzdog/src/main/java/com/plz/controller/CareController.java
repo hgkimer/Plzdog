@@ -26,12 +26,14 @@ public class CareController {
 	@Autowired
 	private CareService service;
 	
-	@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
-	public String selectCareJoinCareImage(@RequestParam int resId, ModelMap model) throws Exception {
-		List<Care> list = service.selectCareJoinCareImage(resId);
+	@RequestMapping("/care/select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
+	//request.getParameter
+	public String selectCareJoinCareImage(@RequestParam int careId, ModelMap model) throws Exception {
+		List<Care> list = service.selectCareJoinCareImage(careId);
 		for(Care c : list) {
 			System.out.println(c);
 		}
+		//request.Dispatcher
 		model.addAttribute("list", list);
 		return "test/care_success.tiles";
 	}

@@ -26,7 +26,7 @@ public class TestMemberDao {
 //
 		Member nMem = new Member("new@naver.com", "새로운사람", "456123", "경기도 용인시","수지구 신봉동",16701,"image010","010-1123-4587",0);
 		System.out.println(nMem.getEmail());
-		service.addMember(nMem); 
+		service.addMember(nMem,"ROLE_MEMBER"); 
 		System.out.println("------등록 완료------");
 		
 		String email ="soo@naver.com";

@@ -9,7 +9,7 @@ public interface MemberService{
 	 * 한 명의 회원을 등록하는 메소드
 	 * @param member
 	 */
-	void addMember(Member member);
+	void addMember(Member member , String role);
 	/**
 	 * 매개변수로 받은 회원의 정보를 삭제하는 메소드
 	 * @param email
