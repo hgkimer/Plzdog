@@ -23,6 +23,10 @@
 		<input type="password" name="password" id="pPwd" class="form-control" required="required">
 	</div>
 	<div class="form-group">
+		<label for="pPwd2">비밀번호 확인 : </label>
+		<input type="password" name="passwordTest" id="pPwd" class="form-control" required="required">
+	</div>
+	<div class="form-group">
 		<label for="pMain">기본주소 : </label>
 		<input type="text" name="mainAddress" id="pMain" class="form-control" required="required">
 	</div>

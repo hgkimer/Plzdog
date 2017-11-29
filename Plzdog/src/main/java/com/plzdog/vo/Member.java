@@ -16,6 +16,7 @@ public class Member implements Serializable {
 	private int memberEnable;
 
 	private Sitter sitter; // 시터
+	private List<Code> skillList;
 	private List<Review> reviewList; // 시터
 	private List<Reservation> resList; // 견주, 시터
 	private List<Dog> dogList; // 견주, 시터
@@ -164,6 +165,14 @@ public class Member implements Serializable {
 	public void setDogList(List<Dog> dogList) {
 		this.dogList = dogList;
 	}
+	
+	public List<Code> getSkillList() {
+		return skillList;
+	}
+
+	public void setSkillList(List<Code> skillList) {
+		this.skillList = skillList;
+	}
 
 	@Override
 	public int hashCode() {
@@ -180,6 +189,7 @@ public class Member implements Serializable {
 		result = prime * result + ((resList == null) ? 0 : resList.hashCode());
 		result = prime * result + ((reviewList == null) ? 0 : reviewList.hashCode());
 		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
+		result = prime * result + ((skillList == null) ? 0 : skillList.hashCode());
 		result = prime * result + ((subAddress == null) ? 0 : subAddress.hashCode());
 		result = prime * result + zipcode;
 		return result;
@@ -246,6 +256,11 @@ public class Member implements Serializable {
 				return false;
 		} else if (!sitter.equals(other.sitter))
 			return false;
+		if (skillList == null) {
+			if (other.skillList != null)
+				return false;
+		} else if (!skillList.equals(other.skillList))
+			return false;
 		if (subAddress == null) {
 			if (other.subAddress != null)
 				return false;
@@ -260,8 +275,7 @@ public class Member implements Serializable {
 	public String toString() {
 		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
 				+ mainAddress + ", subAddress=" + subAddress + ", zipcode=" + zipcode + ", memberImage=" + memberImage
-				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", reviewList="
-				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
+				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", skillList="
+				+ skillList + ", reviewList=" + reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
 	}
-
 }

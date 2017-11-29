@@ -22,12 +22,14 @@
 	.content {
 		height: auto;
 	}
-} */
+} 
 </style>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="menu" />
 	<tiles:insertAttribute name="content" />
+	<tiles:insertAttribute name="footer" />
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
 <%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
 </body>
