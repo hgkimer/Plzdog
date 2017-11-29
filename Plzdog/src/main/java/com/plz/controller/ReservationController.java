@@ -2,7 +2,6 @@ package com.plz.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +30,10 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/delete_reservation")
-	public String removeReservation(@RequestParam int resId) {
+	public String removeReservation(@RequestParam int resId, Model model) {
 		service.removeReservation(resId);
-		return "redirect:member/search_reservation_result.tiles";
+		
+		return "member/delete_reservation_result.tiles";
 	}
 	
 	/**

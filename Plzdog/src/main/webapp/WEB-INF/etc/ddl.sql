@@ -332,10 +332,7 @@ insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 -----------------------------------------------
 --select
-update member set password='$2a$10$e.aM7GT5qtQ/PNTyj3tYT.G4LgunBx6OkAvP0am1o4zgEb9ljP/66'
 -- 시터에 등록된 review를 조회
-
-select 
 
 -- 회원에 해당하는 code의 이름을 조회
 select m.email, m.member_name, c.code, c.code_name 
