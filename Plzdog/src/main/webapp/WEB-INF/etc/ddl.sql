@@ -229,12 +229,12 @@ insert into member values('yoon@naver.com','윤규석','1131','제주도','서�
 insert into member values('soo@naver.com','이수일','1141','서울','마포',12345,'image4','010-9123-0223',0);
 
 -- 권한
-insert into AUTHORITY values('kim@naver.com','ROLE_USER');
+insert into AUTHORITY values('kim@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('kim@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('kim@naver.com','ROLE_SITTER');
 insert into AUTHORITY values('soo@naver.com','ROLE_SITTER');
-insert into AUTHORITY values('lee@naver.com','ROLE_USER');
-insert into AUTHORITY values('soo@naver.com','ROLE_USER');
+insert into AUTHORITY values('lee@naver.com','ROLE_MEMBER');
+insert into AUTHORITY values('soo@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('yoon@naver.com','ROLE_USER');
 
 -- 코드 테이블 
@@ -301,10 +301,6 @@ insert into DEMAND values (3,'code-1');
 insert into DEMAND values (3,'code-2');
 insert into DEMAND values (3,'code-3');
 insert into Demand values (4,'code-12');
-insert into Demand values (5,'code-12');
-insert into Demand values (6,'code-12');
-insert into Demand values (6,'code-11');
-insert into Demand values (6,'code-13');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
@@ -334,9 +330,6 @@ insert into CARE_IMAGE values('돌봄이미지6',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
-insert into care_image values('돌봄이미지8',20);
-insert into care_image values('돌봄이미지9',20);
-insert into care_image values('돌봄이미지8',21);	
 -----------------------------------------------
 --select
 update member set password='$2a$10$e.aM7GT5qtQ/PNTyj3tYT.G4LgunBx6OkAvP0am1o4zgEb9ljP/66'
@@ -391,6 +384,7 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
+
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
 where m.email = s.email and sk.email = s.email and code_skill = code;
