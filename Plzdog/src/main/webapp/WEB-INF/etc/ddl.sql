@@ -226,12 +226,12 @@ insert into member values('yoon@naver.com','윤규석','1131','제주도','서�
 insert into member values('soo@naver.com','이수일','1141','서울','마포',12345,'image4','010-9123-0223',0);
 
 -- 권한
-insert into AUTHORITY values('kim@naver.com','ROLE_USER');
+insert into AUTHORITY values('kim@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('kim@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('kim@naver.com','ROLE_SITTER');
 insert into AUTHORITY values('soo@naver.com','ROLE_SITTER');
-insert into AUTHORITY values('lee@naver.com','ROLE_USER');
-insert into AUTHORITY values('soo@naver.com','ROLE_USER');
+insert into AUTHORITY values('lee@naver.com','ROLE_MEMBER');
+insert into AUTHORITY values('soo@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('yoon@naver.com','ROLE_USER');
 
 -- 코드 테이블 
@@ -381,6 +381,7 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
+
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
 where m.email = s.email and sk.email = s.email and code_skill = code;

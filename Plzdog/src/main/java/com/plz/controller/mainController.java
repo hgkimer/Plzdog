@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
@@ -19,11 +20,15 @@ public class mainController {
 	private MemberService service;
 	
 	@RequestMapping("join_member")
-	public String joinMember(@ModelAttribute Member member, ModelMap model ) {
+	public String joinMember(@ModelAttribute Member member, @RequestParam String passwordTest, ModelMap model ) {
 		//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
 		member.setMemberEnable(1);
 		//DB
-		service.addMember(member,"ROLE_MEMBER");
+			if(member.getPassword().equals(passwordTest)) { 
+				service.addMember(member,"ROLE_MEMBER");
+			} else {
+				
+			}
 		//rquest영역
 		model.addAttribute(member);
 		return "member/join_success.tiles";

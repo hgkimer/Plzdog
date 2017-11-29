@@ -164,7 +164,6 @@
 
 	<!-- 회원 정보 삭제 cascade -->
 	<delete id="deleteMember" parameterType="string">
-		delete from member where
-		email = #{email}
+		delete from member where email = #{email}
 	</delete>
 </mapper>
