@@ -115,8 +115,8 @@
 			<result column="res_id" property="resId"/>  
 			<result column="care_date" property="careDate"/>
 			<collection property="careImageList" ofType="CareImage">
-				<!-- <id column ="care_id" property="careId"/> -->
-				<result column="care_image" property="careImage"/>
+				<id column="care_image" property="imageName"/>
+				<result column="care_id" property="careId"/>
 			</collection>
 		</collection>
 	</resultMap>
