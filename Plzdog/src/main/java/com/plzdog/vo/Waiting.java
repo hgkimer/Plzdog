@@ -1,5 +1,7 @@
 package com.plzdog.vo;
 
+import java.util.List;
+
 public class Waiting {
 
 	private String email;
@@ -7,6 +9,7 @@ public class Waiting {
 	public Waiting() {}
 
 	public Waiting(String email) {
+		super();
 		this.email = email;
 	}
 
@@ -16,6 +19,11 @@ public class Waiting {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Waiting [email=" + email + "]";
 	}
 
 	@Override
@@ -43,8 +51,5 @@ public class Waiting {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Waiting [email=" + email + "]";
-	}
+	
 }

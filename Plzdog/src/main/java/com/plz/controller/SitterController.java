@@ -40,11 +40,13 @@ public class SitterController {
 	@RequestMapping("/admin/select_waiting")
 	public ModelAndView selectWaiting(HttpServletRequest request) {
 		List<String> waitingList = waitingService.selectAllWaiting();
+		System.out.println(waitingList);
 		List<Member> memberList = new ArrayList<>();
-		for(String email : waitingList) {
-			memberList.add(memberService.selectMemberByEmail(email));
+			for(int i =0; i < waitingList.size(); i++) {
+				System.out.println(memberService.selectMemberByEmail(waitingList.get(i)));
+				memberList.add(memberService.selectMemberByEmail(waitingList.get(i)));
 		}
-		return new ModelAndView("admin/select_waiting_result.do", "memberList", memberList);
+		return new ModelAndView("admin/select_waiting_result.tiles", "memberList", memberList);
 	}
 	/**
 	 * 관리자 승인 : 시터등록을 신청한 사람들의 권한을 견주에서 시터로 바꿔주는 메소드
@@ -54,7 +56,11 @@ public class SitterController {
 	 */
 	@RequestMapping("/admin/enroll_sitter")
 	public String enrollSitter(@ModelAttribute Authority authority, ModelMap model) {
+		System.out.println(authority);
 		authorityService.addAuthority(authority);
+		
+		waitingService.deleteWaiting(authority.getEmail());
+		
 		model.addAttribute(authority.getEmail());
 		return "admin/sitter_enroll_result.tiles";
 	}
@@ -68,8 +74,11 @@ public class SitterController {
 	 */
 	@RequestMapping("/member/insert_sitter")
 	public String insertSitter(@ModelAttribute Sitter sitter, ModelMap model) {
+		System.out.println(sitter);
 		sitterService.insertSitter(sitter);
+		System.out.println(sitter+"2");
 		waitingService.insertWaiting(sitter.getEmail());
+		System.out.println(sitter+"3");
 		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
 	}
