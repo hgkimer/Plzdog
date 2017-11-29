@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Care implements Serializable{
 
 	private int careId;
 	private String careContents;
 	private int resId;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date careDate;
 	
 	private List<CareImage> careImageList;

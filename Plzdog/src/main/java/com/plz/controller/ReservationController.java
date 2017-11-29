@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Reservation;
 
+
 @Controller
 public class ReservationController {
 	@Autowired
@@ -46,6 +47,7 @@ public class ReservationController {
 			return new ModelAndView("/member/search_reservation.tiles", "mresList", rlist);
 		}
 	}
+
 }
 
 
