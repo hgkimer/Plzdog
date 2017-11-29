@@ -26,6 +26,9 @@
 </style>
 </head>
 <body>
-	<%-- <tiles:insertAttribute name="header" /> --%>
+	<tiles:insertAttribute name="header" ignore="true"/>
+	<tiles:insertAttribute name="content" ignore="true"/>
+	<a href="${initParam.rootPath }/dog_test.do">테스트</a>
+ 	<tiles:insertAttribute name="footer" ignore="true"/>
 </body>
 </html>
