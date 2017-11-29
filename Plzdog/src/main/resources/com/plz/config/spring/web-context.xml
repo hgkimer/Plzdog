@@ -24,6 +24,10 @@
 	<!-- 회원가입 페이지 -->
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
 	<!-- 로그인 페이지 -->
+	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
+	<!-- 403 권한 없음 에러 페이지 -->
+	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
+	<!-- 로그인 페이지 -->
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<!-- 회원탈퇴완료 페이지 -->
 	<mvc:view-controller path="/member/delete_success.do" view-name="member/delete_success.tiles"/>

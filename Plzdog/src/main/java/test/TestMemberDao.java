@@ -39,7 +39,7 @@ public class TestMemberDao {
 		System.out.println();
 		System.out.println(service.selectReviewByEmail(email));
 		System.out.println();
-		System.out.println(service.selectAllSiiter());
+		System.out.println(service.selectAllSitter());
 		System.out.println();
 		System.out.println(service.selectSitterByEmail(email));
 		System.out.println();
