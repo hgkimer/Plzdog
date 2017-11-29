@@ -14,10 +14,12 @@
 	<mvc:annotation-driven />
 
 	<!-- 메인 페이지 -->
-	<mvc:view-controller path="/main.do" view-name="main.tiles" />
+	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	
 	<!-- 테스트 페이지 -->
-	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />
+	<mvc:view-controller path="/care_test.do" view-name="test/care_test.tiles" />
+	<mvc:view-controller path="/res_test.do" view-name="test/res_test.tiles"/>
+	<mvc:view-controller path="/care_image_result.do" view-name="test/care_image_result.tiles"/>
 
 	<!-- TilesConfigurer : tiles 설정 파일의 위치 지정-->
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
