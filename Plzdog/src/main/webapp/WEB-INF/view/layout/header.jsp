@@ -44,7 +44,7 @@
 	}
 	
 	.nav {
-		width:80%;
+		width:100%;
 		height:100%;
 		float:right;
 	}
@@ -86,8 +86,8 @@
 				
 				<sec:authorize access="isAuthenticated()">
 				<li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="image/foot.png">도그시터 신청하기</a></li>
-				<li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
 				<li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="image/search.png">도그시터 찾기</a></li>
+				<li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
 				<li class="navi"><a href="${initParam.rootPath }/faq.do">FAQ</a></li>
 				<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
 				<li class="navi"><a href="${initParam.rootPath }/member/mypage.do">마이페이지</a></li>
