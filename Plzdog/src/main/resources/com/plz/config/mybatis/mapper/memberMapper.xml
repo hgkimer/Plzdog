@@ -19,6 +19,7 @@
 				m.member_name,
 				m.main_address,
 				m.sub_address,
+				m.password,
 				m.zipcode,
 				m.member_image,
 				m.phonenum,
@@ -35,6 +36,7 @@
 		<id column="email" property="email" />
 		<result column="member_name" property="memberName" />
 		<result column="main_address" property="mainAddress" />
+		<result column="password" property="password" />
 		<result column="sub_address" property="subAddress" />
 		<result column="zipcode" property="zipcode" />
 		<result column="member_image" property="memberImage" />
