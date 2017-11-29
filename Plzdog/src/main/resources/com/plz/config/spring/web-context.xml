@@ -15,15 +15,16 @@
 	
 	<!--
 	#################################################################################################### 
-		단순 링크 처리 z
+		단순 링크 처리 
 	####################################################################################################
 	-->
+	
 	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
 	<!-- 회원가입 페이지 -->
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
 	<!-- 로그인 페이지 -->
-	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
+	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<!-- 회원탈퇴완료 페이지 -->
 	<mvc:view-controller path="/member/delete_success.do" view-name="member/delete_success.tiles"/>
 	<!-- 도그시터 신청 페이지 -->
