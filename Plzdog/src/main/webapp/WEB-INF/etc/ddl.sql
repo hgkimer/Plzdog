@@ -526,21 +526,6 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
-<<<<<<< HEAD
-		and     r.res_id = 2;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-=======
 		and     r.res_id = 2
 		
 		delete from member where email = 'kim@naver.com';
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
