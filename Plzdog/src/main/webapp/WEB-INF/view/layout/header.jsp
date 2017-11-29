@@ -80,7 +80,7 @@
 				<%--인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴 --%>
 				<sec:authorize access="!isAuthenticated()">
 					<li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
-					<li class="navi"><a href="${initParam.rootPath }/join_member_form.do">회원가입</a></li>
+					<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
 					<li class="navi"><a href="${initParam.rootPath}/main.do">메인페이지</a></li>
 				</sec:authorize>
 				
