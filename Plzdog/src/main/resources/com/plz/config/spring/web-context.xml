@@ -15,7 +15,7 @@
 	
 	<!--
 	#################################################################################################### 
-		단순 링크 처리 
+		단순 링크 처리 z
 	####################################################################################################
 	-->
 	<!-- 메인 페이지 -->
@@ -42,8 +42,9 @@
 	<mvc:view-controller path="/member/mydog_register_form.do" view-name="member/mydog_register_form.tiles"/>
 	<!-- 반려견 수정(반려견 수정폼)-->
 	<mvc:view-controller path="/member/mydog_edit_form.do" view-name="member/mydog_edit_form.tiles"/>
-	<!-- 예약 조회 -->
-	<mvc:view-controller path="/member/search_reservation.do" view-name="member/search_reservation.tiles"/>
+	<!-- 예약 결과 조회 페이지 -->
+	<mvc:view-controller path="/member/search_reservation_result.do" view-name="member/search_reservation_result.tiles"/>
+	
 	<!-- 내게온 예약 조회 -->
 	<mvc:view-controller path="/sitter/search_reservation_me.do" view-name="sitter/search_reservation_me.tiles"/>
 	<!-- 돌봄일지 조회 -->

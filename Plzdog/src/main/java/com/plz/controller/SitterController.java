@@ -47,14 +47,14 @@ public class SitterController {
 	 */
 	@RequestMapping("insert_sitter")
 	public String insertSitter(@ModelAttribute Member sitter, @RequestParam String role, ModelMap model) {
-		service.addMember(sitter, role);
+		service.insertMember(sitter, role);
 		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
 	}
 	
 	@RequestMapping("update_sitter")
 	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
-		if(service.findMemberByEmail(sitter.getEmail()) != null) {
+		if(service.selectMemberByEmail(sitter.getEmail()) != null) {
 			service.updateMember(sitter);
 			model.addAttribute("sitter", sitter);
 			return "sitter/sitter_update_result.tiles";
@@ -72,21 +72,21 @@ public class SitterController {
 	
 	@RequestMapping("select_all_sitter")
 	public String selectAllSitter(ModelMap model) {
-		List<Member> sitterList = service.findMemberJoinSiiter();
+		List<Member> sitterList = service.selectAllSiiter();
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}
 	
 	@RequestMapping("select_sitter_name")
 	public String selectSitterByName(@RequestParam String name, ModelMap model) {
-		List<Member> sitterList = service.findMemberJoinSitterByName(name);
+		List<Member> sitterList = service.selectSitterByName(name);
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}
 	
 	@RequestMapping("select_sitter_email")
 	public String selectSitterByEmail(@RequestParam String email, ModelMap model) {
-		Member sitter = service.findMemberJoinSitterByEmail(email);
+		Member sitter = service.selectSitterByEmail(email);
 		if(sitter != null) {
 			model.addAttribute("sitter", sitter);
 			return "sitter/sitter_select_result.tiles";

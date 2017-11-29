@@ -26,23 +26,23 @@ public class TestMemberDao {
 //
 		Member nMem = new Member("new@naver.com", "새로운사람", "456123", "경기도 용인시","수지구 신봉동",16701,"image010","010-1123-4587",0);
 		System.out.println(nMem.getEmail());
-		service.addMember(nMem,"ROLE_MEMBER"); 
+		service.insertMember(nMem,"ROLE_MEMBER"); 
 		System.out.println("------등록 완료------");
 		
 		String email ="soo@naver.com";
 		String name = "수";
-		System.out.println(service.findAllMember());
+		System.out.println(service.selectAllMember());
 		System.out.println();
-		System.out.println(service.findMemberByEmail(email));
+		System.out.println(service.selectMemberByEmail(email));
 		System.out.println();
-		System.out.println(service.findMemberByName(name));
+		System.out.println(service.selectMemberByName(name));
 		System.out.println();
-		System.out.println(service.findMemberJoinReviewByEmail(email));
+		System.out.println(service.selectReviewByEmail(email));
 		System.out.println();
-		System.out.println(service.findMemberJoinSiiter());
+		System.out.println(service.selectAllSiiter());
 		System.out.println();
-		System.out.println(service.findMemberJoinSitterByEmail(email));
+		System.out.println(service.selectSitterByEmail(email));
 		System.out.println();
-		System.out.println(service.findMemberJoinSitterByName(name));
+		System.out.println(service.selectSitterByName(name));
 	}
 }

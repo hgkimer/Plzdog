@@ -24,8 +24,9 @@ public class mainController {
 		//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
 		member.setMemberEnable(1);
 		//DB
+
 			if(member.getPassword().equals(passwordTest)) { 
-				service.addMember(member,"ROLE_MEMBER");
+				service.insertMember(member,"ROLE_MEMBER");
 			} else {
 				
 			}

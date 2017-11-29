@@ -71,6 +71,11 @@ CREATE TABLE MEMBER (
 	PHONENUM VARCHAR2(20) NOT NULL, /* 연락처 */
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
 );
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
 -- 권한
 
@@ -205,7 +210,6 @@ CREATE TABLE CARE_IMAGE (
 --강아지 시퀀스 생성
 drop sequence Dog_id_seq;
 create sequence dog_id_seq;	
-select dog_id_seq.nextval from dual
 
 --예약 시퀀스 생성
 drop sequence RESERVATION_id_seq;
@@ -214,7 +218,6 @@ create sequence RESERVATION_id_seq;
 --돌봄일지 시퀀스 생성
 drop sequence CARE_id_seq;
 create sequence CARE_id_seq;	
-select care_id_seq.nextval from dual
 
 ---------------------------------------------------
 -- INSERT
@@ -397,25 +400,36 @@ from member m, reservation r, care c, care_image ci, code cd, demand d, member s
 where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
 and r.email_sitter = s.email and sl.res_id = r.res_id;
 
+select	m.email,
+		m.member_name,
+		m.main_address,
+		m.sub_address,
+		m.zipcode,
+		m.member_image,
+		m.phonenum,
+		s.school,
+		s.certification,
+		s.service_address,
+		s.sitter_rate,
+		c.code_name,
+		d.dog_name,
+		d.species,
+		d.gender,
+		d.weight,
+		d.birth
+from	member m, dog d, sitter s, skill k, code c
+where s.email = m.email and s.email = d.email and k.code_skill = c.code and s.email = k.email(+);
+
 -- n번 돌봄일지와 돌봄이미지 조회
 select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
 from	care c, care_image i
-where	c.care_id = 7 and c.care_id = i.care_id(+)
-
-select * from care_image
+where	c.care_id = 7 and c.care_id = i.care_id(+);
 
 -- 강아지와 강아지 이미지 조회
 select	d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth, i.dog_image, c.code_dog
 from	dog d, dog_image i, doginfo c
-where 	d.email = 'soo@naver.com' and  d.dog_id = i.dog_id(+) and d.dog_id = c.dog_id
+where 	d.email = 'soo@naver.com' and  d.dog_id = i.dog_id(+) and d.dog_id = c.dog_id;
 
-insert into dog_image values('꼬미사진', 4)
-
-select * from dog_image
-select * from dog
-select * from doginfo
-
-select * from authority where email='kim@naver.com'
 
 -- 펫시터의 정보를 조회
 select			m.email,
@@ -435,7 +449,7 @@ select			m.email,
 		from	member m, sitter s, skill k, code c
 		where	m.email = s.email
 		and 	s.email = k.email
-		and     k.code_skill = c.code 
+		and     k.code_skill = c.code;
 		
 		--<!-- 예약상태를 조회(reservation-> demand -> code) -->
 		select  
@@ -447,7 +461,7 @@ select			m.email,
 			    c.category
 		from    reservation r, demand d, code c
 		where   r.res_id = d.res_id
-		and 	d.code_demand = c.code
+		and 	d.code_demand = c.code;
 		
 		--<!--Email로 해당 예약의 시터의 급여를 조회 -->
 		select  r.res_id,
@@ -463,7 +477,7 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
-		and 	r.email_sitter = 'kim@naver.com'
+		and 	r.email_sitter = 'kim@naver.com';
 		
 		-- <!--Email로 해당 예약의 상태를 조회 -->
 		select  r.res_id,
@@ -479,7 +493,7 @@ select			m.email,
 		from    reservation r, demand d, code c
 		where   r.res_id = d.res_id
 		and     d.code_demand = c.code
-		and 	r.email = 'yoon@naver.com'
+		and 	r.email = 'yoon@naver.com';
 		
 		-- 해당 예약의 돌봄일지를 조회
 		select  r.res_id,
@@ -496,7 +510,7 @@ select			m.email,
 		from    reservation r, care c, care_image i
 		where   r.res_id = c.res_id
 		and		c.care_id = i.care_id(+)
-		and	    r.email = 'lee@naver.com'
+		and	    r.email = 'lee@naver.com';
 		
 		-- 해당 예약의 급여를 조회
 		select  r.res_id,
@@ -512,6 +526,21 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
+<<<<<<< HEAD
+		and     r.res_id = 2;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+=======
 		and     r.res_id = 2
 		
 		delete from member where email = 'kim@naver.com';
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git

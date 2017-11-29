@@ -1,7 +1,5 @@
 package com.plz.service.impl;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,11 @@ import com.plz.dao.MemberDao;
 import com.plz.service.MemberService;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Review;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+	
 	@Autowired
 	private MemberDao dao;
 	
@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public void addMember(Member member, String role) {
+	public void insertMember(Member member, String role) {
 		//패스워드 암호화 처리
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		//member 테이블 insert
@@ -57,38 +57,38 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> findAllMember() {
+	public List<Member> selectAllMember() {
 		return dao.selectAllMember();
 	}
 
 	@Override
-	public Member findMemberByEmail(String email) {
+	public Member selectMemberByEmail(String email) {
 		return dao.selectMemberByEmail(email);
 	}
 
 	@Override
-	public List<Member> findMemberByName(String name) {
+	public List<Member> selectMemberByName(String name) {
 		return dao.selectMemberByName(name);
 	}
 
 	@Override
-	public List<Member> findMemberJoinSiiter() {
-		return dao.selectAllMemberJoinSitter();
+	public List<Member> selectAllSiiter() {
+		return dao.selectAllSitter();
 	}
 
 	@Override
-	public Member findMemberJoinSitterByEmail(String email) {
-		return dao.selectMemberJoinSitterByEmail(email);
+	public Member selectSitterByEmail(String email) {
+		return dao.selectSitterByEmail(email);
 	}
 
 	@Override
-	public List<Member> findMemberJoinSitterByName(String name) {
-		return dao.selectMemberJoinSitterByName(name);
+	public List<Member> selectSitterByName(String name) {
+		return dao.selectSitterByName(name);
 	}
 
 	@Override
-	public List<Member> findMemberJoinReviewByEmail(String email) {
-		return dao.selectMemberJoinReviewByEmail(email);
+	public List<Review> selectReviewByEmail(String email) {
+		return dao.selectReviewByEmail(email);
 	}
 
 }

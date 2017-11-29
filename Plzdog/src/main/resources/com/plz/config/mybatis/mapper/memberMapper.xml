@@ -3,36 +3,81 @@
 <mapper namespace="com.plz.config.mybatis.mapper.memberMapper">
 
 	<insert id="insertMember" parameterType="member">
-		INSERT INTO	member VALUES( 
-								#{email},
-								#{memberName},
-								#{password},
-								#{mainAddress},
-								#{subAddress},
-								#{zipcode},
-								#{memberImage},
-								#{phoneNum},
-								#{memberEnable}
-								)
+		INSERT INTO	member VALUES( 	#{email},
+									#{memberName},
+									#{password},
+									#{mainAddress},
+									#{subAddress},
+									#{zipcode},
+									#{memberImage},
+									#{phoneNum},
+									#{memberEnable}	)
 	</insert>
-
-	<sql id="member-select-sql">
-		select	email,
-			   	member_name,
-			   	password,
-			   	main_address,
-			   	sub_address,
-			   	zipcode,
-			   	member_image,
-			   	phonenum,
-			   	member_enable
-	   from		member
+	
+	<sql id="member-dog-select-sql">
+		select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth
+		from	member m, dog d
 	</sql>
-
-	<!-- 회원의 모든 정보(MEMBER+SITTER+SKILL+CODE+DOG+DOG_IMAGE 조회 -->
-	<!-- 펫시터 전체 조회 -->
-	<sql id="member-sitter-sql">
-		SELECT	m.email,
+	
+	<!-- member-resultmap -->
+	<resultMap type="member" id="member-dog-resultmap">
+		<id column="email" property="email" />
+		<result column="member_name" property="memberName" />
+		<result column="main_address" property="mainAddress" />
+		<result column="sub_address" property="subAddress" />
+		<result column="zipcode" property="zipcode" />
+		<result column="member_image" property="memberImage" />
+		<result column="phonenum" property="phoneNum" />
+		<collection property="dogList" ofType="Dog">
+			<id column="dog_id" property="dogId"/>
+			<result column="dog_name" property="dogName"/>
+			<result column="species" property="species"/>
+			<result column="gender" property="gender"/>
+			<result column="weight" property="weight"/>
+			<result column="birth" property="birth"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectAllMemberJoinDog" resultMap="member-dog-resultmap">
+		<include refid="member-dog-select-sql"/>
+	</select>
+	
+	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
+		<include refid="member-dog-select-sql"/>
+		where m.email = #{value}
+	</select>
+	
+	<select id="selectMemberJoinDogByName" parameterType="string" resultMap="member-dog-resultmap">
+		<include refid="member-dog-select-sql"/>
+		where m.member_name like '%'||#{value}||'%'
+	</select>
+	
+	<resultMap type="member" id="member-dog-sitter-skill-resultmap" extends="member-dog-resultmap">
+		<collection property="sitter" ofType="Sitter">
+			<id column="email" property="email"/>
+			<result column="school" property="school"/>
+			<result column="certification" property="certification"/>
+			<result column="service_address" property="serviceAddress"/>
+			<result column="sitter_rate" property="sitterRate"/>
+		</collection>
+		<collection property="skillList" ofType="Code">
+			<id column="code_name" property="codeName"/>
+		</collection>
+	</resultMap>
+	
+	<sql id="member-dog-sitter-skill-select">
+		select	m.email,
 				m.member_name,
 				m.main_address,
 				m.sub_address,
@@ -43,57 +88,42 @@
 				s.certification,
 				s.service_address,
 				s.sitter_rate,
-				c.code,
 				c.code_name,
-				c.category
-		FROM 	member m, 
-				sitter s, 
-				skill k, 
-				code c
-		WHERE 	m.email = s.email
-		AND		s.email = k.email
-		AND		k.code_skill = c.code
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth
+		from	member m, dog d, sitter s, skill k, code c
 	</sql>
+	
+	<select id="selectAllMemberJoinDogSitterSkill" resultMap="member-dog-sitter-skill-resultmap">
+		<include refid="member-dog-sitter-skill-select"/>
+		where	s.email = m.email 
+		and		s.email = d.email 
+		and		k.code_skill = c.code
+		and		s.email = k.email(+)
+	</select>
+	
+	<select id="selectMemberJoinDogSitterSkillByEmail" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
+		<include refid="member-dog-sitter-skill-select"/>
+		where	s.email = #{value} 
+		and		s.email = m.email 
+		and		s.email = d.email 
+		and 	k.code_skill = c.code 
+		and 	s.email = k.email(+)
+	</select>
+	
+	<select id="selectMemberJoinDogSitterSkillByName" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
+		<include refid="member-dog-sitter-skill-select"/>
+		where	m.member_name like '%'||#{value}||'%' 
+		and 	s.email = m.email 
+		and 	s.email = d.email 
+		and 	k.code_skill = c.code 
+		and 	s.email = k.email(+)
+	</select>
 
-	<sql id="member-review-sql">
-		select r.review_rate,
-		r.review_contents
-		from member m, review r
-		where m.email = r.email_sitter
-	</sql>
-	<!-- member-resultmap -->
-	<resultMap type="member" id="member-resultmap">
-		<id column="email" property="email" />
-		<result column="member_name" property="memberName" />
-		<result column="main_address" property="mainAddress" />
-		<result column="sub_address" property="subAddress" />
-		<result column="zipcode" property="zipcode" />
-		<result column="member_image" property="memberImage" />
-		<result column="phonenum" property="phoneNum" />
-	</resultMap>
-
-	<!-- member-join-sitter-resultmap -->
-	<resultMap type="member" id="member-join-sitter-resultmap" extends="member-resultmap">
-			<association property="sitter" javaType="com.plzdog.vo.Sitter">
-			<id column="email" property="email" />
-			<result column="school" property="school" />
-			<result column="certification" property="certification" />
-			<result column="service_Address" property="serviceAddress" />
-			<result column="sitter_rate" property="sitterRate" />
-			<collection property="skillList" ofType="Skill">
-				<id property="email" column="email"/>
-				<association property="codeSkill" javaType="code">
-					<id property="code" column="code" />
-					<result property="codeName" column="code_name"/>
-					<result property="category" column="category" />
-				</association>
-			</collection>
-		</association>
-	</resultMap>
-
-	<!-- member-join-review-resultmap-->
-	<resultMap type="member" id="member-join-review-resultmap"
-		extends="member-resultmap">
+	<resultMap type="member" id="member-join-review-resultmap" extends="member-dog-sitter-skill-resultmap">
 		<collection property="reviewList" ofType="Review">
 			<id column="review_id" property="reviewId" />
 			<result column="review_rate" property="reviewRate" />
@@ -102,64 +132,30 @@
 			<result column="email_sitter" property="sitterEmail" />
 		</collection>
 	</resultMap>
+
+	<sql id="member-review-sql">
+		select	s.email,
+				r.review_rate,
+				r.review_contents
+		from	review r, member s
+	</sql>
+
+	<select id="c" parameterType="string" resultMap="member-join-review-resultmap">
+		<include refid="member-review-sql"/>
+		where s.email = r.email_sitter 
+	</select>
 		
-	<!-- 전체 멤버 조회 -->
-	<select id="selectAllMember" resultMap="member-resultmap">
-		<include refid="member-select-sql" />
-	</select>
-
-	<!-- email로 회원 조회 -->
-	<select id="selectMemberByEmail" parameterType="string"
-		resultMap="member-resultmap">
-		<include refid="member-select-sql" />
-		where email = #{email}
-	</select>
-
-	<!-- 이름으로 회원 조회 -->
-	<select id="selectMemberByName" parameterType="string"
-		resultMap="member-resultmap">
-		<include refid="member-select-sql" />
-		where member_name like '%'||#{memberName}||'%'
-	</select>
-
-	<!-- 펫시터 전체 조회 -->
-	<select id="selectAllMemberJoinSitter" resultMap="member-join-sitter-resultmap">
-		<include refid="member-sitter-sql" />
-	</select>
-
-	<!-- 이메일로 펫시터 조회 -->
-	<select id="selectMemberJoinSitterByEmail" parameterType="string"
-		resultMap="member-join-sitter-resultmap">
-		<include refid="member-sitter-sql" />
-		AND m.email = #{value}
-	</select>
-
-	<!-- 이름으로 펫시터 조회 -->
-	<select id="selectMemberJoinSitterByName" parameterType="string"
-		resultMap="member-join-sitter-resultmap">
-		<include refid="member-sitter-sql" />
-		and m.member_name like '%'||#{value}||'%'
-	</select>
-
-	<!-- 시터에 해당하는 리뷰 조회 -->
-	<select id="selectMemberJoinReview" parameterType="string"
-		resultMap="member-join-review-resultmap">
-		<include refid="member-review-sql" />
-		and m.email = #{value}
-	</select>
-
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="member">
-		update member
-		set
-		member_name = #{memberName},
-		password = #{password},
-		main_address = #{mainAddress},
-		sub_address = #{subAddress},
-		zipcode = #{zipcode},
-		member_image = #{memberImage},
-		phonenum = #{phoneNum}
-		where email = #{email}
+		update	member
+		set 	member_name = #{memberName},
+				password = #{password},
+				main_address = #{mainAddress},
+				sub_address = #{subAddress},
+				zipcode = #{zipcode},
+				member_image = #{memberImage},
+				phonenum = #{phoneNum}
+		where 	email = #{email}
 	</update>
 
 	<!-- 회원 정보 삭제 cascade -->
