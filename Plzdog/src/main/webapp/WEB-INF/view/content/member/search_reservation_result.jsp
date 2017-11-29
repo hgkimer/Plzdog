@@ -12,13 +12,21 @@ search_reservation_result.do<br>
 오류 메세지 : ${requsetScope.errorMessage }
 내가 견주<br>
 <c:forEach var="res" items="${requestScope.mresList }">
-${res }
+	예약 번호 : ${res.resId }<br>
+	예약 상태 : ${res.resType }<br>
+	리뷰 : ${res.resContents }<br>
+	견주 이메일 : ${res.memberEmail }<br>
+	시터 이메일  : ${res.sitterEmail }<br>
 </c:forEach>
 
 내가 시터
 
 <c:forEach var="res" items="${requestScope.sresList }">
-${res }
+	예약 번호 : ${res.resId }<br>
+	예약 상태 : ${res.resType }<br>
+	리뷰 : ${res.resContents }<br>
+	견주 이메일 : ${res.memberEmail }<br>
+	시터 이메일  : ${res.sitterEmail }<br>
 </c:forEach>
 
 

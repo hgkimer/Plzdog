@@ -2,9 +2,13 @@ package com.plz.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,19 +36,25 @@ public class ReservationController {
 	 * @param mEmail
 	 * @return
 	 */
-	@RequestMapping("/member/search_reservation")
-	public ModelAndView searchReservation(@RequestParam String mEmail) {
+	@RequestMapping(value="/member/search_reservation", method= {RequestMethod.POST, RequestMethod.GET})
+	public String searchReservation(@RequestParam String mEmail, Model model) {
+		System.out.println(mEmail);
 		List<Reservation> rlist = service.findMemberReservationByEmail(mEmail);
 		if (rlist.isEmpty() || rlist == null) {
 			rlist = service.findSitterReservationByEmail(mEmail);
 			if (!rlist.isEmpty() && rlist != null) {
-				return new ModelAndView("/member/search_reservation.tiles", "sresList", rlist);
+				System.out.println(rlist);
+				model.addAttribute("sresList", rlist);
+				return "/member/search_reservation_result.do";
 			} else {
 				String errorMessage = "조회된 예약이 없습니다.";
-				return new ModelAndView("/member/search_reservation.tiles", "errorMessage", errorMessage);
+				model.addAttribute("errorMessage", errorMessage);
+				return "/member/search_reservation_result.do";
 			}
 		} else {
-			return new ModelAndView("/member/search_reservation.tiles", "mresList", rlist);
+			System.out.println(rlist);
+			model.addAttribute("mresList", rlist);
+			return "/member/search_reservation_result.do";
 		}
 	}
 
