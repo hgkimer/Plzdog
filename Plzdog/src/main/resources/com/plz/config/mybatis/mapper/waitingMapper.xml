@@ -10,15 +10,11 @@
 		select email from waiting
 	</sql>
 	
-	<resultMap type="waiting" id="waiting-result">
-		<id column="email" property="email"/>
-	</resultMap>
-	
-	<select id="selectAllWaiting" resultMap="waiting-result">
-		<include refid="waiting-select-sql"/>
+	<select id="selectAllWaiting" resultType="string">
+		select email from waiting
 	</select>
 	
-	<select id="selectWaitingByEmail" parameterType="string" resultMap="waiting-result">
+	<select id="selectWaitingByEmail" parameterType="string" resultType="string">
 		<include refid="waiting-select-sql"/>
 		where email = #{value}
 	</select>

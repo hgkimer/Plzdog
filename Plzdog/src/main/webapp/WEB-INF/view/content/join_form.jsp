@@ -46,7 +46,7 @@ function inputCheck(){
 	</div>
 	<div class="form-group">
 		<label for="pMember">이미지 : </label>
-		<input type="text" name="memberImage" id="pMember" class="form-control" required="required">
+		<input type="file" name="memberImage" id="pMember" class="form-control" required="required">
 	</div>
 	<div class="form-group">
 		<label for="pPhone">전화번호 : </label>
