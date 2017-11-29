@@ -3,6 +3,7 @@ package com.plz.dao;
 import java.util.List;
 
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Review;
 
 public interface MemberDao {
 	/**
@@ -45,27 +46,27 @@ public interface MemberDao {
 	 * 	+ sitter 조인
 	 * @return
 	 */
-	List<Member> selectAllMemberJoinSitter();
+	List<Member> selectAllSitter();
 	/**
 	 * 이메일로 펫시터 정보를 조회하는 메소드
 	 * 	+ sitter 조인
 	 * @param email
 	 * @return
 	 */
-	Member selectMemberJoinSitterByEmail(String email);
+	Member selectSitterByEmail(String email);
 	/**
 	 * 매개변수로 받은 이름으로 펫시터 정보를 조회하는 메소드
 	 * 	+ sitter 조인
 	 * @param name
 	 * @return
 	 */
-	List<Member> selectMemberJoinSitterByName(String name);
+	List<Member> selectSitterByName(String name);
 	/**
 	 * 매개변수로 받은 이름으로 회원의 정보와 회원이 작성한 후기(Review)를 조회하는 메소드
 	 * 	+ review 조인
 	 * @param name
 	 * @return
 	 */
-	List<Member> selectMemberJoinReviewByEmail(String email);
+	List<Review> selectReviewByEmail(String email);
 
 }

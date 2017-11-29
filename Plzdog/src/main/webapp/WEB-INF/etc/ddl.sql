@@ -405,6 +405,26 @@ from member m, reservation r, care c, care_image ci, code cd, demand d, member s
 where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
 and r.email_sitter = s.email and sl.res_id = r.res_id;
 
+select	m.email,
+		m.member_name,
+		m.main_address,
+		m.sub_address,
+		m.zipcode,
+		m.member_image,
+		m.phonenum,
+		s.school,
+		s.certification,
+		s.service_address,
+		s.sitter_rate,
+		c.code_name,
+		d.dog_name,
+		d.species,
+		d.gender,
+		d.weight,
+		d.birth
+from	member m, dog d, sitter s, skill k, code c
+where s.email = m.email and s.email = d.email and k.code_skill = c.code and s.email = k.email(+);
+
 -- n번 돌봄일지와 돌봄이미지 조회
 select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
 from	care c, care_image i

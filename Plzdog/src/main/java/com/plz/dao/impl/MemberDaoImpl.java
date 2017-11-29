@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.plz.dao.MemberDao;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Review;
 @Repository
 public class MemberDaoImpl implements MemberDao{
 	@Autowired
@@ -37,37 +38,36 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public List<Member> selectAllMember() {
-		return session.selectList(makeSqlId("selectAllMember"));
+		return session.selectList(makeSqlId("selectAllMemberJoinDog"));
 	}
 
 	@Override
 	public Member selectMemberByEmail(String email) {
-		return session.selectOne("selectMemberByEmail", email);
+		return session.selectOne("selectMemberJoinDogByEmail", email);
 	}
 
 	@Override
 	public List<Member> selectMemberByName(String memberName) {
-		return session.selectList(makeSqlId("selectMemberByName"), memberName);
+		return session.selectList(makeSqlId("selectMemberJoinDogByName"), memberName);
 	}
-
+	
 	@Override
-	public List<Member> selectAllMemberJoinSitter() {
-		return session.selectList(makeSqlId("selectAllMemberJoinSitter"));
+	public List<Member> selectAllSitter() {
+		return session.selectList(makeSqlId("selectAllMemberJoinDogSitterSkill"));
 	}
-
+	
 	@Override
-	public Member selectMemberJoinSitterByEmail(String email) {
-		return session.selectOne(makeSqlId("selectMemberJoinSitterByEmail"), email);
+	public Member selectSitterByEmail(String email) {
+		return session.selectOne(makeSqlId("selectMemberJoinDogSitterSkillByEmail"), email);
 	}
-
+	
 	@Override
-	public List<Member> selectMemberJoinSitterByName(String name) {
-		return session.selectList(makeSqlId("selectMemberJoinSitterByName"), name);
+	public List<Member> selectSitterByName(String name) {
+		return session.selectList(makeSqlId("selectMemberJoinDogSitterSkillByName"), name);
 	}
-
+	
 	@Override
-	public List<Member> selectMemberJoinReviewByEmail(String email) {
-		return session.selectList(makeSqlId("selectMemberJoinReview"), email);
+	public List<Review> selectReviewByEmail(String email) {
+		return session.selectList(makeSqlId("selectReviewByEmail"), email);
 	}
-
 }
