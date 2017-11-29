@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Care implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int careId;
 	private String careContents;
 	private int resId;

@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class CareImage implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private MultipartFile imageCare;
 	private String imageName;
 	private int careId;
