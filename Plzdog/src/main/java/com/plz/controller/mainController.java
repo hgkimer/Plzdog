@@ -20,15 +20,15 @@ public class mainController {
 	private MemberService service;
 	
 	@RequestMapping("join_member")
-	public String joinMember(@ModelAttribute Member member, @RequestParam String passwordTest, ModelMap model ) {
+	public String joinMember(@ModelAttribute Member member, ModelMap model ) {
 		//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
 		member.setMemberEnable(1);
 		//DB
-			if(member.getPassword().equals(passwordTest)) { 
-				service.insertMember(member,"ROLE_MEMBER");
-			} else {
+			/*if(member.getPassword().equals(passwordTest)) { 
 				
-			}
+			} */
+		System.out.println(member);
+				service.insertMember(member, "ROLE_MEMBER");
 		//rquest영역
 		model.addAttribute(member);
 		return "member/join_success.tiles";
