@@ -23,6 +23,9 @@
 	<!-- 로그인 페이지 -->
 	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
 	
+	<!-- 403 권한 없음 에러 페이지 -->
+	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
+		
 	<!-- 테스트 페이지 -->
 	<mvc:view-controller path="/dog_test.do" view-name="test/dog_test.tiles" />
 	
@@ -40,6 +43,12 @@
 	
 	<!-- 회원정보 수정 페이지 -->
 	<mvc:view-controller path="/member/"/>
+	
+	<!-- 관리자 등록 폼 -->
+	<mvc:view-controller path="/admin/register_admin_form.do" view-name="admin/register_admin_form.tiles"/>
+	
+	<!-- 관리자 등록 폼 -->
+	<mvc:view-controller path="/member/delete_success.do" view-name="/member/delete_success.tiles"/>
 	
 	<!-- TilesConfigurer : tiles 설정 파일의 위치 지정-->
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
