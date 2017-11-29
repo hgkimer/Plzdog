@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> selectAllSiiter() {
+	public List<Member> selectAllSitter() {
 		return dao.selectAllSitter();
 	}
 

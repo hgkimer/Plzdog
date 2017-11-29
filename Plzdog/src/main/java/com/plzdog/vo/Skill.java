@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Skill implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String email;
 	private String codeSkill;
 	

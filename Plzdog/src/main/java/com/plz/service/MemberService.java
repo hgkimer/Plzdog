@@ -44,7 +44,7 @@ public interface MemberService{
 	 * 기본 회원 정보와 시터 정보를 추가하여 전체 회원정보를 조회하느 메소드
 	 * @return
 	 */
-	List<Member> selectAllSiiter();
+	List<Member> selectAllSitter();
 	/**
 	 * 매개 변수로 받은 이메일과 일치하는 기본 회원 정보 + 시터 정보를 조회하는 메소드
 	 * @param email

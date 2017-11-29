@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Dog implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private int dogId;
 	private String dogName;
 	private String species;

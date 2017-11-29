@@ -1,11 +1,16 @@
 package com.plz.controller;
 
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
@@ -20,17 +25,23 @@ public class mainController {
 	private MemberService service;
 	
 	@RequestMapping("join_member")
-	public String joinMember(@ModelAttribute Member member, ModelMap model ) {
-		//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
-		member.setMemberEnable(1);
-		//DB
-			/*if(member.getPassword().equals(passwordTest)) { 
-				
-			} */
-		System.out.println(member);
+	public String joinMember(@ModelAttribute Member member, HttpServletRequest request,
+			ModelMap model ) throws AuthenticationException{
+				/*//파일 업로드 처리
+				MultipartFile memberImage = (MultipartFile)member.getMemberImage();
+				if(memberImage!=null && !memberImage.isEmpty()) {
+					//사진 저장할 디렉토리 
+					String dir = request.getServletContext().getRealPath("/memberImage");
+					String fileName = memberImage.getOriginalFilename();
+					File upImage = new File(dir, fileName);
+					memberImage.transferTo(upImage);
+					member.setMemberImage(fileName);
+				}*/
+				//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
+				member.setMemberEnable(1);
+				//DB
 				service.insertMember(member, "ROLE_MEMBER");
-		//rquest영역
-		model.addAttribute(member);
-		return "member/join_success.tiles";
+				model.addAttribute(member);
+				return "member/join_success.tiles";
+			} 
 	}
-}

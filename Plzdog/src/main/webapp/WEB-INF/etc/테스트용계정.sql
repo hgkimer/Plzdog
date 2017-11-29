@@ -13,6 +13,7 @@ select * from care;
 select * from CARE_IMAGE;
 select * from member;
 
+
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_SITTER');
 
@@ -55,3 +56,8 @@ insert into CARE_IMAGE values('돌봄이미지2',5);
 insert into CARE_IMAGE values('돌봄이미지3',6);
 insert into CARE_IMAGE values('돌봄이미지5',6);
 
+select * from waiting 
+
+select email from waiting
+
+select * from AUTHORITY

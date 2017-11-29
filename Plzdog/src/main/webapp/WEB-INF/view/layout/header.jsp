@@ -36,6 +36,18 @@
 		position:relative;
 	}
 	
+	.click {
+		width:100px;
+		height:100px;
+		float:left;
+		cursor:pointer;
+	}
+	
+	.click img {
+		width:100%;
+		height:100%;
+	}
+	
 	.container {
 		float:left;
 		width:100%;
@@ -44,7 +56,7 @@
 	}
 	
 	.nav {
-		width:100%;
+		width:90%;
 		height:100%;
 		float:right;
 	}
@@ -58,14 +70,12 @@
 		font-weight:bold;
 		font-size:18px;
 		float:left;
-		line-height:30px;
 		width:auto;
 		height:100%;
 		text-align:center;
 		line-height:80px;
 		vertical-align: baseline;
 		margin-left:30px;
-		vertical-align: baseline;
 		color:white;
 	}
 </style>
@@ -74,9 +84,10 @@
 <body>
 	<header>
 		<div class="container">
-			<div class="logo"></div>
+			<div class="click" >
+				<img src="image/bar.png">
+			</div>
 			<ul class="nav">
-
 				<%--인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴 --%>
 				<sec:authorize access="!isAuthenticated()">
 					<li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>

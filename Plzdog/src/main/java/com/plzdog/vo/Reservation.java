@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Reservation implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int resId;
 	private int resType;
 	private Date resSDate;

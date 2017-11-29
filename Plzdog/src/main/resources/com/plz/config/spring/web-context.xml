@@ -15,15 +15,20 @@
 	
 	<!--
 	#################################################################################################### 
-		단순 링크 처리 z
+		단순 링크 처리 
 	####################################################################################################
 	-->
+	
 	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
 	<!-- 회원가입 페이지 -->
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
 	<!-- 로그인 페이지 -->
 	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
+	<!-- 403 권한 없음 에러 페이지 -->
+	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
+	<!-- 로그인 페이지 -->
+	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<!-- 회원탈퇴완료 페이지 -->
 	<mvc:view-controller path="/member/delete_success.do" view-name="member/delete_success.tiles"/>
 	<!-- 도그시터 신청 페이지 -->
@@ -59,6 +64,8 @@
 	<mvc:view-controller path="/faq.do" view-name="/faq.tiles"/>
 	<!-- 관리자(주요 기능 구현 후 추가 작성) -->
 	<mvc:view-controller path="/admin/admin.do" view-name="/admin/admin.tiles"/>
+	<!-- 관리자 대기시터 치러 결과 폼 -->
+	<mvc:view-controller path="/admin/select_waiting_result.do" view-name="admin/select_waiting_result.tiles"/>
 	<!-- 
 	####################################################################################################
 	 -->

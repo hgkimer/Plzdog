@@ -57,8 +57,16 @@ DROP TABLE CARE
 DROP TABLE CARE_IMAGE 
 	CASCADE CONSTRAINTS;
 	
+-- 시터 대기자 테이블
+DROP TABLE WAITING
+	CASCADE CONSTRAINTS;
 --------------------------------------------------
 --create
+--시터 대기자
+CREATE TABLE WAITING (
+	EMAIL VARCHAR2(100) PRIMARY KEY
+);
+	
 --회원 
 CREATE TABLE MEMBER (
 	EMAIL VARCHAR2(100) PRIMARY KEY, /* 이메일 */
@@ -328,6 +336,8 @@ insert into CARE_IMAGE values('돌봄이미지7',4);
 -----------------------------------------------
 --select
 -- 시터에 등록된 review를 조회
+--시터 대기명단에 등록
+insert into waiting values('soo2@naver.com')
 
 -- 회원에 해당하는 code의 이름을 조회
 select m.email, m.member_name, c.code, c.code_name 
@@ -518,21 +528,6 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
-<<<<<<< HEAD
-		and     r.res_id = 2;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-=======
 		and     r.res_id = 2
 		
 		delete from member where email = 'kim@naver.com';
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
