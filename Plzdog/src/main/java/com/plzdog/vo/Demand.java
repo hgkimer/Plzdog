@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Demand implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int resId;
 	private String codeDemand;
 	

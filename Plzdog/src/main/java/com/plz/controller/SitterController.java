@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.plz.service.AuthorityService;
 import com.plz.service.MemberService;
+import com.plz.service.SitterService;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Sitter;
 
 @Controller
-@RequestMapping("/sitter/")
 public class SitterController {
 	
 	@Autowired
-	private MemberService service;
+	private MemberService memberService;
+	
+	@Autowired
+	private SitterService sitterService;
 	
 	@Autowired
 	private AuthorityService authorityService;
@@ -31,7 +35,7 @@ public class SitterController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("enroll_sitter")
+	@RequestMapping("/admin/enroll_sitter")
 	public String enrollSitter(@ModelAttribute Authority authority, ModelMap model) {
 		authorityService.updateAuthority(authority);
 		model.addAttribute(authority.getEmail());
@@ -45,17 +49,18 @@ public class SitterController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("insert_sitter")
-	public String insertSitter(@ModelAttribute Member sitter, @RequestParam String role, ModelMap model) {
-		service.insertMember(sitter, role);
+	@RequestMapping("/member/insert_sitter")
+	public String insertSitter(@ModelAttribute Sitter sitter, ModelMap model) {
+		System.out.println(sitter);
+		sitterService.insertSitter(sitter);
 		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
 	}
 	
-	@RequestMapping("update_sitter")
+	@RequestMapping("/sitter/update_sitter")
 	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
-		if(service.selectMemberByEmail(sitter.getEmail()) != null) {
-			service.updateMember(sitter);
+		if(memberService.selectMemberByEmail(sitter.getEmail()) != null) {
+			memberService.updateMember(sitter);
 			model.addAttribute("sitter", sitter);
 			return "sitter/sitter_update_result.tiles";
 		} else {
@@ -63,30 +68,30 @@ public class SitterController {
 		}
 	}
 	
-	@RequestMapping("delete_sitter")
+	@RequestMapping("/admin/delete_sitter")
 	public String deleteSitter(@RequestParam String email, Model model) {
-		service.deleteMember(email);
+		memberService.deleteMember(email);
 		model.addAttribute(email);
 		return "sitter/sitter_delete_result.tiles";
 	}
 	
-	@RequestMapping("select_all_sitter")
+	@RequestMapping("/member/select_all_sitter")
 	public String selectAllSitter(ModelMap model) {
-		List<Member> sitterList = service.selectAllSiiter();
+		List<Member> sitterList = memberService.selectAllSiiter();
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}
 	
-	@RequestMapping("select_sitter_name")
+	@RequestMapping("/member/select_sitter_name")
 	public String selectSitterByName(@RequestParam String name, ModelMap model) {
-		List<Member> sitterList = service.selectSitterByName(name);
+		List<Member> sitterList = memberService.selectSitterByName(name);
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}
 	
-	@RequestMapping("select_sitter_email")
+	@RequestMapping("/member/select_sitter_email")
 	public String selectSitterByEmail(@RequestParam String email, ModelMap model) {
-		Member sitter = service.selectSitterByEmail(email);
+		Member sitter = memberService.selectSitterByEmail(email);
 		if(sitter != null) {
 			model.addAttribute("sitter", sitter);
 			return "sitter/sitter_select_result.tiles";

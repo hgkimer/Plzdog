@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Member implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
 	private String email;
 	private String memberName;
 	private String password;
@@ -20,7 +22,8 @@ public class Member implements Serializable {
 	private List<Review> reviewList; // 시터
 	private List<Reservation> resList; // 견주, 시터
 	private List<Dog> dogList; // 견주, 시터
-
+	
+	
 	public Member() {
 	}
 	

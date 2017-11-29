@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Sales implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int resId;
 	private int total;
 	private int pay;
