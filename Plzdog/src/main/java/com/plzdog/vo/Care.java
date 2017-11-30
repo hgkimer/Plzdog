@@ -19,7 +19,7 @@ public class Care implements Serializable{
 	//여러개의 이미지 처리
 	private List<MultipartFile> careImageList;
 	//여러개의 파일명 처리
-	private List<String> fileNameList; 
+	private List<CareImage> careImage; 
 
 	public Care() {}
 
@@ -32,14 +32,14 @@ public class Care implements Serializable{
 	}
 
 	public Care(int careId, String careContents, int resId, Date careDate, List<MultipartFile> careImageList,
-			List<String> fileNameList) {
+			List<CareImage> careImage) {
 		super();
 		this.careId = careId;
 		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
 		this.careImageList = careImageList;
-		this.fileNameList = fileNameList;
+		this.careImage = careImage;
 	}
 
 	public int getCareId() {
@@ -82,18 +82,18 @@ public class Care implements Serializable{
 		this.careImageList = careImageList;
 	}
 
-	public List<String> getFileNameList() {
-		return fileNameList;
+	public List<CareImage> getCareImage() {
+		return careImage;
 	}
 
-	public void setFileNameList(List<String> fileNameList) {
-		this.fileNameList = fileNameList;
+	public void setCareImage(List<CareImage> careImage) {
+		this.careImage = careImage;
 	}
 
 	@Override
 	public String toString() {
 		return "Care [careId=" + careId + ", careContents=" + careContents + ", resId=" + resId + ", careDate="
-				+ careDate + ", careImageList=" + careImageList + ", fileNameList=" + fileNameList + "]";
+				+ careDate + ", careImageList=" + careImageList + ", careImage=" + careImage + "]";
 	}
 
 	@Override
@@ -103,8 +103,8 @@ public class Care implements Serializable{
 		result = prime * result + ((careContents == null) ? 0 : careContents.hashCode());
 		result = prime * result + ((careDate == null) ? 0 : careDate.hashCode());
 		result = prime * result + careId;
+		result = prime * result + ((careImage == null) ? 0 : careImage.hashCode());
 		result = prime * result + ((careImageList == null) ? 0 : careImageList.hashCode());
-		result = prime * result + ((fileNameList == null) ? 0 : fileNameList.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -130,15 +130,15 @@ public class Care implements Serializable{
 			return false;
 		if (careId != other.careId)
 			return false;
+		if (careImage == null) {
+			if (other.careImage != null)
+				return false;
+		} else if (!careImage.equals(other.careImage))
+			return false;
 		if (careImageList == null) {
 			if (other.careImageList != null)
 				return false;
 		} else if (!careImageList.equals(other.careImageList))
-			return false;
-		if (fileNameList == null) {
-			if (other.fileNameList != null)
-				return false;
-		} else if (!fileNameList.equals(other.fileNameList))
 			return false;
 		if (resId != other.resId)
 			return false;

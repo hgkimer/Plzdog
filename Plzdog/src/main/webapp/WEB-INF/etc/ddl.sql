@@ -297,17 +297,15 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/0
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',50000,'집에서 맡기기','yoon@naver.com','soo@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',60000,'집에서 맡기기','lee@naver.com','kim@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',80000,'집에서 맡기기','lee@naver.com','soo@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',100000,'집에서 맡기기','lee@naver.com','zxc');
 
 --서비스 요구사항
 
-insert into DEMAND values (1,'code-11'); 
-insert into DEMAND values (2,'code-11'); 
-insert into DEMAND values (3,'code-11');
+insert into DEMAND values (1,'code-1'); 
+insert into DEMAND values (2,'code-2'); 
+insert into DEMAND values (3,'code-3');
 insert into DEMAND values (3,'code-1');
 insert into DEMAND values (3,'code-2');
-insert into DEMAND values (3,'code-3');
-insert into Demand values (4,'code-12');
+insert into Demand values (4,'code-4');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');

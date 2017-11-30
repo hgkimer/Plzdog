@@ -27,6 +27,26 @@ public class CareServiceImpl implements CareService {
 	@Override
 	@Transactional
 	public void insertCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException {
+		//care 등록 처리
+		careDao.insertCare(care);
+		ArrayList<CareImage> list = new ArrayList<>();
+		for(MultipartFile careImage : care.getCareImageList()) {
+			if(careImage != null && ! careImage.isEmpty()) {//업로드된 파일이 있는 경우 파일을 옮기고 파일명을 User에 설정
+				String fileName = UUID.randomUUID().toString();	
+				File dest = new File(request.getServletContext().getRealPath("/careImage"), fileName);
+				careImage.transferTo(dest);
+				//careImage 등록 처리
+				careDao.insertCareImage(new CareImage(care.getCareId(),fileName));
+				list.add(new CareImage(care.getCareId(),fileName));
+			}
+		}
+		//careImage를 care 객체에 등록 
+		care.setCareImage(list);
+	}
+	
+	/*@Override
+	@Transactional
+	public void insertCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException {
 		ArrayList<String> fileNameList = new ArrayList<>();
 		for(MultipartFile careImage : care.getCareImageList()) {
 			if(careImage != null && ! careImage.isEmpty()) {//업로드된 파일이 있는 경우 파일을 옮기고 파일명을 User에 설정
@@ -39,8 +59,10 @@ public class CareServiceImpl implements CareService {
 		care.setFileNameList(fileNameList);
 		careDao.insertCare(care);
 		
-		//careDao.insertCareImage(care.getCareId(),care.getCareImageList());
-	}
+		for(String imageName : care.getFileNameList()) {
+			careDao.insertCareImage(care.getCareId(),imageName);
+		}
+	}*/
 
 	@Override
 	public List<Care> selectCareJoinCareImage(int resId) {

@@ -1,5 +1,6 @@
 package com.plz.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.AuthorityService;
+import com.plz.service.CareService;
 import com.plz.service.MemberService;
 import com.plz.service.SitterService;
 import com.plz.service.WaitingService;
 import com.plzdog.vo.Authority;
+import com.plzdog.vo.Care;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Sitter;
 
@@ -30,6 +33,9 @@ public class SitterController {
 	
 	@Autowired
 	private SitterService sitterService;
+	
+	@Autowired
+	private CareService careService;
 	
 	@Autowired
 	private AuthorityService authorityService;
@@ -81,6 +87,16 @@ public class SitterController {
 		System.out.println(sitter+"3");
 		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
+	}
+	
+	@RequestMapping("/sitter/insert_care")
+	public String insertCare(@ModelAttribute Care care,
+			HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
+			List<String> list = new ArrayList<>();
+		//service.insertCareImage(new CareImage(care.getCareId(),fileName));
+		careService.insertCare(care,request);
+		model.addAttribute(care);
+		return "sitter/care_register_result_form.tiles";
 	}
 	
 	@RequestMapping("/sitter/update_sitter")

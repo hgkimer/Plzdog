@@ -24,7 +24,7 @@ import com.plzdog.vo.Care;
 import com.plzdog.vo.CareImage;
 
 @Controller
-//@RequestMapping("/care/")
+@RequestMapping("/care/")
 public class CareController {
 
 	@Autowired
@@ -44,15 +44,7 @@ public class CareController {
 		return "sitter/care_success.tiles";
 	}
 	
-	@RequestMapping("/sitter/insert_care")
-	public String insertCare(@ModelAttribute Care care,
-			HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
-			List<String> list = new ArrayList<>();
-		//service.insertCareImage(new CareImage(care.getCareId(),fileName));
-		service.insertCare(care,request);
-		model.addAttribute(care);
-		return "sitter/care_register_result_form.tiles";
-	}
+	
 	
 	/*@RequestMapping("insert_care")
 	public String insertCare(@ModelAttribute Care care, ModelMap model) {
