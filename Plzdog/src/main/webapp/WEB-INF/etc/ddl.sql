@@ -254,6 +254,8 @@ INSERT INTO CODE VALUES('code-10','당뇨','강아지');
 insert into code values('1','예약대기','예약');
 insert into code values('2','예약확정','예약');
 insert into code values('3','결제완료','예약');
+insert into code values('service-1', '방문돌봄', '서비스');
+insert into code values('service-2', '위탁돌봄', '서비스');
 
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
