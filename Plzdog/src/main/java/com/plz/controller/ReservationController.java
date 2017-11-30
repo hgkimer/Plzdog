@@ -1,13 +1,18 @@
 package com.plz.controller;
 
+import java.util.Date;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Reservation;
@@ -19,25 +24,33 @@ public class ReservationController {
 	private ReservationService service;
 
 	/**
-	 * 예약 관련 Controller 1. 예약 등록(견주, 시터) 2. 예약 상태 변경 3. 예약 전체 조회 (로그인한 Email로 /견주,
-	 * 시터) 4. 예약 삭제 5.	
+	 * 예약 관련 Controller 
+	 * 1. 예약 등록(견주, 시터) 
+	 * 2. 예약 상태 변경==> 
+	 * 3. 예약 전체(로그인한 Email로 /견주,시터) 조회
+	 * 4. 예약 삭제 
+	 * 5.
 	 */
 	
 	/**
-	 * 예약 삭제 Controller
-	 * 사용자가 예약 취소버튼을 누르게 되면 매개변수로 받은 예약 번호에 해당하는 예약을 삭제
-	 * @param resId
+	 * 1.예약 등록 Controller
+	 * 사용자가 의뢰 신청버튼을 클릭했을 때 폼에 입력한 값과  로그인한 사용자의 정보를 전달하여 예약을 만든다.
+	 * 	- 직접작성시는 비워둔다.
+	 * 	- 검색을 통한 예약을 작성했을 때는 해당 시터의  이메일도 함께 전달하여 DB에 저장한다.
+	 * @param res
 	 * @return
 	 */
-	@RequestMapping("/member/delete_reservation")
-	public String removeReservation(@RequestParam int resId, Model model) {
-		service.removeReservation(resId);
-		
-		return "member/delete_reservation_result.tiles";
+	@RequestMapping("/member/reservation_register")
+	public String addReservation(@ModelAttribute Reservation res) {
+		//1. 요청파라미터 받기(매개변수)
+		//2. Business Logic
+		service.addReservation(res);
+		//3. View로 이동
+		return "member/add_reservation_success.tiles";
 	}
 	
 	/**
-	 * 예약 조회 Controller 
+	 * 3. 예약 조회 Controller 
 	 * 매개변수로 받은 email로 예약 정보를 조회한다. 
 	 * Business Logic 
 	 * 1. 이메일로 예약 검색(member email컬럼에서 예약 조회) 
@@ -69,8 +82,24 @@ public class ReservationController {
 			return "member/search_reservation_result.tiles";
 		}
 	}
-	
-	
+	/**
+	 * 4. 예약 삭제 Controller
+	 * 사용자가 예약 취소버튼을 누르게 되면 요청파라미터로 받은 예약 번호에 해당하는 예약을 삭제
+	 * 실제 사용은 예약 취소 버튼을 누르면 이동하게끔
+	 * 삭제하면 바로 리스트에서 없어지도록  해야 함 AJAX 처리 필요
+	 * @param resId
+	 * @return
+	 */
+	@RequestMapping("/member/delete_reservation")
+	public ModelAndView removeReservation(@RequestParam int resId) {
+		System.out.println(resId);
+		if(service.findReservationById(resId) == null) {
+			String error = "삭제할 예약이 없습니다.";
+		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
+		}
+		service.removeReservation(resId);
+		return new ModelAndView("member/delete_reservation_result.tiles");
+	}
 }
 
 

@@ -31,6 +31,12 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectAllReservation();
 	/**
+	 * 예약 아이디로 예약을 조회하는 메소드
+	 * @param resId
+	 * @return
+	 */
+	Reservation selectReservationById(int resId);
+	/**
 	 * 매개변수로 받은 email로 회원의 예약을 조회하는 메소드
 	 * @param email
 	 * @return

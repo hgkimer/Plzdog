@@ -28,6 +28,12 @@ public interface ReservationService {
 	 */
 	List<Reservation> findAllReservation();
 	/**
+	 * 예약번호로 예약정보를 조회하는 메소드
+	 * @param resId
+	 * @return
+	 */
+	Reservation findReservationById(int resId);
+	/**
 	 * 매개변수로 받은 email로 회원의 예약의 상태를 조회하는 메소드
 	 * @param email
 	 * @return

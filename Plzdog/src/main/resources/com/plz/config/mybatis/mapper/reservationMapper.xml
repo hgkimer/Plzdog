@@ -74,7 +74,7 @@
 		<id column="res_id" property="resId"/>
 		<result column="res_type" property="resType"/>
 		<result column="res_sdate" property="resSDate"/>
-		<result column="res_edate" property="resEdate"/>
+		<result column="res_edate" property="resEDate"/>
 		<result column="res_contents" property="resContents"/>
 		<result column="email" property="memberEmail"/>
 		<result column="email_sitter" property="sitterEmail"/>
@@ -115,8 +115,8 @@
 			<result column="res_id" property="resId"/>  
 			<result column="care_date" property="careDate"/>
 			<collection property="careImageList" ofType="CareImage">
-				<!-- <id column ="care_id" property="careId"/> -->
-				<result column="care_image" property="careImage"/>
+				<id column="care_image" property="imageName"/>
+				<result column="care_id" property="careId"/>
 			</collection>
 		</collection>
 	</resultMap>
@@ -137,7 +137,11 @@
 	<select id="selectAllReservation" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
 	</select>
-	
+	<!-- 예약 id로 예약 조회 -->
+	<select id="selectReservationById">
+		<include refid="reservation-sql"></include>
+		where res_id = #{resId}
+	</select>
 	<!-- 회원에서 이메일로 예약조회 -->
 	<select id="selectMemberReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
 		<include refid="reservation-sql"/>
@@ -186,7 +190,7 @@
         	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
-		#{resEdate}, #{resContents},#{memberEmail},#{sitterEmail})
+		#{resEDate}, #{resContents},#{memberEmail},#{sitterEmail})
 	</insert>
 	
 	<!-- 예약ID를 통해 수정한다. -->
