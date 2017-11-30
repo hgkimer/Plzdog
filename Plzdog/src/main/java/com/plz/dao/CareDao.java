@@ -16,10 +16,10 @@ public interface CareDao {
 
 	/**
 	 * 돌봄일지 + 돌봄일지 이미지 조회하기
-	 * @param careId
+	 * @param resId
 	 * @return
 	 */
-	List<Care> selectCareJoinCareImage(int careId);
+	List<Care> selectCareJoinCareImage(int resId);
 	
 	/**
 	 * 돌봄일지 수정

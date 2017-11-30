@@ -28,8 +28,8 @@ public class CareController {
 	
 	@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
 	//request.getParameter
-	public String selectCareJoinCareImage(@RequestParam int careId, ModelMap model) throws Exception {
-		List<Care> list = service.selectCareJoinCareImage(careId);
+	public String selectCareJoinCareImage(@RequestParam int resId, ModelMap model) throws Exception {
+		List<Care> list = service.selectCareJoinCareImage(resId);
 		for(Care c : list) {
 			System.out.println(c);
 		}

@@ -335,7 +335,21 @@ insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 -----------------------------------------------
 --select
--- 시터에 등록된 review를 조회
+-- 예약 간단 조회
+select * from RESERVATION;
+select	r.res_id,
+		r.res_type,
+		r.res_sdate,
+		r.res_edate,
+		i.dog_image,
+		d.dog_name,
+		d.species,
+		d.gender,
+		d.weight,
+		d.birth
+from	reservation r, dog_image i, dog d
+where 	r.email = d.email and r.email_sitter = 'kim@naver.com' and d.dog_id = i.dog_id(+);
+
 --시터 대기명단에 등록
 
 -- 회원에 해당하는 code의 이름을 조회
