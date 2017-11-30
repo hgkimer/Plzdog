@@ -27,7 +27,7 @@
 	
 	<%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고--%>
 	<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_MEMBER')">
-		<li><a href="${initParam.rootPath }/member/mypage.do">사용자 정보조회</a></li>
+		<li><a href="${initParam.rootPath }/member/member_result_form.do">사용자 정보조회</a></li>
 	</sec:authorize>
 	
 	<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>

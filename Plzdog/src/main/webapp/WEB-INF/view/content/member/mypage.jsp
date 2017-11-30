@@ -14,5 +14,6 @@ mypage.do<br>
 	<button type="submit">전송</button>
 </form>
 <br>
+<a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a>
 </body>
 </html>

@@ -25,6 +25,8 @@
 	<mvc:view-controller path="/main_test.do" view-name="main_test.tiles" />
 	<!-- 회원가입 페이지 -->
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
+	<!-- 회원가입완료 페이지 -->
+	<mvc:view-controller path="/join_success.do" view-name="join_success.tiles"/>
 	<!-- 로그인 페이지 -->
 	<mvc:view-controller path="/login_form.do" view-name="/login_form.tiles"/>
 	<!-- 403 권한 없음 에러 페이지 -->
@@ -41,8 +43,10 @@
 	<mvc:view-controller path="/member/recommend_sitter.do" view-name="member/recommend_sitter.tiles"/>
 	<!-- 회원 마이페이지 -->
 	<mvc:view-controller path="/member/mypage.do" view-name="member/mypage.tiles"/>
+	<!-- 회원 정보 결과 조회 페이지 -->
+	<mvc:view-controller path="/member/member_result_form.do" view-name="member/member_result_form.tiles"/>
 	<!-- 회원정보 수정 페이지(수정 폼) -->
-	<mvc:view-controller path="/member/edit_member_form.do" view-name="member/edit_member.tiles"/>
+	<mvc:view-controller path="/member/member_edit_form.do" view-name="member/member_edit_form.tiles"/>
 	<!-- 반려견 조회 페이지 -->
 	<mvc:view-controller path="/member/mydog.do" view-name="member/mydog.tiles"/>
 	<!-- 반려견 등록 (반려견 등록폼) -->
