@@ -12,7 +12,8 @@ public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
-	private int resType;
+	//★★★★★예약 상태(1 : 예약 대기 / 2 : 예약 확정 / 3: 결제 완료
+	private int resType; 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date resSDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
