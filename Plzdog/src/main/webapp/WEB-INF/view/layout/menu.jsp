@@ -36,7 +36,9 @@
 		<li><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a></li>
 	</sec:authorize>
 	
-	<%-- ?email='<sec:authentication property="principal.email"/>' --%>
+	<sec:authorize access="hasRole('ROLE_SITTER')">
+		<li><a href="${initParam.rootPath }/sitter/care_register_form.do">돌봄일지 등록</a></li>
+	</sec:authorize>
 	
 	<%--관리자 메뉴 /admin 으로 시작--%>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">

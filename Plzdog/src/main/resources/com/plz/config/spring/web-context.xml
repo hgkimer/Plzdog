@@ -65,12 +65,12 @@
 	<mvc:view-controller path="/sitter/select_reservation_simple_result.do" view-name="sitter/select_reservation_simple_result.tiles" />
 	<!-- 내게온 예약 조회 -->
 	<mvc:view-controller path="/sitter/search_reservation_me.do" view-name="sitter/search_reservation_me.tiles"/>
-	<!-- 돌봄일지 조회 -->
-	<mvc:view-controller path="/member/care.do" view-name="member/care.tiles"/>
+	<!-- 돌봄일지 등록 조회 -->
+	<mvc:view-controller path="/sitter/care_register_result_form.do" view-name="sitter/care_register_result_form.tiles"/>
 	<!-- 돌봄일지 등록(돌봄일지 등록 폼) -->
 	<mvc:view-controller path="/sitter/care_register_form.do" view-name="sitter/care_register_form.tiles"/>
 	<!-- 돌봄일지 수정(돌봄일지 수정 폼) -->
-	<mvc:view-controller path="/sitter/care_eidt_form.do" view-name="sitter/care_edit_form.tiles"/>
+	<mvc:view-controller path="/sitter/care_edit_form.do" view-name="sitter/care_edit_form.tiles"/>
 	<!-- 돌봄일지 테스트 -->
 	<mvc:view-controller path="/sitter/care_test.do" view-name="sitter/care_test.tiles" />
 	<!-- FAQ  -->

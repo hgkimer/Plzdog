@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.ReservationDao;
 import com.plz.service.ReservationService;
@@ -17,6 +18,7 @@ public class ReservationServiceImpl implements ReservationService{
 	private ReservationDao dao;
 	
 	@Override
+	@Transactional
 	public void addReservation(Reservation reservation) {
 		dao.insertReservation(reservation);
 	}
@@ -27,6 +29,7 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
+	@Transactional
 	public void removeReservation(int resId) {
 		dao.deleteReservation(resId);
 	}
@@ -68,6 +71,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	//서비스 요구 사항을 추가, 수정 , 삭제
 	@Override
+	@Transactional
 	public void addDemand(Demand demand) {
 		dao.insertDemand(demand);
 	}

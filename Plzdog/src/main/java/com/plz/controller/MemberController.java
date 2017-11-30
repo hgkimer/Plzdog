@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,6 +49,7 @@ public class MemberController {
 	 */
 	@RequestMapping("deleteMember")
 	public String deleteMember(@RequestParam String email) {
+		//권한을 지운다?
 		service.deleteMember(email);
 		System.out.println(email);
 		return "member/delete_success.tiles";
@@ -115,7 +117,7 @@ public class MemberController {
 				//변경 사진 처리
 				MultipartFile memberImage = member.getImageMember();
 				if(memberImage != null && ! memberImage.isEmpty()) {//업로드된 파일이 있는 경우 파일을 옮기고 파일명을 User에 설정
-					String fileName = memberImage.getOriginalFilename();
+					String fileName = UUID.randomUUID().toString();	
 					File dest = new File(request.getServletContext().getRealPath("/memberImage"), fileName);
 					memberImage.transferTo(dest);
 					member.setMemberImage(fileName);

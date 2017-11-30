@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 </head>
 <body>
 <form action="${initParam.rootPath }/" method="post">
+	<sec:csrfInput/>
 	<div class="form-group">
 		<label for="dogName">이름 : </label>
 		<input type="text" name="name" id="dogName" class="form-controller" required="required"/>

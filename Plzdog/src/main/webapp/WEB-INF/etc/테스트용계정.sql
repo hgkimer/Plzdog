@@ -101,4 +101,4 @@ select	m.email,
 		and 	k.code_skill = c.code 
 		and 	s.email = k.email(+);
 
-
+update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'

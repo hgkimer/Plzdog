@@ -22,6 +22,7 @@
 	예약 번호 : <input type="number" id="resId" name="resId"><br>
 	날짜 : <input type="date" id="careDate" name="careDate"><br>
 	내용 : <textarea rows="5" cols="30" id="careContents" name="careContents"></textarea><br>
+	
 	<button type="submit">전송</button>
 </form>
 
