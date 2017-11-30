@@ -165,6 +165,7 @@ CREATE TABLE RESERVATION (
 	RES_TYPE NUMBER(1) NOT NULL, /* 의뢰종류 */
 	RES_SDATE DATE NOT NULL, /* 시작날짜 */
 	RES_EDATE DATE NOT NULL, /* 종료날짜 */
+	PRICE NUMBER(10),
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100), /* 시터_이메일 */
@@ -292,10 +293,11 @@ INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
 INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','soo@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',30000,'집에서 맡기기','yoon@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',50000,'집에서 맡기기','yoon@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',60000,'집에서 맡기기','lee@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',80000,'집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',100000,'집에서 맡기기','lee@naver.com','zxc');
 
 --서비스 요구사항
 

@@ -18,6 +18,7 @@ public class Reservation implements Serializable {
 	private Date resSDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date resEDate;
+	private int price;
 	private String resContents;
 	private String memberEmail;
 	private String sitterEmail;
@@ -40,6 +41,14 @@ public class Reservation implements Serializable {
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public int getResId() {
@@ -144,6 +153,14 @@ public class Reservation implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEDate="
+				+ resEDate + ", price=" + price + ", resContents=" + resContents + ", memberEmail=" + memberEmail
+				+ ", sitterEmail=" + sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales="
+				+ sales + ", dog=" + dog + ", member=" + member + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -152,6 +169,7 @@ public class Reservation implements Serializable {
 		result = prime * result + ((dog == null) ? 0 : dog.hashCode());
 		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
+		result = prime * result + price;
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
 		result = prime * result + ((resEDate == null) ? 0 : resEDate.hashCode());
 		result = prime * result + resId;
@@ -196,6 +214,8 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!memberEmail.equals(other.memberEmail))
 			return false;
+		if (price != other.price)
+			return false;
 		if (resContents == null) {
 			if (other.resContents != null)
 				return false;
@@ -228,11 +248,5 @@ public class Reservation implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEDate="
-				+ resEDate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
-				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + ", dog="
-				+ dog + ", member=" + member + "]";
-	}
+	
 }

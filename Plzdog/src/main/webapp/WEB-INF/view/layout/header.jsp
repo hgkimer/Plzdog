@@ -85,7 +85,7 @@
 	<header>
 		<div class="container">
 			<div class="click" >
-				<img src="image/bar.png">
+				<img src="${initParam.rootPath }/image/bar.png">
 			</div>
 			<ul class="nav">
 				<%--인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴 --%>
@@ -96,8 +96,8 @@
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
-					<li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="image/foot.png">도그시터 신청하기</a></li>
-					<li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="image/search.png">도그시터 찾기</a></li>
+					<li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="${initParam.rootPath }/image/foot.png">도그시터 신청하기</a></li>
+					<li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="${initParam.rootPath }/image/search.png">도그시터 찾기</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/faq.do">FAQ</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>

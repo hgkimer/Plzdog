@@ -15,6 +15,8 @@ select * from care;
 select * from CARE_IMAGE;
 select * from member;
 
+insert into AUTHORITY values('zxc','ROLE_SITTER');
+
 -----------------------------------------
 --시터용 값 insert------------------------
 
