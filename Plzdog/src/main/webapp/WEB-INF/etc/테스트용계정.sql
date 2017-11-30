@@ -17,6 +17,7 @@ select * from member;
 
 -----------------------------------------
 --시터용 값 insert------------------------
+
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_SITTER');
 

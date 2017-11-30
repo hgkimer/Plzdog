@@ -6,9 +6,9 @@
 	<!-- <definition>은 하나의 화면 설정을 한다. -->
 	<definition name="layout" template="/WEB-INF/view/layout/template.jsp">		<!-- 틀이 될 페이지 -->
  		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>	<!-- name으로 부르면 value jsp를 붙인다. -->
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/view/layout/content.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp"/>
 	</definition>
 
 	<definition name="*.tiles" extends="layout">
