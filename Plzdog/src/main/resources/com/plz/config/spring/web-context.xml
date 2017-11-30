@@ -21,6 +21,8 @@
 	
 	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
+	<!-- 메인 test (잠시 머무르다 갈 아이) -->
+	<mvc:view-controller path="/main_test.do" view-name="main_test.tiles" />
 	<!-- 회원가입 페이지 -->
 	<mvc:view-controller path="/join_form.do" view-name="join_form.tiles"/>
 	<!-- 로그인 페이지 -->
