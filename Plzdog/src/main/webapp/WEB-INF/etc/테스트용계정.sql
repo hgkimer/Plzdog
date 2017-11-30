@@ -21,6 +21,10 @@ select * from member;
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_SITTER');
 
+delete from AUTHORITY where email='soo@naver.com'
+
+select * from AUTHORITY
+
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'멍멍이','비숑','암컷',3.5,'20100608', 'hgkimer@naver.com');
 
 INSERT INTO DOGINFO VALUES(5 ,'code-7');
@@ -86,4 +90,4 @@ select	m.email,
 		and 	k.code_skill = c.code 
 		and 	s.email = k.email(+);
 
-
+update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'
