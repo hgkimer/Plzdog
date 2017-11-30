@@ -1,5 +1,7 @@
 package com.plz.dao;
 
+import java.util.List;
+
 import com.plzdog.vo.Code;
 
 public interface CodeDao {
@@ -27,5 +29,12 @@ public interface CodeDao {
 	 * @return
 	 */
 	Code selectCodeByCode(String code);
+	/**
+	 * 매개변수로 받은 Category와 일치하는 코드정보를 조회하는 메소드
+	 * 	- 요구사항, 시터 스킬, 예약 상태, 서비스 종류를 View에 뿌리기 위해 만듦.
+	 * @param category
+	 * @return
+	 */
+	List<Code> selectCodeByCategory(String category);
 	
 }

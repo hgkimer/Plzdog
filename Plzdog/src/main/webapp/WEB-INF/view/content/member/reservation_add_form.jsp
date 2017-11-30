@@ -13,8 +13,10 @@
 	<input type="hidden" name="resType" value="1"/>
 	시작날짜<input type="date" name="resSDate"/><br>
 	끝날짜<input type="date" name="resEDate"/><br>
-	의뢰내용<input type="text" name="resContents"/>
+	의뢰내용<textarea rows="5" cols="30" name="resContents"></textarea>
 	<br>
+	요구사항 : <br>
+	 
 	<input type="text" value='<sec:authentication property="principal.email"/>' name="memberEmail"/>
 	<c:if test='${param.sitterEmail != null }'>
 		<input type="text" value='${param.sitterEmail }' name="sitterEmail"/>
