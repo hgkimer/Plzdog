@@ -104,7 +104,7 @@ public class ReservationServiceImpl implements ReservationService{
 
 	@Override
 	public List<Reservation> selectDetailReservationMember(String email) {
-		return dao.selectMemberReservationByEmail(email);
+		return dao.selectDetailReservationMember(email);
 	}
 
 	@Override
@@ -116,6 +116,4 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail) {
 		return dao.selectDetailReservationAdmin(sitterEmail, memberEmail);
 	}
-	
-	
 }
