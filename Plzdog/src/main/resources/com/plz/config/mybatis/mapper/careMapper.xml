@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<resultMap type="care" id="care-join-care_image-resultmap" extends="care-resultmap">
-		<collection property="careImageList" ofType="CareImage">
+		<collection property="fileNameList" ofType="CareImage">
 			<id column="care_image" property="imageName"/>
 			<result column="care_id" property="careId"/>
 		</collection>
