@@ -5,12 +5,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
 	private int resType;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date resSDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date resEDate;
 	private String resContents;
 	private String memberEmail;
@@ -21,84 +26,17 @@ public class Reservation implements Serializable {
 	private Sales sales;
 	
 	public Reservation() {}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
+	
+	//예약 ID는 시퀀스이므로 객체를 만들때는 Emai로 조회해서 쓴다.
+	public Reservation(int resType, Date resSDate, Date resEDate, String resContents, String memberEmail,
 			String sitterEmail) {
-		this.resId = resId;
-		this.resType = resType;
-		this.resSDate = resSDate;
-		this.resEDate = resEdate;
-		this.resContents = resContents;
-		this.memberEmail = memberEmail;
-		this.sitterEmail = sitterEmail;
-	}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, List<Demand> demandList) {
 		super();
-		this.resId = resId;
 		this.resType = resType;
 		this.resSDate = resSDate;
-		this.resEDate = resEdate;
+		this.resEDate = resEDate;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
-		this.demandList = demandList;
-	}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, ArrayList<Care> careList) {
-		super();
-		this.resId = resId;
-		this.resType = resType;
-		this.resSDate = resSDate;
-		this.resEDate = resEdate;
-		this.resContents = resContents;
-		this.memberEmail = memberEmail;
-		this.sitterEmail = sitterEmail;
-		this.careList = careList;
-	}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, Sales sales) {
-		super();
-		this.resId = resId;
-		this.resType = resType;
-		this.resSDate = resSDate;
-		this.resEDate = resEdate;
-		this.resContents = resContents;
-		this.memberEmail = memberEmail;
-		this.sitterEmail = sitterEmail;
-		this.sales = sales;
-	}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, List<Demand> demandList, Sales sales) {
-		super();
-		this.resId = resId;
-		this.resType = resType;
-		this.resSDate = resSDate;
-		this.resEDate = resEdate;
-		this.resContents = resContents;
-		this.memberEmail = memberEmail;
-		this.sitterEmail = sitterEmail;
-		this.demandList = demandList;
-		this.sales = sales;
-	}
-
-	public Reservation(int resId, int resType, Date resSDate, Date resEdate, String resContents, String memberEmail,
-			String sitterEmail, ArrayList<Care> careList, List<Demand> demandList, Sales sales) {
-		super();
-		this.resId = resId;
-		this.resType = resType;
-		this.resSDate = resSDate;
-		this.resEDate = resEdate;
-		this.resContents = resContents;
-		this.memberEmail = memberEmail;
-		this.sitterEmail = sitterEmail;
-		this.careList = careList;
-		this.demandList = demandList;
-		this.sales = sales;
 	}
 
 	public int getResId() {
@@ -125,12 +63,12 @@ public class Reservation implements Serializable {
 		this.resSDate = resSDate;
 	}
 
-	public Date getResEdate() {
+	public Date getResEDate() {
 		return resEDate;
 	}
 
-	public void setResEdate(Date resEdate) {
-		this.resEDate = resEdate;
+	public void setResEDate(Date resEDate) {
+		this.resEDate = resEDate;
 	}
 
 	public String getResContents() {
@@ -181,11 +119,8 @@ public class Reservation implements Serializable {
 		this.sales = sales;
 	}
 
-	@Override
-	public String toString() {
-		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEdate="
-				+ resEDate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
-				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + "]";
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -260,4 +195,13 @@ public class Reservation implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEDate="
+				+ resEDate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
+				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + "]";
+	}
+
+	
 }

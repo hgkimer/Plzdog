@@ -13,17 +13,8 @@ select * from care;
 select * from CARE_IMAGE;
 select * from member;
 
-delete from member where email ='soo1@naver.com'
 
-insert into member values('soo@naver.com','이효주','$2a$10$HCV5V5tCA6vV32fy9K9iHueQ3uGmLS6GSMfa2NN.trcQBlvuBeDWS','서울','광진',12345,'image2','010-8965-5823',0);
-insert into member values('soo1@naver.com','이효주','$2a$10$HCV5V5tCA6vV32fy9K9iHueQ3uGmLS6GSMfa2NN.trcQBlvuBeDWS','서울','광진',12345,'image2','010-8965-5823',0);
-insert into member values('soo2@naver.com','이효주','$2a$10$HCV5V5tCA6vV32fy9K9iHueQ3uGmLS6GSMfa2NN.trcQBlvuBeDWS','서울','광진',12345,'image2','010-8965-5823',0);
-
-insert into AUTHORITY values('hgkimer@naver.com','ROLE_MEMBER');
-insert into AUTHORITY values('soo@naver.com','ROLE_ADMIN');
-insert into AUTHORITY values('soo1@naver.com','ROLE_MEMBER');
-insert into AUTHORITY values('soo2@naver.com','ROLE_MEMBER');
-insert into AUTHORITY values('soo@naver.com','ROLE_SITTER');
+insert into AUTHORITY values('hgkimer@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_SITTER');
 
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'멍멍이','비숑','암컷',3.5,'20100608', 'hgkimer@naver.com');
@@ -65,8 +56,3 @@ insert into CARE_IMAGE values('돌봄이미지2',5);
 insert into CARE_IMAGE values('돌봄이미지3',6);
 insert into CARE_IMAGE values('돌봄이미지5',6);
 
-select * from waiting 
-
-select email from waiting
-
-select * from AUTHORITY
