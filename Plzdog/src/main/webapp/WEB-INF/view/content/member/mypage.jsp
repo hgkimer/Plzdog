@@ -15,5 +15,6 @@ mypage.do<br>
 </form>
 <br>
 <a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a>
+<a href="${initParam.rootPath }/sitter/sitter_mypage.do">내게 온 예약 조회</a>
 </body>
 </html>

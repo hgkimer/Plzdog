@@ -27,6 +27,14 @@ $(document).ready(function(){
 		text-decoration:none;
 	}
 	
+	a {
+		color:inherit;
+	}
+	
+	.clear {
+		clear:both;
+	}
+	
 	.top {
 		width:200px;
 		height:30px;
@@ -75,8 +83,10 @@ $(document).ready(function(){
 			</span>
 		</div>
 		<div class="care">
-			<img src="image/caredog.jpg">
+			<img src="${initParam.rootPath }/image/caredog.jpg">
 		</div>
 	</div>
+	
+	<div class="clear"></div>
 </body>
 </html>
