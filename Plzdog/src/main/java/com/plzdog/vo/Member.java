@@ -3,33 +3,36 @@ package com.plzdog.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member implements Serializable {
-
-
+	
 	private static final long serialVersionUID = 1L;
 	private String email;
 	private String memberName;
 	private String password;
 	private String mainAddress;
 	private String subAddress;
+	private String memberImage;  
 	private int zipcode;
-	private String memberImage;
 	private String phoneNum;
 	private int memberEnable;
-
+	
+	//이미지 저장
+	private MultipartFile imageMember;
 	private Sitter sitter; // 시터
 	private List<Code> skillList;
 	private List<Review> reviewList; // 시터
 	private List<Reservation> resList; // 견주, 시터
 	private List<Dog> dogList; // 견주, 시터
 	
-	
 	public Member() {
-	}
 	
-	 //회원의 기본정보만 update하기 위한 생성자(memberEnable 변수 떄문에 객체 생성이 안되서)
+	}
+
+	//회원의 기본정보만 update하기 위한 생성자(memberEnable 변수 떄문에 객체 생성이 안되서)
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
-			String memberImage, String phoneNum) {
+			String phoneNum, String memberImage) {
 		this.email = email;
 		this.memberName = memberName;
 		this.password = password;
@@ -39,6 +42,7 @@ public class Member implements Serializable {
 		this.memberImage = memberImage;
 		this.phoneNum = phoneNum;
 	}
+	
 	//등록한 이미지 값이 없을때 사용하는 생성자.
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
 			String phoneNum, int memberEnable) {
@@ -63,6 +67,21 @@ public class Member implements Serializable {
 		this.memberImage = memberImage;
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
+	}
+	
+	public Member(String email, String memberName, String password, String mainAddress, String subAddress,
+			String memberImage, int zipcode, String phoneNum, int memberEnable, MultipartFile imageMember) {
+		super();
+		this.email = email;
+		this.memberName = memberName;
+		this.password = password;
+		this.mainAddress = mainAddress;
+		this.subAddress = subAddress;
+		this.memberImage = memberImage;
+		this.zipcode = zipcode;
+		this.phoneNum = phoneNum;
+		this.memberEnable = memberEnable;
+		this.imageMember = imageMember;
 	}
 
 	public String getEmail() {
@@ -105,20 +124,20 @@ public class Member implements Serializable {
 		this.subAddress = subAddress;
 	}
 
-	public int getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(int zipcode) {
-		this.zipcode = zipcode;
-	}
-
 	public String getMemberImage() {
 		return memberImage;
 	}
 
 	public void setMemberImage(String memberImage) {
 		this.memberImage = memberImage;
+	}
+
+	public int getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
 	}
 
 	public String getPhoneNum() {
@@ -137,12 +156,28 @@ public class Member implements Serializable {
 		this.memberEnable = memberEnable;
 	}
 
+	public MultipartFile getImageMember() {
+		return imageMember;
+	}
+
+	public void setImageMember(MultipartFile imageMember) {
+		this.imageMember = imageMember;
+	}
+
 	public Sitter getSitter() {
 		return sitter;
 	}
 
 	public void setSitter(Sitter sitter) {
 		this.sitter = sitter;
+	}
+
+	public List<Code> getSkillList() {
+		return skillList;
+	}
+
+	public void setSkillList(List<Code> skillList) {
+		this.skillList = skillList;
 	}
 
 	public List<Review> getReviewList() {
@@ -168,13 +203,13 @@ public class Member implements Serializable {
 	public void setDogList(List<Dog> dogList) {
 		this.dogList = dogList;
 	}
-	
-	public List<Code> getSkillList() {
-		return skillList;
-	}
 
-	public void setSkillList(List<Code> skillList) {
-		this.skillList = skillList;
+	@Override
+	public String toString() {
+		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
+				+ mainAddress + ", subAddress=" + subAddress + ", memberImage=" + memberImage + ", zipcode=" + zipcode
+				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", skillList="
+				+ skillList + ", reviewList=" + reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
 	}
 
 	@Override
@@ -272,13 +307,5 @@ public class Member implements Serializable {
 		if (zipcode != other.zipcode)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
-				+ mainAddress + ", subAddress=" + subAddress + ", zipcode=" + zipcode + ", memberImage=" + memberImage
-				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", skillList="
-				+ skillList + ", reviewList=" + reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
 	}
 }

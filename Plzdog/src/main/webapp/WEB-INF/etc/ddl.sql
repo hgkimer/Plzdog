@@ -351,7 +351,6 @@ from	reservation r, dog_image i, dog d
 where 	r.email = d.email and r.email_sitter = 'kim@naver.com' and d.dog_id = i.dog_id(+);
 
 --시터 대기명단에 등록
-insert into waiting values('soo2@naver.com')
 
 -- 회원에 해당하는 code의 이름을 조회
 select m.email, m.member_name, c.code, c.code_name 

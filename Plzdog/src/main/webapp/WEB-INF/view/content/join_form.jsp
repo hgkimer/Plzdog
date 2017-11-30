@@ -10,11 +10,11 @@ function inputCheck(){
 		return false;
 	}
 }
-
 </script>
 
 <h2>회원 가입폼</h2>
-<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" onsubmit="return inputCheck()">
+<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" 
+			enctype="multipart/form-data" onsubmit="return inputCheck()">
 	<sec:csrfInput/>
 	<div class="form-group">
 		<label for="pId">Email : </label>
@@ -46,7 +46,7 @@ function inputCheck(){
 	</div>
 	<div class="form-group">
 		<label for="pMember">이미지 : </label>
-		<input type="file" name="memberImage" id="pMember" class="form-control" required="required">
+		<input type="file" name="imageMember" id="pMember" class="form-control" required="required">
 	</div>
 	<div class="form-group">
 		<label for="pPhone">전화번호 : </label>
