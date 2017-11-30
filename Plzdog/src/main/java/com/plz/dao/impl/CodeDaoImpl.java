@@ -1,5 +1,7 @@
 package com.plz.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,6 +34,10 @@ public class CodeDaoImpl implements CodeDao{
 	@Override
 	public Code selectCodeByCode(String code) {
 		return session.selectOne(makeSqlId("selectCodeByCode"), code);
+	}
+	@Override
+	public List<Code> selectCodeByCategory(String category) {
+		return session.selectList(makeSqlId("selectCodeByCategory"), category);
 	}
 
 }

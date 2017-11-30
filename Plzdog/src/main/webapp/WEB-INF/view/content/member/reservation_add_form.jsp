@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +10,18 @@
 <body>
 <form action="${initParam.rootPath }/member/reservation_add.do" method="post">
 	<sec:csrfInput/>
-	<input type="text" value="1"  name="resType"/><br>
+	<input type="hidden" name="resType" value="1"/>
 	시작날짜<input type="date" name="resSDate"/><br>
 	끝날짜<input type="date" name="resEDate"/><br>
-	의뢰내용<input type="text" name="resContents"/>
+	의뢰내용<textarea rows="5" cols="30" name="resContents"></textarea>
 	<br>
-	<input type="text" value='<sec:authentication property="principal.email"/>' id="memberEmail" name="memberEmail"/>
-	<input type="text" value="${sessionScope.lastSitter }" id="sitterEmail" name="sitterEmail"/>
+	요구사항 : <br>
+	 
+	<input type="text" value='<sec:authentication property="principal.email"/>' name="memberEmail"/>
+	<c:if test='${param.sitterEmail != null }'>
+		<input type="text" value='${param.sitterEmail }' name="sitterEmail"/>
+	</c:if>
 	<button type="submit">전송</button>
-	
 	
 </form>
 </body>

@@ -10,7 +10,7 @@ import com.plzdog.vo.CareImage;
 
 public interface CareService {
 	
-	List<Care> selectCareJoinCareImage(int careId);
+	List<Care> selectCareJoinCareImage(int resId);
 	
 	void updateCare(Care care);
 	

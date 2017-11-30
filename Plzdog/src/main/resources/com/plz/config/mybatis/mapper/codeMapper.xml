@@ -16,7 +16,10 @@
 		<include refid="code-select-sql"/>
 		where code = #{value}
 	</select>
-	
+	<select id="selectCodeByCategory" parameterType="string" resultMap="code-resultmap">
+		<include refid="code-select-sql"></include>
+		WHERE category = #{value}
+	</select>
 	<insert id="insertCode" parameterType="Code">
 		insert into code values(#{code}, #{codeName}, #{category})
 	</insert>

@@ -9,7 +9,7 @@ DROP TABLE MEMBER
 DROP TABLE AUTHORITY 
 	CASCADE CONSTRAINTS;	
 
---코드 테이블
+--코드 테이블 
 DROP TABLE CODE 
 	CASCADE CONSTRAINTS;
 
@@ -165,10 +165,10 @@ CREATE TABLE RESERVATION (
 	RES_TYPE NUMBER(1) NOT NULL, /* 의뢰종류 */
 	RES_SDATE DATE NOT NULL, /* 시작날짜 */
 	RES_EDATE DATE NOT NULL, /* 종료날짜 */
+	PRICE NUMBER(10),
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
-	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
-	PRICE NUMBER(10) NOT NULL, /* 가격 */
+	EMAIL_SITTER VARCHAR2(100), /* 시터_이메일 */
 	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade ,
 	CONSTRAINT FK_RESERVATION_SITTER FOREIGN KEY(EMAIL_SITTER) REFERENCES MEMBER on delete cascade
 );
@@ -252,9 +252,11 @@ insert into code values('code-8','환자 모니터링 가능','시터');
 INSERT INTO CODE VALUES('code-7','배변활동','강아지');
 INSERT INTO CODE VALUES('code-9','심장사상충','강아지');
 INSERT INTO CODE VALUES('code-10','당뇨','강아지');
-insert into code values('code-11','예약대기','예약');
-insert into code values('code-12','예약확정','예약');
-insert into code values('code-13','결제완료','예약');
+insert into code values('1','예약대기','예약');
+insert into code values('2','예약확정','예약');
+insert into code values('3','결제완료','예약');
+insert into code values('service-1', '방문돌봄', '서비스');
+insert into code values('service-2', '위탁돌봄', '서비스');
 
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
@@ -291,10 +293,11 @@ INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
 INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','soo@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',30000,'집에서 맡기기','yoon@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',50000,'집에서 맡기기','yoon@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',60000,'집에서 맡기기','lee@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',80000,'집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',100000,'집에서 맡기기','lee@naver.com','zxc');
 
 --서비스 요구사항
 
@@ -336,7 +339,21 @@ insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 -----------------------------------------------
 --select
--- 시터에 등록된 review를 조회
+-- 예약 간단 조회
+select * from RESERVATION;
+select	r.res_id,
+		r.res_type,
+		r.res_sdate,
+		r.res_edate,
+		i.dog_image,
+		d.dog_name,
+		d.species,
+		d.gender,
+		d.weight,
+		d.birth
+from	reservation r, dog_image i, dog d
+where 	r.email = d.email and r.email_sitter = 'kim@naver.com' and d.dog_id = i.dog_id(+);
+
 --시터 대기명단에 등록
 
 -- 회원에 해당하는 code의 이름을 조회
@@ -528,6 +545,4 @@ select			m.email,
 			    s.sales_date
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
-		and     r.res_id = 2
-		
-		delete from member where email = 'kim@naver.com';
+		and     r.res_id = 2;

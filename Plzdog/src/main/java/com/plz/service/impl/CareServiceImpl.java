@@ -43,8 +43,8 @@ public class CareServiceImpl implements CareService {
 	}
 
 	@Override
-	public List<Care> selectCareJoinCareImage(int careId) {
-		return careDao.selectCareJoinCareImage(careId);
+	public List<Care> selectCareJoinCareImage(int resId) {
+		return careDao.selectCareJoinCareImage(resId);
 	}
 
 	@Override

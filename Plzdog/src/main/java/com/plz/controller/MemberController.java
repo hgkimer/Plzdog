@@ -75,8 +75,8 @@ public class MemberController {
 			flag= true;
 			model.addAttribute("sitterFlag", flag);
 			//사용자가 마지막으로 접근한 시터의 Email을 세션에 저장한다.
-			model.addAttribute("lastSitter", member.getEmail());
-			session.setAttribute("profile", member);
+			model.addAttribute("profile", member);
+			//ession.setAttribute("lastSitter", member.getEmail());
 			return "member/profile.tiles";
 		}else {
 			//일반 견주일 경우
