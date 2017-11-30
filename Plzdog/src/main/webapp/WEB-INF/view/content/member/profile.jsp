@@ -32,8 +32,7 @@
 	</c:forEach></p>
 
 <sec:authentication property="principal.email"/>
-<form action="" method="post">
-	<sec:csrfInput/>
+<form action="${initParam.rootPath }/member/reservation_add_form.do">
 	<input type="text" value="${requestScope.profile.email }" name="sitterEmail"/>
 	<button type="submit">예약 신청</button>
 </form>
