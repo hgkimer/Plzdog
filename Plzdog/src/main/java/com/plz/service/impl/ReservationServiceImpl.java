@@ -86,6 +86,36 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation findReservationById(int resId) {
 		return dao.selectReservationById(resId);
 	}
+
+	@Override
+	public List<Reservation> selectSimpleReservationSitter(String email) {
+		return dao.selectSimpleReservationSitter(email);
+	}
+
+	@Override
+	public List<Reservation> selectDetailReservationSitter(String email) {
+		return dao.selectDetailReservationSitter(email);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleReservationMember(String email) {
+		return dao.selectSimpleReservationMember(email);
+	}
+
+	@Override
+	public List<Reservation> selectDetailReservationMember(String email) {
+		return dao.selectMemberReservationByEmail(email);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleReservationAdmin() {
+		return dao.selectSimpleReservationAdmin();
+	}
+
+	@Override
+	public List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail) {
+		return dao.selectDetailReservationAdmin(sitterEmail, memberEmail);
+	}
 	
 	
 }

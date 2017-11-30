@@ -77,4 +77,16 @@ public interface ReservationService {
 	void removeDemand(int resId);
 	
 	void updateDemand(Demand demand, String originalCodeDemand);
+	
+	List<Reservation> selectSimpleReservationSitter(String email);
+	
+	List<Reservation> selectDetailReservationSitter(String email);
+	
+	List<Reservation> selectSimpleReservationMember(String email);
+	
+	List<Reservation> selectDetailReservationMember(String email);
+	
+	List<Reservation> selectSimpleReservationAdmin();
+	
+	List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail);
 }

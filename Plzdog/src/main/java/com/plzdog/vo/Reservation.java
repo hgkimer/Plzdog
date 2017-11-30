@@ -21,9 +21,11 @@ public class Reservation implements Serializable {
 	private String memberEmail;
 	private String sitterEmail;
 	
-	private ArrayList<Care> careList;
+	private List<Care> careList;
 	private List<Demand> demandList;
 	private Sales sales;
+	private Dog dog;
+	private Member member;
 	
 	public Reservation() {}
 	
@@ -95,11 +97,32 @@ public class Reservation implements Serializable {
 		this.sitterEmail = sitterEmail;
 	}
 
-	public ArrayList<Care> getCareList() {
+
+	public Sales getSales() {
+		return sales;
+	}
+
+	public void setSales(Sales sales) {
+		this.sales = sales;
+	}
+	
+	public Dog getDog() {
+		return dog;
+	}
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public List<Care> getCareList() {
 		return careList;
 	}
 
-	public void setCareList(ArrayList<Care> careList) {
+	public void setCareList(List<Care> careList) {
 		this.careList = careList;
 	}
 
@@ -110,17 +133,13 @@ public class Reservation implements Serializable {
 	public void setDemandList(List<Demand> demandList) {
 		this.demandList = demandList;
 	}
-
-	public Sales getSales() {
-		return sales;
+	
+	public Member getMember() {
+		return member;
 	}
 
-	public void setSales(Sales sales) {
-		this.sales = sales;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	@Override
@@ -129,6 +148,8 @@ public class Reservation implements Serializable {
 		int result = 1;
 		result = prime * result + ((careList == null) ? 0 : careList.hashCode());
 		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
+		result = prime * result + ((dog == null) ? 0 : dog.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
 		result = prime * result + ((resEDate == null) ? 0 : resEDate.hashCode());
@@ -158,6 +179,16 @@ public class Reservation implements Serializable {
 			if (other.demandList != null)
 				return false;
 		} else if (!demandList.equals(other.demandList))
+			return false;
+		if (dog == null) {
+			if (other.dog != null)
+				return false;
+		} else if (!dog.equals(other.dog))
+			return false;
+		if (member == null) {
+			if (other.member != null)
+				return false;
+		} else if (!member.equals(other.member))
 			return false;
 		if (memberEmail == null) {
 			if (other.memberEmail != null)
@@ -200,8 +231,7 @@ public class Reservation implements Serializable {
 	public String toString() {
 		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEDate="
 				+ resEDate + ", resContents=" + resContents + ", memberEmail=" + memberEmail + ", sitterEmail="
-				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + "]";
+				+ sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales=" + sales + ", dog="
+				+ dog + ", member=" + member + "]";
 	}
-
-	
 }

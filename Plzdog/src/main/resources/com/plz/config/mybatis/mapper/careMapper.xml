@@ -26,7 +26,7 @@
 	<select id="selectCareJoinCareImage" parameterType="_int" resultMap="care-join-care_image-resultmap">
 		select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
 		from	care c, care_image i
-		where	c.care_id = #{value} and c.care_id = i.care_id(+)
+		where	c.res_id = #{value} and c.care_id = i.care_id(+)
 	</select>
 	
 	<update id="updateCare" parameterType="Care">

@@ -7,13 +7,14 @@ public class Skill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String email;
-	private String codeSkill;
+	private Code code;
 	
 	public Skill() {}
 
-	public Skill(String email, String codeSkill) {
+	
+	public Skill(String email, Code code) {
 		this.email = email;
-		this.codeSkill = codeSkill;
+		this.code = code;
 	}
 
 	public String getEmail() {
@@ -24,22 +25,25 @@ public class Skill implements Serializable {
 		this.email = email;
 	}
 
-	public String getCodeSkill() {
-		return codeSkill;
+	public Code getCode() {
+		return code;
 	}
 
-	public void setCodeSkill(String codeSkill) {
-		this.codeSkill = codeSkill;
+
+	public void setCode(Code code) {
+		this.code = code;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codeSkill == null) ? 0 : codeSkill.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -50,10 +54,10 @@ public class Skill implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Skill other = (Skill) obj;
-		if (codeSkill == null) {
-			if (other.codeSkill != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!codeSkill.equals(other.codeSkill))
+		} else if (!code.equals(other.code))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -63,9 +67,9 @@ public class Skill implements Serializable {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Skill [email=" + email + ", codeSkill=" + codeSkill + "]";
+		return "Skill [email=" + email + ", code=" + code + "]";
 	}
-
 }

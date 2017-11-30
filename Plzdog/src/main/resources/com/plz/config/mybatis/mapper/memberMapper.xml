@@ -73,8 +73,12 @@
 			<result column="service_address" property="serviceAddress"/>
 			<result column="sitter_rate" property="sitterRate"/>
 		</collection>
-		<collection property="skillList" ofType="Code">
-			<id column="code_name" property="codeName"/>
+		<collection property="skillList" ofType="Skill">
+			<association property="code" javaType="Code">
+				<id column="code" property="code"/>
+				<result column="code_name" property="codeName"/>
+				<result column="category" property="category"/>
+			</association>
 		</collection>
 	</resultMap>
 	
