@@ -9,7 +9,7 @@ public interface CareService {
 
 	void insertCare(Care care);
 	
-	List<Care> selectCareJoinCareImage(int careId);
+	List<Care> selectCareJoinCareImage(int resId);
 	
 	void updateCare(Care care);
 	

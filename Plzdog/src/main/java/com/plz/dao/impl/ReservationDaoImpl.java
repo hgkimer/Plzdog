@@ -80,7 +80,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	public int updateDemand(Demand demand, String originalCodeDemand) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("resId", demand.getResId());
-		params.put("codeDemand", demand.getCodeDemand());
+		params.put("codeDemand", demand.getCode());
 		params.put("originalCodeDemand", originalCodeDemand);
 		return session.update(makeSqlId("updateDemand"), params);
 	}
@@ -93,5 +93,38 @@ public class ReservationDaoImpl implements ReservationDao{
 	@Override
 	public Reservation selectReservationById(int resId) {
 		return session.selectOne(makeSqlId("selectReservationById"), resId);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleReservationSitter(String email) {
+		return session.selectList(makeSqlId("selectSimpleReservationSitter"), email);
+	}
+
+	@Override
+	public List<Reservation> selectDetailReservationSitter(String email) {
+		return session.selectList(makeSqlId("selectDetailReservationSitter"), email);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleReservationMember(String email) {
+		return session.selectList(makeSqlId("selectSimpleReservationMember"), email);
+	}
+
+	@Override
+	public List<Reservation> selectDetailReservationMember(String email) {
+		return session.selectList(makeSqlId("selectDetailReservationMember"), email);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleReservationAdmin() {
+		return session.selectList(makeSqlId("selectSimpleReservationAdmin"));
+	}
+
+	@Override
+	public List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail) {
+		HashMap<String, String> params = new HashMap<>();
+		params.put("sitterEmail", sitterEmail);
+		params.put("memberEmail", memberEmail);
+		return session.selectList(makeSqlId("selectDetailReservationAdmin"), params);
 	}
 }

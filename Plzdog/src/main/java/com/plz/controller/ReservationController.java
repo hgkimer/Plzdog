@@ -40,13 +40,13 @@ public class ReservationController {
 	 * @param res
 	 * @return
 	 */
-	@RequestMapping("/member/reservation_register")
+	@RequestMapping("/member/reservation_add")
 	public String addReservation(@ModelAttribute Reservation res) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
 		service.addReservation(res);
 		//3. View로 이동
-		return "member/add_reservation_success.tiles";
+		return "member/reservation_add_success.tiles";
 	}
 	
 	/**
@@ -100,36 +100,85 @@ public class ReservationController {
 		service.removeReservation(resId);
 		return new ModelAndView("member/delete_reservation_result.tiles");
 	}
+	
+	/**
+	 * 시터 마이페이지 - 예약 조회 - 간단히 보기
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/sitter/select_reservation_simple")
+	public String selectSimpleReservationSitter(@RequestParam String email, Model model) {
+		System.out.println(email);
+		List<Reservation> list = service.selectSimpleReservationSitter(email);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "sitter/select_reservation_simple_result.tiles";
+	}
+	
+	/**
+	 * 시터 마이페이지 - 예약 조회 - 자세히 보기
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/sitter/select_reservation_detail")
+	public String selectDetailReservationSitter(@RequestParam String email, Model model) {
+		List<Reservation> list = service.selectDetailReservationSitter(email);
+		model.addAttribute("list", list);
+		return "sitter/select_reservation_detail_result.tiles";
+	}
+	
+	/**
+	 * 견주 마이페이지 - 예약 조회 - 간단히 보기
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/select_reservation_simple")
+	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
+		List<Reservation> list = service.selectSimpleReservationMember(email);
+		model.addAttribute("list", list);
+		return "member/select_reservation_simple_result.tiles";
+	}
+	
+	/**
+	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/select_reservation_detail")
+	public String selectDetailReservationMember(@RequestParam String email, Model model) {
+		List<Reservation> list = service.selectDetailReservationMember(email);
+		model.addAttribute("list", list);
+		return "member/select_reservation_detail_result.tiles";
+	}
+	
+	/**
+	 * 관리자 페이지  - 예약 조회 - 간단히 보기
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/admin/select_reservation_simple")
+	public String selectSimpleReservationAdmin(@RequestParam String email, Model model) {
+		List<Reservation> list = service.selectSimpleReservationAdmin();
+		model.addAttribute("list", list);
+		return "admin/select_reservation_simple_result.tiles";
+	}
+	
+	/**
+	 * 관리자 페이지 - 예약 조회 - 자세히 보기
+	 * @param sitterEmail
+	 * @param memberEmail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/admin/select_reservation_detail")
+	public String selectDetailReservationAdmin(@RequestParam String sitterEmail, @RequestParam String memberEmail, Model model) {
+		List<Reservation> list = service.selectDetailReservationAdmin(sitterEmail, memberEmail);
+		model.addAttribute("list", list);
+		return "admin/select_reservation_detail_result.tiles";
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

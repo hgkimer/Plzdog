@@ -1,3 +1,5 @@
+-----------------------------------------
+--Table당 전체 조회-----------------------
 select * from AUTHORITY;
 select * from code;
 select * from DOG;
@@ -14,6 +16,10 @@ select * from CARE_IMAGE;
 select * from member;
 
 insert into AUTHORITY values('zxc','ROLE_SITTER');
+
+-----------------------------------------
+--시터용 값 insert------------------------
+
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('hgkimer@naver.com','ROLE_SITTER');
 
@@ -55,4 +61,31 @@ insert into CARE_IMAGE values('돌봄이미지4',5);
 insert into CARE_IMAGE values('돌봄이미지2',5);
 insert into CARE_IMAGE values('돌봄이미지3',6);
 insert into CARE_IMAGE values('돌봄이미지5',6);
+-----------------------------------------
+--견주용 값 insert------------------------
+
+select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				s.school,
+				s.certification,
+				s.service_address,
+				s.sitter_rate,
+				c.code_name,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth
+		from	member m, dog d, sitter s, skill k, code c
+		where	s.email = 'hgkimer@naver.com' 
+		and		s.email = m.email 
+		and		s.email = d.email 
+		and 	k.code_skill = c.code 
+		and 	s.email = k.email(+);
+
 

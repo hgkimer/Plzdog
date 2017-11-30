@@ -80,4 +80,47 @@ public interface ReservationDao {
 	int deleteDemand(int resId);
 	
 	int updateDemand(Demand demand, String originalCodeDemand);
+	
+	//새로 추가한 select
+	/**
+	 * 시터의 마이페이지 - 예약 조회 - 간단히 보기
+	 * @param email 시터 email
+	 * @return
+	 */
+	List<Reservation> selectSimpleReservationSitter(String email);
+	
+	/**
+	 * 시터의 마이페이지 - 예약 조회 - 자세히 보기
+	 * @param email 시터 email
+	 * @return
+	 */
+	List<Reservation> selectDetailReservationSitter(String email);
+	
+	/**
+	 * 견주의 마이페이지 - 예약 조회 - 간단히 보기
+	 * @param email 견주 email
+	 * @return
+	 */
+	List<Reservation> selectSimpleReservationMember(String email);
+	
+	/**
+	 * 견주의 마이페이지 - 예약 조회 - 자세히 보기
+	 * @param email 견주 email
+	 * @return
+	 */
+	List<Reservation> selectDetailReservationMember(String email);
+	
+	/**
+	 * 관리자 페이지 - 모든 예약 조회 - 간단히 보기
+	 * @return
+	 */
+	List<Reservation> selectSimpleReservationAdmin();
+	
+	/**
+	 * 관리자 페이지 - 예약 조회 - 자세히 보기
+	 * @param sitterEmail
+	 * @param memberEmail
+	 * @return
+	 */
+	List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail);
 }

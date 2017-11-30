@@ -7,25 +7,15 @@ public class Demand implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
-	private String codeDemand;
-	
 	private Code code;
 	
 	public Demand() {}
 	
-	public Demand(int resId, String codeDemand) {
-		super();
+	public Demand(int resId, Code code) {
 		this.resId = resId;
-		this.codeDemand = codeDemand;
-	}
-
-	public Demand(int resId, String codeDemand, Code code) {
-		super();
-		this.resId = resId;
-		this.codeDemand = codeDemand;
 		this.code = code;
 	}
-	
+
 
 	public int getResId() {
 		return resId;
@@ -35,14 +25,6 @@ public class Demand implements Serializable{
 		this.resId = resId;
 	}
 
-	public String getCodeDemand() {
-		return codeDemand;
-	}
-
-	public void setCodeDemand(String codeDemand) {
-		this.codeDemand = codeDemand;
-	}
-
 	public Code getCode() {
 		return code;
 	}
@@ -50,18 +32,13 @@ public class Demand implements Serializable{
 	public void setCode(Code code) {
 		this.code = code;
 	}
-	
-	@Override
-	public String toString() {
-		return "Demand [resId=" + resId + ", codeDemand=" + codeDemand + ", code=" + code + "]";
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((codeDemand == null) ? 0 : codeDemand.hashCode());
+		result = prime * result + resId;
 		return result;
 	}
 
@@ -79,16 +56,13 @@ public class Demand implements Serializable{
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (codeDemand == null) {
-			if (other.codeDemand != null)
-				return false;
-		} else if (!codeDemand.equals(other.codeDemand))
+		if (resId != other.resId)
 			return false;
 		return true;
 	}
 
-	
-
-	
-
+	@Override
+	public String toString() {
+		return "Demand [resId=" + resId + ", code=" + code + "]";
+	}
 }

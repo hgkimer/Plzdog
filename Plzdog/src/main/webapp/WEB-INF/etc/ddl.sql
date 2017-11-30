@@ -165,6 +165,7 @@ CREATE TABLE RESERVATION (
 	RES_TYPE NUMBER(1) NOT NULL, /* 의뢰종류 */
 	RES_SDATE DATE NOT NULL, /* 시작날짜 */
 	RES_EDATE DATE NOT NULL, /* 종료날짜 */
+	PRICE NUMBER(10),
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
@@ -290,10 +291,11 @@ INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
 INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','soo@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','kim@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',30000,'집에서 맡기기','yoon@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',50000,'집에서 맡기기','yoon@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',60000,'집에서 맡기기','lee@naver.com','kim@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',80000,'집에서 맡기기','lee@naver.com','soo@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',100000,'집에서 맡기기','lee@naver.com','zxc');
 
 --서비스 요구사항
 
@@ -335,7 +337,21 @@ insert into CARE_IMAGE values('돌봄이미지7',4);
 insert into CARE_IMAGE values('돌봄이미지7',4);
 -----------------------------------------------
 --select
--- 시터에 등록된 review를 조회
+-- 예약 간단 조회
+select * from RESERVATION;
+select	r.res_id,
+		r.res_type,
+		r.res_sdate,
+		r.res_edate,
+		i.dog_image,
+		d.dog_name,
+		d.species,
+		d.gender,
+		d.weight,
+		d.birth
+from	reservation r, dog_image i, dog d
+where 	r.email = d.email and r.email_sitter = 'kim@naver.com' and d.dog_id = i.dog_id(+);
+
 --시터 대기명단에 등록
 
 -- 회원에 해당하는 code의 이름을 조회
