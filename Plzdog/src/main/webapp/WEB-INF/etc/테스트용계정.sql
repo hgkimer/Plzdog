@@ -15,6 +15,10 @@ select * from member;
 
 delete from member where email ='soo1@naver.com'
 
+insert into waiting values('soo2@naver.com')
+
+update member set password='$2a$10$12WwlU/h.ldc/CMlwSHVgu01WZmv.ETqCYaBCcXrGblzEoPlO9nwa'
+
 insert into member values('soo@naver.com','이효주','$2a$10$HCV5V5tCA6vV32fy9K9iHueQ3uGmLS6GSMfa2NN.trcQBlvuBeDWS','서울','광진',12345,'image2','010-8965-5823',0);
 insert into member values('soo1@naver.com','이효주','$2a$10$HCV5V5tCA6vV32fy9K9iHueQ3uGmLS6GSMfa2NN.trcQBlvuBeDWS','서울','광진',12345,'image2','010-8965-5823',0);
 insert into member values('soo2@naver.com','이효주','$2a$10$HCV5V5tCA6vV32fy9K9iHueQ3uGmLS6GSMfa2NN.trcQBlvuBeDWS','서울','광진',12345,'image2','010-8965-5823',0);
