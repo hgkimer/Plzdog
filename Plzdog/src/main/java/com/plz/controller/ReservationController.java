@@ -40,13 +40,13 @@ public class ReservationController {
 	 * @param res
 	 * @return
 	 */
-	@RequestMapping("/member/reservation_register")
+	@RequestMapping("/member/reservation_add")
 	public String addReservation(@ModelAttribute Reservation res) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
 		service.addReservation(res);
 		//3. View로 이동
-		return "member/add_reservation_success.tiles";
+		return "member/reservation_add_success.tiles";
 	}
 	
 	/**
