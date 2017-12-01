@@ -47,7 +47,7 @@
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
 	<select id="selectSimpleReservationSitter" parameterType="string" resultMap="simple-res-sitter-resultmap">
 		<include refid="simple-res-sitter-sql"/>
-		where r.email = d.email and r.email_sitter = #{value} and d.dog_id = i.dog_id
+		where r.email = d.email and r.email_sitter = #{value} and d.dog_id = i.dog_id(+)
 	</select>
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
