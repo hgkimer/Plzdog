@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Care implements Serializable{
 
@@ -15,23 +16,30 @@ public class Care implements Serializable{
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date careDate;
 	
-	private List<CareImage> careImageList;
+	//여러개의 이미지 처리
+	private List<MultipartFile> careImageList;
+	//여러개의 파일명 처리
+	private List<CareImage> careImage; 
 
 	public Care() {}
 
 	public Care(int careId, String careContents, int resId, Date careDate) {
+		super();
 		this.careId = careId;
 		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
 	}
 
-	public Care(int careId, String careContents, int resId, Date careDate, List<CareImage> careImageList) {
+	public Care(int careId, String careContents, int resId, Date careDate, List<MultipartFile> careImageList,
+			List<CareImage> careImage) {
+		super();
 		this.careId = careId;
 		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
 		this.careImageList = careImageList;
+		this.careImage = careImage;
 	}
 
 	public int getCareId() {
@@ -66,12 +74,26 @@ public class Care implements Serializable{
 		this.careDate = careDate;
 	}
 
-	public List<CareImage> getCareImageList() {
+	public List<MultipartFile> getCareImageList() {
 		return careImageList;
 	}
 
-	public void setCareImageList(List<CareImage> careImageList) {
+	public void setCareImageList(List<MultipartFile> careImageList) {
 		this.careImageList = careImageList;
+	}
+
+	public List<CareImage> getCareImage() {
+		return careImage;
+	}
+
+	public void setCareImage(List<CareImage> careImage) {
+		this.careImage = careImage;
+	}
+
+	@Override
+	public String toString() {
+		return "Care [careId=" + careId + ", careContents=" + careContents + ", resId=" + resId + ", careDate="
+				+ careDate + ", careImageList=" + careImageList + ", careImage=" + careImage + "]";
 	}
 
 	@Override
@@ -81,6 +103,7 @@ public class Care implements Serializable{
 		result = prime * result + ((careContents == null) ? 0 : careContents.hashCode());
 		result = prime * result + ((careDate == null) ? 0 : careDate.hashCode());
 		result = prime * result + careId;
+		result = prime * result + ((careImage == null) ? 0 : careImage.hashCode());
 		result = prime * result + ((careImageList == null) ? 0 : careImageList.hashCode());
 		result = prime * result + resId;
 		return result;
@@ -107,6 +130,11 @@ public class Care implements Serializable{
 			return false;
 		if (careId != other.careId)
 			return false;
+		if (careImage == null) {
+			if (other.careImage != null)
+				return false;
+		} else if (!careImage.equals(other.careImage))
+			return false;
 		if (careImageList == null) {
 			if (other.careImageList != null)
 				return false;
@@ -115,11 +143,5 @@ public class Care implements Serializable{
 		if (resId != other.resId)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Care [careId=" + careId + ", careContents=" + careContents + ", resId=" + resId + ", careDate="
-				+ careDate + ", careImageList=" + careImageList + "]";
 	}
 }

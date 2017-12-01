@@ -1,13 +1,14 @@
 package com.plz.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.plzdog.vo.Care;
 import com.plzdog.vo.CareImage;
 
 public interface CareService {
-
-	void insertCare(Care care);
 	
 	List<Care> selectCareJoinCareImage(int resId);
 	
@@ -20,4 +21,6 @@ public interface CareService {
 	void updateCareImage(CareImage careImage, String originalImage);
 	
 	void deleteCareImage(String careImage);
+
+	void insertCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException;
 }

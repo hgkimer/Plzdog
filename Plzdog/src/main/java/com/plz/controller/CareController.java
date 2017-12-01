@@ -2,12 +2,15 @@ package com.plz.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.CareService;
+import com.plz.service.ReservationService;
 import com.plzdog.vo.Care;
 import com.plzdog.vo.CareImage;
 
@@ -25,6 +29,8 @@ public class CareController {
 
 	@Autowired
 	private CareService service;
+	
+	private ReservationService Rservice;
 	
 	@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
 	//request.getParameter
@@ -38,7 +44,9 @@ public class CareController {
 		return "sitter/care_success.tiles";
 	}
 	
-	@RequestMapping("insert_care")
+	
+	
+	/*@RequestMapping("insert_care")
 	public String insertCare(@ModelAttribute Care care, ModelMap model) {
 		service.insertCare(care);
 		if(service.selectCareJoinCareImage(care.getCareId()) != null) {
@@ -47,9 +55,9 @@ public class CareController {
 		} else {
 			return "sitter/fail.tiles";
 		}
-	}
+	}*/
 	
-	@RequestMapping("insert_image")
+	/*@RequestMapping("insert_image")
 	public ModelAndView insertCareImage(@ModelAttribute CareImage ci, HttpServletRequest request) throws Exception {
 		System.out.println(ci);
 		MultipartFile careImage = ci.getImageCare();
@@ -65,7 +73,7 @@ public class CareController {
 		}
 		System.out.println(4);
 		return new ModelAndView("redirect:/care_image_result.do", "careId", ci.getCareId());
-	}
+	}*/
 	
 	@RequestMapping("care_image_result")
 	public ModelAndView uploadSuccess(@RequestParam int careId) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.SalesDao;
 import com.plz.service.SalesService;
@@ -16,6 +17,7 @@ public class SalesServiceImpl implements SalesService {
 	private SalesDao salesDao;
 	
 	@Override
+	@Transactional
 	public void insertSales(Sales sales) {
 		salesDao.insertSales(sales);
 	}

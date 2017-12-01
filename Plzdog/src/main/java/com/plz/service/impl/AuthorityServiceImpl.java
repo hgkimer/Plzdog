@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.AuthorityDao;
 import com.plz.service.AuthorityService;
@@ -12,7 +13,9 @@ import com.plzdog.vo.Authority;
 public class AuthorityServiceImpl implements AuthorityService {
 	@Autowired
 	private AuthorityDao dao;
+	
 	@Override
+	@Transactional
 	public void addAuthority(Authority authority) {
 		dao.insertAuthority(authority);
 	}

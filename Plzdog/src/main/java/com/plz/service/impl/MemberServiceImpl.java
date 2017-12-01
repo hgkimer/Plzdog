@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.AuthorityDao;
 import com.plz.dao.MemberDao;
@@ -26,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
+	@Transactional
 	public void insertMember(Member member, String role) {
 		//패스워드 암호화 처리
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
@@ -47,6 +49,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteMember(String email) {
 		dao.deleteMember(email);
 	}

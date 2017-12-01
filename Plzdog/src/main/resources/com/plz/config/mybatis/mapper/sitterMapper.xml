@@ -33,7 +33,7 @@
 		<!-- property는 VO의 변수명 , ofType : VO명 -->
 		<collection property ="skillList" ofType ="skill">
 			<id property ="email" column = "email"/>
-			<association property="codeSkill" javaType="com.plzdog.vo.Code">
+			<association property="code" javaType="com.plzdog.vo.Code">
 				<id property="code" column="code"/>
 				<result property="codeName" column="code_name"/>
 				<result property="category" column="category"/>

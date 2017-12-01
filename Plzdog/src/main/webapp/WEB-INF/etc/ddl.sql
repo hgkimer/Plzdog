@@ -203,7 +203,7 @@ CREATE TABLE CARE (
 
 /* 돌봄일지 이미지 */
 CREATE TABLE CARE_IMAGE (
-	CARE_IMAGE VARCHAR2(30) NOT NULL, /* 이미지경로 */
+	CARE_IMAGE VARCHAR2(100) NOT NULL, /* 이미지경로 */
 	CARE_ID NUMBER(10) NOT NULL, /* 돌봄일지ID */
 	CONSTRAINT FK_CARE_IMAGE_CARE FOREIGN KEY(CARE_ID) REFERENCES CARE on delete cascade
 );
@@ -255,6 +255,8 @@ INSERT INTO CODE VALUES('code-10','당뇨','강아지');
 insert into code values('1','예약대기','예약');
 insert into code values('2','예약확정','예약');
 insert into code values('3','결제완료','예약');
+insert into code values('service-1', '방문돌봄', '서비스');
+insert into code values('service-2', '위탁돌봄', '서비스');
 
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com');
@@ -295,17 +297,15 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/0
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',50000,'집에서 맡기기','yoon@naver.com','soo@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',60000,'집에서 맡기기','lee@naver.com','kim@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',80000,'집에서 맡기기','lee@naver.com','soo@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',100000,'집에서 맡기기','lee@naver.com','zxc');
 
 --서비스 요구사항
 
-insert into DEMAND values (1,'code-11'); 
-insert into DEMAND values (2,'code-11'); 
-insert into DEMAND values (3,'code-11');
+insert into DEMAND values (1,'code-1'); 
+insert into DEMAND values (2,'code-2'); 
+insert into DEMAND values (3,'code-3');
 insert into DEMAND values (3,'code-1');
 insert into DEMAND values (3,'code-2');
-insert into DEMAND values (3,'code-3');
-insert into Demand values (4,'code-12');
+insert into Demand values (4,'code-4');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');

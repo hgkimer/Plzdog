@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.DogDao;
 import com.plz.service.DogService;
@@ -17,6 +18,7 @@ public class DogServiceImpl implements DogService {
 	private DogDao dogDao;
 	
 	@Override
+	@Transactional
 	public void insertDog(Dog dog) {
 		dogDao.insertDog(dog);
 	}
@@ -37,6 +39,7 @@ public class DogServiceImpl implements DogService {
 	}
 
 	@Override
+	@Transactional
 	public void insertDogImage(DogImage dogImage) {
 		dogDao.insertDogImage(dogImage);
 	}
