@@ -22,13 +22,8 @@ public class ReservationServiceImpl implements ReservationService{
 	@Transactional
 	public void addReservation(Reservation reservation) {
 		List<Demand> dList = reservation.getDemandList();
-		Iterator<Demand> itr = dList.iterator();
-		while(itr.hasNext()) {
-			Demand d = itr.next();
-			if(d.getCodeDemand() == null) {
-				itr.remove();
-			}
-			System.out.println(d);
+		for(Demand d : dList) {
+			
 		}
 		dao.insertReservation(reservation);
 		for(Demand d : reservation.getDemandList()) {
