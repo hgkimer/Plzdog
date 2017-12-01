@@ -64,7 +64,7 @@
 	
 	<resultMap type="Reservation" id="detail-res-resultmap" extends="reservation-resultmap">
 		<collection property="demandList" ofType="Demand">
-			<association property="code" javaType="Code">
+			<association property="codeDemand" javaType="Code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
 				<result column="category" property="category"/>
