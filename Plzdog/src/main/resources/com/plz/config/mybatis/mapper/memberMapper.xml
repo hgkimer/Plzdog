@@ -66,19 +66,17 @@
 	</select>
 	
 	<resultMap type="member" id="member-dog-sitter-skill-resultmap" extends="member-dog-resultmap">
-		<collection property="sitter" ofType="Sitter">
+		<association property="sitter" javaType="Sitter">
 			<id column="email" property="email"/>
 			<result column="school" property="school"/>
 			<result column="certification" property="certification"/>
 			<result column="service_address" property="serviceAddress"/>
 			<result column="sitter_rate" property="sitterRate"/>
-		</collection>
-		<collection property="skillList" ofType="Skill">
-			<association property="code" javaType="Code">
+		</association>
+		<collection property="skillList" ofType="code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
 				<result column="category" property="category"/>
-			</association>
 		</collection>
 	</resultMap>
 	
@@ -94,7 +92,9 @@
 				s.certification,
 				s.service_address,
 				s.sitter_rate,
+				c.code,
 				c.code_name,
+				c.category,
 				d.dog_name,
 				d.species,
 				d.gender,

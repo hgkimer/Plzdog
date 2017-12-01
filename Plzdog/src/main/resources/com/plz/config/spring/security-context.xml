@@ -13,8 +13,6 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-	<!-- Password 암호화 처리 bean -->
-	<beans:bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<!-- 
 		http태그 : 웹 인증/권한체크 처리를 위한 설정을 하는 태그.
 		  하위태그
