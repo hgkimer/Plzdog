@@ -26,7 +26,7 @@ $(document).ready(function(){
 		padding:0;
 		list-style:none;
 		text-decoration:none;
-	}..
+	}
 	
 	a {
 		color:inherit;

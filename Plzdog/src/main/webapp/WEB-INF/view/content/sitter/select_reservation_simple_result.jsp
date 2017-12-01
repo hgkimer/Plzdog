@@ -58,16 +58,16 @@
 	}
 	
 	.dogOwner {
-		width:300px;
-		height:200px;
-		float:left;
+		width:450px;
+		height:400px;
+		float:right;
 		font-size:18px;
 		line-height:45px;
 	}
 	
 	.navlist {
-		width:400px;
-		height:0%;
+		width:100%;
+		height:100%;
 	}
 </style>
 </head>
