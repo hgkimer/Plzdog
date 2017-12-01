@@ -26,6 +26,7 @@
 		<result column="res_type" property="resType"/>
 		<result column="res_sdate" property="resSDate"/>
 		<result column="res_edate" property="resEDate"/>
+		<result column="price" property="price"/>
 		<result column="res_contents" property="resContents"/>
 		<result column="email" property="memberEmail"/>
 		<result column="email_sitter" property="sitterEmail"/>
