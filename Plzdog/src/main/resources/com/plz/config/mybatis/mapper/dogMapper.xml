@@ -25,15 +25,22 @@
 			<id column="code_dog" property="codeDog"/>
 			<result column="dog_id" property="dogId"/>
 			<association property="code" javaType="Code">
-				
+				<id column="code" property="code"/>
+				<result column="code_name" property="codeName"/>
+				<result column="category" property="category"/>
 			</association>
 		</collection>
 	</resultMap>
 	
 	<select id="selectDogByEmail" parameterType="string" resultMap="dog-resultmap">
-		select	d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth, d.email, i.dog_image, f.code_dog
-		from	dog d, dog_image i, doginfo f
-		where 	d.email = #{value} and d.dog_id = i.dog_id(+) and d.dog_id = f.dog_id(+)
+		select	d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth, 
+				d.email, i.dog_image, c.code, c.code_name, c.category
+				
+		from	dog d, dog_image i, doginfo f , code c
+		where 	d.email = #{value} 
+		and     d.dog_id = i.dog_id(+) 
+		and     d.dog_id = f.dog_id(+)
+		and 	f.code_dog = c.code
 	</select>
 	
 	<update id="updateDog" parameterType="dog">

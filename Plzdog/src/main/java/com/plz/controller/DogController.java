@@ -29,11 +29,12 @@ public class DogController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("insert_dog")
+	@RequestMapping("insertDog")
 	@Transactional
 	public String insertDog(@ModelAttribute Dog dog, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
 		service.insertDog(dog, request);
-		return "dog/insert_result";
+		model.addAttribute(dog);
+		return "member/mydog_register_result_form.do";
 	}
 	
 	@RequestMapping("select_dog")
