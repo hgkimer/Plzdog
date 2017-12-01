@@ -66,7 +66,8 @@
 	
 	<resultMap type="Reservation" id="detail-res-resultmap" extends="reservation-resultmap">
 		<collection property="demandList" ofType="Demand">
-			<association property="code" javaType="Code">
+			<id column="res_id" property="resId"/>
+			<association property="codeDemand" javaType="Code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
 				<result column="category" property="category"/>
@@ -295,14 +296,13 @@
 	 -->
 	 
 	 <insert id = "insertDemand" parameterType="Demand">
-	 	insert into demand values(#{resId}, #{codeName})
+	 	insert into demand values(#{resId}, #{codeDemand})
 	 </insert>
 	 
-	 <update id = "updateDemand" parameterType ="map">
+	 <update id = "updateDemand" parameterType ="Demand">
 	 	update  demand
-	 	set     code_demand = #{codeName}
+	 	set     code_demand = #{codeDemand}
 	 	where   res_id = #{resId} 
-	 	and 	code_demand = #{originalCodeDemand}
 	 </update>
 
 	 <delete id = "deleteDemand" parameterType="_int">

@@ -22,7 +22,7 @@
 	<br>
 	요구사항 : <br>
 	<c:forEach var="demand"	items="${applicationScope.skillList }" varStatus="cnt">
-		<input type="checkbox" name="demandList[${cnt.index }].code.code" value="${demand.code }">${demand.codeName }<br>	
+		<input type="checkbox" name="demandList[${cnt.index }].codeDemand" value="${demand.code }">${demand.codeName }<br>	
 	</c:forEach>
 	<input type="text" value='<sec:authentication property="principal.email"/>' name="memberEmail"/><br>
 	<c:if test='${param.sitterEmail != null }'>

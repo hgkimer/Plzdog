@@ -265,9 +265,9 @@ INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100608', 'lee@naver.com');
 
 -- 강아지정보
-INSERT INTO DOGINFO VALUES(4 ,'code-7');
-INSERT INTO DOGINFO VALUES(4, 'code-9');
-INSERT INTO DOGINFO VALUES(4,'code-10');
+INSERT INTO DOGINFO VALUES(4 ,'dog-1');
+INSERT INTO DOGINFO VALUES(4, 'dog-2');
+INSERT INTO DOGINFO VALUES(4,'dog-3');
 
 --강아지 이미지
 INSERT INTO DOG_IMAGE VALUES('SDFLKJSDFL','1');
@@ -283,10 +283,10 @@ INSERT INTO SITTER VALUES('kim@naver.com','가천대학교','이미지경로1','
 INSERT INTO SITTER VALUES('soo@naver.com','대전대학교','이미지경로2','서울,천안',3.1);
 
 --스킬
-INSERT INTO SKILL VALUES('kim@naver.com','code-1');
-INSERT INTO SKILL VALUES('kim@naver.com','code-2');
-INSERT INTO SKILL VALUES('soo@naver.com','code-3');
-INSERT INTO SKILL VALUES('soo@naver.com','code-4');
+INSERT INTO SKILL VALUES('kim@naver.com','sitter-1');
+INSERT INTO SKILL VALUES('kim@naver.com','sitter-2');
+INSERT INTO SKILL VALUES('soo@naver.com','sitter-3');
+INSERT INTO SKILL VALUES('soo@naver.com','sitter-4');
 
 --리뷰
 INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
@@ -300,12 +300,12 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/0
 
 --서비스 요구사항
 
-insert into DEMAND values (1,'code-1'); 
-insert into DEMAND values (2,'code-2'); 
-insert into DEMAND values (3,'code-3');
-insert into DEMAND values (3,'code-1');
-insert into DEMAND values (3,'code-2');
-insert into Demand values (4,'code-4');
+insert into DEMAND values (1,'sitter-1'); 
+insert into DEMAND values (2,'sitter-2'); 
+insert into DEMAND values (3,'sitter-3');
+insert into DEMAND values (3,'sitter-1');
+insert into DEMAND values (3,'sitter-2');
+insert into Demand values (4,'sitter-4');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
