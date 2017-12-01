@@ -30,12 +30,13 @@ public class Reservation implements Serializable {
 	public Reservation() {}
 	
 	//예약 ID는 시퀀스이므로 객체를 만들때는 Emai로 조회해서 쓴다.
-	public Reservation(int resType, Date resSDate, Date resEDate, String resContents, String memberEmail,
+	public Reservation(int resType, Date resSDate, Date resEDate, int price, String resContents, String memberEmail,
 			String sitterEmail) {
 		super();
 		this.resType = resType;
 		this.resSDate = resSDate;
 		this.resEDate = resEDate;
+		this.price = price;
 		this.resContents = resContents;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;

@@ -43,7 +43,7 @@ public class ReservationController {
 		//2. Business Logic
 		System.out.println(res);
 		System.out.println(demandList);
-		//service.addReservation(res);
+		service.addReservation(res, demandList);
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";
 	}

@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1>${requestScope.profile.memberName }</h1>
+<h2>금액 : 30,000원</h2>
 <p>이메일 : ${requestScope.profile.email }</p>
 <p>프로필 사진 : ${requestScope.profile.memberImage }</p>
 <p>우편번호 : ${requestScope.profile.zipcode }</p>

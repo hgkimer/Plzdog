@@ -9,9 +9,10 @@ import com.plzdog.vo.Reservation;
 public interface ReservationService {
 	/**
 	 * 새로운 예약을 추가하는 메소드
+	 * 매개변수로 요구사항 목록을 받아 insert도 함께한다.
 	 * @param reservation
 	 */
-	void addReservation(Reservation reservation);
+	void addReservation(Reservation reservation, List<String> demandList);
 	/**
 	 * 예약을 수정하는 메소드
 	 * @param reservation

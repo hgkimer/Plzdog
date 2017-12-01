@@ -273,7 +273,7 @@
         	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
-		#{resEDate}, #{resContents},#{memberEmail},#{sitterEmail})
+		#{resEDate}, #{price},#{resContents},#{memberEmail},#{sitterEmail})
 	</insert>
 	
 	<!-- 예약ID를 통해 수정한다. -->
