@@ -48,7 +48,7 @@
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
 	<select id="selectSimpleReservationSitter" parameterType="string" resultMap="simple-res-sitter-resultmap">
 		<include refid="simple-res-sitter-sql"/>
-		where r.email = d.email and r.email_sitter = #{value} and d.dog_id = i.dog_id
+		where r.email = d.email and r.email_sitter = #{value} and d.dog_id = i.dog_id(+)
 	</select>
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
@@ -67,7 +67,8 @@
 	
 	<resultMap type="Reservation" id="detail-res-resultmap" extends="reservation-resultmap">
 		<collection property="demandList" ofType="Demand">
-			<association property="code" javaType="Code">
+			<id column="res_id" property="resId"/>
+			<association property="codeDemand" javaType="Code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
 				<result column="category" property="category"/>
@@ -237,7 +238,7 @@
 	</select>
 	
 	<!-- 예약 id로 예약 조회 -->
-	<select id="selectReservationById">
+	<select id="selectReservationById" resultMap="reservation-join-sales-resultmap">
 		<include refid="reservation-sql"></include>
 		where res_id = #{resId}
 	</select>
@@ -299,11 +300,10 @@
 	 	insert into demand values(#{resId}, #{codeDemand})
 	 </insert>
 	 
-	 <update id = "updateDemand" parameterType ="map">
+	 <update id = "updateDemand" parameterType ="Demand">
 	 	update  demand
 	 	set     code_demand = #{codeDemand}
 	 	where   res_id = #{resId} 
-	 	and 	code_demand = #{originalCodeDemand}
 	 </update>
 
 	 <delete id = "deleteDemand" parameterType="_int">

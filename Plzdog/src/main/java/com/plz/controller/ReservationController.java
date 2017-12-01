@@ -38,10 +38,12 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/reservation_add")
-	public String addReservation(@ModelAttribute Reservation res) {
+	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
-		service.addReservation(res);
+		System.out.println(res);
+		System.out.println(demandList);
+		//service.addReservation(res);
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";
 	}
@@ -106,10 +108,8 @@ public class ReservationController {
 	 */
 	@RequestMapping("/sitter/select_reservation_simple")
 	public String selectSimpleReservationSitter(@RequestParam String email, Model model) {
-		System.out.println(email);
 		List<Reservation> list = service.selectSimpleReservationSitter(email);
 		model.addAttribute("list", list);
-		System.out.println(list);
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	

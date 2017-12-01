@@ -14,17 +14,14 @@
 					 classpath:com/plz/config/spring/model-context.xml
 	</param-value>
   </context-param>
-  <!-- 
   <context-param>
-  	<param-name>spring-config</param-name>
+  	<param-name>code-config</param-name>
   	<param-value>com/plz/config/spring/model-context.xml</param-value>
   </context-param>
-  -->
-  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <servlet>
+ <servlet>
     <servlet-name>springDispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>

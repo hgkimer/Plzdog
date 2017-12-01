@@ -80,7 +80,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	public int updateDemand(Demand demand, String originalCodeDemand) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("resId", demand.getResId());
-		params.put("codeDemand", demand.getCode());
+		params.put("codeDemand", demand.getCodeDemand());
 		params.put("originalCodeDemand", originalCodeDemand);
 		return session.update(makeSqlId("updateDemand"), params);
 	}

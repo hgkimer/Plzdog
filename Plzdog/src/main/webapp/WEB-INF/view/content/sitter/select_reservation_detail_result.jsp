@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@ $(document).ready(function(){
 		padding:0;
 		list-style:none;
 		text-decoration:none;
-	}
+	}..
 	
 	a {
 		color:inherit;
@@ -77,12 +78,12 @@ $(document).ready(function(){
 			<button class="btn2">돌봄일지</button>
 		</div>
 		<div class="res">
-			<c:forEach var="list" items="${reqeustScope.list}">
+			<c:forEach var="list" items="${requestScope.list}">
 				<ul>
 					<li>예약상태 : ${list.resId}</li>
 					<li>시작날짜 : ${list.resSDate}</li>
 					<li>끝날짜 : ${list.resEDate}</li>
-					<li>견주이메일 : ${list.email}</li>
+					<li>견주이메일 : ${list.dog.email}</li>
 					<li>의뢰내용 : ${list.resContents}</li>
 					<li>가격 : ${list.price}</li>
 					<li>서비스 요구사항 : ${list.codeName}</li>

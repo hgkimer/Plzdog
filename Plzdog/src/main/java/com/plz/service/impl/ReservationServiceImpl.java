@@ -1,5 +1,6 @@
 package com.plz.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,16 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	@Transactional
 	public void addReservation(Reservation reservation) {
+		List<Demand> dList = reservation.getDemandList();
+		for(Demand d : dList) {
+			
+		}
 		dao.insertReservation(reservation);
+		for(Demand d : reservation.getDemandList()) {
+			System.out.println(d);
+			d.setResId(reservation.getResId());
+			dao.insertDemand(d);
+		}
 	}
 
 	@Override
