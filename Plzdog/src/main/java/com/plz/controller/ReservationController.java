@@ -38,11 +38,12 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/reservation_add")
-	public String addReservation(@ModelAttribute Reservation res) {
+	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
 		System.out.println(res);
-		service.addReservation(res);
+		System.out.println(demandList);
+		//service.addReservation(res);
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";
 	}

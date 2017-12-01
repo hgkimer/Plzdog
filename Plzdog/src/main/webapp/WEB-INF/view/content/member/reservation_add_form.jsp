@@ -21,8 +21,8 @@
 	의뢰내용<textarea rows="5" cols="30" name="resContents"required></textarea>
 	<br>
 	요구사항 : <br>
-	<c:forEach var="demand"	items="${applicationScope.skillList }" varStatus="cnt">
-		<input type="checkbox" name="demandList[${cnt.index }].codeDemand" value="${demand.code }">${demand.codeName }<br>	
+	<c:forEach var="demand"	items="${applicationScope.skillList }">
+		<input type="checkbox" name="demand" value="${demand.code }">${demand.codeName }<br>	
 	</c:forEach>
 	<input type="text" value='<sec:authentication property="principal.email"/>' name="memberEmail"/><br>
 	<c:if test='${param.sitterEmail != null }'>
