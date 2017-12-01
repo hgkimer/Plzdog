@@ -23,5 +23,5 @@ public interface DogService {
 	
 	void deleteDogImage(String dogImage);
 
-	void addDog(Dog dog, Code code, HttpServletRequest request) throws IllegalStateException, IOException;
+	List<Code> addDog(Dog dog, List<String> dogCodeList, HttpServletRequest request) throws IllegalStateException, IOException;
 }

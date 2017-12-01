@@ -75,7 +75,7 @@
 	<!-- ########################################## -->
 	<!-- 강아지 정보(dogInfo) CRUD -->
 	<insert id="insertDogInfo" parameterType="dogInfo">
-		insert into dogInfo values(#{dogId} #{codeDog})
+		insert into dogInfo values(#{dogId}, #{codeDog})
 	</insert>
 	
 	<!-- dogImage명으로 수정 -->

@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Dog;
 
 @Controller
@@ -31,16 +31,11 @@ public class DogController {
 	private MemberService memberService;
 	
 	@RequestMapping("insertDog")
-	@Transactional
-	@ResponseBody
-	public String insertDog(@ModelAttribute Dog dog,@ModelAttribute List<String> codeList , HttpServletRequest request, Model model) throws IllegalStateException, IOException {
-		System.out.println(dog);
-		for(String code : codeList) {
-			System.out.println(code);
-		}
-		//service.addDog(dog, codeList, request);
-		//model.addAttribute(dog);
-		return "member/mydog_register_result_form.do";
+	public String insertDog(@ModelAttribute Dog dog, @RequestParam(name="dogCodeList") List<String> dogCodeList,
+			HttpServletRequest request, ModelMap model) throws IllegalStateException, IOException {
+		model.addAttribute(dog);
+		model.addAttribute("codeList",service.addDog(dog, dogCodeList, request));
+		return "member/mydog_register_result_form.tiles";
 	}
 	
 	@RequestMapping("select_dog")

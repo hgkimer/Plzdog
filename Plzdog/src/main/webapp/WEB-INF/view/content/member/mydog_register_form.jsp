@@ -27,8 +27,8 @@ $(document).ready(function(){
 	</div>
 	<div class="form-group">
 		<label for="gender">성별 : </label>
-		<label><input type="radio" name="gender" id="gendermale" class="form-controller"/>수컷</label>
-		<label><input type="radio" name="gender" id="genderfemale" class="form-controller"/>암컷</label>
+		<label><input type="radio" name="gender" value="수컷" id="gendermale" class="form-controller"/>수컷</label>
+		<label><input type="radio" name="gender" value="암컷" id="genderfemale" class="form-controller"/>암컷</label>
 	</div>
 	<div class="form-group">
 		<label for="weight">몸무게 : </label>
@@ -40,8 +40,9 @@ $(document).ready(function(){
 	</div>
 	<div class="form-group">
 		<label for="dogImageId">강아지 상세정보 : </label>
-		<c:forEach items="${applicationScope.dogInfoList }" var="code" varStatus="status">
-		<input type="checkbox" name="codeList" id="code" value="${code.code }" class="form-controller"/>
+		<c:forEach items="${applicationScope.dogInfoList }" var="code" >
+		<%--String[] 배열로 값이 전달. --%>
+		<input type="checkbox" name="dogCodeList" id="code" value="${code.code }" class="form-controller"/>
 			${code.codeName }
 		</c:forEach><br>
 	</div>  

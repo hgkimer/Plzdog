@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.plz.dao.CodeDao;
 import com.plz.dao.DogDao;
 import com.plz.service.DogService;
 import com.plzdog.vo.Code;
@@ -26,9 +27,12 @@ public class DogServiceImpl implements DogService {
 	@Autowired
 	private DogDao dogDao;
 	
+	@Autowired
+	private CodeDao codeDao;
+	
 	@Override
 	@Transactional
-	public void addDog(Dog dog, Code code ,HttpServletRequest request) throws IllegalStateException, IOException {
+	public List<Code> addDog(Dog dog, List<String> dogCodeList ,HttpServletRequest request) throws IllegalStateException, IOException {
 				dogDao.insertDog(dog);
 				ArrayList<DogImage> list = new ArrayList<>();
 				for(MultipartFile dogImage : dog.getDogImageList()) {
@@ -45,9 +49,13 @@ public class DogServiceImpl implements DogService {
 				dog.setDogImage(list);
 				
 				//dogInfo 등록
-				/*for(Code code : dog.getDogInfoList()) {
-					dogDao.insertDogInfo(dogInfo);
-				}*/
+				List<Code> codeList = new ArrayList<>();
+				for(String code : dogCodeList) {
+					dogDao.insertDogInfo(new DogInfo(dog.getDogId(),code));
+					//코드 리스트에 넣는다.
+					codeList.add(codeDao.selectCodeByCode(code));
+				}
+				return codeList;
 	}
 
 	@Override

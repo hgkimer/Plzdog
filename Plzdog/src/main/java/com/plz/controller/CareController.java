@@ -30,6 +30,7 @@ public class CareController {
 	@Autowired
 	private CareService service;
 	
+	@Autowired
 	private ReservationService Rservice;
 	
 	@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
