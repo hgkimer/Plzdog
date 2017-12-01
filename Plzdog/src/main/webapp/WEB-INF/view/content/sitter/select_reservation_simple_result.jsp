@@ -70,27 +70,27 @@
 
 </body>
 <div class="all">
-	<div class="reservation" onclick="location.href='select_reservation_detail_result.do'">
+	<div class="reservation" onclick="location.href='select_reservation_detail.do'">
 		<div class="dogImage">
 			<c:forEach var="list" items="${reqeustScope.list}">
 				<ul class="nav">
-					<li>강아지사진 : ${list.dogImage}</li>
+					<li>강아지사진 : ${list.dog.dogImage}</li>
 				</ul>
 			</c:forEach>
 		</div>
 		
 		<div class="dogOwner">
-			<c:forEach var="list" items="${reqeustScope.list}">
+			<c:forEach var="list" items="${requestScope.list}">
 				<ul class="nav">
 					<li>예약상태 : ${list.resId}</li>
 					<li>시작날짜 : ${list.resSDate}</li>
 					<li>끝날짜 : ${list.resEDate}</li>
 					<li>가격 : ${list.price}</li>
-					<li>강아지이름 : ${list.dogName}</li>
-					<li>강아지종 : ${list.species}</li>
-					<li>강아지성별 : ${list.gender}</li>
-					<li>강아지무게 : ${list.weight}</li>
-					<li>강아지생년월일 : ${list.birth}</li>
+					<li>강아지이름 : ${list.dog.dogName}</li>
+					<li>강아지종 : ${list.dog.species}</li>
+					<li>강아지성별 : ${list.dog.gender}</li>
+					<li>강아지무게 : ${list.dog.weight}</li>
+					<li>강아지생년월일 : ${list.dog.birth}</li>
 				</ul>
 			</c:forEach>
 		</div>
