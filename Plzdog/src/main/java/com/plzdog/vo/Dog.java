@@ -27,7 +27,7 @@ public class Dog implements Serializable{
 	
 	//여러개의 dogInfo 처리
 	private List<DogInfo> dogInfoList;
-		
+	
 	public Dog() {}
 
 	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email) {
@@ -53,9 +53,9 @@ public class Dog implements Serializable{
 		this.dogImageList = dogImageList;
 		this.dogImage = dogImage;
 	}
-
+	
 	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email,
-			List<DogInfo> dogInfoList) {
+			List<MultipartFile> dogImageList) {
 		super();
 		this.dogId = dogId;
 		this.dogName = dogName;
@@ -64,7 +64,7 @@ public class Dog implements Serializable{
 		this.weight = weight;
 		this.birth = birth;
 		this.email = email;
-		this.dogInfoList = dogInfoList;
+		this.dogImageList = dogImageList;
 	}
 
 	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email,

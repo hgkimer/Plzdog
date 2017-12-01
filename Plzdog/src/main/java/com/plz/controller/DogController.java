@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
-import com.plzdog.vo.Care;
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Dog;
 
 @Controller
@@ -31,8 +31,11 @@ public class DogController {
 	
 	@RequestMapping("insertDog")
 	@Transactional
-	public String insertDog(@ModelAttribute Dog dog, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+	public String insertDog(@ModelAttribute Dog dog, @ModelAttribute Code code , HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+		System.out.println(dog);
+		System.out.println(code);
 		service.insertDog(dog, request);
+		model.addAttribute(dog);
 		model.addAttribute(dog);
 		return "member/mydog_register_result_form.do";
 	}
