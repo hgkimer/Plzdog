@@ -6,13 +6,13 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#addDogImage").on("click",function(){
-		$("#addCare").append("<input type='file' name='dogImageList' id='dogImage'/><br>");
+		$("#addDog").append("<input type='file' name='dogImageList' id='dogImage'/><br>");
 	});	
 });
 </script>
 
 <h3>강아지 등록하기</h3>
-<form id="addDog" action="${initParam.rootPath }/dog/insertDog.do" method="post">
+<form id="addDog" action="${initParam.rootPath }/dog/insertDog.do" method="post" enctype="multipart/form-data">
 	<sec:csrfInput/>
 	<%-- 이메일 , dogId --%>
 	<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
@@ -40,8 +40,8 @@ $(document).ready(function(){
 	</div>
 	<div class="form-group">
 		<label for="dogImageId">강아지 상세정보 : </label>
-		<c:forEach items="${applicationScope.dogInfoList }" var="code">
-		<input type="checkbox" name="code" id="dogInfo" value="${code }" class="form-controller"/>
+		<c:forEach items="${applicationScope.dogInfoList }" var="code" varStatus="status">
+		<input type="checkbox" name="codeList" id="code" value="${code.code }" class="form-controller"/>
 			${code.codeName }
 		</c:forEach><br>
 	</div>  

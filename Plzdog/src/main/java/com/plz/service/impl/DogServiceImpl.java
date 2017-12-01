@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.plz.dao.DogDao;
 import com.plz.service.DogService;
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.DogImage;
 import com.plzdog.vo.DogInfo;
@@ -28,8 +28,7 @@ public class DogServiceImpl implements DogService {
 	
 	@Override
 	@Transactional
-	public void insertDog(Dog dog ,HttpServletRequest request) throws IllegalStateException, IOException {
-				System.out.println(dog);
+	public void addDog(Dog dog, Code code ,HttpServletRequest request) throws IllegalStateException, IOException {
 				dogDao.insertDog(dog);
 				ArrayList<DogImage> list = new ArrayList<>();
 				for(MultipartFile dogImage : dog.getDogImageList()) {
@@ -46,9 +45,9 @@ public class DogServiceImpl implements DogService {
 				dog.setDogImage(list);
 				
 				//dogInfo 등록
-				for(DogInfo dogInfo : dog.getDogInfoList()) {
+				/*for(Code code : dog.getDogInfoList()) {
 					dogDao.insertDogInfo(dogInfo);
-				}
+				}*/
 	}
 
 	@Override

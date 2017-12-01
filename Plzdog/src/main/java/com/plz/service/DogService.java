@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.DogImage;
 
@@ -22,5 +23,5 @@ public interface DogService {
 	
 	void deleteDogImage(String dogImage);
 
-	void insertDog(Dog dog, HttpServletRequest request) throws IllegalStateException, IOException;
+	void addDog(Dog dog, Code code, HttpServletRequest request) throws IllegalStateException, IOException;
 }
