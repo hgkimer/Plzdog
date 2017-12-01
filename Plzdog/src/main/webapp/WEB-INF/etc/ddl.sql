@@ -242,19 +242,19 @@ insert into AUTHORITY values('soo@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('yoon@naver.com','ROLE_USER');
 
 -- 코드 테이블 
-insert into code values('code-1','반려동물 경험 유무','시터');
-insert into code values('code-2','펫트너 집에서 보살필 수 있어요','시터');
-insert into code values('code-3','고객의 집에서 보살필 수 있어요','시터');
-insert into code values('code-4','투약가능','시터');
-insert into code values('code-5','노령견 케어 가능','시터');
-insert into code values('code-6','퍼피 케어 가능','시터');
-insert into code values('code-8','환자 모니터링 가능','시터');
-INSERT INTO CODE VALUES('code-7','배변활동','강아지');
-INSERT INTO CODE VALUES('code-9','심장사상충','강아지');
-INSERT INTO CODE VALUES('code-10','당뇨','강아지');
-insert into code values('1','예약대기','예약');
-insert into code values('2','예약확정','예약');
-insert into code values('3','결제완료','예약');
+insert into code values('sitter-1','반려동물 경험 유무','시터');
+insert into code values('sitter-2','펫트너 집에서 보살필 수 있어요','시터');
+insert into code values('sitter-3','고객의 집에서 보살필 수 있어요','시터');
+insert into code values('sitter-4','투약가능','시터');
+insert into code values('sitter-5','노령견 케어 가능','시터');
+insert into code values('sitter-6','퍼피 케어 가능','시터');
+insert into code values('sitter-8','환자 모니터링 가능','시터');
+INSERT INTO CODE VALUES('dog-1','배변활동','강아지');
+INSERT INTO CODE VALUES('dog-2','심장사상충','강아지');
+INSERT INTO CODE VALUES('dog-3','당뇨','강아지');
+insert into code values('res-1','예약대기','예약');
+insert into code values('res-2','예약확정','예약');
+insert into code values('res-3','결제완료','예약');
 insert into code values('service-1', '방문돌봄', '서비스');
 insert into code values('service-2', '위탁돌봄', '서비스');
 

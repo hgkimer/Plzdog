@@ -41,6 +41,7 @@ public class ReservationController {
 	public String addReservation(@ModelAttribute Reservation res) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
+		System.out.println(res);
 		service.addReservation(res);
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";

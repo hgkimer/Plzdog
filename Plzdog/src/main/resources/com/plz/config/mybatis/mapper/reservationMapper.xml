@@ -236,7 +236,7 @@
 	</select>
 	
 	<!-- 예약 id로 예약 조회 -->
-	<select id="selectReservationById">
+	<select id="selectReservationById" resultMap="reservation-join-sales-resultmap">
 		<include refid="reservation-sql"></include>
 		where res_id = #{resId}
 	</select>
@@ -295,12 +295,12 @@
 	 -->
 	 
 	 <insert id = "insertDemand" parameterType="Demand">
-	 	insert into demand values(#{resId}, #{codeDemand})
+	 	insert into demand values(#{resId}, #{codeName})
 	 </insert>
 	 
 	 <update id = "updateDemand" parameterType ="map">
 	 	update  demand
-	 	set     code_demand = #{codeDemand}
+	 	set     code_demand = #{codeName}
 	 	where   res_id = #{resId} 
 	 	and 	code_demand = #{originalCodeDemand}
 	 </update>
