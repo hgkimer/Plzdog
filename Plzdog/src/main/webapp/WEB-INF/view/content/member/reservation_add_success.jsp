@@ -6,7 +6,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-성공<br>
-${requestScope.reservation }
+<h1>성공</h1><br>
+
+<p>${requestScope.reservation.resId }</p>
+<p>${requestScope.reservation.resSDate }</p>
+<p>${requestScope.reservation.resEDate }</p>
+<p>${requestScope.reservation.price }원</p>
+<p>${requestScope.reservation.sitterEmail }</p>
 </body>
 </html>
