@@ -75,11 +75,11 @@
 
 </body>
 <div class="all">
-	<div class="reservation" onclick="location.href='select_reservation_detail.do'">
+	<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
 		<div class="dogImage">
 			<c:forEach var="list" items="${reqeustScope.list}">
 				<ul class="nav">
-					<li>강아지사진 : ${list.dog.dogImage}</li>
+					<li>강아지사진 : ${list.dogImageList}</li>
 				</ul>
 			</c:forEach>
 		</div>
