@@ -42,7 +42,6 @@
 		</c:if>
 		금액 30,000원 <input type="hidden" value=30000 name="price" />
 		<button type="submit">전송</button>
-
 	</form>
 </body>
 </html>
