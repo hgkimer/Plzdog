@@ -28,4 +28,6 @@ $(document).ready(function(){
 	<button type="submit">전송</button>
 </form>
 
+
+
 <%-- <form action="${initParam.rootPath }/care/insert_image.do" method="post" enctype="multipart/form-data"> --%>

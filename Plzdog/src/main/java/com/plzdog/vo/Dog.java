@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Dog implements Serializable{
 	
@@ -18,9 +19,15 @@ public class Dog implements Serializable{
 	private Date birth;
 	private String email;
 	
-	private List<DogImage> dogImageList;
-	private List<DogInfo> dogInfoList;
+	//여러개의 이미지 처리
+	private List<MultipartFile> dogImageList;
 	
+	//여러개의 dogImage명 처리
+	private List<DogImage> dogImage;
+	
+	//여러개의 dogInfo 처리
+	private List<DogInfo> dogInfoList;
+		
 	public Dog() {}
 
 	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email) {
@@ -34,7 +41,8 @@ public class Dog implements Serializable{
 	}
 
 	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email,
-			List<DogImage> dogImageList, List<DogInfo> dogInfoList) {
+			List<MultipartFile> dogImageList, List<DogImage> dogImage) {
+		super();
 		this.dogId = dogId;
 		this.dogName = dogName;
 		this.species = species;
@@ -43,6 +51,34 @@ public class Dog implements Serializable{
 		this.birth = birth;
 		this.email = email;
 		this.dogImageList = dogImageList;
+		this.dogImage = dogImage;
+	}
+
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email,
+			List<DogInfo> dogInfoList) {
+		super();
+		this.dogId = dogId;
+		this.dogName = dogName;
+		this.species = species;
+		this.gender = gender;
+		this.weight = weight;
+		this.birth = birth;
+		this.email = email;
+		this.dogInfoList = dogInfoList;
+	}
+
+	public Dog(int dogId, String dogName, String species, String gender, double weight, Date birth, String email,
+			List<MultipartFile> dogImageList, List<DogImage> dogImage, List<DogInfo> dogInfoList) {
+		super();
+		this.dogId = dogId;
+		this.dogName = dogName;
+		this.species = species;
+		this.gender = gender;
+		this.weight = weight;
+		this.birth = birth;
+		this.email = email;
+		this.dogImageList = dogImageList;
+		this.dogImage = dogImage;
 		this.dogInfoList = dogInfoList;
 	}
 
@@ -102,12 +138,20 @@ public class Dog implements Serializable{
 		this.email = email;
 	}
 
-	public List<DogImage> getDogImageList() {
+	public List<MultipartFile> getDogImageList() {
 		return dogImageList;
 	}
 
-	public void setDogImageList(List<DogImage> dogImageList) {
+	public void setDogImageList(List<MultipartFile> dogImageList) {
 		this.dogImageList = dogImageList;
+	}
+
+	public List<DogImage> getDogImage() {
+		return dogImage;
+	}
+
+	public void setDogImage(List<DogImage> dogImage) {
+		this.dogImage = dogImage;
 	}
 
 	public List<DogInfo> getDogInfoList() {
@@ -119,11 +163,19 @@ public class Dog implements Serializable{
 	}
 
 	@Override
+	public String toString() {
+		return "Dog [dogId=" + dogId + ", dogName=" + dogName + ", species=" + species + ", gender=" + gender
+				+ ", weight=" + weight + ", birth=" + birth + ", email=" + email + ", dogImageList=" + dogImageList
+				+ ", dogImage=" + dogImage + ", dogInfoList=" + dogInfoList + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
 		result = prime * result + dogId;
+		result = prime * result + ((dogImage == null) ? 0 : dogImage.hashCode());
 		result = prime * result + ((dogImageList == null) ? 0 : dogImageList.hashCode());
 		result = prime * result + ((dogInfoList == null) ? 0 : dogInfoList.hashCode());
 		result = prime * result + ((dogName == null) ? 0 : dogName.hashCode());
@@ -151,6 +203,11 @@ public class Dog implements Serializable{
 		} else if (!birth.equals(other.birth))
 			return false;
 		if (dogId != other.dogId)
+			return false;
+		if (dogImage == null) {
+			if (other.dogImage != null)
+				return false;
+		} else if (!dogImage.equals(other.dogImage))
 			return false;
 		if (dogImageList == null) {
 			if (other.dogImageList != null)
@@ -187,10 +244,4 @@ public class Dog implements Serializable{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Dog [dogId=" + dogId + ", dogName=" + dogName + ", species=" + species + ", gender=" + gender
-				+ ", weight=" + weight + ", birth=" + birth + ", email=" + email + ", dogImageList=" + dogImageList
-				+ ", dogInfoList=" + dogInfoList + "]";
-	}
 }	

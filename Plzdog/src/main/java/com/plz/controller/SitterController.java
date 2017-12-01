@@ -89,15 +89,39 @@ public class SitterController {
 		return "sitter/sitter_register_result.tiles";
 	}
 	
+	/**
+	 * 돌봄 일지 등록
+	 * 돌봄 일지의 등록과 여러개의 이미지 처리
+	 * @param care
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	@RequestMapping("/sitter/insert_care")
 	public String insertCare(@ModelAttribute Care care,
 			HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
-			List<String> list = new ArrayList<>();
-		//service.insertCareImage(new CareImage(care.getCareId(),fileName));
+		if(care == null) {
+			model.addAttribute("errorMessage","객체가 없습니다.");
+		}
 		careService.insertCare(care,request);
 		model.addAttribute(care);
 		return "sitter/care_register_result_form.tiles";
 	}
+	
+	/*@RequestMapping("/sitter/update_care")
+	public String updateCare(@ModelAttribute Care care, ModelMap model) {
+		if(service.selectCareJoinCareImage(care.getResId()) != null) {
+//			
+			service.updateCare(care);
+			model.addAttribute(care);
+			return "sitter/care_success.tiles";
+		} else {
+			return "sitter/fail.tiles";
+		}
+	}*/
+	
 	
 	@RequestMapping("/sitter/update_sitter")
 	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
