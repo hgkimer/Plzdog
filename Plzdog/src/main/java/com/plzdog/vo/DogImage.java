@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class DogImage implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private String dogImage;
 	private int dogId;
+	private String dogImage;
 	
 	public DogImage() {}
 

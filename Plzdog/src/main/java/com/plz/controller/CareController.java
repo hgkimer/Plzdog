@@ -44,52 +44,11 @@ public class CareController {
 		return "sitter/care_success.tiles";
 	}
 	
-	
-	
-	/*@RequestMapping("insert_care")
-	public String insertCare(@ModelAttribute Care care, ModelMap model) {
-		service.insertCare(care);
-		if(service.selectCareJoinCareImage(care.getCareId()) != null) {
-			model.addAttribute(model);
-			return "sitter/care_success.tiles";
-		} else {
-			return "sitter/fail.tiles";
-		}
-	}*/
-	
-	/*@RequestMapping("insert_image")
-	public ModelAndView insertCareImage(@ModelAttribute CareImage ci, HttpServletRequest request) throws Exception {
-		System.out.println(ci);
-		MultipartFile careImage = ci.getImageCare();
-		System.out.println(ci.getImageCare());
-		if(ci.getImageCare() != null && !ci.getImageCare().isEmpty()) {
-//																C:\Java\apache-tomcat-8.0.47\webapps\Plzdog 여기까지 알려줌
-			String dir = request.getServletContext().getRealPath("/image");
-			String fileName = careImage.getOriginalFilename();
-			File upImage = new File(dir, fileName);
-			careImage.transferTo(upImage);
-			ci.setImageName(fileName);
-			System.out.println(3);
-		}
-		System.out.println(4);
-		return new ModelAndView("redirect:/care_image_result.do", "careId", ci.getCareId());
-	}*/
-	
 	@RequestMapping("care_image_result")
 	public ModelAndView uploadSuccess(@RequestParam int careId) {
 		List<Care> careList = service.selectCareJoinCareImage(careId);
 		return new ModelAndView("sitter/care_success.tiles", "careList", careList);
 	}
 	
-	@RequestMapping("update_care")
-	public String updateCare(@ModelAttribute Care care, ModelMap model) {
-		if(service.selectCareJoinCareImage(care.getResId()) != null) {
-//			
-			service.updateCare(care);
-			model.addAttribute(care);
-			return "sitter/care_success.tiles";
-		} else {
-			return "sitter/fail.tiles";
-		}
-	}
+	
 }

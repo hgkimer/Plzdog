@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.plz.dao.DogDao;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.DogImage;
+import com.plzdog.vo.DogInfo;
 
 @Repository
 public class DogDaoImpl implements DogDao {
@@ -40,7 +41,8 @@ public class DogDaoImpl implements DogDao {
 	public int deleteDog(int dogId) {
 		return session.delete(makeSqlId("deleteDog"), dogId);
 	}
-
+	
+	//----------강아지 이미지 -------------------
 	@Override
 	public int insertDogImage(DogImage dogImage) {
 		return session.insert(makeSqlId("insertDogImage"), dogImage);
@@ -58,5 +60,21 @@ public class DogDaoImpl implements DogDao {
 	@Override
 	public int deleteDogImage(String dogImage) {
 		return session.delete(makeSqlId("deleteDogImage"), dogImage);
+	}
+	
+	//----------강아지 정보 -------------------
+	@Override
+	public int insertDogInfo(DogInfo dogInfo) {
+		return session.insert(makeSqlId("insertDogInfo"), dogInfo);
+	}
+
+	@Override
+	public int updateDogInfo(DogInfo dogInfo) {
+		return session.insert(makeSqlId("updateDogImage"), dogInfo);
+	}
+
+	@Override
+	public int deleteDogInfo(int dogId) {
+		return session.delete(makeSqlId("updateDogImage"),dogId);
 	}
 }

@@ -30,13 +30,15 @@ public class CodeLoadListener implements ServletContextListener {
       List<Code> skillList = dao.selectCodeByCategory("시터");
       List<Code> serviceList = dao.selectCodeByCategory("서비스");
       List<Code> resList = dao.selectCodeByCategory("예약");
+      List<Code> dogInfoList = dao.selectCodeByCategory("강아지");
       //전체 요구사항(스킬)에 대한 코드 리스트를 ApplicationScope에 저장
       ctx.setAttribute("skillList", skillList);
       //전체 서비스 종류(service-1 : 방문돌봄, service-2 : 위탁돌봄)에 대한 코드 리스트를 ApplicationScope에 저장
       ctx.setAttribute("serviceList", serviceList);
       //전체 예약 상태 종류(1: 예약대기, 2: 예약 확정, 3: 결제 완료)에 대한 코드 리스트를 ApplicationScope에 저장
       ctx.setAttribute("resList", resList);
-      
+      //전체 강아지 관련 정보
+      ctx.setAttribute("dogInfoList", dogInfoList);
    }
 
 }

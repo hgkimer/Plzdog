@@ -165,8 +165,9 @@ CREATE TABLE RESERVATION (
 	RES_TYPE NUMBER(1) NOT NULL, /* 의뢰종류 */
 	RES_SDATE DATE NOT NULL, /* 시작날짜 */
 	RES_EDATE DATE NOT NULL, /* 종료날짜 */
-	PRICE NUMBER(10),
+	PRICE NUMBER(10),		 /* 가격 */
 	RES_CONTENTS CLOB NOT NULL, /* 의뢰내용 */
+	DOG_ID NUMBER(5) NOT NULL,  /* 강아지 id */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100), /* 시터_이메일 */
 	CONSTRAINT FK_RESERVATION_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade ,
@@ -249,9 +250,18 @@ insert into code values('sitter-4','투약가능','시터');
 insert into code values('sitter-5','노령견 케어 가능','시터');
 insert into code values('sitter-6','퍼피 케어 가능','시터');
 insert into code values('sitter-8','환자 모니터링 가능','시터');
+<<<<<<< HEAD
+INSERT INTO CODE VALUES('dog-1','유기견 출신','강아지');
+INSERT INTO CODE VALUES('dog-2','접종여부','강아지');
+INSERT INTO CODE VALUES('dog-3','심장사상충 예방 여부','강아지');
+INSERT INTO CODE VALUES('dog-4','외부기생충 구제 여부','강아지');
+INSERT INTO CODE VALUES('dog-5','배변훈련','강아지');
+INSERT INTO CODE VALUES('dog-6','다른 강아지들과 잘 지내나요?','강아지');
+=======
 INSERT INTO CODE VALUES('dog-1','배변활동','강아지');
 INSERT INTO CODE VALUES('dog-2','심장사상충','강아지');
 INSERT INTO CODE VALUES('dog-3','당뇨','강아지');
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 insert into code values('res-1','예약대기','예약');
 insert into code values('res-2','예약확정','예약');
 insert into code values('res-3','결제완료','예약');
