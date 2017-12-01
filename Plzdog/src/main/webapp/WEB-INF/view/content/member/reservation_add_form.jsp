@@ -10,13 +10,21 @@
 <body>
 <form action="${initParam.rootPath }/member/reservation_add.do" method="post">
 	<sec:csrfInput/>
+	<select>
+			<c:forEach var="service" items="${applicationScope.serviceList }">
+				<option value="${service.code }">${service.codeName}</option>
+			</c:forEach>
+	</select><br>
 	<input type="hidden" name="resType" value="1"/>
 	시작날짜<input type="date" name="resSDate"/><br>
 	끝날짜<input type="date" name="resEDate"/><br>
 	의뢰내용<textarea rows="5" cols="30" name="resContents"></textarea>
 	<br>
 	요구사항 : <br>
-	<input type="text" value='<sec:authentication property="principal.email"/>' name="memberEmail"/>
+	<c:forEach var="demand"	items="${applicationScope.skillList }">
+		<input type="checkbox" name="demandList" value="${demand.code }">${demand.codeName }<br>	
+	</c:forEach>
+	<input type="text" value='<sec:authentication property="principal.email"/>' name="memberEmail"/><br>
 	<c:if test='${param.sitterEmail != null }'>
 		<input type="text" value='${param.sitterEmail }' name="sitterEmail"/>
 	</c:if>
