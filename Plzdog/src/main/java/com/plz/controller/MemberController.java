@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -147,4 +148,28 @@ public class MemberController {
 				
 				return "member/member_result_form.tiles";
 	}
+	@RequestMapping("zipcode")
+	public String getZipcode(@RequestParam String sample4_postcode, @RequestParam String sample4_mainAddress, @RequestParam String sample4_subAddress, Model model  ) {
+		System.out.println(sample4_postcode);
+		System.out.println(sample4_mainAddress);
+		System.out.println(sample4_subAddress);
+		model.addAttribute("sample4_postcode", sample4_postcode);
+		model.addAttribute("sample4_mainAddress",sample4_mainAddress);
+		model.addAttribute("sample4_subAddress", sample4_subAddress);
+		return "member/address_test_result.tiles";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -81,6 +81,10 @@
 	<mvc:view-controller path="/admin/admin.do" view-name="/admin/admin.tiles"/>
 	<!-- 관리자 대기시터 치러 결과 폼 -->
 	<mvc:view-controller path="/admin/select_waiting_result.do" view-name="admin/select_waiting_result.tiles"/>
+	
+	<!-- 우편번호 테스트 -->
+	<mvc:view-controller path="/member/address_test.do" view-name="member/address_test.tiles"/>
+	
 	<!-- 
 	####################################################################################################
 	 -->
