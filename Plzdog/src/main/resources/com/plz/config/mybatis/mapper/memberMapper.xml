@@ -42,6 +42,7 @@
 		<result column="zipcode" property="zipcode" />
 		<result column="member_image" property="memberImage" />
 		<result column="phonenum" property="phoneNum" />
+		<result column="member_enable" property="memberEnable" />
 		<collection property="dogList" ofType="Dog">
 			<id column="dog_id" property="dogId"/>
 			<result column="dog_name" property="dogName"/>
