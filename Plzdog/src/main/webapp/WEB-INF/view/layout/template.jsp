@@ -34,7 +34,9 @@
 	<div class="clear"></div>
 	<tiles:insertAttribute name="menu" />
 	<div class="clear"></div>
+	<section class="col-sm-9 content">
 	<tiles:insertAttribute name="content" />
+	</section>
 	<div class="clear"></div>
 	<tiles:insertAttribute name="footer" />
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
