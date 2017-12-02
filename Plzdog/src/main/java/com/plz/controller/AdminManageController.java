@@ -25,7 +25,8 @@ public class AdminManageController {
 	 * 등록 처리후 join_success.do로 redirect방식으로 이동 (MainController) - 요청파라미터로 등록된 userId 전송
 	 * @param user
 	 * @return
-	 */
+	*/
+	
 	@RequestMapping("register_admin")
 	public ModelAndView registerAdmin(@ModelAttribute Member member) {
 		service.insertMember(member, "ROLE_ADMIN");
