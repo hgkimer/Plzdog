@@ -318,32 +318,71 @@ insert into code values('service-2', '위탁돌봄', '서비스');
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); --1
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100711', 'jang@naver.com'); --2
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100812', 'jang@naver.com'); --3
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100913', 'jang@naver.com'); --4
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20101014', 'lee@naver.com');  --5
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20101115', 'lee@naver.com');  --6
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'가지','진돗개','수컷',5.5,'20100812', 'jang@naver.com'); --3
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'토마토','진돗개','수컷',5.5,'20100913', 'jang@naver.com'); --4
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'가자미','진돗개','수컷',5.5,'20101014', 'lee@naver.com');  --5
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순이','진돗개','수컷',5.5,'20101115', 'lee@naver.com');  --6
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20101216', 'lee@naver.com');  -- 7
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100117', 'yoon@naver.com');  --8
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100218', 'yoon@naver.com'); --9
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100319', 'yoon@naver.com'); --10
 
 -- 강아지정보
-INSERT INTO DOGINFO VALUES(4 ,'dog-1');
-INSERT INTO DOGINFO VALUES(4, 'dog-2');
-INSERT INTO DOGINFO VALUES(4,'dog-3');
+INSERT INTO DOGINFO VALUES(1 ,'dog-1');
+INSERT INTO DOGINFO VALUES(1 ,'dog-2');
+INSERT INTO DOGINFO VALUES(1 ,'dog-3');
+INSERT INTO DOGINFO VALUES(2 ,'dog-4');
+INSERT INTO DOGINFO VALUES(2 ,'dog-5');
+INSERT INTO DOGINFO VALUES(2 ,'dog-6');
+INSERT INTO DOGINFO VALUES(3 ,'dog-1');
+INSERT INTO DOGINFO VALUES(3 ,'dog-2');
+INSERT INTO DOGINFO VALUES(3 ,'dog-3');
+INSERT INTO DOGINFO VALUES(4 ,'dog-4');
+INSERT INTO DOGINFO VALUES(4 ,'dog-5');
+INSERT INTO DOGINFO VALUES(4 ,'dog-6');
+INSERT INTO DOGINFO VALUES(5 ,'dog-1');
+INSERT INTO DOGINFO VALUES(5 ,'dog-2');
+INSERT INTO DOGINFO VALUES(5 ,'dog-3');
+INSERT INTO DOGINFO VALUES(6 ,'dog-4');
+INSERT INTO DOGINFO VALUES(6 ,'dog-5');
+INSERT INTO DOGINFO VALUES(6 ,'dog-6');
+INSERT INTO DOGINFO VALUES(7 ,'dog-1');
+INSERT INTO DOGINFO VALUES(7 ,'dog-2');
+INSERT INTO DOGINFO VALUES(7 ,'dog-3');
+INSERT INTO DOGINFO VALUES(8 ,'dog-4');
+INSERT INTO DOGINFO VALUES(8 ,'dog-5');
+INSERT INTO DOGINFO VALUES(8 ,'dog-6');
+INSERT INTO DOGINFO VALUES(9 ,'dog-1');
+INSERT INTO DOGINFO VALUES(9 ,'dog-2');
+INSERT INTO DOGINFO VALUES(9 ,'dog-3');
+INSERT INTO DOGINFO VALUES(10 ,'dog-4');
+INSERT INTO DOGINFO VALUES(10 ,'dog-5');
+INSERT INTO DOGINFO VALUES(10 ,'dog-6');
+
 
 --강아지 이미지
-INSERT INTO DOG_IMAGE VALUES('SDFLKJSDFL','1');
-INSERT INTO DOG_IMAGE VALUES('SDLFKJLVKJSD','1');
-INSERT INTO DOG_IMAGE VALUES('QWEOUWEORE3TER','1');
-INSERT INTO DOG_IMAGE VALUES('이미지 경로1 ','2');
-INSERT INTO DOG_IMAGE VALUES('이미지 경로2 ','2');
-INSERT INTO DOG_IMAGE VALUES('이미지 경로3 ','2');
-INSERT INTO DOG_IMAGE VALUES('이미지 경로4 ','2');
+INSERT INTO DOG_IMAGE VALUES('1.jpg','1');
+INSERT INTO DOG_IMAGE VALUES('2.jpg','2');
+INSERT INTO DOG_IMAGE VALUES('3.jpg','3');
+INSERT INTO DOG_IMAGE VALUES('4.jpg','4');
+INSERT INTO DOG_IMAGE VALUES('5.jpg','5');
+INSERT INTO DOG_IMAGE VALUES('6.jpg','6');
+INSERT INTO DOG_IMAGE VALUES('7.jpg','7');
+INSERT INTO DOG_IMAGE VALUES('8.jpg','8');
+INSERT INTO DOG_IMAGE VALUES('9.jpg','9');
+INSERT INTO DOG_IMAGE VALUES('10.jpg','10');
 
 --시터
-INSERT INTO SITTER VALUES('kim@naver.com','가천대학교','이미지경로1','서울,경기',3.6);
-INSERT INTO SITTER VALUES('soo@naver.com','대전대학교','이미지경로2','서울,천안',3.1);
+INSERT INTO SITTER VALUES('soo1@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
+INSERT INTO SITTER VALUES('soo2@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
+INSERT INTO SITTER VALUES('soo3@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
+INSERT INTO SITTER VALUES('soo4@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
+INSERT INTO SITTER VALUES('soo5@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
+INSERT INTO SITTER VALUES('soo6@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
+INSERT INTO SITTER VALUES('soo7@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
+INSERT INTO SITTER VALUES('soo8@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
+INSERT INTO SITTER VALUES('soo9@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
+INSERT INTO SITTER VALUES('soo10@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
 
 --스킬
 INSERT INTO SKILL VALUES('kim@naver.com','sitter-1');
