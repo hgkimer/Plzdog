@@ -21,8 +21,8 @@ insert into AUTHORITY values('zxc','ROLE_SITTER');
 --시터용 값 insert------------------------
 
 --insert into AUTHORITY values('sitter@naver.com','ROLE_ADMIN');
+--insert into AUTHORITY values('admin@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('sitter@naver.com','ROLE_SITTER');
-insert into AUTHORITY values('admin@naver.com','ROLE_ADMIN');
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'멍멍이','비숑','암컷',3.5,'20100608', 'sitter@naver.com');
 
 INSERT INTO DOGINFO VALUES(5,'dog-1');
