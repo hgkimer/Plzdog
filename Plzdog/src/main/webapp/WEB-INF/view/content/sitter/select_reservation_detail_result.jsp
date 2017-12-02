@@ -26,7 +26,7 @@ $(document).ready(function(){
 		padding:0;
 		list-style:none;
 		text-decoration:none;
-	}..
+	}
 	
 	a {
 		color:inherit;
@@ -79,6 +79,7 @@ $(document).ready(function(){
 		</div>
 		<div class="res">
 			<c:forEach var="list" items="${requestScope.list}">
+				
 				<ul>
 					<li>예약상태 : ${list.resId}</li>
 					<li>시작날짜 : ${list.resSDate}</li>
@@ -86,7 +87,9 @@ $(document).ready(function(){
 					<li>견주이메일 : ${list.dog.email}</li>
 					<li>의뢰내용 : ${list.resContents}</li>
 					<li>가격 : ${list.price}</li>
-					<li>서비스 요구사항 : ${list.codeName}</li>
+					<c:forEach items ="${list.demandList }" var="demand">
+					<li>서비스 요구사항 : ${demand.code.codeName}</li>
+					</c:forEach>
 				</ul>
 			</c:forEach>
 		</div>
