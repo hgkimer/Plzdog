@@ -1,6 +1,5 @@
 package com.plz.controller;
 
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.plz.service.AuthorityService;
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
 
@@ -34,7 +35,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
-		
+	
+	@Autowired
+	private AuthorityService aService;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -49,10 +53,23 @@ public class MemberController {
 	 * @throws IllegalStateException 
 	 */
 	@RequestMapping("deleteMember")
-	public String deleteMember(@RequestParam String email) {
-		//권한을 지운다?
-		service.deleteMember(email);
+	public String deleteMember(@RequestParam String email,ModelMap model) {
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		//권한을 지운다
+		aService.removeAuthority(email);
 		System.out.println(email);
+		Member member = ((Member)authentication.getPrincipal());
+		
+		//0이면 탈퇴
+		member.setMemberEnable(0);
+		//로그 아웃
+		context.setAuthentication(null);
+		//회원 수정
+		service.updateMember(member);
+		
+		model.addAttribute(email);
 		return "member/delete_success.tiles";
 	}
 	

@@ -89,5 +89,6 @@ function inputCheck(){
 		<label for="pPhone">전화번호 : </label>
 		<input type="text" name="phoneNum" id="pPhone" class="form-control" required="required">
 	</div>
+	<input type="hidden" name="memberEnable" value='1'>
 	<input type="submit" value="전송" class="btn btn-default">
 </form>

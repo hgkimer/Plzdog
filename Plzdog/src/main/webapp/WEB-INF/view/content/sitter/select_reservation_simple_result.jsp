@@ -35,7 +35,7 @@
 	
 	.reservation {
 		width:700px;
-		height:200px;
+		height:400px;
 		float:left;
 		cursor:pointer;
 		position:relative;
@@ -58,11 +58,16 @@
 	}
 	
 	.dogOwner {
-		width:300px;
-		height:150px;
-		float:left;
-		font-size:20px;
-		line-height:40px;
+		width:450px;
+		height:400px;
+		float:right;
+		font-size:18px;
+		line-height:45px;
+	}
+	
+	.navlist {
+		width:100%;
+		height:100%;
 	}
 </style>
 </head>
@@ -70,27 +75,26 @@
 
 </body>
 <div class="all">
-	<div class="reservation" onclick="location.href='select_reservation_detail.do'">
+	<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
 		<div class="dogImage">
 			<c:forEach var="list" items="${reqeustScope.list}">
 				<ul class="nav">
-					<li>강아지사진 : ${list.dog.dogImage}</li>
+					<li>강아지사진 : ${list.dogImageList}</li>
 				</ul>
 			</c:forEach>
 		</div>
 		
 		<div class="dogOwner">
 			<c:forEach var="list" items="${requestScope.list}">
-				<ul class="nav">
+				<ul class="navlist">
 					<li>예약상태 : ${list.resId}</li>
-					<li>시작날짜 : ${list.resSDate}</li>
-					<li>끝날짜 : ${list.resEDate}</li>
-					<li>가격 : ${list.price}</li>
 					<li>강아지이름 : ${list.dog.dogName}</li>
 					<li>강아지종 : ${list.dog.species}</li>
 					<li>강아지성별 : ${list.dog.gender}</li>
-					<li>강아지무게 : ${list.dog.weight}</li>
 					<li>강아지생년월일 : ${list.dog.birth}</li>
+					<li>시작날짜 : ${list.resSDate}</li>
+					<li>끝날짜 : ${list.resEDate}</li>
+					<li>가격 : ${list.price}</li>
 				</ul>
 			</c:forEach>
 		</div>

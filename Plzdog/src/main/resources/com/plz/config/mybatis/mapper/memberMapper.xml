@@ -23,6 +23,7 @@
 				m.zipcode,
 				m.member_image,
 				m.phonenum,
+				m.member_enable,
 				d.dog_name,
 				d.species,
 				d.gender,
@@ -41,6 +42,7 @@
 		<result column="zipcode" property="zipcode" />
 		<result column="member_image" property="memberImage" />
 		<result column="phonenum" property="phoneNum" />
+		<result column="member_enable" property="memberEnable" />
 		<collection property="dogList" ofType="Dog">
 			<id column="dog_id" property="dogId"/>
 			<result column="dog_name" property="dogName"/>
@@ -57,7 +59,9 @@
 	
 	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
-		where m.email = #{value}
+		where m.email = #{email}
+		and   m.email = d.email(+)
+		and   m.member_enable = '1'
 	</select>
 	
 	<select id="selectMemberJoinDogByName" parameterType="string" resultMap="member-dog-resultmap">
@@ -160,7 +164,8 @@
 				sub_address = #{subAddress},
 				zipcode = #{zipcode},
 				member_image = #{memberImage},
-				phonenum = #{phoneNum}
+				phonenum = #{phoneNum},
+				member_enable = #{memberEnable}
 		where 	email = #{email}
 	</update>
 

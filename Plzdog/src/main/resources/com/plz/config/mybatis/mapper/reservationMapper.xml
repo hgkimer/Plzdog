@@ -15,7 +15,6 @@
 				d.dog_name,
 				d.species,
 				d.gender,
-				d.weight,
 				d.birth
 		from	reservation r, dog_image i, dog d
 	</sql>
@@ -39,7 +38,6 @@
 			<result column="dog_name" property="dogName"/>
 			<result column="species" property="species"/>
 			<result column="gender" property="gender"/>
-			<result column="weight" property="weight"/>
 			<result column="birth" property="birth"/>
 			<result column="email" property="email"/>
 		</association>
