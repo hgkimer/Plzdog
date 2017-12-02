@@ -12,7 +12,7 @@
 		<label for="species">견종 : ${dog.species } </label>
 	</div>
 	<div class="form-group">
-		<label for="gender">성별 : ${dog.gender='on' ? :}</label>
+		<label for="gender">성별 : ${dog.gender }</label>
 	</div>
 	<div class="form-group">
 		<label for="weight">몸무게 : ${dog.weight }</label>

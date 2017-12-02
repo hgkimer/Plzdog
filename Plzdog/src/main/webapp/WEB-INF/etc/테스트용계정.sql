@@ -21,8 +21,11 @@ insert into AUTHORITY values('zxc','ROLE_SITTER');
 --시터용 값 insert------------------------
 
 --insert into AUTHORITY values('sitter@naver.com','ROLE_ADMIN');
+
 --insert into AUTHORITY values('admin@naver.com','ROLE_ADMIN');
+
 insert into AUTHORITY values('sitter@naver.com','ROLE_SITTER');
+
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'멍멍이','비숑','암컷',3.5,'20100608', 'sitter@naver.com');
 
 INSERT INTO DOGINFO VALUES(5,'dog-1');
@@ -119,5 +122,21 @@ select	m.email,
 		where m.email = '1211'
 		and   m.email = d.email(+)
 		and   m.member_enable = '1'
-
+		
+		select	r.res_id,
+				r.res_type,
+				r.res_sdate,
+				r.res_edate,
+				r.res_contents,
+				r.price,
+				r.email,
+				r.email_sitter,
+				c.code_name,
+				c.code,
+				c.category
+		from	reservation r, demand d, code c
+		where   r.res_id = d.res_id 
+		and     d.code_demand = c.code
+		and     r.email_sitter = 'sitter@naver.com'
+		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'

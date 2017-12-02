@@ -34,14 +34,15 @@
 	<div class="clear"></div>
 	<%--메인 body --%>
 	<div class="row whole">
+		
 		<%-- 메뉴 --%>
-		<nav class="col-sm-3 side">
+		<nav class="col-sm-2 side">
 			<tiles:insertAttribute name="menu"/>
 		</nav>
 		<!-- 내용 -->
-		<section class="col-sm-9 content">
+		<nav class="col-sm-9 content">
 			<tiles:insertAttribute name="content"/>
-		</section>
+		</nav>
 	</div>
 	<tiles:insertAttribute name="footer" />
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>

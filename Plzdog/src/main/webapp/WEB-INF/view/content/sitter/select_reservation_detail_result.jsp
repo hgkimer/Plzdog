@@ -78,8 +78,8 @@ $(document).ready(function(){
 			<button class="btn2">돌봄일지</button>
 		</div>
 		<div class="res">
+			<%--이메일에 해당하는 예약에 대한 리스트 --%>
 			<c:forEach var="list" items="${requestScope.list}">
-				
 				<ul>
 					<li>예약상태 : ${list.resId}</li>
 					<li>시작날짜 : ${list.resSDate}</li>
@@ -88,10 +88,11 @@ $(document).ready(function(){
 					<li>의뢰내용 : ${list.resContents}</li>
 					<li>가격 : ${list.price}</li>
 					<c:forEach items ="${list.demandList }" var="demand">
-					<li>서비스 요구사항 : ${demand.code.codeName}</li>
+						<li>서비스 요구사항 : ${demand.code.codeName}</li>
 					</c:forEach>
 				</ul>
 			</c:forEach>
+					
 		</div>
 		<div class="care">
 			<img src="${initParam.rootPath }/image/caredog.jpg">
