@@ -68,7 +68,7 @@ public class MemberController {
 		//회원 수정
 		service.updateMember(member);
 		
-		model.addAttribute(email);
+		model.addAttribute("memberName",member.getMemberName());
 		return "member/delete_success.tiles";
 	}
 	
