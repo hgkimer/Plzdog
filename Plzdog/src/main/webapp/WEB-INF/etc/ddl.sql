@@ -298,7 +298,7 @@ insert into code values('sitter-3','고객의 집에서 보살필 수 있어요'
 insert into code values('sitter-4','투약가능','시터');
 insert into code values('sitter-5','노령견 케어 가능','시터');
 insert into code values('sitter-6','퍼피 케어 가능','시터');
-insert into code values('sitter-8','환자 모니터링 가능','시터');
+insert into code values('sitter-7','환자 모니터링 가능','시터');
 --------시터의 환경-----------------------------------------------------------
 insert into code values('sitterEn-1','아파트','시터환경');
 insert into code values('sitterEn-2','주택','시터환경');
