@@ -18,18 +18,19 @@ import com.plzdog.vo.Member;
 public class AdminManageController {
 
 	@Autowired
-	private AuthorityService service;
+	private MemberService service;
 
 	/**
 	 * 관리자를 등록하는 메소드.
 	 * 등록 처리후 join_success.do로 redirect방식으로 이동 (MainController) - 요청파라미터로 등록된 userId 전송
 	 * @param user
 	 * @return
-	 */
+	*/
+	
 	@RequestMapping("register_admin")
 	public ModelAndView registerAdmin(@ModelAttribute Member member) {
-		service.addAuthority(new Authority(member.getEmail(), "ROLE_ADMIN"));
+		service.insertMember(member, "ROLE_ADMIN");
 		//redirect 방식이동시 model값은 요청파라미터로 전송된다.
-		return new ModelAndView("redirect:/join_success.do", "member", member);
+		return new ModelAndView("redirect:/join_success.do", "email", member.getEmail());
 	}
 }
