@@ -32,12 +32,26 @@
 <body>
 	<tiles:insertAttribute name="header" />
 	<div class="clear"></div>
+<<<<<<< HEAD
 	<tiles:insertAttribute name="menu" />
 	<div class="clear"></div>
 	<section class="col-sm-9 content">
 	<tiles:insertAttribute name="content" />
 	</section>
 	<div class="clear"></div>
+=======
+	<%--메인 body --%>
+	<div class="row whole">
+		<%-- 메뉴 --%>
+		<nav class="col-sm-3 side">
+			<tiles:insertAttribute name="menu"/>
+		</nav>
+		<!-- 내용 -->
+		<section class="col-sm-9 content">
+			<tiles:insertAttribute name="content"/>
+		</section>
+	</div>
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 	<tiles:insertAttribute name="footer" />
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
 	<a href="${initParam.rootPath }/admin/select_waiting.do">대기시터 테스트</a><br>

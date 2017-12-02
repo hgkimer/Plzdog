@@ -8,8 +8,8 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/main/resources/com/plz/config/spring/security-context.xml</config>
-		<config>src/main/resources/com/plz/config/spring/web-context.xml</config>
 		<config>src/main/resources/com/plz/config/spring/model-context.xml</config>
+		<config>src/main/resources/com/plz/config/spring/web-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
