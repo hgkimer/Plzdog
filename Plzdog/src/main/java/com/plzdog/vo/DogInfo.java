@@ -9,11 +9,20 @@ public class DogInfo implements Serializable {
 	private int dogId;
 	private String codeDog;
 	
+	private Code code;
 	public DogInfo() {}
 
 	public DogInfo(int dogId, String codeDog) {
+		super();
 		this.dogId = dogId;
 		this.codeDog = codeDog;
+	}
+
+	public DogInfo(int dogId, String codeDog, Code code) {
+		super();
+		this.dogId = dogId;
+		this.codeDog = codeDog;
+		this.code = code;
 	}
 
 	public int getDogId() {
@@ -32,10 +41,24 @@ public class DogInfo implements Serializable {
 		this.codeDog = codeDog;
 	}
 
+	public Code getCode() {
+		return code;
+	}
+
+	public void setCode(Code code) {
+		this.code = code;
+	}
+
+	@Override
+	public String toString() {
+		return "DogInfo [dogId=" + dogId + ", codeDog=" + codeDog + ", code=" + code + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((codeDog == null) ? 0 : codeDog.hashCode());
 		result = prime * result + dogId;
 		return result;
@@ -50,6 +73,11 @@ public class DogInfo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		DogInfo other = (DogInfo) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
 		if (codeDog == null) {
 			if (other.codeDog != null)
 				return false;
@@ -58,10 +86,5 @@ public class DogInfo implements Serializable {
 		if (dogId != other.dogId)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "DogInfo [dogId=" + dogId + ", codeDog=" + codeDog + "]";
 	}
 }

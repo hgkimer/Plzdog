@@ -1,17 +1,23 @@
 package com.plz.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Dog;
 
 @Controller
@@ -24,10 +30,12 @@ public class DogController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("insert_dog")
-	public String insertDog(@ModelAttribute Dog dog, Model model) {
-		service.insertDog(dog);
-		return "dog/insert_result";
+	@RequestMapping("insertDog")
+	public String insertDog(@ModelAttribute Dog dog, @RequestParam(name="dogCodeList") List<String> dogCodeList,
+			HttpServletRequest request, ModelMap model) throws IllegalStateException, IOException {
+		model.addAttribute(dog);
+		model.addAttribute("codeList",service.addDog(dog, dogCodeList, request));
+		return "member/mydog_register_result_form.tiles";
 	}
 	
 	@RequestMapping("select_dog")

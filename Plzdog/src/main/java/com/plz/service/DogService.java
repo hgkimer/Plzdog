@@ -1,13 +1,15 @@
 package com.plz.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.DogImage;
 
 public interface DogService {
-
-	void insertDog(Dog dog);
 	
 	List<Dog> selectDogByEmail(String email);
 	
@@ -20,4 +22,6 @@ public interface DogService {
 	void updateDogImage(DogImage dogImage, String originalImage);
 	
 	void deleteDogImage(String dogImage);
+
+	List<Code> addDog(Dog dog, List<String> dogCodeList, HttpServletRequest request) throws IllegalStateException, IOException;
 }

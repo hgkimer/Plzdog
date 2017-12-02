@@ -25,6 +25,7 @@
 		<result column="res_type" property="resType"/>
 		<result column="res_sdate" property="resSDate"/>
 		<result column="res_edate" property="resEDate"/>
+		<result column="price" property="price"/>
 		<result column="res_contents" property="resContents"/>
 		<result column="email" property="memberEmail"/>
 		<result column="email_sitter" property="sitterEmail"/>
@@ -64,6 +65,7 @@
 	
 	<resultMap type="Reservation" id="detail-res-resultmap" extends="reservation-resultmap">
 		<collection property="demandList" ofType="Demand">
+			<id column="res_id" property="resId"/>
 			<association property="codeDemand" javaType="Code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
@@ -269,7 +271,7 @@
         	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
 		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
-		#{resEDate}, #{resContents},#{memberEmail},#{sitterEmail})
+		#{resEDate}, #{price},#{resContents},#{memberEmail},#{sitterEmail})
 	</insert>
 	
 	<!-- 예약ID를 통해 수정한다. -->
@@ -293,14 +295,13 @@
 	 -->
 	 
 	 <insert id = "insertDemand" parameterType="Demand">
-	 	insert into demand values(#{resId}, #{codeName})
+	 	insert into demand values(#{resId}, #{codeDemand})
 	 </insert>
 	 
-	 <update id = "updateDemand" parameterType ="map">
+	 <update id = "updateDemand" parameterType ="Demand">
 	 	update  demand
-	 	set     code_demand = #{codeName}
+	 	set     code_demand = #{codeDemand}
 	 	where   res_id = #{resId} 
-	 	and 	code_demand = #{originalCodeDemand}
 	 </update>
 
 	 <delete id = "deleteDemand" parameterType="_int">

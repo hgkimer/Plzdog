@@ -7,11 +7,13 @@ public class Demand implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
-	private Code codeDemand;
+	private String codeDemand;
+	
+	private Code code;
 	
 	public Demand() {}
 
-	public Demand(int resId, Code codeDemand) {
+	public Demand(int resId, String codeDemand) {
 		this.resId = resId;
 		this.codeDemand = codeDemand;
 	}
@@ -24,18 +26,27 @@ public class Demand implements Serializable{
 		this.resId = resId;
 	}
 
-	public Code getCodeDemand() {
+	public String getCodeDemand() {
 		return codeDemand;
 	}
 
-	public void setCodeDemand(Code codeDemand) {
+	public void setCodeDemand(String codeDemand) {
 		this.codeDemand = codeDemand;
+	}
+
+	public Code getCode() {
+		return code;
+	}
+
+	public void setCode(Code code) {
+		this.code = code;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((codeDemand == null) ? 0 : codeDemand.hashCode());
 		result = prime * result + resId;
 		return result;
@@ -47,10 +58,14 @@ public class Demand implements Serializable{
 			return true;
 		if (obj == null)
 			return false;
-		
 		if (getClass() != obj.getClass())
 			return false;
 		Demand other = (Demand) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
 		if (codeDemand == null) {
 			if (other.codeDemand != null)
 				return false;
@@ -63,8 +78,8 @@ public class Demand implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Demand [resId=" + resId + ", codeDemand=" + codeDemand + "]";
+		return "Demand [resId=" + resId + ", codeDemand=" + codeDemand + ", code=" + code + "]";
 	}
-	
+
 	
 }
