@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<sec:authentication property="principal.memberName"/>은 시터로 등록 되었습니다.
+	  {email}님은 시터로 등록 되었습니다.
 </body>
 </html>

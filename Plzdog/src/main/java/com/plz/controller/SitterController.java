@@ -67,7 +67,7 @@ public class SitterController {
 		
 		waitingService.deleteWaiting(authority.getEmail());
 		
-		model.addAttribute(authority.getEmail());
+		model.addAttribute("email",authority.getEmail());
 		return "admin/sitter_enroll_result.tiles";
 	}
 	
