@@ -325,7 +325,6 @@ insert into code values('service-1', '방문돌봄', '서비스');
 insert into code values('service-2', '위탁돌봄', '서비스');
 ----------------------------------------------------------------------------------
 
-
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); --1
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100711', 'jang@naver.com'); --2
@@ -396,27 +395,51 @@ INSERT INTO SITTER VALUES('soo9@naver.com','가천대학교','이미지경로1',
 INSERT INTO SITTER VALUES('soo10@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
 
 --스킬
-INSERT INTO SKILL VALUES('kim@naver.com','sitter-1');
-INSERT INTO SKILL VALUES('kim@naver.com','sitter-2');
-INSERT INTO SKILL VALUES('soo@naver.com','sitter-3');
-INSERT INTO SKILL VALUES('soo@naver.com','sitter-4');
+INSERT INTO SKILL VALUES('soo1@naver.com','sitter-1');
+INSERT INTO SKILL VALUES('soo1@naver.com','sitter-2');
+INSERT INTO SKILL VALUES('soo1@naver.com','sitter-3');
+INSERT INTO SKILL VALUES('soo1@naver.com','sitterEn-1');
+INSERT INTO SKILL VALUES('soo1@naver.com','sitterEn-2');
+INSERT INTO SKILL VALUES('soo1@naver.com','sitterEn-3');
+
+INSERT INTO SKILL VALUES('soo2@naver.com','sitter-4');
+INSERT INTO SKILL VALUES('soo2@naver.com','sitter-5');
+INSERT INTO SKILL VALUES('soo2@naver.com','sitter-6');
+INSERT INTO SKILL VALUES('soo2@naver.com','sitterEn-1');
+INSERT INTO SKILL VALUES('soo2@naver.com','sitterEn-2');
+INSERT INTO SKILL VALUES('soo2@naver.com','sitterEn-3');
+
+INSERT INTO SKILL VALUES('soo3@naver.com','sitter-1');
+INSERT INTO SKILL VALUES('soo3@naver.com','sitter-2');
+INSERT INTO SKILL VALUES('soo3@naver.com','sitter-3');
+INSERT INTO SKILL VALUES('soo3@naver.com','sitter-4');
+INSERT INTO SKILL VALUES('soo3@naver.com','sitterEn-1');
+INSERT INTO SKILL VALUES('soo3@naver.com','sitterEn-2');
+INSERT INTO SKILL VALUES('soo3@naver.com','sitterEn-3');
+
+INSERT INTO SKILL VALUES('soo4@naver.com','sitter-4');
+INSERT INTO SKILL VALUES('soo4@naver.com','sitter-5');
+INSERT INTO SKILL VALUES('soo4@naver.com','sitter-6');
+INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-1');
+INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-2');
+INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-3');
 
 --리뷰
 INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
-INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo@naver.com');
+INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo1@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',10000,'의뢰내용1','lee@naver.com','soo1@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',20000,'의뢰내용2','lee@naver.com','soo2@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',30000,'의뢰내용3','lee@naver.com','soo3@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',40000,'의뢰내용4','jang@naver.com','soo4@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',50000,'의뢰내용5','jang@naver.com','soo5@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',60000,'의뢰내용6','jang@naver.com','soo6@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',70000,'의뢰내용7','yoon@naver.com','soo7@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',80000,'의뢰내용8','yoon@naver.com','soo8@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02',90000,'의뢰내용9','yoon@naver.com','soo9@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',10000,'의뢰내용1','예약대기','lee@naver.com','soo1@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',20000,'의뢰내용2','예약대기','lee@naver.com','soo2@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',30000,'의뢰내용3','예약대기','lee@naver.com','soo3@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',40000,'의뢰내용4','예약대기','jang@naver.com','soo4@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',50000,'의뢰내용5','예약대기','jang@naver.com','soo5@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',60000,'의뢰내용6','예약대기','jang@naver.com','soo6@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',70000,'의뢰내용7','예약대기','yoon@naver.com','soo7@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',80000,'의뢰내용8','예약대기','yoon@naver.com','soo8@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용9','예약대기','yoon@naver.com','soo9@naver.com');
 
---예약 상세
+-- 예약 상세
 -- jang의 dogID : 2,3,4 , lee : 5,6,7 , yoon : 8,9,10
 -- lee의 Res : 1,2,3 , jang : 4,5,6 , yoon : 7,8,9
 insert into RESDETAIL values('1','5');
@@ -448,9 +471,6 @@ insert into DEMAND values (3,'sitter-1');
 insert into DEMAND values (3,'sitter-2');
 insert into Demand values (4,'sitter-4');
 insert into demand values (5,'sitter-1');
-delete from DEMAND
-
-select * from demand
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
