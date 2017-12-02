@@ -23,6 +23,7 @@
 				m.zipcode,
 				m.member_image,
 				m.phonenum,
+				m.member_enable,
 				d.dog_name,
 				d.species,
 				d.gender,
@@ -57,7 +58,9 @@
 	
 	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
-		where m.email = #{value}
+		where m.email = #{email}
+		and   m.email = d.email(+)
+		and   m.member_enable = '1'
 	</select>
 	
 	<select id="selectMemberJoinDogByName" parameterType="string" resultMap="member-dog-resultmap">
@@ -160,7 +163,8 @@
 				sub_address = #{subAddress},
 				zipcode = #{zipcode},
 				member_image = #{memberImage},
-				phonenum = #{phoneNum}
+				phonenum = #{phoneNum},
+				member_enable = #{memberEnable}
 		where 	email = #{email}
 	</update>
 

@@ -100,5 +100,24 @@ select	m.email,
 		and		s.email = d.email 
 		and 	k.code_skill = c.code 
 		and 	s.email = k.email(+);
+		
+		select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.password,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth
+		from	member m, dog d
+		where m.email = '1211'
+		and   m.email = d.email(+)
+		and   m.member_enable = '1'
 
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'
