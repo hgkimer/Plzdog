@@ -137,7 +137,7 @@ CREATE TABLE SITTER (
 	SERVICE_ADDRESS CLOB NOT NULL, /* 서비스가능지역 */
 	SITTER_RATE NUMBER(2, 1), /* 평점 */
 	VISIT_PRICE NUMBER NOT NULL, /* 방문돌봄가격 */
-	GIVE_PRICE NUMBER NOT NULL /* 위탁돌봄가격 */
+	GIVE_PRICE NUMBER NOT NULL, /* 위탁돌봄가격 */
 	CONSTRAINT PK_SITTER PRIMARY KEY(EMAIL),
 	CONSTRAINT FK_SITTER_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade
 );
@@ -287,33 +287,44 @@ insert into AUTHORITY values('jang@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('lee@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('yoon@naver.com','ROLE_MEMBER');
 
--- 코드 테이블 
+-- 코드 테이블 ---------------------------------------------------------------------
+-------코드 테이블 값들 삭제
+delete from code;
+-- 전체 코드 등록
+--------시터의 스킬(= 견주 요구사항)-------------------------------------------
 insert into code values('sitter-1','반려동물 경험 유무','시터');
 insert into code values('sitter-2','펫트너 집에서 보살필 수 있어요','시터');
 insert into code values('sitter-3','고객의 집에서 보살필 수 있어요','시터');
 insert into code values('sitter-4','투약가능','시터');
 insert into code values('sitter-5','노령견 케어 가능','시터');
 insert into code values('sitter-6','퍼피 케어 가능','시터');
-insert into code values('sitter-8','환자 모니터링 가능','시터');
-insert into code values('sitter-9','흡연유무','시터');
-
+insert into code values('sitter-7','환자 모니터링 가능','시터');
+--------시터의 환경-----------------------------------------------------------
 insert into code values('sitterEn-1','아파트','시터환경');
 insert into code values('sitterEn-2','주택','시터환경');
-insert into code values('sitterEn-2','마당유무','시터환경');
-
+insert into code values('sitterEn-3','마당유무','시터환경');
+insert into code values('sitterEn-4','흡연유무','시터환경');
+--------강아지 정보-----------------------------------------------------------
 INSERT INTO CODE VALUES('dog-1','유기견 출신','강아지');
 INSERT INTO CODE VALUES('dog-2','접종여부','강아지');
 INSERT INTO CODE VALUES('dog-3','심장사상충 예방 여부','강아지');
 INSERT INTO CODE VALUES('dog-4','외부기생충 구제 여부','강아지');
 INSERT INTO CODE VALUES('dog-5','배변훈련','강아지');
 INSERT INTO CODE VALUES('dog-6','다른 강아지들과 잘 지내나요?','강아지');
-
+--------예약 상태-------------------------------------------------------------
+-- 담당 시터 없이 바로 예약을 등록한 상태
 insert into code values('res-1','예약대기','예약');
-insert into code values('res-2','예약확정','예약');
-insert into code values('res-3','결제완료','예약');
-
+-- 예약 등록 후, 시터의 견적이 들어와 승인 요청을 기다리는 상태
+insert into code values('res-2','견주의 승인 대기','예약');
+-- 견주가 시터 자신에게 직접 예약을 등록하고, 시터 자신의 승인 요청을 기다리는 상태
+insert into code values('res-3','견주의 승인 대기','예약');
+-- 견주나 시터가 승인을 완료(res-2 나 res-3 상태에서 승인 버튼을 눌렀을 때)한 상태
+insert into code values('res-4','결제완료','예약');
+-------서비스 종류------------------------------------------------------------
 insert into code values('service-1', '방문돌봄', '서비스');
 insert into code values('service-2', '위탁돌봄', '서비스');
+----------------------------------------------------------------------------------
+
 
 --강아지
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); --1
