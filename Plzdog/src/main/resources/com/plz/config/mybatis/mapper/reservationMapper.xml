@@ -59,14 +59,16 @@
 				r.price,
 				r.email,
 				r.email_sitter,
-				c.code_name
+				c.code_name,
+				c.code,
+				c.category
 		from	reservation r, demand d, code c
 	</sql>
 	
 	<resultMap type="Reservation" id="detail-res-resultmap" extends="reservation-resultmap">
 		<collection property="demandList" ofType="Demand">
-			<id column="res_id" property="resId"/>
-			<association property="codeDemand" javaType="Code">
+			<!-- <id column="res_id" property="resId"/> -->
+			<association property="code" javaType="Code">
 				<id column="code" property="code"/>
 				<result column="code_name" property="codeName"/>
 				<result column="category" property="category"/>
@@ -77,7 +79,9 @@
 	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
 	<select id="selectDetailReservationSitter" parameterType="string" resultMap="detail-res-resultmap">
 		<include refid="detail-res-sql"/>
-		where r.res_id = d.res_id and r.email_sitter = #{value}
+		where r.res_id = d.res_id 
+		and d.code_demand = c.code
+		and r.email_sitter = #{value}
 	</select>
 
 	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->

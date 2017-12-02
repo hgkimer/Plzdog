@@ -397,6 +397,10 @@ insert into DEMAND values (3,'sitter-3');
 insert into DEMAND values (3,'sitter-1');
 insert into DEMAND values (3,'sitter-2');
 insert into Demand values (4,'sitter-4');
+insert into demand values (5,'sitter-1');
+delete from DEMAND
+
+select * from demand
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');
