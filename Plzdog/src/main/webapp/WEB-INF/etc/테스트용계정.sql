@@ -64,7 +64,7 @@ insert into CARE_IMAGE values('돌봄이미지5',6);
 -----------------------------------------
 --견주용 값 insert------------------------
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'견주의 개','비숑','암컷',3.5,'20100608', 'dog@naver.com');
-s
+
 INSERT INTO DOGINFO VALUES(6 ,'dog-1');
 INSERT INTO DOGINFO VALUES(6, 'dog-2');
 INSERT INTO DOGINFO VALUES(6,'dog-3');
