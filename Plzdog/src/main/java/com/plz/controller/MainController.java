@@ -67,6 +67,7 @@ public class MainController {
 		@RequestMapping("join_success")
 		public ModelAndView joinSuccess(@RequestParam String email) {
 			Member member = service.selectMemberByEmail(email);
+			System.out.println(member);
 			return new ModelAndView("join_success.tiles","member",member);
 		}
 	}
