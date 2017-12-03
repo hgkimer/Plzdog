@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.config.mybatis.mapper.resDetailMapper">
+<sql id="select-sql">
+	SELECT 	res_id,
+			dog_id 
+	FROM 	RESDETAIL
+</sql>
+
+<resultMap type="ResDetail" id="resdetail-resultmap">
+	<id column="res_id" property="resId"/>
+	<result column="dog_id" property="dogId"/>
+</resultMap>
+
+
+<!-- Data 변경 Mapper -->
+<!-- Insert sql -->
+<insert id="insertResDetail" parameterType="ResDetail">
+	INSERT INTO	RESDETAIL
+	VALUES(	#{resId},
+			#{dogId}
+	)
+</insert>
+<!-- 예약번호화 같은 예약 상세 정보의 강아지 아이디를 변경하는 sql -->
+<update id="updateResDetail" parameterType="ResDetail">
+	UPDATE 	RESDETAIL
+	SET		dog_id = ${dogId}
+	WHERE	res_id = ${resId}
+</update>
+<!-- 예약번호로 예약 상세 정보를 삭제하는 sql -->
+<delete id="deleteResDetailByResId" parameterType="_int">
+	DELETE FROM RESDETAIL
+	WHERE		res_id = #{value}
+</delete>
+<!-- 개의 아이디로 예약 상세 정보를 삭제하는 sql -->
+<delete id="deleteResDetailByDogId" parameterType="_int">
+	DELETE FROM RESDETAIL
+	WHERE		dog_id = #{value}
+</delete>
+<!-- 예약번호와 개의 정보 두가지가 모두 일치하는 예약 상세정보를 삭제하는 sql -->
+<delete id="deleteResDetailByResIdAndDogId" parameterType="ResDetail">
+	DELETE FROM RESDETAIL
+	WHERE		res_id	= #{resId}
+	AND			dog_id 	= #{dogId}
+</delete>
+
+<!-- Data 조회 SQL -->
+<!-- 예약 번호로 조회 -->
+<select id="selectResDetailByResId" resultMap="resdetail-resultmap" parameterType="_int">
+	<include refid="select-sql"></include>
+	WHERE res_id = #{value}
+</select>
+
+<!-- 강아지 id로 조회 -->
+<select id="selectResDetailByDogId" resultMap="resdetail-resultmap">
+	<include refid="select-sql"></include>
+	WHERE dog_id = #{value}
+</select>
+
+
+
+</mapper>
