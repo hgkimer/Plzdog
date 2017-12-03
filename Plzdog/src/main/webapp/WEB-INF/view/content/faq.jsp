@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+FAQ 입니다.
 </body>
 </html>

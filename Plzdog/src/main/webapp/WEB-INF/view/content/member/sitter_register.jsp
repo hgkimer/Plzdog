@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 <title>Insert title here</title>
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -49,14 +50,14 @@
 	}
 </style>
 </head>
-<body class="body">
+<body >
 ${applicationScope.skillList }
-<div class="group">
+<div class="container">
 	<form action="${initParam.rootPath }/member/insert_sitter.do" method="post" class="every">
 		<sec:csrfInput/>
 		
 		<div class="form-group">
-			<label for="schoolName">학교이름 : </label>
+			<label for="school">학교이름 : </label>
 			<input type="text" name="school" id="school" class="form-controller" required="required">
 		</div>
 		<div class="form-group">
@@ -67,10 +68,10 @@ ${applicationScope.skillList }
 			<label for="serviceAddress">서비스 가능지역 : </label>
 			<input type="text" name="serviceAddress" id="serviceAddress" class="form-controller" required="required">
 		</div>
-		<div class="form-group">
-			<label for="schoolName">보유 기술 목록 : </label>
+		<div class="form-check">
+			<label class="form-check-label">보유 기술 목록 : </label>
 			<c:forEach var="skill" items="${applicationScope.skillList }">
-			<input type="checkbox" name="skillList" value="${skill.code }" class="form-controller">${skill.codeName }	
+			<input type="checkbox" name="skillList" value="${skill.code }" class="form-check-input">${skill.codeName }<br>	
 		</c:forEach>
 		</div>
 		
