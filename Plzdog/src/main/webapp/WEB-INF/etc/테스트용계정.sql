@@ -22,7 +22,7 @@ insert into AUTHORITY values('zxc','ROLE_SITTER');
 
 --insert into AUTHORITY values('sitter@naver.com','ROLE_ADMIN');
 
---insert into AUTHORITY values('admin@naver.com','ROLE_ADMIN');
+insert into AUTHORITY values('admin@naver.com','ROLE_ADMIN');
 
 insert into AUTHORITY values('sitter@naver.com','ROLE_SITTER');
 

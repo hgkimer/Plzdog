@@ -51,8 +51,7 @@
 </style>
 </head>
 <body >
-${applicationScope.skillList }
-<div class="container">
+<div class="every">
 	<form action="${initParam.rootPath }/member/insert_sitter.do" method="post" class="every">
 		<sec:csrfInput/>
 		
@@ -69,12 +68,19 @@ ${applicationScope.skillList }
 			<input type="text" name="serviceAddress" id="serviceAddress" class="form-controller" required="required">
 		</div>
 		<div class="form-check">
-			<label class="form-check-label">보유 기술 목록 : </label>
+			<label class="form-check-label">보유 기술 목록 : </label><br>
 			<c:forEach var="skill" items="${applicationScope.skillList }">
 			<input type="checkbox" name="skillList" value="${skill.code }" class="form-check-input">${skill.codeName }<br>	
 		</c:forEach>
 		</div>
-		
+		<div class="form-group">
+			<label for="serviceAddress">방문 돌봄 희망 가격</label>
+			<input type="number" name="visitPrice" id="visitPrice" class="form-controller" required="required">
+		</div>
+		<div class="form-group">
+			<label for="serviceAddress">위탁 돌봄 희망 가격</label>
+			<input type="number" name="givePrice" id="givePrice" class="form-controller" required="required">
+		</div>
 		<input type="hidden" name="email" value="<sec:authentication property="principal.email"/>">
 		<input type="hidden" name="sitterRate" value="0">
 		<div class="btn">
