@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +50,7 @@
 </style>
 </head>
 <body class="body">
+${applicationScope.skillList }
 <div class="group">
 	<form action="${initParam.rootPath }/member/insert_sitter.do" method="post" class="every">
 		<sec:csrfInput/>
@@ -65,6 +67,13 @@
 			<label for="serviceAddress">서비스 가능지역 : </label>
 			<input type="text" name="serviceAddress" id="serviceAddress" class="form-controller" required="required">
 		</div>
+		<div class="form-group">
+			<label for="schoolName">보유 기술 목록 : </label>
+			<c:forEach var="skill" items="${applicationScope.skillList }">
+			<input type="checkbox" name="skillList" value="${skill.code }" class="form-controller">${skill.codeName }	
+		</c:forEach>
+		</div>
+		
 		<input type="hidden" name="email" value="<sec:authentication property="principal.email"/>">
 		<input type="hidden" name="sitterRate" value="0">
 		<div class="btn">

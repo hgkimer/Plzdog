@@ -11,30 +11,24 @@ public class Sitter implements Serializable {
 	private String certification;
 	private String serviceAddress;
 	private double sitterRate;
+	private int visitPrice;
+	private int givePrice;
 
-	private List<Skill> skillList;
+	private List<String> skillList;
 
 	public Sitter() {
 	}
 
-	public Sitter(String email, String school, String certification, String serviceAddress, double sitterRate) {
-		super();
-		this.email = email;
-		this.school = school;
-		this.certification = certification;
-		this.serviceAddress = serviceAddress;
-		this.sitterRate = sitterRate;
-	}
-
 	public Sitter(String email, String school, String certification, String serviceAddress, double sitterRate,
-			List<Skill> skillList) {
+			int visitPrice, int givePrice) {
 		super();
 		this.email = email;
 		this.school = school;
 		this.certification = certification;
 		this.serviceAddress = serviceAddress;
 		this.sitterRate = sitterRate;
-		this.skillList = skillList;
+		this.visitPrice = visitPrice;
+		this.givePrice = givePrice;
 	}
 
 	public String getEmail() {
@@ -77,19 +71,28 @@ public class Sitter implements Serializable {
 		this.sitterRate = sitterRate;
 	}
 
-	public List<Skill> getSkillList() {
+	public int getVisitPrice() {
+		return visitPrice;
+	}
+
+	public void setVisitPrice(int visitPrice) {
+		this.visitPrice = visitPrice;
+	}
+
+	public int getGivePrice() {
+		return givePrice;
+	}
+
+	public void setGivePrice(int givePrice) {
+		this.givePrice = givePrice;
+	}
+
+	public List<String> getSkillList() {
 		return skillList;
 	}
 
-	public void setSkillList(List<Skill> skillList) {
+	public void setSkillList(List<String> skillList) {
 		this.skillList = skillList;
-	}
-
-	@Override
-	public String toString() {
-		return "Sitter [email=" + email + ", school=" + school + ", certification=" + certification
-				+ ", serviceAddress=" + serviceAddress + ", sitterRate=" + sitterRate + ", skillList=" + skillList
-				+ "]";
 	}
 
 	@Override
@@ -98,12 +101,14 @@ public class Sitter implements Serializable {
 		int result = 1;
 		result = prime * result + ((certification == null) ? 0 : certification.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + givePrice;
 		result = prime * result + ((school == null) ? 0 : school.hashCode());
 		result = prime * result + ((serviceAddress == null) ? 0 : serviceAddress.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(sitterRate);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((skillList == null) ? 0 : skillList.hashCode());
+		result = prime * result + visitPrice;
 		return result;
 	}
 
@@ -126,6 +131,8 @@ public class Sitter implements Serializable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (givePrice != other.givePrice)
+			return false;
 		if (school == null) {
 			if (other.school != null)
 				return false;
@@ -143,6 +150,16 @@ public class Sitter implements Serializable {
 				return false;
 		} else if (!skillList.equals(other.skillList))
 			return false;
+		if (visitPrice != other.visitPrice)
+			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Sitter [email=" + email + ", school=" + school + ", certification=" + certification
+				+ ", serviceAddress=" + serviceAddress + ", sitterRate=" + sitterRate + ", visitPrice=" + visitPrice
+				+ ", givePrice=" + givePrice + ", skillList=" + skillList + "]";
+	}
+
 }

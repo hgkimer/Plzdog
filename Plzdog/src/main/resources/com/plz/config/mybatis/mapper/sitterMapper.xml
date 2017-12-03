@@ -12,6 +12,8 @@
 			   s.certification,
 			   s.service_address,
 			   s.sitter_rate,
+			   s.visit_price,
+			   s.give_price
 			   c.code,
 			   c.code_name,
 			   c.category	
@@ -26,6 +28,8 @@
 		<result column="certification" property="certification"/>
 		<result column="service_address" property="serviceAddress"/>
 		<result column="sitter_rate" property="sitterRate"/>
+		<result column="visit_price" property="visitPrice"/>
+		<result column="give_price" property="givePrice"/>
 	</resultMap>
 	
 	<!-- sitter -> skill -> code로 조회 -->
@@ -55,7 +59,7 @@
 	
 	<!-- ##########################데이터 변경 쿼리################################ -->
 	<insert id ="insertSitter" parameterType="Sitter">
-		insert into sitter values(#{email}, #{school}, #{certification}, #{serviceAddress}, #{sitterRate})
+		insert into sitter values(#{email}, #{school}, #{certification}, #{serviceAddress}, #{sitterRate}, #{visitPrice}, #{givePrice})
 	</insert>
 	
 	<update id="updateSitter" parameterType="Sitter">
@@ -64,6 +68,8 @@
 			    certification = #{certification},
 			    service_address = #{serviceAddress},
 			    sitter_rate = #{sitterRate}
+			    visit_price = #{visitPrice}
+			    give_price	= #{givePrice}
 		where 	email = #{email}
 	</update>
 	
