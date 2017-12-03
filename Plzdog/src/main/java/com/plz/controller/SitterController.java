@@ -143,9 +143,13 @@ public class SitterController {
 		return "sitter/sitter_delete_result.tiles";
 	}
 	
+	
 	@RequestMapping("/member/select_all_sitter")
 	public String selectAllSitter(ModelMap model) {
 		List<Member> sitterList = memberService.selectAllSitter();
+		for(Member member : sitterList) {
+			System.out.println(member);
+		}
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}

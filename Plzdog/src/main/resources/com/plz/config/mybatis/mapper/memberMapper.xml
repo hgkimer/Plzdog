@@ -28,8 +28,9 @@
 				d.species,
 				d.gender,
 				d.weight,
-				d.birth
-		from	member m, dog d
+				d.birth,
+				i.dog_image
+		from	member m, dog d, DOG_IMAGE i
 	</sql>
 	
 	<!-- member-resultmap -->
@@ -50,17 +51,22 @@
 			<result column="gender" property="gender"/>
 			<result column="weight" property="weight"/>
 			<result column="birth" property="birth"/>
+				<collection property="dogImage" ofType="DogImage">
+				<result column="dog_image" property="dogImage"/>
+				</collection>
 		</collection>
 	</resultMap>
 	
 	<select id="selectAllMemberJoinDog" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
+		and   m.member_enable = '1'
 	</select>
 	
 	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
 		where m.email = #{email}
 		and   m.email = d.email(+)
+		and	  d.dog_id = i.dog_id(+) 
 		and   m.member_enable = '1'
 	</select>
 	
@@ -71,7 +77,7 @@
 	
 	<resultMap type="member" id="member-dog-sitter-skill-resultmap" extends="member-dog-resultmap">
 		<association property="sitter" javaType="Sitter">
-			<id column="email" property="email"/>
+			<!-- <id column="email" property="email"/> -->
 			<result column="school" property="school"/>
 			<result column="certification" property="certification"/>
 			<result column="service_address" property="serviceAddress"/>
@@ -103,24 +109,27 @@
 				d.species,
 				d.gender,
 				d.weight,
-				d.birth
-		from	member m, dog d, sitter s, skill k, code c
+				d.birth,
+				i.dog_image
+		from	member m, dog d, dog_image i, sitter s, skill k, code c
 	</sql>
 	
 	<select id="selectAllMemberJoinDogSitterSkill" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
 		where	s.email = m.email 
-		and		s.email = d.email 
-		and		k.code_skill = c.code
+		and		s.email = d.email(+)
+		and	    d.dog_id = i.dog_id(+) 
 		and		s.email = k.email(+)
+		and		k.code_skill = c.code(+)
 	</select>
 	
 	<select id="selectMemberJoinDogSitterSkillByEmail" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
 		where	s.email = #{value} 
 		and		s.email = m.email 
-		and		s.email = d.email 
-		and 	k.code_skill = c.code 
+		and		s.email = d.email(+)
+		and	    d.dog_id = i.dog_id(+) 
+		and 	k.code_skill = c.code(+)
 		and 	s.email = k.email(+)
 	</select>
 	

@@ -139,4 +139,32 @@ select	m.email,
 		and     d.code_demand = c.code
 		and     r.email_sitter = 'sitter@naver.com'
 		
+		select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				s.school,
+				s.certification,
+				s.service_address,
+				s.sitter_rate,
+				c.code,
+				c.code_name,
+				c.category,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth,
+				i.dog_image
+		from	member m, dog d, dog_image i, sitter s, skill k, code c
+		where	s.email = m.email 
+		and		s.email = d.email(+)
+		and	    d.dog_id = i.dog_id(+) 
+		and		s.email = k.email(+)
+		and		k.code_skill = c.code(+)
+		
+		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'

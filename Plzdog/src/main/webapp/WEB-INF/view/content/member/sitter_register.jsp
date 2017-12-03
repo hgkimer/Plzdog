@@ -52,7 +52,7 @@
 </head>
 <body >
 <div class="every">
-	<form action="${initParam.rootPath }/member/insert_sitter.do" method="post" class="every">
+	<form action="${initParam.rootPath }/member/insert_sitter.do" method="post" class="every" enctype="multipart/form-data">
 		<sec:csrfInput/>
 		
 		<div class="form-group">
