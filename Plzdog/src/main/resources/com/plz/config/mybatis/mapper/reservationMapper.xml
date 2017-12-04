@@ -5,10 +5,10 @@
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
 	<sql id="simple-res-sitter-sql">
 		select	r.res_id,
-				r.res_type,
 				r.res_sdate,
 				r.res_edate,
 				r.price,
+				r.res_status,
 				r.email,
 				r.email_sitter,
 				i.dog_image,
@@ -22,11 +22,11 @@
 	<!-- reservation resultmap -->
 	<resultMap id="reservation-resultmap" type="Reservation">
 		<id column="res_id" property="resId"/>
-		<result column="res_type" property="resType"/>
 		<result column="res_sdate" property="resSDate"/>
 		<result column="res_edate" property="resEDate"/>
 		<result column="price" property="price"/>
 		<result column="res_contents" property="resContents"/>
+		<result column="res_status" property="resStatus"/>
 		<result column="email" property="memberEmail"/>
 		<result column="email_sitter" property="sitterEmail"/>
 	</resultMap>
@@ -52,11 +52,11 @@
 	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
 	<sql id="detail-res-sql">
 		select	r.res_id,
-				r.res_type,
 				r.res_sdate,
 				r.res_edate,
 				r.res_contents,
 				r.price,
+				r.res_status,
 				r.email,
 				r.email_sitter,
 				c.code_name,
@@ -87,10 +87,10 @@
 	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
 	<sql id="simple-res-member-sql">
 		select	r.res_id,
-				r.res_type,
 				r.res_sdate,
 				r.res_edate,
 				r.price,
+				r.res_status,
 				r.email,
 				r.email_sitter,
 				s.member_name,
@@ -127,9 +127,9 @@
 	<!-- 관리자 페이지 - 예약 조회 - 간단히 보기 -->
 	<sql id="simple-res-admin-sql">
 		select	r.res_id,
-				r.res_type,
 				r.res_sdate,
 				r.res_edate,
+				r.res_status,
 				r.email,
 				r.email_sitter,
 				m.member_image,
@@ -162,11 +162,11 @@
 	
 	<sql id="detail-res-admin-sql">
 		select	r.res_id,
-				r.res_type,
 				r.res_sdate,
 				r.res_edate,
-				r.res_contents,
 				r.price,
+				r.res_contents,
+				r.res_status,
 				r.email,
 				r.email_sitter,
 				c.code_name
@@ -198,10 +198,10 @@
 	-->
 	<sql id="reservation-sql">
 		select  res_id,
-			    res_type,
 			    res_sdate,
 			    res_edate,
 			    res_contents,
+			    res_status,
 			    email,
 			    email_sitter
 		from    reservation
@@ -209,10 +209,10 @@
 	
 	<sql id="reservation-join-sales-sql">
 		select  r.res_id,
-			    r.res_type,
 			    r.res_sdate,
 			    r.res_edate,
 			    r.res_contents,
+			    r.res_status,
 			    r.email,
 			    r.email_sitter,
 			    s.total,
@@ -274,17 +274,17 @@
 		<selectKey keyProperty="resId" resultType="_int" order="BEFORE">
         	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
-		insert into reservation values(#{resId}, #{resType}, #{resSDate}, 
-		#{resEDate}, #{price},#{resContents},#{memberEmail},#{sitterEmail})
+		insert into reservation values(#{resId}, #{resSDate}, 
+		#{resEDate}, #{price},#{resContents}, #{resStatus}, #{memberEmail},#{sitterEmail})
 	</insert>
 	
 	<!-- 예약ID를 통해 수정한다. -->
 	<update id="updateReservation" parameterType="Reservation">
 		update   reservation 	
-		set 	 res_type = #{resType},
 			     res_sDate = #{resSDate},
 			     res_eDate = #{resEDate},
 			     res_contents = #{resContents},
+		set 	 res_status = #{resStatus},
 			     email = #{memberEmail},
 			     email_sitter = #{sitterEmail}
 		where    res_id = #{resId}

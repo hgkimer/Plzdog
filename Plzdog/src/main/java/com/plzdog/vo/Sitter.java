@@ -3,9 +3,12 @@ package com.plzdog.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Sitter implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private String email;
 	private String school;
 	private String certification;
@@ -14,14 +17,16 @@ public class Sitter implements Serializable {
 	private int visitPrice;
 	private int givePrice;
 
+	//시터가 가지고 있는 기술 리스트
 	private List<String> skillList;
-
+	//시터의 증명서 이미지
+	private MultipartFile certificationImage;
+	
 	public Sitter() {
 	}
 
 	public Sitter(String email, String school, String certification, String serviceAddress, double sitterRate,
 			int visitPrice, int givePrice) {
-		super();
 		this.email = email;
 		this.school = school;
 		this.certification = certification;
@@ -95,11 +100,20 @@ public class Sitter implements Serializable {
 		this.skillList = skillList;
 	}
 
+	public MultipartFile getCertificationImage() {
+		return certificationImage;
+	}
+
+	public void setCertificationImage(MultipartFile certificationImage) {
+		this.certificationImage = certificationImage;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((certification == null) ? 0 : certification.hashCode());
+		result = prime * result + ((certificationImage == null) ? 0 : certificationImage.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + givePrice;
 		result = prime * result + ((school == null) ? 0 : school.hashCode());
@@ -125,6 +139,11 @@ public class Sitter implements Serializable {
 			if (other.certification != null)
 				return false;
 		} else if (!certification.equals(other.certification))
+			return false;
+		if (certificationImage == null) {
+			if (other.certificationImage != null)
+				return false;
+		} else if (!certificationImage.equals(other.certificationImage))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -159,7 +178,8 @@ public class Sitter implements Serializable {
 	public String toString() {
 		return "Sitter [email=" + email + ", school=" + school + ", certification=" + certification
 				+ ", serviceAddress=" + serviceAddress + ", sitterRate=" + sitterRate + ", visitPrice=" + visitPrice
-				+ ", givePrice=" + givePrice + ", skillList=" + skillList + "]";
+				+ ", givePrice=" + givePrice + ", skillList=" + skillList + ", certificationImage=" + certificationImage
+				+ "]";
 	}
-
+	
 }
