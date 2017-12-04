@@ -24,7 +24,7 @@
 	
 	.every {
 		width:700px;
-		height:500px;
+		height:650px;
 		margin-top:30px;
 	}
 	
@@ -81,13 +81,13 @@
 			<label for="givePrice">위탁 돌봄 희망 가격</label>
 			<input type="number" name="givePrice" id="givePrice" class="form-controller" required="required">
 		</div>
-		<div class="form-check" style="float:right; font-size:15px; font-weight:bold; line-height:30px; margin-bottom:20px;">
+		<div class="form-check-skill" style="float:left; font-size:15px; font-weight:bold; line-height:30px; margin-bottom:20px;">
 			<label class="form-check-label">보유 기술 목록 : </label><br>
 			<c:forEach var="skill" items="${applicationScope.skillList }">
 			<input type="checkbox" name="skill" value="${skill.code }" class="form-check-input">${skill.codeName }<br>	
 		</c:forEach>
 		</div>
-		<div class="form-check">
+		<div class="form-check-en" style="float:left; font-size:15px; font-weight:bold; line-height:30px; margin-bottom:20px;">
 			<label class="form-check-label">보유 환경 목록 : </label><br>
 			<c:forEach var="en" items="${applicationScope.enList }">
 			<input type="checkbox" name="skill" value="${en.code }" class="form-check-input">${en.codeName }<br>	
