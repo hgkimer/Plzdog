@@ -14,6 +14,8 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
+select * from resdetail;
+select * from waiting;
 
 insert into AUTHORITY values('zxc','ROLE_SITTER');
 
@@ -24,7 +26,7 @@ insert into AUTHORITY values('zxc','ROLE_SITTER');
 
 insert into AUTHORITY values('admin@naver.com','ROLE_ADMIN');
 
-insert into AUTHORITY values('sitter@naver.com','ROLE_SITTER');
+insert into AUTHORITY values('admin1@naver.com','ROLE_SITTER');
 
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'멍멍이','비숑','암컷',3.5,'20100608', 'sitter@naver.com');
 

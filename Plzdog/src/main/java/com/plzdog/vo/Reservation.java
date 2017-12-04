@@ -5,18 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	//★★★★★예약 상태(1 : 예약 대기 / 2 : 예약 확정 / 3: 결제 완료
+	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resSDate;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resEDate;
 	private int price;
 	private String resContents;
-	//★★★★★예약 상태(1 : 예약 대기 / 2 : 예약 확정 / 3: 결제 완료
 	private String resStatus; 
 	private String memberEmail;
 	private String sitterEmail;
@@ -29,7 +31,6 @@ public class Reservation implements Serializable {
 	
 	public Reservation() {}
 	
-	//예약 ID는 시퀀스이므로 객체를 만들때는 Emai로 조회해서 쓴다.
 	public Reservation(int resId, Date resSDate, Date resEDate, int price, String resContents, String resStatus,
 			String memberEmail, String sitterEmail) {
 		this.resId = resId;
@@ -41,9 +42,9 @@ public class Reservation implements Serializable {
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
 	}
-	
+
 	public Reservation(int resId, Date resSDate, Date resEDate, int price, String resContents, String resStatus,
-			String memberEmail, String sitterEmail, List<ResDetail> resDetail, List<Care> careList,
+			String memberEmail, String sitterEmail, List<ResDetail> resDetailList, List<Care> careList,
 			List<Demand> demandList, Sales sales, Member member) {
 		this.resId = resId;
 		this.resSDate = resSDate;
@@ -53,19 +54,11 @@ public class Reservation implements Serializable {
 		this.resStatus = resStatus;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
-		this.resDetailList = resDetail;
+		this.resDetailList = resDetailList;
 		this.careList = careList;
 		this.demandList = demandList;
 		this.sales = sales;
 		this.member = member;
-	}
-
-	public List<ResDetail> getResDetailList() {
-		return resDetailList;
-	}
-
-	public void setResDetailList(List<ResDetail> resDetailList) {
-		this.resDetailList = resDetailList;
 	}
 
 	public int getResId() {
@@ -132,12 +125,12 @@ public class Reservation implements Serializable {
 		this.sitterEmail = sitterEmail;
 	}
 
-	public List<ResDetail> getResDetail() {
+	public List<ResDetail> getResDetailList() {
 		return resDetailList;
 	}
 
-	public void setResDetail(List<ResDetail> resDetail) {
-		this.resDetailList = resDetail;
+	public void setResDetailList(List<ResDetail> resDetailList) {
+		this.resDetailList = resDetailList;
 	}
 
 	public List<Care> getCareList() {
@@ -172,14 +165,6 @@ public class Reservation implements Serializable {
 		this.member = member;
 	}
 	
-	@Override
-	public String toString() {
-		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
-				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
-				+ ", sitterEmail=" + sitterEmail + ", resDetail=" + resDetailList + ", careList=" + careList
-				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + "]";
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -270,4 +255,13 @@ public class Reservation implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
+				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
+				+ ", sitterEmail=" + sitterEmail + ", resDetailList=" + resDetailList + ", careList=" + careList
+				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + "]";
+	}
+	
 }
