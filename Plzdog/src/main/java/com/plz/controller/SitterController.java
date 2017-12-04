@@ -143,20 +143,7 @@ public class SitterController {
 		return "sitter/sitter_delete_result.tiles";
 	}
 	
-	/**
-	 * 모든 시터 조회(skill, dog 포함)
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/member/select_all_sitter")
-	public String selectAllSitter(ModelMap model) {
-		List<Member> sitterList = memberService.selectAllSitter();
-		for(Member member : sitterList) {
-			System.out.println(member);
-		}
-		model.addAttribute("sitterList", sitterList);
-		return "sitter/sitter_select_result.tiles";
-	}
+	
 	
 	@RequestMapping("/member/select_sitter_name")
 	public String selectSitterByName(@RequestParam String name, ModelMap model) {
