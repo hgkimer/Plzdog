@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript">
+
 function changeStatus(){
 	var status = '${param.sitterEmail}';
-	alert(status);
 	if(status){
 		document.getElementById("resStatus").value = 'res-3';
 		alert('변경됨');
@@ -28,7 +28,7 @@ function changeStatus(){
 					<option value="${service.code }">${service.codeName}</option>
 				</c:forEach>
 			</select> 
-
+			
 			<label for="resSDate">시작 날짜</label> 
 			<input type="date" name="resSDate" required />
 		
@@ -47,7 +47,7 @@ function changeStatus(){
 			</c:forEach>
 		<input type="text"
 			value='<sec:authentication property="principal.email"/>'
-			name="memberEmail" /><br>
+			name="memberEmail" id="memberEmail"/><br>
 		<c:if test='${param.sitterEmail != null }'>
 			<input type="text" value='${param.sitterEmail }' name="sitterEmail" />
 		</c:if>

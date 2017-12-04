@@ -16,7 +16,7 @@ search_reservation_result.do<br>
 내가 견주<br>
 <c:forEach var="res" items="${requestScope.mresList }">
 	예약 번호 : ${res.resId }<br>
-	예약 상태 : ${res.resType }<br>
+	예약 상태 : ${res.resStatus }<br>
 	의뢰 상세 : ${res.resContents }<br>
 	견주 이메일 : ${res.memberEmail }<br>
 	시터 이메일  : ${res.sitterEmail }<br>
@@ -31,7 +31,7 @@ search_reservation_result.do<br>
 
 <c:forEach var="res" items="${requestScope.sresList }">
 	예약 번호 : ${res.resId }<br>
-	예약 상태 : ${res.resType }<br>
+	예약 상태 : ${res.resStatus }<br>
 	의뢰 상세 : ${res.resContents }<br>
 	견주 이메일 : ${res.memberEmail }<br>
 	시터 이메일  : ${res.sitterEmail }<br>

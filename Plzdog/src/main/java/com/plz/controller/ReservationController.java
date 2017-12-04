@@ -2,6 +2,7 @@ package com.plz.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.plz.service.DogService;
+import com.plz.service.ResDetailService;
 import com.plz.service.ReservationService;
+import com.plzdog.vo.Dog;
 import com.plzdog.vo.Reservation;
 
 
@@ -19,15 +23,17 @@ import com.plzdog.vo.Reservation;
 public class ReservationController {
 	@Autowired
 	private ReservationService service;
+	@Autowired
+	private DogService dogService;
+	@Autowired
+	private ResDetailService resDetailService;
 
-	/**
-	 * 예약 관련 Controller 
-	 * 1. 예약 등록(견주, 시터) 
-	 * 2. 예약 상태 변경==> 
-	 * 3. 예약 전체(로그인한 Email로 /견주,시터) 조회
-	 * 4. 예약 삭제 
-	 * 5.
-	 */
+
+	@RequestMapping("/member/selectDogInReservation")
+	public String selectDogInReservation(@RequestParam int resId, @RequestParam(name="dogId") List<Integer> dogIdList) {
+		resDetailService.addResDetail(resId, dogIdList);
+		return "member/reservation_add_success.tiles";
+	}
 	
 	/**
 	 * 1.예약 등록 Controller
@@ -38,14 +44,18 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/reservation_add")
-	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList) {
+	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList, HttpSession session) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
 		System.out.println(res);
 		System.out.println(demandList);
 		service.addReservation(res, demandList);
+		List<Dog> dogList = dogService.selectDogByEmail(res.getMemberEmail());
+		session.setAttribute("dogList", dogList);
+		session.setAttribute("resId", res.getResId());
+		session.setAttribute("reservation", res);
 		//3. View로 이동
-		return "member/reservation_add_success.tiles";
+		return "member/select_dog_reservation.tiles";
 	}
 	
 	/**

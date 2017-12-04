@@ -18,14 +18,14 @@
 	<insert id="insertResDetail" parameterType="ResDetail">
 		INSERT INTO RESDETAIL
 		VALUES( #{resId},
-		#{dogId}
+				#{dogId}
 		)
 	</insert>
 	<!-- 예약번호화 같은 예약 상세 정보의 강아지 아이디를 변경하는 sql -->
 	<update id="updateResDetail" parameterType="ResDetail">
 		UPDATE RESDETAIL
-		SET dog_id = ${dogId}
-		WHERE res_id = ${resId}
+		SET dog_id = #{dogId}
+		WHERE res_id = #{resId}
 	</update>
 	<!-- 예약번호로 예약 상세 정보를 삭제하는 sql -->
 	<delete id="deleteResDetailByResId" parameterType="_int">
