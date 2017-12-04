@@ -19,6 +19,8 @@
 	####################################################################################################
 	-->
 	
+	<!-- test sidebar -->
+	<mvc:view-controller path="/test/sidebar.do" view-name="test/sidebar.tiles"/>
 	<!-- 메인 페이지 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles" />
 	<!-- 회원가입 페이지 -->
