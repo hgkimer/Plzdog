@@ -64,6 +64,7 @@ DROP TABLE WAITING
 -- 예약 상세 테이블
 DROP TABLE RESDETAIL 
 	CASCADE CONSTRAINTS;
+	
 --------------------------------------------------
 --create
 --시터 대기자
@@ -567,7 +568,8 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
-
+select * from resdetail;
+select * from waiting;
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
 where m.email = s.email and sk.email = s.email and code_skill = code;

@@ -1,5 +1,6 @@
 package com.plz.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.AuthorityService;
@@ -80,14 +82,21 @@ public class SitterController {
 	 * @return
 	 */
 	@RequestMapping("/member/insert_sitter")
-	public String insertSitter(@ModelAttribute Sitter sitter, ModelMap model, @RequestParam List<String>skillList) {
+	public String insertSitter(@ModelAttribute Sitter sitter, HttpServletRequest request, @RequestParam(name="skill") List<String>skillList) 
+	throws IllegalStateException, IOException{
+		System.out.println(skillList);
 		System.out.println(sitter);
-		sitterService.insertSitter(sitter);
-		sitter.setSkillList(skillList);
-		System.out.println(sitter+"2");
+		MultipartFile certificationImage = sitter.getCertificationImage();
+		if(certificationImage!=null && !certificationImage.isEmpty()) {
+			//사진 저장할 디렉토리 
+			String dir = request.getServletContext().getRealPath("/certificationImage");
+			String fileName = certificationImage.getOriginalFilename();
+			File upImage = new File(dir, fileName);
+			certificationImage.transferTo(upImage);
+			sitter.setCertification(fileName);
+		}
+		sitterService.insertSitter(sitter, skillList);
 		waitingService.insertWaiting(sitter.getEmail());
-		System.out.println(sitter+"3");
-		model.addAttribute("sitter", sitter);
 		return "sitter/sitter_register_result.tiles";
 	}
 	

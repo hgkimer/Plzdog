@@ -6,21 +6,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+function changeStatus(){
+	var status = '${param.sitterEmail}';
+	alert(status);
+	if(status){
+		document.getElementById("resStatus").value = 'res-3';
+		alert('변경됨');
+	}
+}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
 		<h2>예약 등록</h2>
 	<form action="${initParam.rootPath }/member/reservation_add.do"
-		method="post">
+		method="post" onsubmit="changeStatus();">
 		<sec:csrfInput />
 			<label for="demand">서비스 종류</label> <select name="demand" required>
 				<c:forEach var="service" items="${applicationScope.serviceList }">
 					<option value="${service.code }">${service.codeName}</option>
 				</c:forEach>
-			</select> <input type="hidden" name="resType" value="1" />
+			</select> 
 
-			<label for="resSDate">시작 날짜</label> <input type="date"
-				name="resSDate" required />
+			<label for="resSDate">시작 날짜</label> 
+			<input type="date" name="resSDate" required />
 		
 			<label for="resSDate">끝날짜</label> 
 			<input type="date" name="resEDate" required />
@@ -29,6 +39,7 @@
 			<textarea rows="5" cols="30" name="resContents" required
 			placeholder="의뢰 내용을 입력하세요"></textarea>
 		
+			<input type="hidden" name="resStatus" id='resStatus' value="res-1" />
 		<br> 
 		<label for="demand">요구사항 : </label><br>
 			<c:forEach var="demand" items="${applicationScope.skillList }">

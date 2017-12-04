@@ -36,7 +36,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 	@Autowired
 	private PasswordEncoder encoder;
 	//문자열을 암호화 - encode()
-	//문자열과 암호화된 문자열을 비고 - matches(비교대상문자열, 암호화된문자열) : boolean
+	//문자열과 암호화된 문자열을 비고 - matches(비교대상문자열, 암호화된문자열) : boole an
 	
 	/*
 	 	- Authentication : 인증/권한 정보를 가지는 객체 

@@ -54,35 +54,43 @@
 <div class="every">
 	<form action="${initParam.rootPath }/member/insert_sitter.do" method="post" class="every" enctype="multipart/form-data">
 		<sec:csrfInput/>
-		
+		<input type="hidden" name="email" value="<sec:authentication property="principal.email"/>">
 		<div class="form-group">
 			<label for="school">학교이름 : </label>
 			<input type="text" name="school" id="school" class="form-controller" required="required">
 		</div>
 		<div class="form-group">
 			<label for="certificate" style="float:left;">증명서/면허증 : </label>
-			<input style="float:left; height:46px;" type="file" name="certification" id="certification" class="form-controller" id="file" required="required"/>
+			<input style="float:left; height:46px;" type="file" name="certificationImage" id="certification" class="form-controller" id="file" required="required"/>
 		</div>
 		<div class="form-group">
 			<label for="serviceAddress">서비스 가능지역 : </label>
 			<input type="text" name="serviceAddress" id="serviceAddress" class="form-controller" required="required">
 		</div>
-		<div class="form-check">
-			<label class="form-check-label">보유 기술 목록 : </label><br>
-			<c:forEach var="skill" items="${applicationScope.skillList }">
-			<input type="checkbox" name="skillList" value="${skill.code }" class="form-check-input">${skill.codeName }<br>	
-		</c:forEach>
-		</div>
+		<input type="hidden" name="sitterRate" value="0">
 		<div class="form-group">
-			<label for="serviceAddress">방문 돌봄 희망 가격</label>
+			<label for="visitPrice">방문 돌봄 희망 가격</label>
 			<input type="number" name="visitPrice" id="visitPrice" class="form-controller" required="required">
 		</div>
 		<div class="form-group">
-			<label for="serviceAddress">위탁 돌봄 희망 가격</label>
+			<label for="givePrice">위탁 돌봄 희망 가격</label>
 			<input type="number" name="givePrice" id="givePrice" class="form-controller" required="required">
 		</div>
-		<input type="hidden" name="email" value="<sec:authentication property="principal.email"/>">
-		<input type="hidden" name="sitterRate" value="0">
+		<div class="form-check">
+			<label class="form-check-label">보유 기술 목록 : </label><br>
+			<c:forEach var="skill" items="${applicationScope.skillList }">
+			<input type="checkbox" name="skill" value="${skill.code }" class="form-check-input">${skill.codeName }<br>	
+		</c:forEach>
+		</div>
+		<div class="form-check">
+			<label class="form-check-label">보유 환경 목록 : </label><br>
+			<c:forEach var="en" items="${applicationScope.enList }">
+			<input type="checkbox" name="skill" value="${en.code }" class="form-check-input">${en.codeName }<br>	
+		</c:forEach>
+		</div>
+		
+		
+	
 		<div class="btn">
 			<input type="submit" value="전송" id="sitterBtn" name="sitterBtn" class="btn btn-default">
 		</div>

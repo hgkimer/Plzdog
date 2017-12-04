@@ -5,19 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
 	//★★★★★예약 상태(1 : 예약 대기 / 2 : 예약 확정 / 3: 결제 완료
-	private int resType; 
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resSDate;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resEDate;
 	private int price;
 	private String resContents;
+	private String resStatus; 
 	private String memberEmail;
 	private String sitterEmail;
 	
@@ -28,26 +29,17 @@ public class Reservation implements Serializable {
 	private Member member;
 	
 	public Reservation() {}
-	
-	//예약 ID는 시퀀스이므로 객체를 만들때는 Emai로 조회해서 쓴다.
-	public Reservation(int resType, Date resSDate, Date resEDate, int price, String resContents, String memberEmail,
-			String sitterEmail) {
-		super();
-		this.resType = resType;
+
+	public Reservation(int resId, Date resSDate, Date resEDate, int price, String resContents, String resStatus,
+			String memberEmail, String sitterEmail) {
+		this.resId = resId;
 		this.resSDate = resSDate;
 		this.resEDate = resEDate;
 		this.price = price;
 		this.resContents = resContents;
+		this.resStatus = resStatus;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 	public int getResId() {
@@ -56,14 +48,6 @@ public class Reservation implements Serializable {
 
 	public void setResId(int resId) {
 		this.resId = resId;
-	}
-
-	public int getResType() {
-		return resType;
-	}
-
-	public void setResType(int resType) {
-		this.resType = resType;
 	}
 
 	public Date getResSDate() {
@@ -82,12 +66,28 @@ public class Reservation implements Serializable {
 		this.resEDate = resEDate;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	public String getResContents() {
 		return resContents;
 	}
 
 	public void setResContents(String resContents) {
 		this.resContents = resContents;
+	}
+
+	public String getResStatus() {
+		return resStatus;
+	}
+
+	public void setResStatus(String resStatus) {
+		this.resStatus = resStatus;
 	}
 
 	public String getMemberEmail() {
@@ -106,27 +106,6 @@ public class Reservation implements Serializable {
 		this.sitterEmail = sitterEmail;
 	}
 
-
-	public Sales getSales() {
-		return sales;
-	}
-
-	public void setSales(Sales sales) {
-		this.sales = sales;
-	}
-	
-	public Dog getDog() {
-		return dog;
-	}
-
-	public void setDog(Dog dog) {
-		this.dog = dog;
-	}
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public List<Care> getCareList() {
 		return careList;
 	}
@@ -142,21 +121,29 @@ public class Reservation implements Serializable {
 	public void setDemandList(List<Demand> demandList) {
 		this.demandList = demandList;
 	}
-	
+
+	public Sales getSales() {
+		return sales;
+	}
+
+	public void setSales(Sales sales) {
+		this.sales = sales;
+	}
+
+	public Dog getDog() {
+		return dog;
+	}
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+
 	public Member getMember() {
 		return member;
 	}
 
 	public void setMember(Member member) {
 		this.member = member;
-	}
-
-	@Override
-	public String toString() {
-		return "Reservation [resId=" + resId + ", resType=" + resType + ", resSDate=" + resSDate + ", resEDate="
-				+ resEDate + ", price=" + price + ", resContents=" + resContents + ", memberEmail=" + memberEmail
-				+ ", sitterEmail=" + sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales="
-				+ sales + ", dog=" + dog + ", member=" + member + "]";
 	}
 
 	@Override
@@ -173,7 +160,7 @@ public class Reservation implements Serializable {
 		result = prime * result + ((resEDate == null) ? 0 : resEDate.hashCode());
 		result = prime * result + resId;
 		result = prime * result + ((resSDate == null) ? 0 : resSDate.hashCode());
-		result = prime * result + resType;
+		result = prime * result + ((resStatus == null) ? 0 : resStatus.hashCode());
 		result = prime * result + ((sales == null) ? 0 : sales.hashCode());
 		result = prime * result + ((sitterEmail == null) ? 0 : sitterEmail.hashCode());
 		return result;
@@ -232,7 +219,10 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!resSDate.equals(other.resSDate))
 			return false;
-		if (resType != other.resType)
+		if (resStatus == null) {
+			if (other.resStatus != null)
+				return false;
+		} else if (!resStatus.equals(other.resStatus))
 			return false;
 		if (sales == null) {
 			if (other.sales != null)
@@ -247,5 +237,14 @@ public class Reservation implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
+				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
+				+ ", sitterEmail=" + sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales="
+				+ sales + ", dog=" + dog + ", member=" + member + "]";
+	}
+	
+	
 	
 }
