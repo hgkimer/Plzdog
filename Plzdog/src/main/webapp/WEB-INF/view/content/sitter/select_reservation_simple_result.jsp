@@ -77,9 +77,9 @@
 <div class="all">
 	<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
 		<div class="dogImage">
-				<ul class="nav">
-					회원 이미지 : <img src="${initParam.rootPath }/memberImage/${requestSocpe.member.memberImage }" width="350px"><br>
-				</ul>
+			<ul class="nav">
+				회원 이미지 : <img src="${initParam.rootPath }/memberImage/${requestSocpe.member.memberImage }" width="350px"><br>
+			</ul>
 		</div>
 		
 		<div class="dogOwner">
