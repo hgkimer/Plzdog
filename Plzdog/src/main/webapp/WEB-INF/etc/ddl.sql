@@ -137,8 +137,8 @@ CREATE TABLE SITTER (
 	CERTIFICATION VARCHAR2(100) NOT NULL, /* 증명서/면허증 */
 	SERVICE_ADDRESS CLOB NOT NULL, /* 서비스가능지역 */
 	SITTER_RATE NUMBER(2, 1), /* 평점 */
-	VISIT_PRICE NUMBER NOT NULL, /* 방문돌봄가격 */
-	GIVE_PRICE NUMBER NOT NULL, /* 위탁돌봄가격 */
+	VISIT_PRICE NUMBER(10) NOT NULL, /* 방문돌봄가격 */
+	GIVE_PRICE NUMBER(10) NOT NULL, /* 위탁돌봄가격 */
 	CONSTRAINT PK_SITTER PRIMARY KEY(EMAIL),
 	CONSTRAINT FK_SITTER_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade
 );
@@ -245,16 +245,19 @@ insert into member values('lee@naver.com','이효주','1111','서울','광진',1
 insert into member values('yoon@naver.com','윤규석','1111','제주도','서귀포',41523,'image3','010-6412-9223',1);
 insert into member values('jang@naver.com','이수일','1111','서울','마포',12345,'image4','010-9123-0223',1);
 -- sitter용
-insert into member values('soo1@naver.com','강시터','1111','서울','마포',12345,'image4','010-1234-0223',1);
-insert into member values('soo2@naver.com','허시터','1111','서울','상암',12345,'image4','010-2344-0223',1);
-insert into member values('soo3@naver.com','김시터','1111','서울','구리',12345,'image4','010-2343-0223',1);
-insert into member values('soo4@naver.com','이시터','1111','서울','경희대',12345,'image4','010-9344-0223',1);
-insert into member values('soo5@naver.com','박시터','1111','서울','잠실',12345,'image4','010-5454-0223',1);
-insert into member values('soo6@naver.com','장시터','1111','서울','천호',12345,'image4','010-6765-0223',1);
-insert into member values('soo7@naver.com','최시터','1111','서울','강남',12345,'image4','010-3323-0223',1);
-insert into member values('soo8@naver.com','진시터','1111','서울','원효',12345,'image4','010-2311-0223',1);
-insert into member values('soo9@naver.com','차시터','1111','서울','올림픽대교',12345,'image4','010-3455-0223',1);
-insert into member values('soo10@naver.com','오시터','1111','서울','연희동',12345,'image4','010-3433-0223',1);
+insert into member values('soo1@naver.com','강시터','1111','서울','마포',12345,'시터1.jpg','010-1234-0223',1);
+insert into member values('soo2@naver.com','허시터','1111','서울','상암',12345,'시터2.jpg','010-2344-0223',1);
+insert into member values('soo3@naver.com','김시터','1111','서울','구리',12345,'시터3.jpg','010-2343-0223',1);
+insert into member values('soo4@naver.com','이시터','1111','서울','경희대',12345,'시터4.jpg','010-9344-0223',1);
+insert into member values('soo5@naver.com','박시터','1111','서울','잠실',12345,'시터5.jpg','010-5454-0223',1);
+insert into member values('soo6@naver.com','장시터','1111','서울','천호',12345,'시터6.jpg','010-6765-0223',1);
+insert into member values('soo7@naver.com','최시터','1111','서울','강남',12345,'시터7.jpg','010-3323-0223',1);
+insert into member values('soo8@naver.com','진시터','1111','서울','원효',12345,'시터8.jpg','010-2311-0223',1);
+insert into member values('soo9@naver.com','차시터','1111','서울','올림픽대교',12345,'시터9.jpg','010-3455-0223',1);
+insert into member values('soo10@naver.com','오시터','1111','서울','연희동',12345,'시터10.jpg','010-3433-0223',1);
+
+-- 비밀번호 1111 통일
+update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u';
 
 -- 권한
 -- 관리자
@@ -327,16 +330,16 @@ insert into code values('service-2', '위탁돌봄', '서비스');
 ----------------------------------------------------------------------------------
 
 --강아지
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); --1
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100711', 'jang@naver.com'); --2
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'가지','진돗개','수컷',5.5,'20100812', 'jang@naver.com'); --3
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'토마토','진돗개','수컷',5.5,'20100913', 'jang@naver.com'); --4
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'가자미','진돗개','수컷',5.5,'20101014', 'lee@naver.com');  --5
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순이','진돗개','수컷',5.5,'20101115', 'lee@naver.com');  --6
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); -- 1
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100711', 'jang@naver.com'); -- 2
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'가지','진돗개','수컷',5.5,'20100812', 'jang@naver.com'); -- 3
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'토마토','진돗개','수컷',5.5,'20100913', 'jang@naver.com'); -- 4
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'가자미','진돗개','수컷',5.5,'20101014', 'lee@naver.com');  -- 5
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순이','진돗개','수컷',5.5,'20101115', 'lee@naver.com');  -- 6
 INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20101216', 'lee@naver.com');  -- 7
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100117', 'yoon@naver.com');  --8
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100218', 'yoon@naver.com'); --9
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100319', 'yoon@naver.com'); --10
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100117', 'yoon@naver.com');  -- 8
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100218', 'yoon@naver.com'); -- 9
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100319', 'yoon@naver.com'); -- 10
 
 -- 강아지정보
 INSERT INTO DOGINFO VALUES(1 ,'dog-1');
