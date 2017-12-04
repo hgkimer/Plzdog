@@ -2,6 +2,8 @@ package com.plz.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.plz.service.DogService;
+import com.plz.service.ResDetailService;
 import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
+import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
@@ -21,6 +26,16 @@ public class ReservationController {
 	@Autowired
 	private ReservationService service;
 	@Autowired
+	private DogService dogService;
+	@Autowired
+	private ResDetailService resDetailService;
+
+
+	@RequestMapping("/member/selectDogInReservation")
+	public String selectDogInReservation(@RequestParam int resId, @RequestParam(name="dogId") List<Integer> dogIdList) {
+		resDetailService.addResDetail(resId, dogIdList);
+		return "member/reservation_add_success.tiles";
+	}
 	private MemberService memberService;
 	
 	/**
@@ -41,14 +56,18 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/reservation_add")
-	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList) {
+	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList, HttpSession session) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
 		System.out.println(res);
 		System.out.println(demandList);
 		service.addReservation(res, demandList);
+		List<Dog> dogList = dogService.selectDogByEmail(res.getMemberEmail());
+		session.setAttribute("dogList", dogList);
+		session.setAttribute("resId", res.getResId());
+		session.setAttribute("reservation", res);
 		//3. View로 이동
-		return "member/reservation_add_success.tiles";
+		return "member/select_dog_reservation.tiles";
 	}
 	
 	/**
