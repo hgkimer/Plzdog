@@ -19,6 +19,7 @@ public class Member implements Serializable {
 	private int memberEnable;
 	
 	//이미지 저장
+	private List<Authority> authorityList; //권한
 	private MultipartFile imageMember;
 	private Sitter sitter; // 시터
 	private List<Code> skillList;
@@ -46,6 +47,7 @@ public class Member implements Serializable {
 	//등록한 이미지 값이 없을때 사용하는 생성자.
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
 			String phoneNum, int memberEnable) {
+		super();
 		this.email = email;
 		this.memberName = memberName;
 		this.password = password;
@@ -55,6 +57,7 @@ public class Member implements Serializable {
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
 	}
+	
 	// 전체 회원 기본 정보를 갖는 생성자
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress, int zipcode,
 			String memberImage, String phoneNum, int memberEnable) {
@@ -68,9 +71,11 @@ public class Member implements Serializable {
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
 	}
-	
+
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress,
-			String memberImage, int zipcode, String phoneNum, int memberEnable, MultipartFile imageMember) {
+			String memberImage, int zipcode, String phoneNum, int memberEnable, List<Authority> authorityList,
+			MultipartFile imageMember, Sitter sitter, List<Code> skillList, List<Review> reviewList,
+			List<Reservation> resList, List<Dog> dogList) {
 		super();
 		this.email = email;
 		this.memberName = memberName;
@@ -81,7 +86,21 @@ public class Member implements Serializable {
 		this.zipcode = zipcode;
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
+		this.authorityList = authorityList;
 		this.imageMember = imageMember;
+		this.sitter = sitter;
+		this.skillList = skillList;
+		this.reviewList = reviewList;
+		this.resList = resList;
+		this.dogList = dogList;
+	}
+	
+	public List<Authority> getauthorityList() {
+		return authorityList;
+	}
+
+	public void setauthorityList(List<Authority> authorityList) {
+		this.authorityList = authorityList;
 	}
 
 	public String getEmail() {
@@ -208,14 +227,16 @@ public class Member implements Serializable {
 	public String toString() {
 		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
 				+ mainAddress + ", subAddress=" + subAddress + ", memberImage=" + memberImage + ", zipcode=" + zipcode
-				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", sitter=" + sitter + ", skillList="
-				+ skillList + ", reviewList=" + reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
+				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", authorityList=" + authorityList
+				+ ", imageMember=" + imageMember + ", sitter=" + sitter + ", skillList=" + skillList + ", reviewList="
+				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((authorityList == null) ? 0 : authorityList.hashCode());
 		result = prime * result + ((dogList == null) ? 0 : dogList.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((mainAddress == null) ? 0 : mainAddress.hashCode());
@@ -242,6 +263,11 @@ public class Member implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
+		if (authorityList == null) {
+			if (other.authorityList != null)
+				return false;
+		} else if (!authorityList.equals(other.authorityList))
+			return false;
 		if (dogList == null) {
 			if (other.dogList != null)
 				return false;

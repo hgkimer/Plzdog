@@ -82,7 +82,7 @@ public class SitterController {
 	 * @return
 	 */
 	@RequestMapping("/member/insert_sitter")
-	public String insertSitter(@ModelAttribute Sitter sitter, HttpServletRequest request, @RequestParam(name="skill") List<String>skillList) 
+	public String insertSitter(@ModelAttribute Sitter sitter, HttpServletRequest request, @RequestParam(name="skill") List<String> skillList) 
 	throws IllegalStateException, IOException{
 		System.out.println(skillList);
 		System.out.println(sitter);

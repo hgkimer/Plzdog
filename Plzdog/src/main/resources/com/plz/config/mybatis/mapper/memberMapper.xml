@@ -24,13 +24,14 @@
 				m.member_image,
 				m.phonenum,
 				m.member_enable,
+				a.authority,
 				d.dog_name,
 				d.species,
 				d.gender,
 				d.weight,
 				d.birth,
 				i.dog_image
-		from	member m, dog d, DOG_IMAGE i
+		from	member m, authority a, dog d, DOG_IMAGE i
 	</sql>
 	
 	<sql id="member-dog-sitter-skill-select">
@@ -43,6 +44,7 @@
 				m.member_image,
 				m.phonenum,
 				m.member_enable,
+				a.authority,
 				s.school,
 				s.certification,
 				s.service_address,
@@ -58,7 +60,7 @@
 				d.weight,
 				d.birth,
 				i.dog_image
-		from	member m, dog d, dog_image i, sitter s, skill k, code c
+		from	member m,authority a, dog d, dog_image i, sitter s, skill k, code c
 	</sql>
 	
 	<resultMap type="member" id="member-join-review-resultmap" extends="member-dog-sitter-skill-resultmap">
@@ -82,6 +84,9 @@
 		<result column="member_image" property="memberImage" />
 		<result column="phonenum" property="phoneNum" />
 		<result column="member_enable" property="memberEnable" />
+		<collection property="authorityList" ofType="Authority">
+			<result column="authority" property="authority"/>
+		</collection>	
 		<collection property="dogList" ofType="Dog">
 			<id column="dog_id" property="dogId"/>
 			<result column="dog_name" property="dogName"/>
@@ -91,6 +96,13 @@
 			<result column="birth" property="birth"/>
 				<collection property="dogImage" ofType="DogImage">
 					<result column="dog_image" property="dogImage"/>
+				</collection>
+				<collection property="dogInfoList" ofType="DogInfo">
+					<association property="code" javaType="Code">
+						<id column="code" property="code"/>
+						<result column="code_name" property="codeName"/>
+						<result column="category" property="category"/>
+					</association>
 				</collection>
 		</collection>
 	</resultMap>
@@ -133,10 +145,11 @@
 		where m.member_name like '%'||#{value}||'%'
 	</select>
 	
-	<!-- 전체 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
+	<!-- 전체 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보,권한 조회 -->
 	<select id="selectAllMemberJoinDogSitterSkill" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
-		where	s.email = m.email 
+		where	s.email = m.email
+		and		a.email = m.email 
 		and		s.email = d.email(+)
 		and	    d.dog_id = i.dog_id(+) 
 		and		s.email = k.email(+)
@@ -148,11 +161,12 @@
 	<select id="selectMemberJoinDogSitterSkillByEmail" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
 		where	s.email = #{value} 
-		and		s.email = m.email 
+		and  	s.email = m.email
+		and		a.email = m.email 
 		and		s.email = d.email(+)
 		and	    d.dog_id = i.dog_id(+) 
-		and 	k.code_skill = c.code(+)
-		and 	s.email = k.email(+)
+		and		s.email = k.email(+)
+		and		k.code_skill = c.code(+)
 		and     m.member_enable = '1'
 	</select>
 	
