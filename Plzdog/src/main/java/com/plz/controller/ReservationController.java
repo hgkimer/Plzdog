@@ -122,7 +122,6 @@ public class ReservationController {
 	@RequestMapping("/sitter/select_reservation_detail")
 	public String selectDetailReservationSitter(@RequestParam String email, Model model) {
 		List<Reservation> list = service.selectDetailReservationSitter(email);
-		System.out.println(list);
 		model.addAttribute("list", list);
 		return "sitter/select_reservation_detail_result.tiles";
 	}

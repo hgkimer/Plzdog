@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 <title>Insert title here</title>
+<!-- 헤더와 연결되어 있으므로 굳이 부트스트랩을 다시 연결해 줄 필요가 없다. -->
+<%-- <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css"> --%>
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 

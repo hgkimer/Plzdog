@@ -95,6 +95,9 @@
 					<li>시작날짜 : ${list.resSDate}</li>
 					<li>끝날짜 : ${list.resEDate}</li>
 					<li>가격 : ${list.price}</li>
+					<c:forEach items ="${list.demandList }" var="demand">
+						<li>서비스 요구사항 : ${demand.code.codeName}</li>
+					</c:forEach>
 				</ul>
 			</c:forEach>
 		</div>
