@@ -12,7 +12,9 @@
 <body>
 
 <h2>시터 전체 결과</h2>
+
 <c:forEach items="${requestScope.sitterList }" var="member">
+	<div class="sitter" onclick="location.href='goToProfile.do?email=${member.email }'" style="cursor:pointer">
 	email : ${member.email }<br> 
 	회원이름 : ${member.memberName }<br>
 	회원 비밀번호 : ${member.password }<br>
@@ -28,6 +30,7 @@
 	방문돌봄 가격 : ${member.sitter.visitPrice }<br>
 	위탁돌봄 가격 : ${member.sitter.givePrice }<br>
 	-----------------------------<br>
+	</div>
 </c:forEach>
 </body>
 </html>

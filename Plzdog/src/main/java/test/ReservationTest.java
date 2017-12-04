@@ -24,7 +24,7 @@ public class ReservationTest {
 		//예약 전체 조회
 		List<Reservation> list = service.findAllReservation();
 		printReservation(list,"전체조회");
-		//해당 회원,시터 이메일에 해당하는 예약 조회
+		/*//해당 회원,시터 이메일에 해당하는 예약 조회
 		list = service.findMemberReservationByEmail("lee@naver.com");
 		printReservation(list,"회원 해당 예약조회");
 		
@@ -60,7 +60,10 @@ public class ReservationTest {
 		service.removeDemand(4);
 		
 		list = service.findReservationJoinDemandByEmail("lee@naver.com");
-		printReservation(list, "회원 해당 예약상태 조회");
+		printReservation(list, "회원 해당 예약상태 조회");*/
+		
+		list = service.selectSimpleReservationSitter("soo1@naver.com");
+		printReservation(list, "회원 해당 예약 정보 + 강아지 이미지");
 	}
 	
 	public static void printReservation(List<Reservation> list,String label) {

@@ -86,23 +86,11 @@ public class MemberController {
 		//먼저 sitter에 등록되어 있는지 확인한다.
 		Member member = service.selectSitterByEmail(email);
 		System.out.println(member);
-		boolean flag = false;
-		if(member != null) {
-			//시터인 경우
-			flag= true;
-			model.addAttribute("sitterFlag", flag);
-			//사용자가 마지막으로 접근한 시터의 Email을 세션에 저장한다.
-			model.addAttribute("profile", member);
-			//ession.setAttribute("lastSitter", member.getEmail());
-			return "member/profile.tiles";
-		}else {
-			//일반 견주일 경우
-			member = service.selectMemberByEmail(email);
-			System.out.println(member);
-			model.addAttribute("profile", member);
-			return "member/profile.tiles";
-		}
-	}	
+		
+		//해당 시터의 프로필
+		model.addAttribute("profile", member);
+		return "member/profile.tiles";
+	}
 	/**
 	 * 사용자 정보 수정 - 관리자/회원 공통으로 자기 정보 수정시 사용.
 	 * 수정할 정보와 현재 패스워드를 받는다.
@@ -164,6 +152,22 @@ public class MemberController {
 				
 				return "member/member_result_form.tiles";
 	}
+	
+	/**
+	 * 모든 시터 조회(skill, dog 포함)
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("select_all_sitter")
+	public String selectAllSitter(ModelMap model) {
+		List<Member> sitterList = service.selectAllSitter();
+		for(Member member : sitterList) {
+			System.out.println(member);
+		}
+		model.addAttribute("sitterList", sitterList);
+		return "sitter/sitter_select_result.tiles";
+	}
+	
 	@RequestMapping("zipcode")
 	public String getZipcode(@RequestParam String sample4_postcode, @RequestParam String sample4_mainAddress, @RequestParam String sample4_subAddress, Model model  ) {
 		System.out.println(sample4_postcode);

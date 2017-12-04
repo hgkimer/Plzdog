@@ -92,7 +92,6 @@ $(document).ready(function(){
 					</c:forEach>
 				</ul>
 			</c:forEach>
-					
 		</div>
 		<div class="care">
 			<img src="${initParam.rootPath }/image/caredog.jpg">

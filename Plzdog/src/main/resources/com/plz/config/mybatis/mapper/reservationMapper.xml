@@ -3,25 +3,48 @@
 <mapper namespace="com.plz.config.mybatis.mapper.reservationMapper">
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
-	<sql id="simple-res-sitter-sql">
+	 <sql id="simple-res-sitter-sql">
 		select	r.res_id,
+<<<<<<< HEAD
+				r.res_status,
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 				r.res_sdate,
 				r.res_edate,
 				r.price,
 				r.res_status,
 				r.email,
 				r.email_sitter,
-				i.dog_image,
+				d.dog_id,
 				d.dog_name,
 				d.species,
 				d.gender,
-				d.birth
-		from	reservation r, dog_image i, dog d
+				d.birth,
+				i.dog_image
+		from	reservation r, res_detail t, dog_image i, dog d
+	</sql>
+	
+	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
+	<sql id="simple-res-member-sql">
+		select	r.res_id,
+				r.res_status,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.email,
+				r.email_sitter,
+				s.member_name,
+				s.member_image
+		from	reservation r, member s
 	</sql>
 	
 	<!-- reservation resultmap -->
 	<resultMap id="reservation-resultmap" type="Reservation">
 		<id column="res_id" property="resId"/>
+<<<<<<< HEAD
+		<result column="res_status" property="resStatus"/>
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 		<result column="res_sdate" property="resSDate"/>
 		<result column="res_edate" property="resEDate"/>
 		<result column="price" property="price"/>
@@ -31,27 +54,59 @@
 		<result column="email_sitter" property="sitterEmail"/>
 	</resultMap>
 	
-	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
-	<resultMap type="Reservation" id="simple-res-sitter-resultmap" extends="reservation-resultmap">
-		<association property="dog" javaType="Dog">
-			<id column="dog_id" property="dogId"/>
-			<result column="dog_name" property="dogName"/>
-			<result column="species" property="species"/>
-			<result column="gender" property="gender"/>
-			<result column="birth" property="birth"/>
-			<result column="email" property="email"/>
+	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
+	<resultMap type="Reservation" id="simple-res-member-resultmap" extends="reservation-resultmap">
+		<association property="member" javaType="Member">
+			<id column="email" property="email"/>
+			<result column="member_name" property="memberName"/>
+			<result column="password" property="password"/>
+			<result column="main_address" property="mainAddress"/>
+			<result column="sub_address" property="subAddress"/>
+			<result column="zipcode" property="zipcode"/>
+			<result column="member_image" property="memberImage"/>
+			<result column="phonenum" property="phoneNum"/>
 		</association>
 	</resultMap>
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
+	<resultMap type="Reservation" id="simple-res-sitter-resultmap" extends="reservation-resultmap">
+		<collection property="resDetailList" ofType="ResDetail">
+			<collection property="dogList" ofType="Dog">
+				<id column="dog_id" property="dogId"/>
+				<result column="dog_name" property="dogName"/>
+				<result column="species" property="species"/>
+				<result column="gender" property="gender"/>
+				<result column="birth" property="birth"/>
+				<result column="email" property="email"/>
+				<collection property="dogImage" ofType="dogImage">
+					<result column="dog_Image" property="dogImage"/>
+				</collection>
+			</collection>
+		</collection>
+	</resultMap>
+	
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) -->
 	<select id="selectSimpleReservationSitter" parameterType="string" resultMap="simple-res-sitter-resultmap">
 		<include refid="simple-res-sitter-sql"/>
-		where r.email = d.email and r.email_sitter = #{value} and d.dog_id = i.dog_id(+)
-	</select>
+		where r.email = d.email 
+		and r.email_sitter = #{value}
+		and t.res_id = r.res_id
+		and t.dog_id = d.dog_id 
+		and d.dog_id = i.dog_id(+)
+	</select> 
+	
+	<!-- <select id="selectSimpleReservationSitter" parameterType="string" resultMap="reservation-resultmap">
+		<include refid="simple-res-member-sql"/>
+		where r.email_sitter = #{value} 
+	</select> -->
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
 	<sql id="detail-res-sql">
 		select	r.res_id,
+<<<<<<< HEAD
+				r.res_status,
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 				r.res_sdate,
 				r.res_edate,
 				r.res_contents,
@@ -83,6 +138,8 @@
 		and d.code_demand = c.code
 		and r.email_sitter = #{value}
 	</select>
+<<<<<<< HEAD
+=======
 
 	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
 	<sql id="simple-res-member-sql">
@@ -97,20 +154,8 @@
 				s.member_image
 		from	reservation r, member s
 	</sql>
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
-	<resultMap type="Reservation" id="simple-res-member-resultmap" extends="reservation-resultmap">
-		<association property="member" javaType="Member">
-			<id column="email" property="email"/>
-			<result column="member_name" property="memberName"/>
-			<result column="password" property="password"/>
-			<result column="main_address" property="mainAddress"/>
-			<result column="sub_address" property="subAddress"/>
-			<result column="zipcode" property="zipcode"/>
-			<result column="member_image" property="memberImage"/>
-			<result column="phonenum" property="phoneNum"/>
-		</association>
-	</resultMap>
 	
 	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
 	<select id="selectSimpleReservationMember" parameterType="string" resultMap="simple-res-member-resultmap">
@@ -127,6 +172,10 @@
 	<!-- 관리자 페이지 - 예약 조회 - 간단히 보기 -->
 	<sql id="simple-res-admin-sql">
 		select	r.res_id,
+<<<<<<< HEAD
+				r.res_status,
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 				r.res_sdate,
 				r.res_edate,
 				r.res_status,
@@ -140,19 +189,19 @@
 	</sql>	
 	
 	<resultMap type="Reservation" id="simple-res-admin-resultmap" extends="simple-res-member-resultmap">
-		<association property="dog" javaType="Dog">
-			<id column="dog_id" property="dogId"/>
-			<result column="dog_name" property="dogName"/>
-			<result column="species" property="species"/>
-			<result column="gender" property="gender"/>
-			<result column="weight" property="weight"/>
-			<result column="birth" property="birth"/>
-			<result column="email" property="email"/>
-			<collection property="dogImageList" ofType="DogImage">
+		<collection property="resDetailList" ofType="ResDetail">
+			<collection property="dogList" ofType="Dog">
 				<id column="dog_id" property="dogId"/>
-				<result column="dog_image" property="dogImage"/>
+				<result column="dog_name" property="dogName"/>
+				<result column="species" property="species"/>
+				<result column="gender" property="gender"/>
+				<result column="birth" property="birth"/>
+				<result column="email" property="email"/>
+				<collection property="dogImage" ofType="dogImage">
+					<result column="dog_Image" property="dogImage"/>
+				</collection>
 			</collection>
-		</association>
+		</collection>
 	</resultMap>
 	
 	<select id="selectSimpleReservationAdmin" resultMap="simple-res-admin-resultmap">
@@ -162,6 +211,10 @@
 	
 	<sql id="detail-res-admin-sql">
 		select	r.res_id,
+<<<<<<< HEAD
+				r.res_status,
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 				r.res_sdate,
 				r.res_edate,
 				r.price,
@@ -198,6 +251,10 @@
 	-->
 	<sql id="reservation-sql">
 		select  res_id,
+<<<<<<< HEAD
+			    res_status,
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 			    res_sdate,
 			    res_edate,
 			    res_contents,
@@ -209,6 +266,10 @@
 	
 	<sql id="reservation-join-sales-sql">
 		select  r.res_id,
+<<<<<<< HEAD
+			    r.res_status,
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 			    r.res_sdate,
 			    r.res_edate,
 			    r.res_contents,
@@ -274,13 +335,22 @@
 		<selectKey keyProperty="resId" resultType="_int" order="BEFORE">
         	select RESERVATION_id_seq.nextval from dual
       	</selectKey>
+<<<<<<< HEAD
+		insert into reservation values(#{resId}, #{resStatus}, #{resSDate}, 
+		#{resEDate}, #{price},#{resContents},#{memberEmail},#{sitterEmail})
+=======
 		insert into reservation values(#{resId}, #{resSDate}, 
 		#{resEDate}, #{price},#{resContents}, #{resStatus}, #{memberEmail},#{sitterEmail})
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 	</insert>
 	
 	<!-- 예약ID를 통해 수정한다. -->
 	<update id="updateReservation" parameterType="Reservation">
 		update   reservation 	
+<<<<<<< HEAD
+		set 	 res_status = #{resStatus},
+=======
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 			     res_sDate = #{resSDate},
 			     res_eDate = #{resEDate},
 			     res_contents = #{resContents},

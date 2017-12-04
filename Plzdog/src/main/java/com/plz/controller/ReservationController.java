@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.DogService;
 import com.plz.service.ResDetailService;
+import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Dog;
+import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
 
@@ -34,6 +36,16 @@ public class ReservationController {
 		resDetailService.addResDetail(resId, dogIdList);
 		return "member/reservation_add_success.tiles";
 	}
+	private MemberService memberService;
+	
+	/**
+	 * 예약 관련 Controller 
+	 * 1. 예약 등록(견주, 시터) 
+	 * 2. 예약 상태 변경==> 
+	 * 3. 예약 전체(로그인한 Email로 /견주,시터) 조회
+	 * 4. 예약 삭제 
+	 * 5.
+	 */
 	
 	/**
 	 * 1.예약 등록 Controller
@@ -118,8 +130,26 @@ public class ReservationController {
 	 */
 	@RequestMapping("/sitter/select_reservation_simple")
 	public String selectSimpleReservationSitter(@RequestParam String email, Model model) {
-		List<Reservation> list = service.selectSimpleReservationSitter(email);
-		model.addAttribute("list", list);
+				String memberEmail = null;
+				//견주한테 들어온 예약
+				List<Reservation> res = service.findSitterReservationByEmail(email);
+				
+				for(int i = 0 ; i < res.size() ; i++) {
+					memberEmail = res.get(i).getMemberEmail();
+				}	
+				
+				//예약(정보)에 해당하는 견주의 강아지 정보
+				List<Reservation> list = service.selectSimpleReservationSitter(email);
+				for(Reservation res1 : list) {
+					System.out.println(res1);
+				}
+				//견주 정보(이미지)
+				Member member = memberService.selectMemberByEmail(memberEmail);
+				//System.out.println(member);
+				//시터에게 온 강아지 정보+예약정보
+				model.addAttribute("list",list);
+				//회원의 관한 정보(이미지)
+				model.addAttribute("member", member);
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
@@ -131,8 +161,8 @@ public class ReservationController {
 	 */
 	@RequestMapping("/sitter/select_reservation_detail")
 	public String selectDetailReservationSitter(@RequestParam String email, Model model) {
+		//예약과 관련된 스킬
 		List<Reservation> list = service.selectDetailReservationSitter(email);
-		System.out.println(list);
 		model.addAttribute("list", list);
 		return "sitter/select_reservation_detail_result.tiles";
 	}

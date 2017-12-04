@@ -11,6 +11,7 @@ public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
+
 	//★★★★★예약 상태(1 : 예약 대기 / 2 : 예약 확정 / 3: 결제 완료
 	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resSDate;
@@ -22,14 +23,14 @@ public class Reservation implements Serializable {
 	private String memberEmail;
 	private String sitterEmail;
 	
+	private List<ResDetail> resDetailList;
 	private List<Care> careList;
 	private List<Demand> demandList;
 	private Sales sales;
-	private Dog dog;
 	private Member member;
 	
 	public Reservation() {}
-
+	
 	public Reservation(int resId, Date resSDate, Date resEDate, int price, String resContents, String resStatus,
 			String memberEmail, String sitterEmail) {
 		this.resId = resId;
@@ -40,6 +41,24 @@ public class Reservation implements Serializable {
 		this.resStatus = resStatus;
 		this.memberEmail = memberEmail;
 		this.sitterEmail = sitterEmail;
+	}
+
+	public Reservation(int resId, Date resSDate, Date resEDate, int price, String resContents, String resStatus,
+			String memberEmail, String sitterEmail, List<ResDetail> resDetailList, List<Care> careList,
+			List<Demand> demandList, Sales sales, Member member) {
+		this.resId = resId;
+		this.resSDate = resSDate;
+		this.resEDate = resEDate;
+		this.price = price;
+		this.resContents = resContents;
+		this.resStatus = resStatus;
+		this.memberEmail = memberEmail;
+		this.sitterEmail = sitterEmail;
+		this.resDetailList = resDetailList;
+		this.careList = careList;
+		this.demandList = demandList;
+		this.sales = sales;
+		this.member = member;
 	}
 
 	public int getResId() {
@@ -106,6 +125,14 @@ public class Reservation implements Serializable {
 		this.sitterEmail = sitterEmail;
 	}
 
+	public List<ResDetail> getResDetailList() {
+		return resDetailList;
+	}
+
+	public void setResDetailList(List<ResDetail> resDetailList) {
+		this.resDetailList = resDetailList;
+	}
+
 	public List<Care> getCareList() {
 		return careList;
 	}
@@ -130,14 +157,6 @@ public class Reservation implements Serializable {
 		this.sales = sales;
 	}
 
-	public Dog getDog() {
-		return dog;
-	}
-
-	public void setDog(Dog dog) {
-		this.dog = dog;
-	}
-
 	public Member getMember() {
 		return member;
 	}
@@ -145,18 +164,18 @@ public class Reservation implements Serializable {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((careList == null) ? 0 : careList.hashCode());
 		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
-		result = prime * result + ((dog == null) ? 0 : dog.hashCode());
 		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
 		result = prime * result + price;
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
+		result = prime * result + ((resDetailList == null) ? 0 : resDetailList.hashCode());
 		result = prime * result + ((resEDate == null) ? 0 : resEDate.hashCode());
 		result = prime * result + resId;
 		result = prime * result + ((resSDate == null) ? 0 : resSDate.hashCode());
@@ -185,11 +204,6 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!demandList.equals(other.demandList))
 			return false;
-		if (dog == null) {
-			if (other.dog != null)
-				return false;
-		} else if (!dog.equals(other.dog))
-			return false;
 		if (member == null) {
 			if (other.member != null)
 				return false;
@@ -206,6 +220,11 @@ public class Reservation implements Serializable {
 			if (other.resContents != null)
 				return false;
 		} else if (!resContents.equals(other.resContents))
+			return false;
+		if (resDetailList == null) {
+			if (other.resDetailList != null)
+				return false;
+		} else if (!resDetailList.equals(other.resDetailList))
 			return false;
 		if (resEDate == null) {
 			if (other.resEDate != null)
@@ -241,10 +260,8 @@ public class Reservation implements Serializable {
 	public String toString() {
 		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
 				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
-				+ ", sitterEmail=" + sitterEmail + ", careList=" + careList + ", demandList=" + demandList + ", sales="
-				+ sales + ", dog=" + dog + ", member=" + member + "]";
+				+ ", sitterEmail=" + sitterEmail + ", resDetailList=" + resDetailList + ", careList=" + careList
+				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + "]";
 	}
-	
-	
 	
 }

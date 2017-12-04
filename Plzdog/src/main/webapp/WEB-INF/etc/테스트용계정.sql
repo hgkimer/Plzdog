@@ -163,10 +163,40 @@ select	m.email,
 				i.dog_image
 		from	member m, dog d, dog_image i, sitter s, skill k, code c
 		where	s.email = m.email 
-		and		s.email = d.email(+)
-		and	    d.dog_id = i.dog_id(+) 
+		and		s.email = d.email
+		and	    d.dog_id = i.dog_id 
 		and		s.email = k.email(+)
-		and		k.code_skill = c.code(+)
+		and		k.code_skill = c.code
+		and 	m.email = 'yoon@naver.com'
 		
+		select	r.res_id,
+			r.res_status,
+			r.res_sdate,
+			r.res_edate,
+			r.price,
+			r.email,
+			r.email_sitter
+		from	reservation r
+		where r.email_sitter ='soo1@naver.com'
+		
+		select	r.res_id,
+				r.res_status,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.email,
+				r.email_sitter,
+				d.dog_id,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.birth,
+				i.dog_image
+		from	reservation r, res_detail t, dog_image i, dog d
+		where r.email = d.email 
+		and r.email_sitter ='soo1@naver.com'
+		and t.res_id = r.res_id
+		and t.dog_id = d.dog_id 
+		and d.dog_id = i.dog_id(+)
 		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'

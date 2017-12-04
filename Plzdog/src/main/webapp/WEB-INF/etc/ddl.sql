@@ -62,7 +62,7 @@ DROP TABLE WAITING
 	CASCADE CONSTRAINTS;
 	
 -- 예약 상세 테이블
-DROP TABLE RESDETAIL 
+DROP TABLE RES_DETAIL 
 	CASCADE CONSTRAINTS;
 	
 --------------------------------------------------
@@ -179,7 +179,7 @@ CREATE TABLE RESERVATION (
 );
 
 /* 예약상세 */
-CREATE TABLE RESDETAIL (
+CREATE TABLE RES_DETAIL (
 	RES_ID NUMBER(10) NOT NULL, /* 예약ID */
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
 	CONSTRAINT PK_RESDETAIL PRIMARY KEY(RES_ID, DOG_ID),
@@ -331,16 +331,20 @@ insert into code values('service-2', '위탁돌봄', '서비스');
 ----------------------------------------------------------------------------------
 
 --강아지
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); -- 1
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100711', 'jang@naver.com'); -- 2
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'가지','진돗개','수컷',5.5,'20100812', 'jang@naver.com'); -- 3
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'토마토','진돗개','수컷',5.5,'20100913', 'jang@naver.com'); -- 4
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'가자미','진돗개','수컷',5.5,'20101014', 'lee@naver.com');  -- 5
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순이','진돗개','수컷',5.5,'20101115', 'lee@naver.com');  -- 6
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20101216', 'lee@naver.com');  -- 7
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100117', 'yoon@naver.com');  -- 8
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100218', 'yoon@naver.com'); -- 9
-INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100319', 'yoon@naver.com'); -- 10
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'미륵','비숑','암컷',3.5,'20100608', 'kim@naver.com'); 
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'리코','슈바이처','암컷',4.5,'20100711', 'jang@naver.com'); 
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'가지','진돗개','수컷',5.5,'20100812', 'jang@naver.com'); 
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'토마토','진돗개','수컷',5.5,'20100913', 'jang@naver.com');
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'가자미','진돗개','수컷',5.5,'20101014', 'lee@naver.com');  
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순이','진돗개','수컷',5.5,'20101115', 'lee@naver.com'); 
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20101216', 'lee@naver.com');  
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'까미','삽살개','투컷',6.5,'20100117', 'yoon@naver.com');  
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100218', 'yoon@naver.com'); 
+INSERT INTO DOG VALUES(dog_id_seq.nextval,'순둥이','진돗개','수컷',5.5,'20100319', 'yoon@naver.com'); 
+
+insert into DOG values(dog_id_seq.nextval,'순둥이1','진돗개','수컷',5.5,'20100319', 'soo1@naver.com'); 
+insert into DOG values(dog_id_seq.nextval,'순둥이2','진돗개','수컷',5.5,'20100319', 'soo1@naver.com'); 
+insert into DOG values(dog_id_seq.nextval,'순둥이3','진돗개','수컷',5.5,'20100319', 'soo1@naver.com'); 
 
 -- 강아지정보
 INSERT INTO DOGINFO VALUES(1 ,'dog-1');
@@ -386,6 +390,9 @@ INSERT INTO DOG_IMAGE VALUES('7.jpg','7');
 INSERT INTO DOG_IMAGE VALUES('8.jpg','8');
 INSERT INTO DOG_IMAGE VALUES('9.jpg','9');
 INSERT INTO DOG_IMAGE VALUES('10.jpg','10');
+INSERT INTO DOG_IMAGE VALUES('10.jpg','11');
+INSERT INTO DOG_IMAGE VALUES('10.jpg','12');
+INSERT INTO DOG_IMAGE VALUES('10.jpg','13');
 
 --시터
 INSERT INTO SITTER VALUES('soo1@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
@@ -447,26 +454,26 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/
 -- 예약 상세
 -- jang의 dogID : 2,3,4 , lee : 5,6,7 , yoon : 8,9,10
 -- lee의 Res : 1,2,3 , jang : 4,5,6 , yoon : 7,8,9
-insert into RESDETAIL values('1','5');
-insert into RESDETAIL values('1','6');
-insert into RESDETAIL values('1','7');
-insert into RESDETAIL values('2','5');
-insert into RESDETAIL values('2','6');
-insert into RESDETAIL values('2','7');
+insert into RES_DETAIL values('1','5');
+insert into RES_DETAIL values('1','6');
+insert into RES_DETAIL values('1','7');
+insert into RES_DETAIL values('2','5');
+insert into RES_DETAIL values('2','6');
+insert into RES_DETAIL values('2','7');
 
-insert into RESDETAIL values('4','2');
-insert into RESDETAIL values('4','3');
-insert into RESDETAIL values('4','4');
-insert into RESDETAIL values('5','2');
-insert into RESDETAIL values('5','3');
-insert into RESDETAIL values('5','4');
+insert into RES_DETAIL values('4','2');
+insert into RES_DETAIL values('4','3');
+insert into RES_DETAIL values('4','4');
+insert into RES_DETAIL values('5','2');
+insert into RES_DETAIL values('5','3');
+insert into RES_DETAIL values('5','4');
 
-insert into RESDETAIL values('7','8');
-insert into RESDETAIL values('7','9');
-insert into RESDETAIL values('7','10');
-insert into RESDETAIL values('8','8');
-insert into RESDETAIL values('8','9');
-insert into RESDETAIL values('8','10');
+insert into RES_DETAIL values('7','8');
+insert into RES_DETAIL values('7','9');
+insert into RES_DETAIL values('7','10');
+insert into RES_DETAIL values('8','8');
+insert into RES_DETAIL values('8','9');
+insert into RES_DETAIL values('8','10');
 --서비스 요구사항
 
 insert into DEMAND values (1,'sitter-1'); 
@@ -510,7 +517,7 @@ insert into CARE_IMAGE values('돌봄이미지7',4);
 -- 예약 간단 조회
 select * from RESERVATION;
 select	r.res_id,
-		r.res_type,
+		r.res_status,
 		r.res_sdate,
 		r.res_edate,
 		i.dog_image,
@@ -570,9 +577,14 @@ select * from RESERVATION;
 select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
+<<<<<<< HEAD
+select * from member;s]
+select * from res_detail
+=======
 select * from member;
 select * from resdetail;
 select * from waiting;
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
 where m.email = s.email and sk.email = s.email and code_skill = code;
@@ -583,7 +595,7 @@ where m.email = d.email and di.dog_id = d.dog_id;
 select m.email, m.member_name, r.review_contents from member m, review r, sitter s
 where m.email = s.email and m.email = r.email_sitter and s.email = 'soo@naver.com';
 
-select m.email, m.member_name, r.res_type, c.care_contents, ci.care_image, cd.code_name, s.email, s.member_name, sl.total
+select m.email, m.member_name, r.res_status, c.care_contents, ci.care_image, cd.code_name, s.email, s.member_name, sl.total
 from member m, reservation r, care c, care_image ci, code cd, demand d, member s, sales sl
 where r.res_id = c.res_id and r.email = m.email and ci.care_id = c.care_id and r.res_id = d.res_id and d.code_demand = cd.code 
 and r.email_sitter = s.email and sl.res_id = r.res_id;
@@ -653,7 +665,7 @@ select			m.email,
 		
 		--<!--Email로 해당 예약의 시터의 급여를 조회 -->
 		select  r.res_id,
-			    r.res_type,
+			    r.res_status,
 			    r.res_sdate,
 			    r.res_edate,
 			    r.res_contents,
@@ -669,7 +681,7 @@ select			m.email,
 		
 		-- <!--Email로 해당 예약의 상태를 조회 -->
 		select  r.res_id,
-			    r.res_type,
+			    r.res_status,
 			    r.res_sdate,
 			    r.res_edate,
 			    r.res_contents,
@@ -685,7 +697,7 @@ select			m.email,
 		
 		-- 해당 예약의 돌봄일지를 조회
 		select  r.res_id,
-			    r.res_type,
+			    r.res_status,
 			    r.res_sdate,
 			    r.res_edate,
 			    r.res_contents,
@@ -702,7 +714,7 @@ select			m.email,
 		
 		-- 해당 예약의 급여를 조회
 		select  r.res_id,
-			    r.res_type,
+			    r.res_status,
 			    r.res_sdate,
 			    r.res_edate,
 			    r.res_contents,
@@ -715,3 +727,4 @@ select			m.email,
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
 		and     r.res_id = 2;
+		
