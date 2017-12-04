@@ -199,4 +199,42 @@ select	m.email,
 		and t.dog_id = d.dog_id 
 		and d.dog_id = i.dog_id(+)
 		
+		select	m.email,
+				m.member_name,
+				m.password,
+				m.main_address,
+				m.sub_address,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable,
+				a.authority,
+				s.school,
+				s.certification,
+				s.service_address,
+				s.sitter_rate,
+				s.VISIT_PRICE,
+				s.give_price,
+				c.code,
+				c.code_name,
+				c.category,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth,
+				i.dog_image
+		from	member m, authority a, dog d, DOGINFO f, dog_image i, sitter s, skill k, code c
+		where	s.email = m.email
+		and		m.email = d.email(+)
+		and		s.email = a.email
+		and		s.email = k.email
+		and		k.code_skill = c.code
+		and	    d.dog_id = i.dog_id(+)
+		and		d.dog_id = f.dog_id
+		and		f.code_dog = c.code
+		and     m.member_enable = '1'
+		and  	s.email = 'soo1@naver.com' 
+		
+		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'

@@ -160,9 +160,15 @@ public class MemberController {
 	 */
 	@RequestMapping("select_all_sitter")
 	public String selectAllSitter(ModelMap model) {
-		List<Member> sitterList = service.selectAllSitter();
-		for(Member member : sitterList) {
-			System.out.println(member);
+		List<Member> sitterList = new ArrayList<>();
+		
+		for(Member member : service.selectAllSitter()) {
+			//ROLE_MEMBER, ROLE_SITTER
+			System.out.println(member.getauthorityList().size());
+			if(member.getauthorityList().size() == 2) {
+				sitterList.add(member);
+				System.out.println(member);
+			}
 		}
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";

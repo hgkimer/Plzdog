@@ -64,7 +64,6 @@ DROP TABLE WAITING
 -- 예약 상세 테이블
 DROP TABLE RES_DETAIL 
 	CASCADE CONSTRAINTS;
-	
 --------------------------------------------------
 --create
 --시터 대기자
@@ -377,6 +376,10 @@ INSERT INTO DOGINFO VALUES(9 ,'dog-3');
 INSERT INTO DOGINFO VALUES(10 ,'dog-4');
 INSERT INTO DOGINFO VALUES(10 ,'dog-5');
 INSERT INTO DOGINFO VALUES(10 ,'dog-6');
+INSERT INTO DOGINFO VALUES(11 ,'dog-6');
+INSERT INTO DOGINFO VALUES(11 ,'dog-4');
+INSERT INTO DOGINFO VALUES(11 ,'dog-3');
+
 
 
 --강아지 이미지
@@ -435,6 +438,11 @@ INSERT INTO SKILL VALUES('soo4@naver.com','sitter-6');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-1');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-2');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-3');
+
+insert into skill values('soo1@naver.com','res-1');
+insert into SKILL values('soo1@naver.com','service-1');
+insert into SKILL values('soo1@naver.com','service-2');
+
 
 --리뷰
 INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
@@ -577,14 +585,9 @@ select * from RESERVATION;
 select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
-<<<<<<< HEAD
-select * from member;s]
-select * from res_detail
-=======
 select * from member;
 select * from resdetail;
 select * from waiting;
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
 where m.email = s.email and sk.email = s.email and code_skill = code;

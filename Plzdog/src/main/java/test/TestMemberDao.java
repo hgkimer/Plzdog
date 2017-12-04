@@ -1,5 +1,7 @@
 package test;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,7 +26,7 @@ public class TestMemberDao {
 //		System.out.println("------삭제완료------");
 //		
 //
-		Member nMem = new Member("new@naver.com", "새로운사람", "456123", "경기도 용인시","수지구 신봉동",16701,"image010","010-1123-4587",0);
+		/*Member nMem = new Member("new@naver.com", "새로운사람", "456123", "경기도 용인시","수지구 신봉동",16701,"image010","010-1123-4587",0);
 		System.out.println(nMem.getEmail());
 		service.insertMember(nMem,"ROLE_MEMBER"); 
 		System.out.println("------등록 완료------");
@@ -43,6 +45,12 @@ public class TestMemberDao {
 		System.out.println();
 		System.out.println(service.selectSitterByEmail(email));
 		System.out.println();
-		System.out.println(service.selectSitterByName(name));
+		System.out.println(service.selectSitterByName(name));*/
+		
+		List<Member> list = service.selectAllSitter();
+		for(Member member : list) {
+			System.out.println(member);
+			System.out.println(member.getauthorityList().size());
+		}
 	}
 }
