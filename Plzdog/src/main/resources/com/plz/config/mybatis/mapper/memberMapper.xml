@@ -61,6 +61,16 @@
 		from	member m, dog d, dog_image i, sitter s, skill k, code c
 	</sql>
 	
+	<resultMap type="member" id="member-join-review-resultmap" extends="member-dog-sitter-skill-resultmap">
+		<collection property="reviewList" ofType="Review">
+			<id column="review_id" property="reviewId" />
+			<result column="review_rate" property="reviewRate" />
+			<result column="review_contents" property="reviewContents" />
+			<result column="email" property="memberEmail" />
+			<result column="email_sitter" property="sitterEmail" />
+		</collection>
+	</resultMap>
+	
 	<!-- member-resultmap -->
 	<resultMap type="member" id="member-dog-resultmap">
 		<id column="email" property="email" />
@@ -80,28 +90,10 @@
 			<result column="weight" property="weight"/>
 			<result column="birth" property="birth"/>
 				<collection property="dogImage" ofType="DogImage">
-				<result column="dog_image" property="dogImage"/>
+					<result column="dog_image" property="dogImage"/>
 				</collection>
 		</collection>
 	</resultMap>
-	
-	<select id="selectAllMemberJoinDog" resultMap="member-dog-resultmap">
-		<include refid="member-dog-select-sql"/>
-		and   m.member_enable = '1'
-	</select>
-	
-	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
-		<include refid="member-dog-select-sql"/>
-		where m.email = #{email}
-		and   m.email = d.email(+)
-		and	  d.dog_id = i.dog_id(+) 
-		and   m.member_enable = '1'
-	</select>
-	
-	<select id="selectMemberJoinDogByName" parameterType="string" resultMap="member-dog-resultmap">
-		<include refid="member-dog-select-sql"/>
-		where m.member_name like '%'||#{value}||'%'
-	</select>
 	
 	<resultMap type="member" id="member-dog-sitter-skill-resultmap" extends="member-dog-resultmap">
 		<association property="sitter" javaType="Sitter">
@@ -120,8 +112,28 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 전체 회원과 강아지를 조히 -->
+	<select id="selectAllMemberJoinDog" resultMap="member-dog-resultmap">
+		<include refid="member-dog-select-sql"/>
+		and   m.member_enable = '1'
+	</select>
 	
+	<!--이메일로 회원과 강아지를 조회 -->
+	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
+		<include refid="member-dog-select-sql"/>
+		where m.email = #{email}
+		and   m.email = d.email(+)
+		and	  d.dog_id = i.dog_id(+) 
+		and   m.member_enable = '1'
+	</select>
 	
+	<!--이름로 회원과 강아지를 조회 -->
+	<select id="selectMemberJoinDogByName" parameterType="string" resultMap="member-dog-resultmap">
+		<include refid="member-dog-select-sql"/>
+		where m.member_name like '%'||#{value}||'%'
+	</select>
+	
+	<!-- 전체 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
 	<select id="selectAllMemberJoinDogSitterSkill" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
 		where	s.email = m.email 
@@ -129,8 +141,10 @@
 		and	    d.dog_id = i.dog_id(+) 
 		and		s.email = k.email(+)
 		and		k.code_skill = c.code(+)
+		and     m.member_enable = '1'
 	</select>
 	
+	<!-- 이메일로 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
 	<select id="selectMemberJoinDogSitterSkillByEmail" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
 		where	s.email = #{value} 
@@ -139,8 +153,10 @@
 		and	    d.dog_id = i.dog_id(+) 
 		and 	k.code_skill = c.code(+)
 		and 	s.email = k.email(+)
+		and     m.member_enable = '1'
 	</select>
 	
+	<!-- 이름으로 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
 	<select id="selectMemberJoinDogSitterSkillByName" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
 		<include refid="member-dog-sitter-skill-select"/>
 		where	m.member_name like '%'||#{value}||'%' 
@@ -148,17 +164,10 @@
 		and 	s.email = d.email 
 		and 	k.code_skill = c.code 
 		and 	s.email = k.email(+)
+		and     m.member_enable = '1'
 	</select>
 
-	<resultMap type="member" id="member-join-review-resultmap" extends="member-dog-sitter-skill-resultmap">
-		<collection property="reviewList" ofType="Review">
-			<id column="review_id" property="reviewId" />
-			<result column="review_rate" property="reviewRate" />
-			<result column="review_contents" property="reviewContents" />
-			<result column="email" property="memberEmail" />
-			<result column="email_sitter" property="sitterEmail" />
-		</collection>
-	</resultMap>
+	
 
 	<sql id="member-review-sql">
 		select	s.email,
