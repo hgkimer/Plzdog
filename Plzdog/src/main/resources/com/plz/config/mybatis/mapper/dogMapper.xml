@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.dogMapper">
 
+	<sql id="dog-dogInfo-dogImage-select-sql">
+		 select  d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth,
+		   		 dc.code, dc.code_name, dc.category,
+		   		 dim.dog_image
+   		 from   dog d, doginfo di, code dc, dog_image dim
+	</sql>
+
 	<insert id="insertDog" parameterType="Dog">
 		<selectKey keyProperty="dogId" resultType="_int" order="BEFORE">
 			select dog_id_seq.nextval from dual
@@ -9,7 +16,7 @@
 		insert into dog values(#{dogId}, #{dogName}, #{species}, #{gender}, #{weight}, #{birth}, #{email})
 	</insert>
 	
-	<resultMap type="dog" id="dog-resultmap">
+	<!-- <resultMap type="dog" id="dog-resultmap">
 		<id column="dog_id" property="dogId"/>
 		<result column="dog_name" property="dogName"/>
 		<result column="species" property="species"/>
@@ -30,17 +37,43 @@
 				<result column="category" property="category"/>
 			</association>
 		</collection>
+	</resultMap> -->
+	
+	<!-- 강아지에서 강아지 이미지와 강아지 상태 조회 resulmap -->
+	<!-- 
+		dogInfoList은 codeDog과 해당하는 code의 code를 갖는 property가 있어야 된다. 
+	-->
+	<resultMap type="Dog" id="dog-dogInfo-dogImage-resulmap">
+			<id column="dog_id" property="dogId"/>
+			<result column="dog_name" property="dogName"/>
+			<result column="species" property="species"/>
+			<result column="gender" property="gender"/>
+			<result column="weight" property="weight"/>
+			<result column="birth" property="birth"/>
+			<collection property="dogImage" ofType="DogImage">
+				<result property="dogImage" column="dog_image"/>
+			</collection>
+			<collection property="dogInfoList" ofType="DogInfo">
+				<result column="code" property="codeDog"/>
+				<association property="code" javaType="Code">
+					<id column="code" property="code"/>
+					<result column="code_name" property="codeName"/>
+				</association>
+			</collection>		
 	</resultMap>
 	
-	<select id="selectDogByEmail" parameterType="string" resultMap="dog-resultmap">
-		select	d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth, 
-				d.email, i.dog_image, c.code, c.code_name, c.category
+	<!-- 이메일로 강아지 ,강아지 상태, 강아지 이미지 조회  -->
+	<select id="selectDogJoinDogInfoDogImageByEmail" parameterType="string" resultMap="dog-dogInfo-dogImage-resulmap">
+		select  d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth,
+				di.dog_image,
+				c.code, c.code_name
 				
-		from	dog d, dog_image i, doginfo f , code c
-		where 	d.email = #{value} 
-		and     d.dog_id = i.dog_id(+) 
-		and     d.dog_id = f.dog_id(+)
-		and 	f.code_dog = c.code
+   		from   	dog d, dog_image di, dogInfo dinfo, code c
+		where   d.dog_id = di.dog_id(+)
+		and		d.dog_id = dinfo.dog_id(+)
+		and		dinfo.code_dog = c.code(+)
+		and		d.email = #{email}
+		order by d.dog_id
 	</select>
 	
 	<update id="updateDog" parameterType="dog">

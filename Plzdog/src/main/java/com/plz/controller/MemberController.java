@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.plz.service.AuthorityService;
+import com.plz.service.DogService;
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Skill;
 
 @Controller
 @RequestMapping("/member/")
@@ -37,6 +39,9 @@ public class MemberController {
 	
 	@Autowired
 	private AuthorityService aService;
+	
+	@Autowired
+	private DogService dService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -85,7 +90,8 @@ public class MemberController {
 	public String goToProfile(@RequestParam String email, Model model, HttpSession session) {
 		//먼저 sitter에 등록되어 있는지 확인한다.
 		Member member = service.selectSitterByEmail(email);
-		System.out.println(member);
+		//해당 회원의 강아지 리스트 추가
+		member.setDogList(dService.selectDogByEmail(email));
 		
 		//해당 시터의 프로필
 		model.addAttribute("profile", member);
@@ -164,8 +170,8 @@ public class MemberController {
 		
 		for(Member member : service.selectAllSitter()) {
 			//ROLE_MEMBER, ROLE_SITTER
-			System.out.println(member.getauthorityList().size());
-			if(member.getauthorityList().size() == 2) {
+			System.out.println(member.getAuthorityList().size());
+			if(member.getAuthorityList().size() == 2) {
 				sitterList.add(member);
 				System.out.println(member);
 			}

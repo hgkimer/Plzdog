@@ -53,17 +53,17 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Override
 	public List<Member> selectAllSitter() {
-		return session.selectList(makeSqlId("selectAllMemberJoinDogSitterSkill"));
+		return session.selectList(makeSqlId("selectAllMemberJoinSitterSkillAuthority"));
 	}
 	
 	@Override
 	public Member selectSitterByEmail(String email) {
-		return session.selectOne(makeSqlId("selectMemberJoinDogSitterSkillByEmail"), email);
+		return session.selectOne(makeSqlId("selectMemberJoinSitterSkillAuthorityByEmail"), email);
 	}
 	
 	@Override
 	public List<Member> selectSitterByName(String name) {
-		return session.selectList(makeSqlId("selectMemberJoinDogSitterSkillByName"), name);
+		return session.selectList(makeSqlId("\"selectMemberJoinSitterSkillAuthorityByName\""), name);
 	}
 	
 	@Override

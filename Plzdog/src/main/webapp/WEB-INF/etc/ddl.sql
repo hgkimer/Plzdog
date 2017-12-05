@@ -537,6 +537,9 @@ select	r.res_id,
 from	reservation r, dog_image i, dog d
 where 	r.email = d.email and r.email_sitter = 'kim@naver.com' and d.dog_id = i.dog_id(+);
 
+
+update dog_image set dog_image = '2.jpg' where dog_id = 13
+
 --시터 대기명단에 등록
 
 -- 회원에 해당하는 code의 이름을 조회
@@ -586,7 +589,7 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
-select * from resdetail;
+select * from res_detail;
 select * from waiting;
 ------------------------------------test
 select m.email, m.member_name, s.school, c.code_name from member m, sitter s, skill sk, code c
@@ -730,4 +733,11 @@ select			m.email,
 		from    reservation r, sales s
 		where   r.res_id = s.res_id
 		and     r.res_id = 2;
+		
+		
+		
+		
+		
+
+		
 		
