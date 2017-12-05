@@ -132,10 +132,11 @@ public class ReservationController {
 				//예약(정보)에 해당하는 견주의 강아지 정보
 				List<Reservation> list = service.selectSimpleReservationSitter(email);
 				for(Reservation res1 : list) {
-					System.out.println(res1);
+					System.out.println("ㅇㅖ약 : "+res1);
 				}
 				//견주 정보(이미지)
 				Member member = memberService.selectMemberByEmail(memberEmail);
+				System.out.println(member.getMemberImage());
 				//System.out.println(member);
 				//시터에게 온 강아지 정보+예약정보
 				model.addAttribute("list",list);

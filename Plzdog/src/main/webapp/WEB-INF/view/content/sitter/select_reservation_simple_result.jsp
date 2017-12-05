@@ -73,13 +73,11 @@
 </style>
 </head>
 <body>
-
-</body>
 <div class="all">
 	<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
 		<div class="dogImage">
 			<ul class="navImage">
-				<img src="${initParam.rootPath }/memberImage/${requestSocpe.member.memberImage }"><br>
+				<img src="${initParam.rootPath }/memberImage/${requestScope.member.memberImage }"><br>
 			</ul>
 		</div>
 		
