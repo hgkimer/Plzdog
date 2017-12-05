@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plz.dao.AuthorityDao;
+import com.plz.dao.MemberDao;
 import com.plz.dao.ResDetailDao;
 import com.plz.dao.ReservationDao;
 import com.plz.service.ReservationService;
+import com.plzdog.vo.Authority;
 import com.plzdog.vo.Demand;
+import com.plzdog.vo.Member;
 import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
@@ -21,12 +25,31 @@ public class ReservationServiceImpl implements ReservationService{
 	private ReservationDao dao;
 	@Autowired
 	private ResDetailDao resdDao;
+	@Autowired
+	private AuthorityDao aDao;
+	@Autowired
+	private MemberDao mDao;
+	
+	@Override
+	public Member checkSitter(String sitterEmail) {
+		Member sitter = null;
+		List<Authority> aList = aDao.selectAuthorityByEmail(sitterEmail);
+		for(Authority a : aList) {
+			if(a.getAuthority().equals("ROLE_SITTER")) {
+				sitter = mDao.selectSitterByEmail(sitterEmail);
+				break;
+			}else {
+				continue;
+			}
+		}return sitter;
+	}
 	
 	@Override
 	//Reservation, Demand, ResDetail 동시에 insert가 들어가기 때문에 Transaction 처리
 	@Transactional
 	public void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList) {
 		dao.insertReservation(reservation);
+		System.out.println(demandList);
 		//요구사항 리스트를 반복해서 Demand 테이블에 insert
 		for(String demand : demandList) {
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
@@ -135,4 +158,6 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail) {
 		return dao.selectDetailReservationAdmin(sitterEmail, memberEmail);
 	}
+
+
 }

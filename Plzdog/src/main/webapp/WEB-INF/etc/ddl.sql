@@ -442,6 +442,17 @@ INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-3');
 insert into skill values('soo1@naver.com','res-1');
 insert into SKILL values('soo1@naver.com','service-1');
 insert into SKILL values('soo1@naver.com','service-2');
+insert into SKILL values('soo2@naver.com','service-1');
+insert into SKILL values('soo2@naver.com','service-2');
+insert into SKILL values('soo3@naver.com','service-1');
+insert into SKILL values('soo3@naver.com','service-2');
+insert into SKILL values('soo4@naver.com','service-1');
+insert into SKILL values('soo5@naver.com','service-1');
+insert into SKILL values('soo6@naver.com','service-1');
+insert into SKILL values('soo7@naver.com','service-2');
+insert into SKILL values('soo8@naver.com','service-2');
+insert into SKILL values('soo9@naver.com','service-2');
+insert into SKILL values('soo10@naver.com','service-2');
 
 
 --리뷰

@@ -21,11 +21,9 @@ public class CodeLoadListener implements ServletContextListener {
    }
 
    public void contextInitialized(ServletContextEvent event) {
-      System.out.println("시작");
       ServletContext ctx = event.getServletContext();
       String confg = ctx.getInitParameter("code-config");
       ApplicationContext context = new ClassPathXmlApplicationContext(confg);
-      System.out.println(context);
       CodeDao dao = (CodeDao) context.getBean("codeDaoImpl");
       List<Code> skillList = dao.selectCodeByCategory("시터");
       List<Code> enList = dao.selectCodeByCategory("시터환경");
