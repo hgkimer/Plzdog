@@ -24,8 +24,9 @@
 	
 	.every {
 		width:700px;
-		height:650px;
+		height:750px;
 		margin-top:30px;
+		margin-left:130px;
 	}
 	
 	.form-group {
@@ -38,7 +39,7 @@
 	}
 	
 	.btn {
-		width:100%;
+		width:400px;
 		height:50px;
 		float:left;
 	}
@@ -81,19 +82,21 @@
 			<label for="givePrice">위탁 돌봄 희망 가격</label>
 			<input type="number" name="givePrice" id="givePrice" class="form-controller" required="required">
 		</div>
+		<div class="clear"></div>
 		<div class="form-check-skill" style="float:left; font-size:15px; font-weight:bold; line-height:30px; margin-bottom:20px;">
 			<label class="form-check-label">보유 기술 목록 : </label><br>
 			<c:forEach var="skill" items="${applicationScope.skillList }">
 			<input type="checkbox" name="skill" value="${skill.code }" class="form-check-input">${skill.codeName }<br>	
 		</c:forEach>
 		</div>
-		<div class="form-check-en" style="float:left; font-size:15px; font-weight:bold; line-height:30px; margin-bottom:20px;">
+		<div class="form-check-en" style="float:left; font-size:15px; font-weight:bold; line-height:30px; margin-bottom:20px; margin-left:30px;">
 			<label class="form-check-label">보유 환경 목록 : </label><br>
 			<c:forEach var="en" items="${applicationScope.enList }">
 			<input type="checkbox" name="skill" value="${en.code }" class="form-check-input">${en.codeName }<br>	
 		</c:forEach>
 		</div>
 		<input type="hidden" name="sitterRate" value="0">
+		<div class="clear"></div>
 		<div class="btn">
 			<input type="submit" value="전송" id="sitterBtn" name="sitterBtn" class="btn btn-default">
 		</div>

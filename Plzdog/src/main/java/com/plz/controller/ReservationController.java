@@ -127,7 +127,7 @@ public class ReservationController {
 				
 				for(int i = 0 ; i < res.size() ; i++) {
 					memberEmail = res.get(i).getMemberEmail();
-				}	
+				}
 				
 				//예약(정보)에 해당하는 견주의 강아지 정보
 				List<Reservation> list = service.selectSimpleReservationSitter(email);
