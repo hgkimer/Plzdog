@@ -29,14 +29,15 @@ public class ReservationController {
 	private DogService dogService;
 	@Autowired
 	private ResDetailService resDetailService;
-
+	/* @Autowired처리 안되있었음 */
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping("/member/selectDogInReservation")
 	public String selectDogInReservation(@RequestParam int resId, @RequestParam(name="dogId") List<Integer> dogIdList) {
 		resDetailService.addResDetail(resId, dogIdList);
 		return "member/reservation_add_success.tiles";
 	}
-	private MemberService memberService;
 	
 	/**
 	 * 예약 관련 Controller 
@@ -136,7 +137,7 @@ public class ReservationController {
 				
 				for(int i = 0 ; i < res.size() ; i++) {
 					memberEmail = res.get(i).getMemberEmail();
-				}	
+				}
 				
 				//예약(정보)에 해당하는 견주의 강아지 정보
 				List<Reservation> list = service.selectSimpleReservationSitter(email);

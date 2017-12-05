@@ -28,6 +28,7 @@ public class Reservation implements Serializable {
 	private List<Demand> demandList;
 	private Sales sales;
 	private Member member;
+	private Dog dog;
 	
 	public Reservation() {}
 	
@@ -165,12 +166,21 @@ public class Reservation implements Serializable {
 		this.member = member;
 	}
 	
+	public Dog getDog() {
+		return dog;
+	}
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((careList == null) ? 0 : careList.hashCode());
 		result = prime * result + ((demandList == null) ? 0 : demandList.hashCode());
+		result = prime * result + ((dog == null) ? 0 : dog.hashCode());
 		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((memberEmail == null) ? 0 : memberEmail.hashCode());
 		result = prime * result + price;
@@ -203,6 +213,11 @@ public class Reservation implements Serializable {
 			if (other.demandList != null)
 				return false;
 		} else if (!demandList.equals(other.demandList))
+			return false;
+		if (dog == null) {
+			if (other.dog != null)
+				return false;
+		} else if (!dog.equals(other.dog))
 			return false;
 		if (member == null) {
 			if (other.member != null)
@@ -261,7 +276,6 @@ public class Reservation implements Serializable {
 		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
 				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
 				+ ", sitterEmail=" + sitterEmail + ", resDetailList=" + resDetailList + ", careList=" + careList
-				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + "]";
+				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + ", dog=" + dog + "]";
 	}
-	
 }
