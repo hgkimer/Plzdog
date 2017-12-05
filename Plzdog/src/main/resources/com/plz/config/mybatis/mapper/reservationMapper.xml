@@ -236,7 +236,6 @@
 	</select>
 	
 	
-	
 	<!-- 해당 시터의 급여를 조회하는 resultmap -->
 	<resultMap id="reservation-join-sales-resultmap" type = "Reservation" extends="reservation-resultmap">
 		<association property ="sales" javaType ="sales">

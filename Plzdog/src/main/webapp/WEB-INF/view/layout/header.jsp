@@ -137,7 +137,6 @@
 					<li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="${initParam.rootPath }/image/foot.png">도그시터 신청하기</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="${initParam.rootPath }/image/search.png">도그시터 찾기</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
-					<li class="navi"><a href="${initParam.rootPath }/faq.do">FAQ</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/member/mypage.do">마이페이지</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
@@ -151,6 +150,12 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
 }	
+
+$(document).ready(function(){
+	$("#logout").on("click", function(){
+		$("#logoutForm").submit();
+	});
+});
 </script>
 </body>
 </html>
