@@ -50,7 +50,10 @@ public class TestMemberDao {
 		List<Member> list = service.selectAllSitter();
 		for(Member member : list) {
 			System.out.println(member);
-			System.out.println(member.getauthorityList().size());
+			System.out.println(member.getAuthorityList().size());
 		}
+		Member member = service.selectSitterByEmail("soo1@naver.com");
+		System.out.println("soo1@naver.com : "+member);
+		System.out.println(member.getSitter().getSkillList());
 	}
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -90,8 +91,8 @@ public class SitterController {
 		if(certificationImage!=null && !certificationImage.isEmpty()) {
 			//사진 저장할 디렉토리 
 			String dir = request.getServletContext().getRealPath("/certificationImage");
-			String fileName = certificationImage.getOriginalFilename();
-			File upImage = new File(dir, fileName);
+			String fileName = UUID.randomUUID().toString();	
+			File upImage = new File(request.getServletContext().getRealPath("/certificationImage"), fileName);
 			certificationImage.transferTo(upImage);
 			sitter.setCertification(fileName);
 		}

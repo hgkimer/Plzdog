@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.memberMapper">
-
-	<insert id="insertMember" parameterType="member">
-		INSERT INTO	member VALUES( 	#{email},
-									#{memberName},
-									#{password},
-									#{mainAddress},
-									#{subAddress},
-									#{zipcode},
-									#{memberImage},
-									#{phoneNum},
-									#{memberEnable}	)
-	</insert>
 	
 	<sql id="member-dog-select-sql">
 		select	m.email,
@@ -34,36 +22,16 @@
 		from	member m, authority a, dog d, DOG_IMAGE i
 	</sql>
 	
-	<sql id="member-dog-sitter-skill-select">
-		select	m.email,
-				m.member_name,
-				m.password,
-				m.main_address,
-				m.sub_address,
-				m.zipcode,
-				m.member_image,
-				m.phonenum,
-				m.member_enable,
-				a.authority,
-				s.school,
-				s.certification,
-				s.service_address,
-				s.sitter_rate,
-				s.VISIT_PRICE,
-				s.give_price,
-				c.code,
-				c.code_name,
-				c.category,
-				d.dog_name,
-				d.species,
-				d.gender,
-				d.weight,
-				d.birth,
-				i.dog_image
-		from	member m,authority a, dog d, dog_image i, sitter s, skill k, code c
+	<sql id="member-sitter-skill-authority-select-sql">
+		select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
+		m.member_image, m.phonenum, m.member_enable,
+		s.school, s.certification, s.service_address, s.sitter_rate, s.VISIT_PRICE, s.give_price,
+		c.code, c.code_name, c.category,
+		a.authority
+		from  member m, sitter s, skill sk, code c, authority a
 	</sql>
 	
-	<resultMap type="member" id="member-join-review-resultmap" extends="member-dog-sitter-skill-resultmap">
+	<!-- <resultMap type="member" id="member-join-review-resultmap" extends="member-dog-sitter-skill-resultmap">
 		<collection property="reviewList" ofType="Review">
 			<id column="review_id" property="reviewId" />
 			<result column="review_rate" property="reviewRate" />
@@ -71,7 +39,7 @@
 			<result column="email" property="memberEmail" />
 			<result column="email_sitter" property="sitterEmail" />
 		</collection>
-	</resultMap>
+	</resultMap> -->
 	
 	<!-- member-resultmap -->
 	<resultMap type="member" id="member-dog-resultmap">
@@ -107,24 +75,43 @@
 		</collection>
 	</resultMap>
 	
-	<resultMap type="member" id="member-dog-sitter-skill-resultmap" extends="member-dog-resultmap">
+	<!-- 회원에서 권한과 시터 스킬 조회 resulmap -->
+	<!-- 
+		스킬은 code_skill과 해당하는 code의 code를 갖는 property가 있어야 된다. 
+	-->
+	<resultMap type="Member" id="member-sitter-skill-authority-resultmap">
+		<id column="email" property="email" />
+		<result column="member_name" property="memberName" />
+		<result column="main_address" property="mainAddress" />
+		<result column="password" property="password" />
+		<result column="sub_address" property="subAddress" />
+		<result column="zipcode" property="zipcode" />
+		<result column="member_image" property="memberImage" />
+		<result column="phonenum" property="phoneNum" />
+		<result column="member_enable" property="memberEnable" />
 		<association property="sitter" javaType="Sitter">
-			<!-- <id column="email" property="email"/> -->
+			<id column="email" property="email"/> 
 			<result column="school" property="school"/>
 			<result column="certification" property="certification"/>
 			<result column="service_address" property="serviceAddress"/>
 			<result column="sitter_rate" property="sitterRate"/>
 			<result column="visit_price" property="visitPrice"/>
 			<result column="give_price" property="givePrice"/>
+			<collection property="skillList" ofType="Skill">
+				<result column="code" property="codeSkill"/>
+				<association property="code" javaType="Code">
+					<id column="code" property="code"/>
+					<result column="code_name" property="codeName"/>
+					<result column="category" property="category"/>
+				</association>
+			</collection>
 		</association>
-		<collection property="skillList" ofType="code">
-				<id column="code" property="code"/>
-				<result column="code_name" property="codeName"/>
-				<result column="category" property="category"/>
+		<collection property="authorityList" ofType="Authority">
+			<result column="authority" property="authority"/>
 		</collection>
 	</resultMap>
 	
-	<!-- 전체 회원과 강아지를 조히 -->
+	<!-- 전체 회원과 강아지를 조회 -->
 	<select id="selectAllMemberJoinDog" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
 		and   m.member_enable = '1'
@@ -145,40 +132,36 @@
 		where m.member_name like '%'||#{value}||'%'
 	</select>
 	
-	<!-- 전체 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보,권한 조회 -->
-	<select id="selectAllMemberJoinDogSitterSkill" resultMap="member-dog-sitter-skill-resultmap">
-		<include refid="member-dog-sitter-skill-select"/>
-		where	s.email = m.email
-		and		a.email = m.email 
-		and		s.email = d.email(+)
-		and	    d.dog_id = i.dog_id(+) 
-		and		s.email = k.email(+)
-		and		k.code_skill = c.code(+)
-		and     m.member_enable = '1'
+	<!-- 시터의 전체 회원정보, 시터정보, 스킬 정보 조회 -->
+	<select id="selectAllMemberJoinSitterSkillAuthority" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
+		<include refid="member-sitter-skill-authority-select-sql"/>
+		where 	m.email = s.email
+		and		s.email = sk.email(+)
+		and		sk.code_skill = c.code(+)
+		and 	m.member_enable = '1'
+		and 	m.email = a.email	
 	</select>
 	
-	<!-- 이메일로 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
-	<select id="selectMemberJoinDogSitterSkillByEmail" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
-		<include refid="member-dog-sitter-skill-select"/>
-		where	s.email = #{value} 
-		and  	s.email = m.email
-		and		a.email = m.email 
-		and		s.email = d.email(+)
-		and	    d.dog_id = i.dog_id(+) 
-		and		s.email = k.email(+)
-		and		k.code_skill = c.code(+)
-		and     m.member_enable = '1'
+	<!-- 이메일로 시터의 회원정보, 시터정보 스킬 정보 조회 -->
+	<select id="selectMemberJoinSitterSkillAuthorityByEmail" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
+		<include refid="member-sitter-skill-authority-select-sql"/>
+		where 	m.email = s.email
+		and		s.email = sk.email
+		and		sk.code_skill = c.code
+		and 	m.member_enable = '1'
+		and 	m.email = a.email	
+		and  	m.email = #{email}
 	</select>
 	
 	<!-- 이름으로 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
-	<select id="selectMemberJoinDogSitterSkillByName" parameterType="string" resultMap="member-dog-sitter-skill-resultmap">
-		<include refid="member-dog-sitter-skill-select"/>
+	<select id="selectMemberJoinSitterSkillAuthorityByName" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
+		<include refid="member-sitter-skill-authority-select-sql"/>
 		where	m.member_name like '%'||#{value}||'%' 
-		and 	s.email = m.email 
-		and 	s.email = d.email 
-		and 	k.code_skill = c.code 
-		and 	s.email = k.email(+)
-		and     m.member_enable = '1'
+		and 	m.email = s.email
+		and		s.email = sk.email
+		and		sk.code_skill = c.code
+		and 	m.member_enable = '1'
+		and 	m.email = a.email	
 	</select>
 
 	
@@ -190,10 +173,23 @@
 		from	review r, member s
 	</sql>
 
-	<select id="c" parameterType="string" resultMap="member-join-review-resultmap">
+	<!-- <select id="c" parameterType="string" resultMap="member-join-review-resultmap">
 		<include refid="member-review-sql"/>
 		where s.email = r.email_sitter 
-	</select>
+	</select> -->
+	
+	<!-- 회원 정보 추가 -->
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO	member VALUES( 	#{email},
+									#{memberName},
+									#{password},
+									#{mainAddress},
+									#{subAddress},
+									#{zipcode},
+									#{memberImage},
+									#{phoneNum},
+									#{memberEnable}	)
+	</insert>
 		
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="member">

@@ -22,7 +22,7 @@ public class Member implements Serializable {
 	private List<Authority> authorityList; //권한
 	private MultipartFile imageMember;
 	private Sitter sitter; // 시터
-	private List<Code> skillList;
+	//private List<Code> skillList;
 	private List<Review> reviewList; // 시터
 	private List<Reservation> resList; // 견주, 시터
 	private List<Dog> dogList; // 견주, 시터
@@ -71,11 +71,29 @@ public class Member implements Serializable {
 		this.phoneNum = phoneNum;
 		this.memberEnable = memberEnable;
 	}
-
+	
 	public Member(String email, String memberName, String password, String mainAddress, String subAddress,
 			String memberImage, int zipcode, String phoneNum, int memberEnable, List<Authority> authorityList,
-			MultipartFile imageMember, Sitter sitter, List<Code> skillList, List<Review> reviewList,
-			List<Reservation> resList, List<Dog> dogList) {
+			Sitter sitter, List<Dog> dogList) {
+		super();
+		this.email = email;
+		this.memberName = memberName;
+		this.password = password;
+		this.mainAddress = mainAddress;
+		this.subAddress = subAddress;
+		this.memberImage = memberImage;
+		this.zipcode = zipcode;
+		this.phoneNum = phoneNum;
+		this.memberEnable = memberEnable;
+		this.authorityList = authorityList;
+		this.sitter = sitter;
+		this.dogList = dogList;
+	}
+	
+	public Member(String email, String memberName, String password, String mainAddress, String subAddress,
+			String memberImage, int zipcode, String phoneNum, int memberEnable, List<Authority> authorityList,
+			MultipartFile imageMember, Sitter sitter, List<Review> reviewList, List<Reservation> resList,
+			List<Dog> dogList) {
 		super();
 		this.email = email;
 		this.memberName = memberName;
@@ -89,18 +107,9 @@ public class Member implements Serializable {
 		this.authorityList = authorityList;
 		this.imageMember = imageMember;
 		this.sitter = sitter;
-		this.skillList = skillList;
 		this.reviewList = reviewList;
 		this.resList = resList;
 		this.dogList = dogList;
-	}
-	
-	public List<Authority> getauthorityList() {
-		return authorityList;
-	}
-
-	public void setauthorityList(List<Authority> authorityList) {
-		this.authorityList = authorityList;
 	}
 
 	public String getEmail() {
@@ -175,6 +184,14 @@ public class Member implements Serializable {
 		this.memberEnable = memberEnable;
 	}
 
+	public List<Authority> getAuthorityList() {
+		return authorityList;
+	}
+
+	public void setAuthorityList(List<Authority> authorityList) {
+		this.authorityList = authorityList;
+	}
+
 	public MultipartFile getImageMember() {
 		return imageMember;
 	}
@@ -189,14 +206,6 @@ public class Member implements Serializable {
 
 	public void setSitter(Sitter sitter) {
 		this.sitter = sitter;
-	}
-
-	public List<Code> getSkillList() {
-		return skillList;
-	}
-
-	public void setSkillList(List<Code> skillList) {
-		this.skillList = skillList;
 	}
 
 	public List<Review> getReviewList() {
@@ -228,8 +237,8 @@ public class Member implements Serializable {
 		return "Member [email=" + email + ", memberName=" + memberName + ", password=" + password + ", mainAddress="
 				+ mainAddress + ", subAddress=" + subAddress + ", memberImage=" + memberImage + ", zipcode=" + zipcode
 				+ ", phoneNum=" + phoneNum + ", memberEnable=" + memberEnable + ", authorityList=" + authorityList
-				+ ", imageMember=" + imageMember + ", sitter=" + sitter + ", skillList=" + skillList + ", reviewList="
-				+ reviewList + ", resList=" + resList + ", dogList=" + dogList + "]";
+				+ ", imageMember=" + imageMember + ", sitter=" + sitter + ", reviewList=" + reviewList + ", resList="
+				+ resList + ", dogList=" + dogList + "]";
 	}
 
 	@Override
@@ -248,7 +257,6 @@ public class Member implements Serializable {
 		result = prime * result + ((resList == null) ? 0 : resList.hashCode());
 		result = prime * result + ((reviewList == null) ? 0 : reviewList.hashCode());
 		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
-		result = prime * result + ((skillList == null) ? 0 : skillList.hashCode());
 		result = prime * result + ((subAddress == null) ? 0 : subAddress.hashCode());
 		result = prime * result + zipcode;
 		return result;
@@ -319,11 +327,6 @@ public class Member implements Serializable {
 			if (other.sitter != null)
 				return false;
 		} else if (!sitter.equals(other.sitter))
-			return false;
-		if (skillList == null) {
-			if (other.skillList != null)
-				return false;
-		} else if (!skillList.equals(other.skillList))
 			return false;
 		if (subAddress == null) {
 			if (other.subAddress != null)
