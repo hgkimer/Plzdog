@@ -4,12 +4,23 @@ import java.util.List;
 
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Demand;
+import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
 public interface ReservationService {
 	/**
+	 * 예약 작성 폼으로 가기 위해
+	 *  1. 매개변수로 받은 이메일로 시터 권한이 있는지 확인
+	 *  2. 권한이 있다면 회원 조회(회원 정보 + 시터 정보) 메소드(MemberDao)를 통해 Member객체에 저장
+	 *  	2-1. 권한이 없는 일반 회원이면 null을 리턴
+	 *  3. 리턴
+	 * 
+	 * @param sitterEmail
+	 */
+	Member checkSitter(String sitterEmail);
+	/**
 	 * 새로운 예약을 추가하는 메소드
-	 * 매개변수로 요구사항 목록을 받아 insert도 함께한다.
+	 * 매개변수로 요구사항, 요구 환경 , 강아지 목록을 받아 insert도 함께한다.
 	 * @param reservation
 	 */
 	void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList);
