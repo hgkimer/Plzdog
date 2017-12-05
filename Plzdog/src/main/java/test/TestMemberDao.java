@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.plz.service.MemberService;
+import com.plzdog.vo.Code;
 import com.plzdog.vo.Member;
 
 public class TestMemberDao {
@@ -54,6 +55,9 @@ public class TestMemberDao {
 		}
 		Member member = service.selectSitterByEmail("soo1@naver.com");
 		System.out.println("soo1@naver.com : "+member);
-		System.out.println(member.getSitter().getSkillList());
+		//System.out.println(member.getSitter().getSkillList());
+		
+		Code code= new Code();
+		
 	}
 }

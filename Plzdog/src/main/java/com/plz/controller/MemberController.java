@@ -22,13 +22,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.plz.service.AuthorityService;
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
 import com.plzdog.vo.Member;
-import com.plzdog.vo.Skill;
+import com.plzdog.vo.Sitter;
 
 @Controller
 @RequestMapping("/member/")
@@ -180,6 +181,28 @@ public class MemberController {
 		return "sitter/sitter_select_result.tiles";
 	}
 	
+	@RequestMapping("find_sitter")
+	public @ResponseBody List<Member> findSitter(@RequestParam String serviceName){
+		List<Member> sitterList = service.selectAllMember();
+		String codeName;
+		
+		System.out.println(serviceName);
+		for(Member member : service.selectAllSitter()) {
+			//ROLE_MEMBER, ROLE_SITTER
+			System.out.println(member.getAuthorityList().size());
+			if(member.getAuthorityList().size() == 2) {
+				for(int i=0; i< member.getSitter().getSkillList().size() ; i++) {
+					codeName = member.getSitter().getSkillList().get(i).getCode().getCodeName();
+					if(codeName.equals(serviceName)) {
+						sitterList.add(member);
+					}
+				}
+			}
+		}
+		
+		return sitterList;
+	}
+	
 	@RequestMapping("zipcode")
 	public String getZipcode(@RequestParam String sample4_postcode, @RequestParam String sample4_mainAddress, @RequestParam String sample4_subAddress, Model model  ) {
 		System.out.println(sample4_postcode);
@@ -190,7 +213,6 @@ public class MemberController {
 		model.addAttribute("sample4_subAddress", sample4_subAddress);
 		return "member/address_test_result.tiles";
 	}
-	
 	
 	
 	
