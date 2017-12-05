@@ -29,7 +29,7 @@ public class DogDaoImpl implements DogDao {
 
 	@Override
 	public List<Dog> selectDogByEmail(String email) {
-		return session.selectList(makeSqlId("selectDogByEmail"), email);
+		return session.selectList(makeSqlId("selectDogJoinDogInfoDogImageByEmail"), email);
 	}
 
 	@Override
@@ -77,4 +77,6 @@ public class DogDaoImpl implements DogDao {
 	public int deleteDogInfo(int dogId) {
 		return session.delete(makeSqlId("updateDogImage"),dogId);
 	}
+	
+	
 }

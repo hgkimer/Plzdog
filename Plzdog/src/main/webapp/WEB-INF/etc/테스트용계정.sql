@@ -227,7 +227,7 @@ select	m.email,
 		from	member m, authority a, dog d, DOGINFO f, dog_image i, sitter s, skill k, code c
 		where	s.email = m.email
 		and		m.email = d.email(+)
-		and		s.email = a.email
+		and		m.email = a.email
 		and		s.email = k.email
 		and		k.code_skill = c.code
 		and	    d.dog_id = i.dog_id(+)
@@ -235,6 +235,103 @@ select	m.email,
 		and		f.code_dog = c.code
 		and     m.member_enable = '1'
 		and  	s.email = 'soo1@naver.com' 
-		
+
+/* 강사님이 해주신 것 */		
+select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
+		m.member_image, m.phonenum, m.member_enable,
+		s.school, s.certification, s.service_address, s.sitter_rate, s.VISIT_PRICE, s.give_price,
+		c.code, c.code_name, c.category, 
+		d.dog_name, d.species, d.gender, d.weight, d.birth,
+		dc.code, dc.code_name, dc.category,
+		dim.dog_image,
+		a.authority
+from  	member m, sitter s, skill sk, code c, dog d, doginfo di, code dc, dog_image dim, authority a
+where 	m.email = s.email
+and		s.email = sk.email
+and		sk.code_skill = c.code
+and		m.email = d.email
+and		d.dog_id = di.dog_id(+)
+and		di.code_dog = dc.code(+)
+and		d.dog_id = dim.dog_id(+)
+and 	m.member_enable = '1'
+and 	m.email = a.email		
+and  	m.email = 'soo1@naver.com'
+
+select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
+		m.member_image, m.phonenum, m.member_enable,
+		s.school, s.certification, s.service_address, s.sitter_rate, s.VISIT_PRICE, s.give_price,
+		c.code, c.code_name, c.category, 
+		d.dog_name, d.species, d.gender, d.weight, d.birth,
+		dc.code, dc.code_name, dc.category,
+		dim.dog_image,
+		a.authority
+from  	member m, sitter s, skill sk, code c, dog d, doginfo di, code dc, dog_image dim, authority a
+where 	m.email = s.email
+and		s.email = sk.email(+)
+and		sk.code_skill = c.code(+)
+and		m.email = d.email(+)
+and		d.dog_id = di.dog_id(+)
+and		di.code_dog = dc.code(+)
+and		d.dog_id = dim.dog_id(+)
+and 	m.member_enable = '1'
+and 	m.email = a.email		
 		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'
+
+
+select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
+				m.member_image, m.phonenum, m.member_enable,
+				s.school, s.certification, s.service_address, s.sitter_rate, s.VISIT_PRICE, s.give_price,
+				c.code_name sitter_skill, 
+				d.dog_name, d.species, d.gender, d.weight, d.birth,
+				dc.code_name dog_code,
+				dim.dog_image,
+				a.authority
+		from  	member m, sitter s, skill sk, code c, dog d, doginfo di, code dc, dog_image dim, authority a
+		where 	m.email = s.email
+				and		s.email = sk.email
+				and		sk.code_skill = c.code
+				and		m.email = d.email
+				and		d.dog_id = di.dog_id(+)
+				and		di.code_dog = dc.code(+)
+				and		d.dog_id = dim.dog_id(+)
+				and 	m.member_enable = '1'
+				and 	m.email = a.email	
+		and  	m.email = 'soo1@naver.com'
+order by d.dog_name		
+		
+
+select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
+		m.member_image, m.phonenum, m.member_enable,
+		s.school, s.certification, s.service_address, s.sitter_rate, s.VISIT_PRICE, s.give_price,
+		c.code, c.code_name, c.category,
+		a.authority
+		from  member m, sitter s, skill sk, code c, authority a
+		where 	m.email = s.email
+		and		s.email = sk.email(+)
+		and		sk.code_skill = c.code(+)
+		and 	m.member_enable = '1'
+		and 	m.email = a.email	
+		and  	m.email = 'soo1@naver.com'
+		
+   select  d.dog_name, d.species, d.gender, d.weight, d.birth,
+		   dc.code, dc.code_name, dc.category,
+		   dim.dog_image
+    from   dog d, doginfo di, code dc, dog_image dim
+			where   di.code_dog = dc.code(+)
+			and		d.dog_id = dim.dog_id(+)
+			and 	d.dog_id = di.dog_id(+)
+        	and  	d.email = 'soo1@naver.com'
+			and d.dog_id = '11'
+		
+ select  d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth,
+				di.dog_image
+				
+   		from   	dog d, dog_image di, dogInfo dinfo, code c
+		where   d.dog_id = di.dog_id(+)
+		and		d.dog_id = dinfo.dog_id(+)
+		and		dinfo.code_dog = c.code(+)
+        	and  	d.email = 'soo1@naver.com'
+			and d.dog_id = '11'
+		
+		

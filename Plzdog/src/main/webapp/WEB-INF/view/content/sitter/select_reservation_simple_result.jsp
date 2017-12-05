@@ -65,7 +65,7 @@
 		line-height:45px;
 	}
 	
-	.navlist {
+	.navList {
 		width:100%;
 		height:100%;
 	}
@@ -88,16 +88,16 @@
 					<li>예약ID : ${reservation.resId}</li>
 					<li>예약상태 : ${reservation.resStatus}</li>	
 					<ul class="navlist1">
-							<c:forEach items="${reservation.resDetailList }" var="resDetail">
-								<c:forEach items="${resDetail.dogList }" var="dog">
-									<li>강아지이름 : ${dog.dogName}</li>
-									<li>강아지종 : ${dog.species}</li>
-									<li>강아지성별 : ${dog.gender}</li>
-									<li>강아지생년월일 : ${dog.birth}</li>
-										<c:forEach items="${dog.dogImage }" var="dogImage">
-											강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
-										</c:forEach>
-								</c:forEach>
+						<c:forEach items="${reservation.resDetailList }" var="resDetail">
+							<c:forEach items="${resDetail.dogList }" var="dog">
+								<li>강아지이름 : ${dog.dogName}</li>
+								<li>강아지종 : ${dog.species}</li>
+								<li>강아지성별 : ${dog.gender}</li>
+								<li>강아지생년월일 : ${dog.birth}</li>
+									<c:forEach items="${dog.dogImage }" var="dogImage">
+										강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
+									</c:forEach>
+							</c:forEach>
 						</c:forEach>
 					</ul>
 					<li>시작날짜 : ${reservation.resSDate}</li>

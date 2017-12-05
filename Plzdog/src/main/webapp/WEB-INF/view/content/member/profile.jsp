@@ -34,8 +34,8 @@
 <p>위탁돌봄금액 : ${requestScope.profile.sitter.givePrice }</p>
 
 <p>스킬 리스트 : <br>
-	<c:forEach var="code" items="${requestScope.profile.skillList }">
-		★${code.codeName }<br>
+	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
+		★${skill.code.codeName }<br>
 	</c:forEach></p>
 
 <form action="${initParam.rootPath }/member/checkSitter.do">
