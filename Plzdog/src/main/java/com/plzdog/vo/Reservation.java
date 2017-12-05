@@ -11,14 +11,13 @@ public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int resId;
-
-	//★★★★★예약 상태(1 : 예약 대기 / 2 : 예약 확정 / 3: 결제 완료
 	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resSDate;
 	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date resEDate;
 	private int price;
 	private String resContents;
+	//★★★★★예약 상태 ddl.sql 참조
 	private String resStatus; 
 	private String memberEmail;
 	private String sitterEmail;
