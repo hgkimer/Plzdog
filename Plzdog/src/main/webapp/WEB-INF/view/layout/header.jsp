@@ -7,8 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>header</title>
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -31,28 +33,9 @@
 	header {
 		width:100%;
 		height:100px;
-		background-color:#0cb70f;
+		background-color:#009688;
 		box-shadow:0px 5px 5px gray;
 		position:relative;
-	}
-	
-	.click {
-		width:100px;
-		height:100px;
-		float:left;
-		cursor:pointer;
-	}
-	
-	.click img {
-		width:100%;
-		height:100%;
-	}
-	
-	.container {
-		float:left;
-		width:100%;
-		height:100%;
-		float:right;
 	}
 	
 	.nav {
@@ -74,19 +57,74 @@
 		height:100%;
 		text-align:center;
 		line-height:80px;
-		vertical-align: baseline;
 		margin-left:30px;
 		color:white;
 	}
+	
+	.w3-teal {
+		height:100px;
+	}
+	
+	::-webkit-scrollbar {
+		display:none;
+	} 
 </style>
 </head>
 
 <body>
 	<header>
-		<div class="container">
-			<div class="click" >
-				<img src="${initParam.rootPath }/image/bar.png">
-			</div>
+	<%-- 사이드 바 --%>
+	<div class="w3-teal" style="width:50px; height:100px; float:left;">
+	<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+		<div class="w3-container">
+		</div>
+	</div>
+			
+	<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
+		<button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+		<ul class="nav" style="margin-top:20px; width:100%; text-align:center;">
+			<sec:authorize access="isAuthenticated()">
+				 <!-- Authentication의 getPrincipal() 호출 - User 리턴 -->
+				<sec:authentication property="principal.memberName"/> 님 환영합니다.<br>
+			</sec:authorize>
+			
+			<%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_MEMBER')"></li>
+				<li><a href="${initParam.rootPath }/member/mydog_register_form.do">강아지 등록</a></li>
+				<li><a href="${initParam.rootPath }/member/member_result_form.do">사용자 정보조회</a></li>
+				<li><a href="${initParam.rootPath }/member/select_all_sitter.do">시터 전체 조회</a></li>
+			</sec:authorize>
+			
+			<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
+			<sec:authorize access="isAuthenticated()">
+				<li><a id="logout" style="cursor: pointer;">로그아웃</a></li>
+				<li><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ROLE_SITTER')">
+				<li><a href="${initParam.rootPath }/sitter/care_register_form.do">돌봄일지 등록</a></li>
+			</sec:authorize>
+			
+			<%--관리자 메뉴 /admin 으로 시작--%>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
+			</sec:authorize>
+			
+			<%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
+		</ul>
+		
+		<!-- 
+			로그아웃전송폼
+			+ 로그인/로그아웃은 반드시 POST방식으로 요청하며 csrf 토큰을 보내야 한다.
+			+ 로그아웃은 단순 링크이므로 아래와 같이 hidden 폼을 말들고 클릭시 Javascript에서 form을 submit하여 처리한다.
+		 -->
+		
+			<form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
+			    <sec:csrfInput/>
+			</form>
+	</div>
+
+		<%-- 헤더 부분 --%>
 			<ul class="nav">
 				<%--인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴 --%>
 				<sec:authorize access="!isAuthenticated()">
@@ -106,5 +144,13 @@
 				</sec:authorize>
 			</ul>
 	</header>
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}	
+</script>
 </body>
 </html>

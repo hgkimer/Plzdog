@@ -9,10 +9,10 @@
 <body>
 <h1>예약 신청 완료</h1><br>
 
-<p>${sessionScope.reservation.resId }</p>
-<p><fmt:formatDate value = '${sessionScope.reservation.resSDate }' type="date"/></p>
-<p><fmt:formatDate value = '${sessionScope.reservation.resEDate }' type="date"/></p>
-<p>${sessionScope.reservation.price }원</p>
-<p>${sessionScope.reservation.sitterEmail }</p>
+<p>${request.reservation.resId }</p>
+<p><fmt:formatDate value = '${requestScope.reservation.resSDate }' type="date"/></p>
+<p><fmt:formatDate value = '${requestScope.reservation.resEDate }' type="date"/></p>
+<p>${requestScope.reservation.price }원</p>
+<p>${requestScope.reservation.sitterEmail }</p>
 </body>
 </html>

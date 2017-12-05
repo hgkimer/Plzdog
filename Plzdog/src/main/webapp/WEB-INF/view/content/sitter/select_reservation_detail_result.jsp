@@ -81,7 +81,7 @@ $(document).ready(function(){
 			<%--이메일에 해당하는 예약에 대한 리스트 --%>
 			<c:forEach var="list" items="${requestScope.list}">
 				<ul>
-					<li>예약상태 : ${list.resId}</li>
+					<li>예약상태 : ${list.resStatus}</li>
 					<li>시작날짜 : ${list.resSDate}</li>
 					<li>끝날짜 : ${list.resEDate}</li>
 					<li>견주이메일 : ${list.dog.email}</li>

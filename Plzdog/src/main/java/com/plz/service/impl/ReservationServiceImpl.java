@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plz.dao.ResDetailDao;
 import com.plz.dao.ReservationDao;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Demand;
+import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
 @Service
@@ -17,13 +19,21 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Autowired
 	private ReservationDao dao;
+	@Autowired
+	private ResDetailDao resdDao;
 	
 	@Override
+	//Reservation, Demand, ResDetail 동시에 insert가 들어가기 때문에 Transaction 처리
 	@Transactional
-	public void addReservation(Reservation reservation, List<String> demandList) {
+	public void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList) {
 		dao.insertReservation(reservation);
+		//요구사항 리스트를 반복해서 Demand 테이블에 insert
 		for(String demand : demandList) {
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
+		}
+		//해당 예약 Id를 가지고 있는 강아지 ID를 반복해서 ResDetail 테이블에 insert
+		for(int dogId : dogList) {
+			resdDao.insertResDetail(new ResDetail(reservation.getResId(), dogId));
 		}
 		
 	}

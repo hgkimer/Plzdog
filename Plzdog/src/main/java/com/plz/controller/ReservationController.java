@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.DogService;
@@ -28,24 +29,20 @@ public class ReservationController {
 	@Autowired
 	private DogService dogService;
 	@Autowired
-	private ResDetailService resDetailService;
-
-
-	@RequestMapping("/member/selectDogInReservation")
-	public String selectDogInReservation(@RequestParam int resId, @RequestParam(name="dogId") List<Integer> dogIdList) {
-		resDetailService.addResDetail(resId, dogIdList);
-		return "member/reservation_add_success.tiles";
-	}
 	private MemberService memberService;
 	
 	/**
-	 * 예약 관련 Controller 
-	 * 1. 예약 등록(견주, 시터) 
-	 * 2. 예약 상태 변경==> 
-	 * 3. 예약 전체(로그인한 Email로 /견주,시터) 조회
-	 * 4. 예약 삭제 
-	 * 5.
+	 * 예약 등록 화면에서 회원의 강아지 정보를 AJAX 처리 하기 위한 Controller
+	 * @param email
+	 * @return
 	 */
+	@RequestMapping("/member/find_dog_reservation")
+	@ResponseBody
+	public List<Dog> findMyDog(String email){
+		List<Dog> dogList = dogService.selectDogByEmail(email);
+		System.out.println(dogList);
+		return dogList;
+	}
 	
 	/**
 	 * 1.예약 등록 Controller
@@ -56,18 +53,12 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/reservation_add")
-	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList, HttpSession session) {
+	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList,  @RequestParam(name="dog")List<Integer> dogList) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
-		System.out.println(res);
-		System.out.println(demandList);
-		service.addReservation(res, demandList);
-		List<Dog> dogList = dogService.selectDogByEmail(res.getMemberEmail());
-		session.setAttribute("dogList", dogList);
-		session.setAttribute("resId", res.getResId());
-		session.setAttribute("reservation", res);
+		service.addReservation(res, demandList, dogList);
 		//3. View로 이동
-		return "member/select_dog_reservation.tiles";
+		return "member/reservation_add_success.tiles";
 	}
 	
 	/**
@@ -136,7 +127,7 @@ public class ReservationController {
 				
 				for(int i = 0 ; i < res.size() ; i++) {
 					memberEmail = res.get(i).getMemberEmail();
-				}	
+				}
 				
 				//예약(정보)에 해당하는 견주의 강아지 정보
 				List<Reservation> list = service.selectSimpleReservationSitter(email);

@@ -19,11 +19,7 @@ public class ResDetail implements Serializable{
 		this.dogId = dogId;
 	}
 	
-	public ResDetail(int resId, int dogId, List<Dog> dogList) {
-		this.resId = resId;
-		this.dogId = dogId;
-		this.dogList = dogList;
-	}
+	
 	public int getResId() {
 		return resId;
 	}
