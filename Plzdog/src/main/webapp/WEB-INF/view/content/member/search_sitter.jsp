@@ -14,6 +14,7 @@
 	.gores {
 		width:800px;
 		height:100px;
+		margin-top:50px;
 	}
 	
 	.move {
@@ -25,7 +26,7 @@
 		border-radius:30px;
 		font-weight:bold;
 		margin:20px;
-		background-color:#0fa301;
+		background-color:#009688;
 		color:white;
 		line-height:100px;
 		cursor:pointer;
@@ -44,27 +45,25 @@
 		font-weight:bold;
 		margin:20px;
 		border-radius:30px;
-		background-color:#0fa301;
+		background-color:#009688;
 		color:white;
+		float:left;
 	}
 </style>
 </head>
 <body>
 <div class="gores">
 	<div class="move1">
-	<form action="${initParam.rootPath }/member/checkSitter.do" method="post">
-			<sec:csrfInput/>
-			<input type="hidden" value='<sec:authentication property="principal.email"/>' name="sitterEmail"/>
-			<button type="submit" class="sbtn">도그시터 추천 받기</button> 
-		</form>
-	</div>
 	<div class="move">
-		<li><a href="${initParam.rootPath }/member/select_all_sitter.do">시터 검색</a><br>
+		<li><a href="${initParam.rootPath }/member/reservation_add_form.do">시터 추천 받기</a><br>
+	<div class="move">
+		<a href="${initParam.rootPath }/member/select_all_sitter.do">시터 검색</a><br>
 	</div>
+	
 	<div class="move1">
 		<form action="${initParam.rootPath }/member/goToProfile.do" method="post">
 			<sec:csrfInput/>
-			<input type="hidden" value="sitter@naver.com" name="email"/>
+			<input type="hidden" value="sitter1@naver.com" name="email"/>
 			<button type="submit" class="sbtn">sitter@naver.com의 프로필</button> 
 		</form>
 	</div>	

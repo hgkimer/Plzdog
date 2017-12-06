@@ -40,7 +40,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	public List<Reservation> selectAllReservation() {
 		return session.selectList(makeSqlId("selectAllReservation"));
 	}
-
+	
 	@Override
 	public List<Reservation> selectMemberReservationByEmail(String email) {
 		return session.selectList(makeSqlId("selectMemberReservationByEmail"),email);
@@ -86,10 +86,15 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 	
 	@Override
+	public List<Reservation> selectSimpleReservationMemberByEmail(String email){
+		return session.selectList(makeSqlId("selectSimpleReservationMemberByEmail"),email);
+	}
+	
+	@Override
 	public int deleteDemand(int resId) {
 		return session.delete(makeSqlId("deleteDemand"),resId);
 	}
-
+	
 	@Override
 	public Reservation selectReservationById(int resId) {
 		return session.selectOne(makeSqlId("selectReservationById"), resId);

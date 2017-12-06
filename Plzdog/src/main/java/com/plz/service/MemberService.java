@@ -31,7 +31,7 @@ public interface MemberService{
 	 * @param email
 	 * @return
 	 */
-	Member selectMemberByEmail(String email);
+	Member findMemberByEmail(String email);
 	/**
 	 * 매개 변수로 받은 이름으로 회원을 조회하는 메소드
 	 * 	+ 부분일치
@@ -63,4 +63,7 @@ public interface MemberService{
 	 * @return
 	 */
 	List<Review> selectReviewByEmail(String email);
+	
+	
+	
 }

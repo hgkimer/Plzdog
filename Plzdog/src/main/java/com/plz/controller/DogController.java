@@ -40,7 +40,7 @@ public class DogController {
 	
 	@RequestMapping("select_dog")
 	public String selectDog(@RequestParam String email, ModelMap model) {
-		if(memberService.selectMemberByEmail(email) != null) {
+		if(memberService.findMemberByEmail(email) != null) {
 			List<Dog> dogList = service.selectDogByEmail(email);
 			model.addAttribute("dogList", dogList);
 			return "dog/select_result";
