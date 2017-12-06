@@ -49,7 +49,6 @@ public class ReservationServiceImpl implements ReservationService{
 	@Transactional
 	public void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList) {
 		dao.insertReservation(reservation);
-		System.out.println(demandList);
 		//요구사항 리스트를 반복해서 Demand 테이블에 insert
 		for(String demand : demandList) {
 			dao.insertDemand(new Demand(reservation.getResId(),demand));

@@ -89,7 +89,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	public int deleteDemand(int resId) {
 		return session.delete(makeSqlId("deleteDemand"),resId);
 	}
-
+	
 	@Override
 	public Reservation selectReservationById(int resId) {
 		return session.selectOne(makeSqlId("selectReservationById"), resId);

@@ -9,7 +9,7 @@
 <body>
 <h1>예약 신청 완료</h1><br>
 
-<p>${request.reservation.resId }</p>
+<p>${requestScope.reservation.resId }</p>
 <p><fmt:formatDate value = '${requestScope.reservation.resSDate }' type="date"/></p>
 <p><fmt:formatDate value = '${requestScope.reservation.resEDate }' type="date"/></p>
 <p>${requestScope.reservation.price }원</p>

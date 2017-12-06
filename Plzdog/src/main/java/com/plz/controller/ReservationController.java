@@ -1,5 +1,6 @@
 package com.plz.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -72,14 +73,22 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/member/reservation_add")
-	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList,  @RequestParam(name="mydog")List<Integer> dogList) {
+	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList,  
+			@RequestParam(name="mydog")List<Integer> dogList, String sTime, String eTime ) {
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
-		rService.addReservation(res, demandList, dogList);
+			//매개변수로 받은 시간을 기존의 날짜와 합침
+		setTimeToDate(res.getResSDate(), sTime);
+		setTimeToDate(res.getResEDate(), eTime);
+		rService.addReservation(res,  demandList, dogList);
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";
 	}
-	
+	private void setTimeToDate(Date date, String time) {
+		String [] str = time.split(":");
+		date.setHours(Integer.parseInt(str[0].trim()));
+		date.setMinutes(Integer.parseInt(str[1].trim()));
+	}
 	/**
 	 * 예약 조회 Controller 
 	 * 매개변수로 받은 email로 예약 정보를 조회한다. 
