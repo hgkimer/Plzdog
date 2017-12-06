@@ -41,7 +41,7 @@
 </style>
 </head>
 <body>
-<div class="wrap"
+<div class="wrap">
 	<tiles:insertAttribute name="header" />
 	<div class="clear"></div>
 	<%--메인 body --%>
