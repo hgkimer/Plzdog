@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  *  http-form 의 authentication-failure-handler-ref 에 등록한다. 
  */
 
-@Component
+@Component("loginFailHandler")
 public class LoginFailHandler implements AuthenticationFailureHandler{
 	
 	@Override

@@ -19,6 +19,7 @@ $(document).ready(function(){
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
 		var selValue = this.selectedIndex;
+		
 		if(selValue == 0){
 			alert("서비스 종류를 선택하세요!");
 		}else if(selValue == 1){
@@ -58,7 +59,8 @@ $(document).ready(function(){
 
 function formCheck(){
 	var serviceSel = document.getElementById("serviceSel");
-	alert(serviceSel);
+	var selected = serviceSel.elements[0].selectedIndex;
+	alert(selected);
 	return false;
 }
 
@@ -125,5 +127,5 @@ function formCheck(){
 			 -->
 			 <br>
 			 <br>
-			 <button type="button">등록</button>
+			 <button type="button" onclick="formCheck();">등록</button>
 	</form>
