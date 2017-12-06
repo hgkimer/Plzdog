@@ -177,15 +177,6 @@ $(document).ready(function(){
 			
 			<!-- 강아지 목록을 불러오는 버튼(AJAX) -->
 			<input type="button" id="dogBtn" value="강아지 선택"/> <br>
-			<!-- 
-			<input type="button" value="전송" id="regBtn">
-			 -->
-			 <br>
-<<<<<<< HEAD
-			 <br>
-			 <button type="button" onclick="formCheck();">등록</button>
-=======
 			 <br>
 			 <button type="submit" id="regBtn">등록</button>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 	</form>
