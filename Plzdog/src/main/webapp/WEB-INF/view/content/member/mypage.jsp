@@ -5,7 +5,7 @@
 	
 </style>
 
-<h2>마이페이지</h2>
+<h2 style="margin-top:30px;">마이페이지</h2>
 <div class="mypage-form">
 	<form action="${initParam.rootPath }/member/search_reservation.do" method="post" class="myform">
 		<sec:csrfInput/>

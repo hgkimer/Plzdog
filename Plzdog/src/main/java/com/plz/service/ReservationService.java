@@ -101,4 +101,11 @@ public interface ReservationService {
 	List<Reservation> selectSimpleReservationAdmin();
 	
 	List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail);
+	
+	/**
+	 * 회원에 해당하는 회원 + 강아지 정보
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findSimpleReservationMemberByEmail(String email);
 }
