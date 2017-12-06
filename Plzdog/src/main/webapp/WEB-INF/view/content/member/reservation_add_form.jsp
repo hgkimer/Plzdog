@@ -18,17 +18,37 @@ $(document).ready(function(){
 				$("#serviceSel").focus();
 				return false;
 			}else{
-				var dogCount = $("input[name=mydog]:checked").length;
-				if(dogCount < 1){
-					alert("강아지를 선택해 주세요.");
+				var sDate = $("#sDate").val();
+				var eDate = $("#eDate").val();
+			
+				if(sDate > eDate){
+					alert("종료 날짜는 서비스 시작 날짜보다 앞설 수 없습니다.");
 					return false;
 				}else{
-					return true;
+					var	sTime = $("#sTime").val();
+					var eTime = $("#eTime").val();
+					alert("날짜 성공");
+					alert(sTime);
+					if(sTime >= eTime){
+						alert("서비스 종료 시간은 서비스 시작시간 보다 크거나 같을 수 없습니다.");
+						return false;
+					}else{
+						var dogCount = $("input[name=mydog]:checked").length;
+						if(dogCount < 1){
+							alert("강아지를 선택해 주세요.");
+							return false;
+						}else{
+							return false;
+					}
+						return false;
 				}
-				return true;
+					return false;
+				}
+				return false;
 			}
 		});//end of submit()
 	});//end of #regBtn
+	
 	
 	//날짜 선택을 위한 jQuery ui API
 	
@@ -55,7 +75,7 @@ $(document).ready(function(){
 	    scrollbar: true
 	});
 	
-
+	
 	
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
@@ -110,12 +130,12 @@ $(document).ready(function(){
 			</select> 
 			<br>
 			<label for="resSDate">시작일 선택</label><br> 
-			<input type="datetime" name="resSDate" class="datepicker" required placeholder="클릭 후 시작 날짜를 선택" readonly/>
+			<input type="datetime" id="sDate" name="resSDate" class="datepicker" required placeholder="클릭 후 시작 날짜를 선택" readonly/>
 			<input type="text" name="sTime" class="timepicker" placeholder="시간을 선택해 주세요" required readonly/>
 			<br>
 		
 			<label for="resEDate">종료일 선택</label><br> 
-			<input type="text" name="resEDate" class="datepicker" required placeholder="클릭 후 종료 날짜를 선택" readonly/>
+			<input type="text" id="eDate" name="resEDate" class="datepicker" required placeholder="클릭 후 종료 날짜를 선택" readonly/>
 			<input type="text" name="eTime" class="timepicker" placeholder="시간을 선택해 주세요" required readonly/><br>
 			<label for="resContents">의뢰내용</label><br>
 			<textarea rows="5" cols="30" name="resContents" id="resContents" required placeholder="의뢰 내용을 입력하세요"></textarea>
