@@ -59,7 +59,7 @@
 		</form>
 	</div>
 	<div class="move">
-		<a href="${initParam.rootPath }/member/search_sitter.do">시터 검색</a><br>
+		<li><a href="${initParam.rootPath }/member/select_all_sitter.do">시터 검색</a><br>
 	</div>
 	<div class="move1">
 		<form action="${initParam.rootPath }/member/goToProfile.do" method="post">

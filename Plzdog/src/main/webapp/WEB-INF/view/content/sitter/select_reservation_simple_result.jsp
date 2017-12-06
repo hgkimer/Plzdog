@@ -35,14 +35,14 @@
 	
 	.reservation {
 		width:700px;
-		height:400px;
+		height:200px;
 		float:left;
 		cursor:pointer;
 		position:relative;
 		box-shadow:0px 0px 5px;
 	}
 	
-	.dogImage {
+	.navImage {
 		width:150px;
 		height:150px;
 		float:left;
@@ -51,7 +51,7 @@
 		margin-left:10px;
 	}
 	
-	.dogImage img {
+	.navImage img{
 		width:100%;
 		height:100%;
 		border-radius:100px;
@@ -61,8 +61,9 @@
 		width:450px;
 		height:400px;
 		float:right;
-		font-size:18px;
-		line-height:45px;
+		font-size:15px;
+		line-height:40px;
+		font-weight:bold;
 	}
 	
 	.navList {
@@ -72,31 +73,28 @@
 </style>
 </head>
 <body>
-
-</body>
 <div class="all">
 	<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
 		<div class="dogImage">
-			<ul class="nav">
-				회원 이미지 : <img src="${initParam.rootPath }/memberImage/${requestSocpe.member.memberImage }" width="350px"><br>
+			<ul class="navImage">
+				<img src="${initParam.rootPath }/memberImage/${requestScope.member.memberImage }"><br>
 			</ul>
 		</div>
 		
 		<div class="dogOwner">
 			<c:forEach items="${requestScope.list}" var="reservation">
 				<ul class="navList">
-					<li>예약ID : ${reservation.resId}</li>
 					<li>예약상태 : ${reservation.resStatus}</li>	
 					<ul class="navlist1">
 						<c:forEach items="${reservation.resDetailList }" var="resDetail">
 							<c:forEach items="${resDetail.dogList }" var="dog">
 								<li>강아지이름 : ${dog.dogName}</li>
-								<li>강아지종 : ${dog.species}</li>
+								<%-- <li>강아지종 : ${dog.species}</li>
 								<li>강아지성별 : ${dog.gender}</li>
-								<li>강아지생년월일 : ${dog.birth}</li>
-									<c:forEach items="${dog.dogImage }" var="dogImage">
-										강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
-									</c:forEach>
+								<li>강아지생년월일 : ${dog.birth}</li> --%>
+									<%-- <c:forEach items="${dog.dogImage }" var="dogImage">
+										강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
+									</c:forEach> --%>
 							</c:forEach>
 						</c:forEach>
 					</ul>
