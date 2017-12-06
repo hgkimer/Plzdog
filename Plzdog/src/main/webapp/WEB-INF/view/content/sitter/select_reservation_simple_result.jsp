@@ -85,7 +85,6 @@
 			<c:forEach items="${requestScope.list}" var="reservation">
 				<ul class="navList">
 					<li>예약상태 : ${reservation.resStatus}</li>	
-					<ul class="navlist1">
 						<c:forEach items="${reservation.resDetailList }" var="resDetail">
 							<c:forEach items="${resDetail.dogList }" var="dog">
 								<li>강아지이름 : ${dog.dogName}</li>
@@ -97,12 +96,11 @@
 									</c:forEach> --%>
 							</c:forEach>
 						</c:forEach>
-					</ul>
 					<li>시작날짜 : ${reservation.resSDate}</li>
 					<li>끝날짜 : ${reservation.resEDate}</li>
 					<li>예약에 대한 가격 : ${reservation.price}</li>
+				</ul>
 			</c:forEach>
-			</ul>
 		</div>
 	</div>
 </div>
