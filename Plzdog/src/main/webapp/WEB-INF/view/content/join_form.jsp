@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#btn").on("click",function(){
+		$("#regForm").submit(function(){
+			var email = $("input#pId").val();
+			var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+			if(!email.match(regExp)){
+				alert("올바른 이메일 형식이 아닙니다");
+				return false;
+			}else{
+				return true;
+			}
+		});//end of #regForm.submit()
+	});//end of #btn.on("click",function(){}
+});//end of document
+
 function inputCheck(){
 	if(regForm.password.value !== regForm.passwordTest.value) {
 		alert("비밀번호가 일치하지 않습니다!");
@@ -70,9 +85,9 @@ function inputCheck(){
 		text-align:center;
 	}
 </style>
-<h2 style="margin-top:30px;">회원 가입폼</h2>
-<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" 
-			enctype="multipart/form-data" onsubmit="return inputCheck()" style="width:950px; height:450px;">
+
+<h2>회원 가입폼</h2>
+<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck()" style="width:950px; height:450px;">
 	<sec:csrfInput/>
 	<div class="form-group">
 		<label for="pId">Email : </label>
