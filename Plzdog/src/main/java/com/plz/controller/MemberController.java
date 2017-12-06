@@ -171,10 +171,8 @@ public class MemberController {
 		
 		for(Member member : service.selectAllSitter()) {
 			//ROLE_MEMBER, ROLE_SITTER
-			System.out.println(member.getAuthorityList().size());
 			if(member.getAuthorityList().size() == 2) {
 				sitterList.add(member);
-				System.out.println(member);
 			}
 		}
 		model.addAttribute("sitterList", sitterList);
@@ -183,13 +181,13 @@ public class MemberController {
 	
 	@RequestMapping("find_sitter")
 	public @ResponseBody List<Member> findSitter(@RequestParam String serviceName){
-		List<Member> sitterList = service.selectAllMember();
+		
+		List<Member> sitterList = new ArrayList<>();
 		String codeName;
 		
 		System.out.println(serviceName);
 		for(Member member : service.selectAllSitter()) {
 			//ROLE_MEMBER, ROLE_SITTER
-			System.out.println(member.getAuthorityList().size());
 			if(member.getAuthorityList().size() == 2) {
 				for(int i=0; i< member.getSitter().getSkillList().size() ; i++) {
 					codeName = member.getSitter().getSkillList().get(i).getCode().getCodeName();
@@ -199,7 +197,9 @@ public class MemberController {
 				}
 			}
 		}
-		
+		for(Member member : sitterList) {
+			System.out.println(member);
+		}
 		return sitterList;
 	}
 	
