@@ -40,7 +40,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	public List<Reservation> selectAllReservation() {
 		return session.selectList(makeSqlId("selectAllReservation"));
 	}
-
+	
 	@Override
 	public List<Reservation> selectMemberReservationByEmail(String email) {
 		return session.selectList(makeSqlId("selectMemberReservationByEmail"),email);
@@ -83,6 +83,11 @@ public class ReservationDaoImpl implements ReservationDao{
 		params.put("codeDemand", demand.getCodeDemand());
 		params.put("originalCodeDemand", originalCodeDemand);
 		return session.update(makeSqlId("updateDemand"), params);
+	}
+	
+	@Override
+	public List<Reservation> selectSimpleReservationMemberByEmail(String email){
+		return session.selectList(makeSqlId("selectSimpleReservationMemberByEmail"),email);
 	}
 	
 	@Override

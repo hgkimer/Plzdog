@@ -5,16 +5,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
-	/*$("#regBtn").on("click", function(){
-		$("#reservationForm").submit(function(){
-		var index = $("#serviceSel option:selected").val();
-		alert(index);
-			
-			return false;
-		});//end of submit()
-	});//end of #regBtn
-	*/
 	 
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
@@ -54,18 +44,10 @@ $(document).ready(function(){
 	
 });//end of document
 
-
-
-function formCheck(){
-	var serviceSel = document.getElementById("serviceSel");
-	alert('하이');
-	return false;
-}
-
 </script>
 
 		<h2>예약 등록</h2>
-	<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm" onsubmit='return false;'>
+	<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm">
 		<sec:csrfInput />
 			<label for="demand">서비스 종류</label> 
 			<select name="demand" id="serviceSel" required >
@@ -125,5 +107,5 @@ function formCheck(){
 			 -->
 			 <br>
 			 <br>
-			 <button type="submit" onclick="formCheck();">등록</button>
+			 <button type="submit">등록</button>
 	</form>
