@@ -17,8 +17,11 @@
 	footer {
     	bottom:0;
     	width:100%;
-   		height:70px;   
+    	height:70px;
    	 	background:#ccc;
+   	 	position:absolute;
+   	 	left:0;
+   	 	right:0;
 	}
 </style>
 </head>

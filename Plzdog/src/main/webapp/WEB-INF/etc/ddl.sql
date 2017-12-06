@@ -470,6 +470,12 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',80000,'의뢰내용8','예약대기','yoon@naver.com','soo8@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용9','예약대기','yoon@naver.com','soo9@naver.com');
 
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용10','예약대기','yoon@naver.com','soo9@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용11','예약대기','yoon@naver.com','soo9@naver.com');
+
+insert into res_detail values('10','10');
+insert into res_detail values('11','9');
+
 -- 예약 상세
 -- jang의 dogID : 2,3,4 , lee : 5,6,7 , yoon : 8,9,10
 -- lee의 Res : 1,2,3 , jang : 4,5,6 , yoon : 7,8,9

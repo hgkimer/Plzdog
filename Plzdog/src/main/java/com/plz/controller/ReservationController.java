@@ -1,14 +1,13 @@
 package com.plz.controller;
 
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.DogService;
-import com.plz.service.ResDetailService;
 import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
-import com.plzdog.vo.Authority;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
@@ -149,27 +146,20 @@ public class ReservationController {
 	 */
 	@RequestMapping("/sitter/select_reservation_simple")
 	public String selectSimpleReservationSitter(@RequestParam String email, Model model) {
-				String memberEmail = null;
-				//견주한테 들어온 예약
-				List<Reservation> res = rService.findSitterReservationByEmail(email);
-				
-				for(int i = 0 ; i < res.size() ; i++) {
-					memberEmail = res.get(i).getMemberEmail();
-				}
+				//시터이메일 해당하는 예약
+				//견주가 시터한테 신청한 예약
+				List<Reservation> list = rService.findSitterReservationByEmail(email);
 				
 				//예약(정보)에 해당하는 견주의 강아지 정보
-				List<Reservation> list = rService.selectSimpleReservationSitter(email);
+				List<Member> memberList = new ArrayList<>();
 				for(Reservation res1 : list) {
-					System.out.println("ㅇㅖ약 : "+res1);
+					 memberList.add(memberService.findMemberByEmail(res1.getMemberEmail()));
 				}
-				//견주 정보(이미지)
-				Member member = memberService.selectMemberByEmail(memberEmail);
-				System.out.println(member.getMemberImage());
-				//System.out.println(member);
+				
 				//시터에게 온 강아지 정보+예약정보
 				model.addAttribute("list",list);
-				//회원의 관한 정보(이미지)
-				model.addAttribute("member", member);
+				//시터에게 온 회원 + 강아지 정보
+				model.addAttribute("memberList",memberList);
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	

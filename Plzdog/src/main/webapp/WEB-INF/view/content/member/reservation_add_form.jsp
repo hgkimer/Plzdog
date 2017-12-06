@@ -7,7 +7,7 @@
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function(){ 
 	//폼 제출 시 서비스 종류, 요구사항, 강아지 선택 입력 체크
 	$("#regBtn").on("click", function(){
 		$("#reservationForm").submit(function(){
@@ -77,6 +77,7 @@ $(document).ready(function(){
 	
 	
 	
+
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
 		var selValue = this.selectedIndex;
@@ -115,10 +116,10 @@ $(document).ready(function(){
 	
 });//end of document
 
- 
 </script>
 
 		<h2>예약 등록</h2>
+		
 	<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm" >
 		<sec:csrfInput />
 			<label for="demand">서비스 종류</label> 

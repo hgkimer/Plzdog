@@ -53,8 +53,8 @@ public class SitterController {
 		System.out.println(waitingList);
 		List<Member> memberList = new ArrayList<>();
 			for(int i =0; i < waitingList.size(); i++) {
-				System.out.println(memberService.selectMemberByEmail(waitingList.get(i)));
-				memberList.add(memberService.selectMemberByEmail(waitingList.get(i)));
+				System.out.println(memberService.findMemberByEmail(waitingList.get(i)));
+				memberList.add(memberService.findMemberByEmail(waitingList.get(i)));
 		}
 		return new ModelAndView("admin/select_waiting_result.tiles", "memberList", memberList);
 	}
@@ -137,7 +137,7 @@ public class SitterController {
 	
 	@RequestMapping("/sitter/update_sitter")
 	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
-		if(memberService.selectMemberByEmail(sitter.getEmail()) != null) {
+		if(memberService.findMemberByEmail(sitter.getEmail()) != null) {
 			memberService.updateMember(sitter);
 			model.addAttribute("sitter", sitter);
 			return "sitter/sitter_update_result.tiles";

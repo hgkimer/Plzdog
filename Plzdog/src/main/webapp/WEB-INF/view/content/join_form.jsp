@@ -85,9 +85,9 @@ function inputCheck(){
 		text-align:center;
 	}
 </style>
+
 <h2>회원 가입폼</h2>
-<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm"
-			enctype="multipart/form-data" onsubmit="return inputCheck()" style="width:950px; height:450px;">
+<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck()" style="width:950px; height:450px;">
 	<sec:csrfInput/>
 	<div class="form-group">
 		<label for="pId">Email : </label>

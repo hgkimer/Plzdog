@@ -183,6 +183,16 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 이메일로 회원정보 (예약 , 강아지 정보) 조회 -->
+	<select id="selectSimpleReservationMemberByEmail" parameterType="string" resultMap="simple-res-sitter-resultmap">
+		<include refid="simple-res-sitter-sql"/>
+		where r.email = d.email 
+		and r.email = #{value}
+		and t.res_id = r.res_id
+		and t.dog_id = d.dog_id 
+		and d.dog_id = i.dog_id(+)
+	</select> 
+	
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) -->
 	<select id="selectSimpleReservationSitter" parameterType="string" resultMap="simple-res-sitter-resultmap">
 		<include refid="simple-res-sitter-sql"/>

@@ -123,4 +123,11 @@ public interface ReservationDao {
 	 * @return
 	 */
 	List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail);
+	
+	/**
+	 * 이메일로 회원, 강아지 정보 조회
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectSimpleReservationMemberByEmail(String email);
 }
