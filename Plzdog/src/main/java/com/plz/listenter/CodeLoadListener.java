@@ -1,5 +1,6 @@
 package com.plz.listenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -25,9 +26,14 @@ public class CodeLoadListener implements ServletContextListener {
       String confg = ctx.getInitParameter("code-config");
       ApplicationContext context = new ClassPathXmlApplicationContext(confg);
       CodeDao dao = (CodeDao) context.getBean("codeDaoImpl");
+      
       List<Code> skillList = dao.selectCodeByCategory("시터");
       List<Code> enList = dao.selectCodeByCategory("시터환경");
       List<Code> serviceList = dao.selectCodeByCategory("서비스");
+      /*List<Code> checkSkillList = new ArrayList<>();
+      for(int i = 3 ; i< skillList.size(); i++) {
+    	  checkSkillList.add(skillList.get(i));
+      }*/
       List<Code> resList = dao.selectCodeByCategory("예약");
       List<Code> dogInfoList = dao.selectCodeByCategory("강아지");
       //전체 요구사항(스킬)에 대한 코드 리스트(sitter-1 ~ -7)를 ApplicationScope에 저장

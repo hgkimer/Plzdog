@@ -179,8 +179,9 @@ public class MemberController {
 		return "sitter/sitter_select_result.tiles";
 	}
 	
-	@RequestMapping("find_sitter")
-	public @ResponseBody List<Member> findSitter(@RequestParam String serviceName){
+	//지우지 마세용
+	/*@RequestMapping("select_sitter")
+	public @ResponseBody List<Member> selectSitter(@RequestParam String serviceName){
 		
 		List<Member> sitterList = new ArrayList<>();
 		String codeName;
@@ -201,6 +202,50 @@ public class MemberController {
 			System.out.println(member);
 		}
 		return sitterList;
+	}*/
+	
+	//List<String> arrayParams, @RequestParam(value="selectService") String selectService
+	@RequestMapping("find_sitter")
+	public @ResponseBody List<Member> findSitter(@RequestParam(value="checkArray[]") List<String> checkArray,
+				@RequestParam(value="selectService") String selectService  ){
+		
+		//전체 시터
+		List<Member> sitterList = new ArrayList<>();
+		//체크된 code 저장 변수
+		List<String> checkList = new ArrayList<>();
+		//비교 code 저장 변수
+		List<String> compareList = new ArrayList<>();
+		//각 코드의 id
+		String code;
+		
+		//선택된 code를 합친다.
+		checkList.add(selectService);
+		for(int i=0 ; i < checkArray.size() ; i++) {
+			checkList.add(checkArray.get(i));
+		}
+		System.out.println(checkList);
+		
+		for(Member member : service.selectAllSitter()) {
+			//ROLE_MEMBER, ROLE_SITTER
+			if(member.getAuthorityList().size() == 2) {
+				//member가 가진 전체 스킬 정보
+				//compareList 초기화
+				compareList = new ArrayList<>();
+				for(int i=0; i< member.getSitter().getSkillList().size() ; i++) {
+					code = member.getSitter().getSkillList().get(i).getCode().getCode();
+					for(int j=0; j < checkList.size() ; j++) {
+						if(checkList.get(j).equals(code)) {
+							compareList.add(code);
+						}
+					}
+				}
+			}
+			//checkList가 가진 모든 것을 포함하면 true
+			if(compareList.containsAll(checkList)){
+				sitterList.add(member);
+			}
+		}
+		return sitterList;
 	}
 	
 	@RequestMapping("zipcode")
@@ -213,8 +258,4 @@ public class MemberController {
 		model.addAttribute("sample4_subAddress", sample4_subAddress);
 		return "member/address_test_result.tiles";
 	}
-	
-	
-	
-	
 }
