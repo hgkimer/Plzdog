@@ -108,6 +108,7 @@
 			
 			<%--관리자 메뉴 /admin 으로 시작--%>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li><a href="${initParam.rootPath }/admin/select_waiting.do">시터 등록</a></li>
 				<li><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
 			</sec:authorize>
 			
