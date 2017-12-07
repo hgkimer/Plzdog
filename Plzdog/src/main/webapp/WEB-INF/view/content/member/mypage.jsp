@@ -16,7 +16,7 @@
 	<div class="member-form">
 		<a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a>
 	</div>
-	<form action="${initParam.rootPath }/sitter/select_reservation_simple.do" method="post" class="myform">
+	<form action="${initParam.rootPath }/sitter/select_reservation_simple_result.do" method="post" class="myform">
 		<sec:csrfInput/>
 		<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'/>
 		<button type="submit">내게 온 예약 조회</button>
