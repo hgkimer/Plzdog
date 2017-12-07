@@ -90,10 +90,15 @@ public class MemberController {
 	@RequestMapping("goToProfile")
 	public String goToProfile(@RequestParam String email, Model model, HttpSession session) {
 		//먼저 sitter에 등록되어 있는지 확인한다.
+		System.out.println(email);
 		Member member = service.selectSitterByEmail(email);
 		//해당 회원의 강아지 리스트 추가
-		member.setDogList(dService.selectDogByEmail(email));
-		
+		if(!dService.selectDogByEmail(email).isEmpty()) {
+			//강아지가 등록되지 않는 경우 NullPointerException이 발생하기 때문에 조건문 걸어줌.
+			member.setDogList(dService.selectDogByEmail(email));
+		}else {
+			
+		}
 		//해당 시터의 프로필
 		model.addAttribute("profile", member);
 		return "member/profile.tiles";

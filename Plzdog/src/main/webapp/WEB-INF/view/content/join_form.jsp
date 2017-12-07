@@ -107,7 +107,7 @@ function inputCheck(){
 	</div>
 	<div class="form-group">
 		<label for="pZip">우편번호 : </label>
-		<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+		<input class="btn btn-default"type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 		<input type="number" name="zipcode" id="pZip" class="form-control" required="required" readonly placeholder="우편번호">
 	</div>
 	<div class="form-group">
