@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script src="${initParam.rootPath }/resource/moment/moment.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/moment/locale/ko.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
 	* {
