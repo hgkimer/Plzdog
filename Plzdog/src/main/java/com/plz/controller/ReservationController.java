@@ -1,13 +1,13 @@
 package com.plz.controller;
 
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +19,6 @@ import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
-import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
 
@@ -163,21 +162,35 @@ public class ReservationController {
 	 * @return
 	 */
 	
-	// 수정 중 입니다.
 	@RequestMapping("/sitter/select_reservation_detail")
-	public String selectDetailReservationSitter(@RequestParam String siiterEmail, Model model) {
+	public String selectDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
+				@RequestParam(name="memberEmail") String memberEmail, ModelMap model) {
 		
 		//시터에게 온 회원 + 회원의 강아지 정보
-		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(siiterEmail);
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
+		//시터에게 온 회원의 요구사항
+		Reservation skillList = new Reservation();
+		
 		//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
-		List<ResDetail> dogList = new ArrayList<>();
 		for(int i =0; i< memberList.size() ; i++) {
+			
+			skillList = rService.findDetailSitterReservationDemandCodeByResId(memberList.get(i).getResId());
+			
+			//해당 회원의 요구사항을 회원 리스트에 넣는다.
+			memberList.get(i).setDemandList(skillList.getDemandList());
+			
 			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
-				memberList.get(i).getResDetailList().get(j).getDogId();
+				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
+				memberList.get(i).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
 			}
 		}
 		
-		model.addAttribute("list", siiterEmail);
+		for(Reservation res : memberList) {
+			System.out.println(res);
+			if(res.getMemberEmail().equals(memberEmail)) {
+				model.addAttribute("resMember", res);
+			}
+		}
 		return "sitter/select_reservation_detail_result.tiles";
 	}
 	

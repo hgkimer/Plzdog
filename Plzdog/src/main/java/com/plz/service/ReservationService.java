@@ -107,7 +107,7 @@ public interface ReservationService {
 	 * @param email
 	 * @return
 	 */
-	List<Reservation> findSimpleReservationMemberByEmail(String email);
+	//List<Reservation> findSimpleReservationMemberByEmail(String email);
 	
 	
 	// -----------------------Lee su il----------------------------------

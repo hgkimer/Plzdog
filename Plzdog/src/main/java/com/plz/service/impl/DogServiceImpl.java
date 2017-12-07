@@ -62,6 +62,11 @@ public class DogServiceImpl implements DogService {
 	public List<Dog> selectDogByEmail(String email) {
 		return dogDao.selectDogByEmail(email);
 	}
+	
+	@Override
+	public Dog findDogJoinDogInfoDogImageByDogId(int dogId){
+		return dogDao.selectDogJoinDogInfoDogImageByDogId(dogId);
+	}
 
 	@Override
 	public void updateDog(Dog dog) {

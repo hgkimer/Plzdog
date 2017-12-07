@@ -26,11 +26,20 @@ public class DogDaoImpl implements DogDao {
 	public int insertDog(Dog dog) {
 		return session.insert(makeSqlId("insertDog"), dog);
 	}
+	
+	//------------ lee su il--------------------
+	
+	@Override
+	public Dog selectDogJoinDogInfoDogImageByDogId(int dogId) {
+		return session.selectOne(makeSqlId("selectDogJoinDogInfoDogImageByDogId"), dogId);
+	}
 
 	@Override
 	public List<Dog> selectDogByEmail(String email) {
 		return session.selectList(makeSqlId("selectDogJoinDogInfoDogImageByEmail"), email);
 	}
+	
+	//----------- lee su il -----------------
 
 	@Override
 	public int updateDog(Dog dog) {

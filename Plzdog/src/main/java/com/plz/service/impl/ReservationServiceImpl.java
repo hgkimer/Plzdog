@@ -140,10 +140,10 @@ public class ReservationServiceImpl implements ReservationService{
 		return dao.selectDetailReservationSitter(email);
 	}
 	
-	@Override
+	/*@Override
 	public List<Reservation> findSimpleReservationMemberByEmail(String email){
 		return dao.selectSimpleReservationMemberByEmail(email);
-	}
+	}*/
 	
 	@Override
 	public List<Reservation> selectSimpleReservationMember(String email) {

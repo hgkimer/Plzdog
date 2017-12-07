@@ -79,19 +79,17 @@ $(document).ready(function(){
 		</div>
 		<div class="res">
 			<%--이메일에 해당하는 예약에 대한 리스트 --%>
-			<c:forEach var="list" items="${requestScope.list}">
 				<ul>
-					<li>예약상태 : ${list.resStatus}</li>
-					<li>시작날짜 : ${list.resSDate}</li>
-					<li>끝날짜 : ${list.resEDate}</li>
-					<li>견주이메일 : ${list.dog.email}</li>
-					<li>의뢰내용 : ${list.resContents}</li>
-					<li>가격 : ${list.price}</li>
-					<c:forEach items ="${list.demandList }" var="demand">
+					<li>예약상태 : ${requestScope.resMember.resStatus}</li>
+					<li>시작날짜 : ${requestScope.resMember.resSDate}</li>
+					<li>끝날짜 : ${requestScope.resMember.resEDate}</li>
+					<li>견주이메일 : ${requestScope.resMember.member.email}</li>
+					<li>의뢰내용 : ${requestScope.resMember.resContents}</li>
+					<li>가격 : ${requestScope.resMember.price}</li>
+					<c:forEach items ="${requestScope.resMember.demandList }" var="demand">
 						<li>서비스 요구사항 : ${demand.code.codeName}</li>
 					</c:forEach>
 				</ul>
-			</c:forEach>
 		</div>
 		<div class="care">
 			<img src="${initParam.rootPath }/image/caredog.jpg">

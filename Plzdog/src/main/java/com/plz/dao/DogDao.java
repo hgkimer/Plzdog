@@ -78,4 +78,11 @@ public interface DogDao {
 	 * @return
 	 */
 	int deleteDogInfo(int dogId);
+	
+	/**
+	 * 강아지 Id로 강아지 정보 조회
+	 * @param dogId
+	 * @return
+	 */
+	Dog selectDogJoinDogInfoDogImageByDogId(int dogId);
 }

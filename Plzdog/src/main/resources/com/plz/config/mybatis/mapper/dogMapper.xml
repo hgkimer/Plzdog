@@ -77,7 +77,7 @@
 	</select>
 	
 	<!-- resId로 강아지, 강아지 상태, 강아지 이미지 조회 -->
-	<select id="selectDogJoinDogInfoDogImageByResId" parameterType="string" resultMap="dog-dogInfo-dogImage-resulmap">
+	<select id="selectDogJoinDogInfoDogImageByDogId" parameterType="_int" resultMap="dog-dogInfo-dogImage-resulmap">
 		select  d.dog_id, d.dog_name, d.species, d.gender, d.weight, d.birth,
 				di.dog_image,
 				c.code, c.code_name
@@ -86,7 +86,7 @@
 		where   d.dog_id = di.dog_id(+)
 		and		d.dog_id = dinfo.dog_id(+)
 		and		dinfo.code_dog = c.code(+)
-		and		d.res_id = #{resId}
+		and		d.dog_id = #{dogId}
 		order by d.dog_id
 	</select>
 	
