@@ -122,7 +122,9 @@ public class ReservationServiceImpl implements ReservationService{
 	public void removeDemand(int resId) {
 		dao.deleteDemand(resId);
 	}
-
+	
+	//------------------------------------
+	
 	@Override
 	public Reservation findReservationById(int resId) {
 		return dao.selectReservationById(resId);
@@ -162,6 +164,21 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail) {
 		return dao.selectDetailReservationAdmin(sitterEmail, memberEmail);
 	}
-
-
+	
+	// -----------------------Lee su il----------------------------------
+	@Override
+	public List<Reservation> findSimpleSitterReservationMemberByEmail(String sitterEmail){
+		return dao.selectSimpleSitterReservationMemberByEmail(sitterEmail);
+	}
+	
+	@Override
+	public List<Reservation> findSimpleSitterReservationResDetailDogByEmail(String sitterEmail){
+		return dao.selectSimpleSitterReservationResDetailDogByEmail(sitterEmail);
+	}
+	
+	@Override
+	public Reservation findDetailSitterReservationDemandCodeByResId(int resId) {
+		return dao.selectDetailSitterReservationDemandCodeByResId(resId);
+	}
+	// -----------------------Lee su il----------------------------------
 }

@@ -129,7 +129,6 @@ CREATE TABLE DOG_IMAGE (
 	CONSTRAINT FK_DOG_IMAGE_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG on delete cascade
 );
 
-
 --시터
 CREATE TABLE SITTER (
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
@@ -380,13 +379,7 @@ INSERT INTO DOGINFO VALUES(11 ,'dog-6');
 INSERT INTO DOGINFO VALUES(11 ,'dog-4');
 INSERT INTO DOGINFO VALUES(11 ,'dog-3');
 
-insert into DEMAND values (1,'sitter-1'); 
-insert into DEMAND values (2,'sitter-2'); 
-insert into DEMAND values (3,'sitter-3');
-insert into DEMAND values (3,'sitter-1');
-insert into DEMAND values (3,'sitter-2');
-insert into Demand values (4,'sitter-4');
-insert into demand values (5,'sitter-1');
+
 
 --강아지 이미지
 INSERT INTO DOG_IMAGE VALUES('1.jpg','1');
@@ -466,21 +459,35 @@ INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
 INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo1@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',10000,'의뢰내용1','예약대기','lee@naver.com','soo1@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',20000,'의뢰내용2','예약대기','lee@naver.com','soo2@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',30000,'의뢰내용3','예약대기','lee@naver.com','soo3@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',40000,'의뢰내용4','예약대기','jang@naver.com','soo4@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',50000,'의뢰내용5','예약대기','jang@naver.com','soo5@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',60000,'의뢰내용6','예약대기','jang@naver.com','soo6@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',70000,'의뢰내용7','예약대기','yoon@naver.com','soo7@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',80000,'의뢰내용8','예약대기','yoon@naver.com','soo8@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용9','예약대기','yoon@naver.com','soo9@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-1','lee@naver.com','soo1@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',20000,'의뢰내용2','res-1','lee@naver.com','soo2@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',30000,'의뢰내용3','res-1','lee@naver.com','soo3@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',40000,'의뢰내용4','res-1','jang@naver.com','soo4@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',50000,'의뢰내용5','res-1','jang@naver.com','soo5@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',60000,'의뢰내용6','res-1','jang@naver.com','soo6@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',70000,'의뢰내용7','res-1','yoon@naver.com','soo7@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',80000,'의뢰내용8','res-1','yoon@naver.com','soo8@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용9','res-1','yoon@naver.com','soo9@naver.com');
 
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용10','예약대기','yoon@naver.com','soo9@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용11','예약대기','yoon@naver.com','soo9@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용10','res-1','yoon@naver.com','soo9@naver.com');
+
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용11','res-1','yoon@naver.com','soo1@naver.com');
+
+insert into DEMAND values (1,'sitter-1'); 
+insert into DEMAND values (2,'sitter-2'); 
+insert into DEMAND values (3,'sitter-3');
+insert into DEMAND values (3,'sitter-1');
+insert into DEMAND values (3,'sitter-2');
+insert into Demand values (4,'sitter-4');
+insert into demand values (5,'sitter-1');
+insert into demand values (11,'sitter-1');
+insert into demand values (11,'sitter-2');
 
 insert into res_detail values('10','10');
 insert into res_detail values('11','9');
+-- yoon : dogId = 8,9,10
+insert into res_detail values('11','8');
+insert into res_detail values('11','10');
 
 -- 예약 상세
 -- jang의 dogID : 2,3,4 , lee : 5,6,7 , yoon : 8,9,10
@@ -505,11 +512,6 @@ insert into RES_DETAIL values('7','10');
 insert into RES_DETAIL values('8','8');
 insert into RES_DETAIL values('8','9');
 insert into RES_DETAIL values('8','10');
---서비스 요구사항
-
-insert into delete values (5,'res-1');
-insert into delete values (5,'res-2');
-insert into delete values (5,'res-1');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');

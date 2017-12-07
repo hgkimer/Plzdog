@@ -71,6 +71,25 @@ public class ReservationDaoImpl implements ReservationDao{
 		return session.selectList(makeSqlId("selectSitterCareByEmail"),sitterEmail);
 	}
 	
+	// ---------------------lee su il -----------------------------------
+	
+	@Override
+	public List<Reservation> selectSimpleSitterReservationMemberByEmail(String sitterEmail){
+		return session.selectList(makeSqlId("selectSimpleSitterReservationMemberByEmail"),sitterEmail);
+	}
+	
+	@Override
+	public List<Reservation> selectSimpleSitterReservationResDetailDogByEmail(String sitterEmail){
+		return session.selectList(makeSqlId("selectSimpleSitterReservationResDetailDogByEmail"),sitterEmail);
+	}
+	
+	@Override
+	public Reservation selectDetailSitterReservationDemandCodeByResId(int resId){
+		return session.selectOne(makeSqlId("selectDetailSitterReservationDemandCodeByResId"), resId);
+	}
+	
+	//----------------------------------------------
+	
 	//서비스 요구 사항을 추가, 수정 , 삭제
 	@Override
 	public int insertDemand(Demand demand) {

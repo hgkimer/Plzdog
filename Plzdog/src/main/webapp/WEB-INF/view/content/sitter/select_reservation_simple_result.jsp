@@ -75,12 +75,12 @@ a {
 </head>
 <body>
 	<div class="all">
-		<c:forEach items="${requestScope.memberList }" var="member">
+		<c:forEach items="${requestScope.memberList }" var="reservation">
 			<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
 				<div class="navImage">
-					<img src="${initParam.rootPath }/memberImage/${member.memberImage }"><br>
+					<img src="${initParam.rootPath }/memberImage/${reservation.member.memberImage }"><br>
+					회원 이름 : ${reservation.member.memberName } <br>
 				</div>
-				<c:forEach var="reservation" items="${requestScope.list}">
 					<div class="dogOwner">
 						<ul class="navList">
 							<li>예약상태 : ${reservation.resStatus}</li>
@@ -96,8 +96,7 @@ a {
 					</div>
 				</c:forEach>
 			</div>
-		</c:forEach>
-	</div>
+		</div>
 	</div>
 	<%-- <li>강아지종 : ${dog.species}</li>
 									<li>강아지성별 : ${dog.gender}</li>

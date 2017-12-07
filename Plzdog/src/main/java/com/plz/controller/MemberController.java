@@ -205,10 +205,10 @@ public class MemberController {
 	}*/
 	
 	//List<String> arrayParams, @RequestParam(value="selectService") String selectService
+	
 	@RequestMapping("find_sitter")
 	public @ResponseBody List<Member> findSitter(@RequestParam(value="checkArray[]") List<String> checkArray,
 				@RequestParam(value="selectService") String selectService ){
-		
 		//전체 시터
 		List<Member> sitterList = new ArrayList<>();
 		//체크된 code 저장 변수
