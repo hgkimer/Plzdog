@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 	* {
 		margin:0 auto;
