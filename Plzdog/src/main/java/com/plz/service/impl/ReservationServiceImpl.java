@@ -180,5 +180,24 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation findDetailSitterReservationDemandCodeByResId(int resId) {
 		return dao.selectDetailSitterReservationDemandCodeByResId(resId);
 	}
+	
+	@Override
+	public List<Reservation> findSimpleSitterReservationInfoByEmail(String sitterEmail){
+		//시터이메일 해당하는 예약
+		//견주들이 해당 시터한테 신청한 예약
+		List<Reservation> memberList = dao.selectSimpleSitterReservationMemberByEmail(sitterEmail);
+
+		//해당 시터가 가진 견주들의 강아지 정보
+		List<Reservation> dogList = dao.selectSimpleSitterReservationResDetailDogByEmail(sitterEmail);
+
+		for(Reservation resMember : memberList) {
+			for(Reservation resDog : dogList) {
+				if(resMember.getResId() == resDog.getResId()) {
+					resMember.setResDetailList(resDog.getResDetailList());
+				}
+			}
+		}
+		return memberList;
+	}
 	// -----------------------Lee su il----------------------------------
 }

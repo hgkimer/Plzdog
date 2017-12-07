@@ -219,20 +219,6 @@ $(document).ready(function(){
 					name="sitterEmail" readonly />
 				<br>
 			</c:if>
-<<<<<<< HEAD
-			
-			<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
-			<c:if test="${requestScope.sitter != null}">
-				<label for="price">금액</label>
-				<input type="number" id="price" name="price" value="" readonly><br>
-			</c:if>
-			
-			<!-- 강아지 목록을 불러오는 버튼(AJAX) -->
-			<input type="button" id="dogBtn" value="강아지 선택"/> <br>
-			 <br>
-			 <button type="submit" id="regBtn">등록</button>
-	</form>
-=======
 			<div>
 				<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
 				<c:if test="${requestScope.sitter != null}">
@@ -251,4 +237,3 @@ $(document).ready(function(){
 		</form>
 	</div>
 </div>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git

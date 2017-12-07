@@ -146,20 +146,8 @@ public class ReservationController {
 	 */
 	@RequestMapping("/sitter/select_reservation_simple")
 	public String selectSimpleReservationSitter(@RequestParam String sitterEmail, Model model) {
-				//시터이메일 해당하는 예약
-				//견주들이 해당 시터한테 신청한 예약
-				List<Reservation> memberList = rService.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
-		
-				//해당 시터가 가진 견주들의 강아지 정보
-				List<Reservation> dogList = rService.findSimpleSitterReservationResDetailDogByEmail("soo1@naver.com");
-		
-				for(Reservation resMember : memberList) {
-					for(Reservation resDog : dogList) {
-						if(resMember.getResId() == resDog.getResId()) {
-							resMember.setResDetailList(resDog.getResDetailList());
-						}
-					}
-				}
+				
+				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
 				
 				//시터에게 온 회원 + 강아지 정보
 				model.addAttribute("memberList",memberList);
