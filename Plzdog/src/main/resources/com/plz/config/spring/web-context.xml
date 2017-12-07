@@ -55,6 +55,9 @@
 	<!-- 예약 결과 조회 페이지 -->
 	<mvc:view-controller path="/member/search_reservation_result.do" view-name="member/search_reservation_result.tiles"/>
 	
+	<!-- 예약 전체 조회 -->
+	<mvc:view-controller path="/sitter/selectAllReservation.do" view-name="sitter/selectAllReservation.tiles"/>
+	
 	
 	<!-- 시터에게 온 예약 조회 -->
 	<mvc:view-controller path="/sitter/sitter_mypage.do" view-name="sitter/sitter_mypage.tiles" />

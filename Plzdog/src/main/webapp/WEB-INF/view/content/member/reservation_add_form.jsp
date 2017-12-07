@@ -93,6 +93,7 @@ $(document).ready(function(){
 	    dropdown: true,
 	    scrollbar: true
 	});
+	
 	//시간 선택을 위한 jQuery ui API
 	//종료 시간
 	$('#eTime').timepicker({
@@ -108,7 +109,6 @@ $(document).ready(function(){
 	});
 	$("#datetimepicker").data("DateTimePicker");
 	
-
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
 		var selValue = this.selectedIndex;

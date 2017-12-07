@@ -3,7 +3,6 @@ package com.plz.dao;
 import java.util.List;
 
 import com.plzdog.vo.Demand;
-import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
 public interface ReservationDao {
@@ -130,4 +129,32 @@ public interface ReservationDao {
 	 * @return
 	 */
 	List<Reservation> selectSimpleReservationMemberByEmail(String email);
+	
+	// -----------------------Lee su il----------------------------------
+	/**
+	 * 시터 이메일로 예약에 해당하는 회원 정보를 조회(simple 페이지)
+	 * @param stterEmail
+	 * @return
+	 */
+	List<Reservation> selectSimpleSitterReservationMemberByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 이메일로 예약에 해당하는 강아지 정보를 조회(simple 페이지)
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectSimpleSitterReservationResDetailDogByEmail(String sitterEmail);
+	
+	/**
+	 * resId로 예약에 해당하는 서비스 요구사항 조회(detail 페이지)
+	 * @param resId
+	 * @return
+	 */
+	Reservation selectDetailSitterReservationDemandCodeByResId(int resId);
+	
+	// -----------------------Lee su il----------------------------------
+	
+	// -----------------------Yoon gue seok--------------------------------
+	List<Reservation> findAllMemberReservationMember();
+	
 }

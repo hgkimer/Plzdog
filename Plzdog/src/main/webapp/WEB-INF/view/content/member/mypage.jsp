@@ -18,7 +18,13 @@
 	</div>
 	<form action="${initParam.rootPath }/sitter/select_reservation_simple_result.do" method="post" class="myform">
 		<sec:csrfInput/>
-		<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'/>
+		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
 		<button type="submit">내게 온 예약 조회</button>
+	</form>
+	
+	<form action="${initParam.rootPath }/sitter/selectAllReservation.do" method="post">
+		<sec:csrfInput/>
+		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
+		<button type="submit">전체 예약 조회</button>
 	</form>
 </div>

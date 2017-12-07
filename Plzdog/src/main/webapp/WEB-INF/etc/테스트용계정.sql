@@ -47,7 +47,7 @@ INSERT INTO SKILL VALUES('sitter@naver.com','sitter-3');
 INSERT INTO REVIEW VALUES (4,3.5,'좋아요1','yoon@naver.com','sitter@naver.com');
 
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,0,'2010/07/01','2010/07/02',30000,'집에서 맡기기','yoon@naver.com','sitter@naver.com');
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기','yoon@naver.com','sitter@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,1,'2010/07/01','2010/07/02','집에서 맡기기',30000,res-1,'yoon@naver.com','soo1@naver.com');
 
 insert into DEMAND values (5,'dog-2'); 
 insert into DEMAND values (6,'dog-1'); 
@@ -367,3 +367,40 @@ select			r.res_id,
 from			reservation r, member s
 				res join demand -code by Email
 where 			res_status = 'res_2'
+
+		select	r.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.res_contents,
+				r.price,
+				r.res_status,
+				r.email,
+				r.email_sitter,
+				c.code_name,
+				c.code,
+				c.category
+		from	reservation r, demand d, code c
+		where r.res_id = 11
+		and r.res_id = d.res_id 
+		and d.code_demand = c.code(+)
+		
+		select * from reservation
+		select  r.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.res_status,
+				r.email,
+				r.email_sitter,
+				m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.password,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable
+		from	reservation r, member m
+		where r.RES_STATUS = 'res-1'
+		and	  r.email_sitter is null

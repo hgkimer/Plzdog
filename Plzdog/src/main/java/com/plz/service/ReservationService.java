@@ -108,4 +108,33 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findSimpleReservationMemberByEmail(String email);
+	
+	
+	// -----------------------Lee su il----------------------------------
+	
+	/**
+	 * 시터 이메일로 예약에 해당하는 회원 정보를 조회(simple 페이지)
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findSimpleSitterReservationMemberByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 이메일로 예약에 해당하는 강아지 정보를 조회(simple 페이지)
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findSimpleSitterReservationResDetailDogByEmail(String sitterEmail);
+	
+	/**
+	 * resId로 예약에 해당하는 서비스 요구사항 조회(detail 페이지)
+	 * @param resId
+	 * @return
+	 */
+	Reservation findDetailSitterReservationDemandCodeByResId(int resId);
+	// -----------------------Lee su il----------------------------------
+
+
+	//-----------------------Yoon gue seok----------------------------------
+	List<Reservation> findAllMemberReservationMember();
 }

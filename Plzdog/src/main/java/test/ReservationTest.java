@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.plz.service.ReservationService;
-import com.plzdog.vo.Demand;
+import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
 public class ReservationTest {
@@ -62,8 +62,43 @@ public class ReservationTest {
 		list = service.findReservationJoinDemandByEmail("lee@naver.com");
 		printReservation(list, "회원 해당 예약상태 조회");*/
 		
-		list = service.selectSimpleReservationSitter("soo1@naver.com");
-		printReservation(list, "회원 해당 예약 정보 + 강아지 이미지");
+		//list = service.selectSimpleReservationSitter("soo1@naver.com");
+		//printReservation(list, "회원 해당 예약 정보 + 강아지 이미지");
+		
+		list = service.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
+		printReservation(list,"예약에 해당하는 회원 정보");
+		
+		list = service.findSimpleSitterReservationResDetailDogByEmail("soo1@naver.com");
+		printReservation(list, "예약에 해당하는 회원의 강아지 정보");
+		
+		/*Reservation res = service.findDetailSitterReservationDemandCodeByResId(1);
+		System.out.println("예약에 해당하는 회원의 요구사항"+res);
+		
+		Reservation res1 = service.findDetailSitterReservationDemandCodeByResId(11);
+		System.out.println("예약에 해당하는 회원의 요구사항"+res1);*/
+		
+		List<Reservation> memberList = service.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
+		
+		//해당 시터가 가진 견주들의 강아지 정보
+		List<Reservation> dogList = service.findSimpleSitterReservationResDetailDogByEmail("soo1@naver.com");
+		
+		for(Reservation resMember : memberList) {
+			for(Reservation resDog : dogList) {
+				if(resMember.getResId() == resDog.getResId()) {
+					resMember.setResDetailList(resDog.getResDetailList());
+				}
+			}
+		}
+		
+		for(Reservation res1 : memberList) {
+			System.out.println("회원에 해당된 예약 : "+res1);
+		}
+		
+		//전체 의뢰 조회
+		List<Reservation> memberList1 = service.findAllMemberReservationMember();
+		for(Reservation res2 : memberList1) {
+			System.out.println("각 의뢰 : " + res2);
+		}
 	}
 	
 	public static void printReservation(List<Reservation> list,String label) {

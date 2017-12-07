@@ -2,9 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.reservationMapper">
 	
-	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
-	 <sql id="simple-res-sitter-sql">
-		select	r.res_id,
+	<!-- 
+		사용자가 예약을 수정,삭제,조회,추가   
+		code테이블에 예약상태 (예약대기/예약확정/예약종료)가 들어간다.
+	-->
+	<sql id="reservation-sql">
+		select  res_id,
+			    res_sdate,
+			    res_edate,
+			    res_contents,
+			    res_status,
+			    email,
+			    email_sitter
+		from    reservation
+	</sql>
+	
+	<!-- 
+		시터의 마이페이지 - 내게 온 예약조회 - 간단히보기
+		예약 - 예약 상세 - 강아지
+	 -->
+	 <sql id="simple-sitter-res-resdetail-dog-sql">
+		select  r.res_id,
 				r.res_sdate,
 				r.res_edate,
 				r.price,
@@ -15,9 +33,50 @@
 				d.dog_name,
 				d.species,
 				d.gender,
-				d.birth,
-				i.dog_image
-		from	reservation r, res_detail t, dog_image i, dog d
+				d.birth
+		from	reservation r, res_detail t, dog d
+	</sql>
+	
+	<!-- 
+		시터의 마이페이지 - 내게 온 예약조회 - 간단히보기
+		견주의 마이페이지 - 예약조회 - 간단히보기
+		예약 - 회원
+	-->
+	
+	<sql id="simple-sitter-res-member-sql">
+		select  r.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.res_status,
+				r.email,
+				r.email_sitter,
+				m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.password,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable
+		from	reservation r, member m
+	</sql>
+	
+	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
+	<sql id="detail-sitter-res-demand-code-sql">
+		select	r.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.res_contents,
+				r.price,
+				r.res_status,
+				r.email,
+				r.email_sitter,
+				c.code_name,
+				c.code,
+				c.category
+		from	reservation r, demand d, code c
 	</sql>
 	
 	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
@@ -32,22 +91,6 @@
 				s.member_name,
 				s.member_image
 		from	reservation r, member s
-	</sql>
-	
-	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
-	<sql id="detail-res-sql">
-		select	r.res_id,
-				r.res_sdate,
-				r.res_edate,
-				r.res_contents,
-				r.price,
-				r.res_status,
-				r.email,
-				r.email_sitter,
-				c.code_name,
-				c.code,
-				c.category
-		from	reservation r, demand d, code c
 	</sql>
 	
 	<!-- 관리자 페이지 - 예약 조회 - 간단히 보기 -->
@@ -65,6 +108,7 @@
 		from	reservation r, member m, member s, dog_image i, dog d
 	</sql>	
 	
+	<!-- 관리자 페이지 - 예약조회 - 자세히 보기 -->
 	<sql id="detail-res-admin-sql">
 		select	r.res_id,
 				r.res_sdate,
@@ -81,21 +125,7 @@
 		from	reservation r, demand d, code c, sales s	
 	</sql>
 	
-	<!-- 
-		사용자가 예약을 수정,삭제,조회,추가   
-		code테이블에 예약상태 (예약대기/예약확정/예약종료)가 들어간다.
-	-->
-	<sql id="reservation-sql">
-		select  res_id,
-			    res_sdate,
-			    res_edate,
-			    res_contents,
-			    res_status,
-			    email,
-			    email_sitter
-		from    reservation
-	</sql>
-	
+	<!-- 예약 + 매출 -->
 	<sql id="reservation-join-sales-sql">
 		select  r.res_id,
 			    r.res_sdate,
@@ -124,7 +154,7 @@
 		<result column="email_sitter" property="sitterEmail"/>
 	</resultMap>
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
+	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기, 시터의 마이페이지 - 예약조회 - 간단히보기 -->
 	<resultMap type="Reservation" id="simple-res-member-resultmap" extends="reservation-resultmap">
 		<association property="member" javaType="Member">
 			<id column="email" property="email"/>
@@ -138,8 +168,9 @@
 	</resultMap>
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기 -->
-	<resultMap type="Reservation" id="simple-res-sitter-resultmap" extends="reservation-resultmap">
+	<resultMap type="Reservation" id="simple-sitter-res-resdetail-dog-resulmap" extends="reservation-resultmap">
 		<collection property="resDetailList" ofType="ResDetail">
+			<result column="dog_id" property="dogId"/>
 			<collection property="dogList" ofType="Dog">
 				<id column="dog_id" property="dogId"/>
 				<result column="dog_name" property="dogName"/>
@@ -147,10 +178,19 @@
 				<result column="gender" property="gender"/>
 				<result column="birth" property="birth"/>
 				<result column="email" property="email"/>
-				<collection property="dogImage" ofType="dogImage">
-					<result column="dog_Image" property="dogImage"/>
-				</collection>
 			</collection>
+		</collection>
+	</resultMap>
+	
+	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
+	<resultMap type="Reservation" id="detail-sitter-res-demand-code-resulmap" extends="reservation-resultmap">
+		<collection property="demandList" ofType="Demand">
+			<result column="code_demand" property="codeDemand"/>
+			<association property="code" javaType="Code">
+				<id column="code" property="code"/>
+				<result column="code_name" property="codeName"/>
+				<result column="category" property="category"/>
+			</association>
 		</collection>
 	</resultMap>
 	
@@ -171,45 +211,32 @@
 		</collection>
 	</resultMap>
 	
-	<resultMap type="Reservation" id="detail-res-resultmap" extends="reservation-resultmap">
-		<collection property="demandList" ofType="Demand">
-			<!-- <id column="res_id" property="resId"/> -->
-			<association property="code" javaType="Code">
-				<id column="code" property="code"/>
-				<result column="code_name" property="codeName"/>
-				<result column="category" property="category"/>
-			</association>
-		</collection>
-	</resultMap>
+	<!-- lee su il -->
 	
-	<!-- 이메일로 회원정보 (예약 , 강아지 정보) 조회 -->
-	<select id="selectSimpleReservationMemberByEmail" parameterType="string" resultMap="simple-res-sitter-resultmap">
-		<include refid="simple-res-sitter-sql"/>
-		where r.email = d.email 
-		and r.email = #{value}
-		and t.res_id = r.res_id
-		and t.dog_id = d.dog_id 
-		and d.dog_id = i.dog_id(+)
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
+	<select id="selectSimpleSitterReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
+		<include refid="simple-sitter-res-member-sql"/>
+		where r.email_sitter = #{email} 
+		and r.email = m.email
 	</select> 
 	
-	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) -->
-	<select id="selectSimpleReservationSitter" parameterType="string" resultMap="simple-res-sitter-resultmap">
-		<include refid="simple-res-sitter-sql"/>
-		where r.email = d.email 
-		and r.email_sitter = #{value}
-		and t.res_id = r.res_id
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
+	<select id="selectSimpleSitterReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"/>
+		where r.email_sitter = #{email}
+		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id 
-		and d.dog_id = i.dog_id(+)
 	</select> 
 	
-	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기 -->
-	<select id="selectDetailReservationSitter" parameterType="string" resultMap="detail-res-resultmap">
-		<include refid="detail-res-sql"/>
-		where r.res_id = d.res_id 
-		and d.code_demand = c.code
-		and r.email_sitter = #{value}
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원이 선택한 서비스 요구사항-->
+	<select id="selectDetailSitterReservationDemandCodeByResId" parameterType="_int" resultMap="detail-sitter-res-demand-code-resulmap">
+		<include refid="detail-sitter-res-demand-code-sql"/>
+		where r.res_id = #{resId}
+		and r.res_id = d.res_id 
+		and d.code_demand = c.code(+)
 	</select>
-
+	
+	<!-- lee su il -->
 	
 	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
 	<select id="selectSimpleReservationMember" parameterType="string" resultMap="simple-res-member-resultmap">
@@ -218,17 +245,28 @@
 	</select>
 	
 	<!-- 견주의 마이페이지 - 예약조회 - 자세히보기 -->
-	<select id="selectDetailReservationMember" parameterType="string" resultMap="detail-res-resultmap">
-		<include refid="detail-res-sql"/>
+	<select id="selectDetailReservationMember" parameterType="string" resultMap="detail-sitter-res-demand-code-resulmap">
+		<include refid="detail-sitter-res-demand-code-sql"/>
 		where r.res_id = d.res_id and r.email = #{value}
 	</select>
+	
+	<!-- yoon gue seok -->
+	<!-- 시터의 마이페이지 - 전체 의뢰 찾기  -->
+	<select id="selectAllMemberReservationMember" parameterType="string" resultMap="simple-res-member-resultmap">
+		<include refid="simple-sitter-res-member-sql"/>
+		where r.RES_STATUS = 'res-1'
+		and	  r.email_sitter is null
+	</select> 
+	
+	
+	<!-- yoon gue seok -->
 	
 	<select id="selectSimpleReservationAdmin" resultMap="simple-res-admin-resultmap">
 		<include refid="simple-res-admin-sql"/>
 		where r.email = m.email and r.email_sitter = s.email and i.dog_id = d.dog_id
 	</select>
 	
-	<resultMap type="Reservation" id="detail-res-admin-resultmap" extends="detail-res-resultmap">
+	<resultMap type="Reservation" id="detail-res-admin-resultmap" extends="detail-sitter-res-demand-code-resulmap">
 		<association property="sales" javaType="Sales">
 			<result column="res_id" property="resId"/>
 			<result column="total" property="total"/>
@@ -278,12 +316,6 @@
 		<include refid="reservation-sql"/>
 		where email_sitter = #{email}
 	</select>
-	
-	<!-- 시터에서 이메일로 예약조회 -->
-   <!-- 	<select id="selectSitterReservationByEmail" parameterType="string" resultMap="reservation-resultmap">
-		<include refid="reservation-sql"/>
-		where r.email_sitter = #{email}
-	</select> -->
 	
 	<!--ResID로 해당 예약의 시터의 급여를 조회 -->
 	<select id="selectSitterReservationSalesByResId" parameterType="_int" resultMap="reservation-join-sales-resultmap">

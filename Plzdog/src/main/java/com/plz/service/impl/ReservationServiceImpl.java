@@ -50,14 +50,15 @@ public class ReservationServiceImpl implements ReservationService{
 	public void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList) {
 		dao.insertReservation(reservation);
 		//요구사항 리스트를 반복해서 Demand 테이블에 insert
+		System.out.println(reservation);
 		for(String demand : demandList) {
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
 		}
 		//해당 예약 Id를 가지고 있는 강아지 ID를 반복해서 ResDetail 테이블에 insert
+		
 		for(int dogId : dogList) {
 			resdDao.insertResDetail(new ResDetail(reservation.getResId(), dogId));
 		}
-		
 	}
 
 	@Override
@@ -122,7 +123,9 @@ public class ReservationServiceImpl implements ReservationService{
 	public void removeDemand(int resId) {
 		dao.deleteDemand(resId);
 	}
-
+	
+	//------------------------------------
+	
 	@Override
 	public Reservation findReservationById(int resId) {
 		return dao.selectReservationById(resId);
@@ -162,6 +165,27 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail) {
 		return dao.selectDetailReservationAdmin(sitterEmail, memberEmail);
 	}
+	
+	// -----------------------Lee su il----------------------------------
+	@Override
+	public List<Reservation> findSimpleSitterReservationMemberByEmail(String sitterEmail){
+		return dao.selectSimpleSitterReservationMemberByEmail(sitterEmail);
+	}
+	
+	@Override
+	public List<Reservation> findSimpleSitterReservationResDetailDogByEmail(String sitterEmail){
+		return dao.selectSimpleSitterReservationResDetailDogByEmail(sitterEmail);
+	}
+	
+	@Override
+	public Reservation findDetailSitterReservationDemandCodeByResId(int resId) {
+		return dao.selectDetailSitterReservationDemandCodeByResId(resId);
+	}
+	// -----------------------Lee su il----------------------------------
 
-
+	//------------------------Yoon gue seok------------------------------
+	@Override
+	public List<Reservation> findAllMemberReservationMember() {
+		return dao.findAllMemberReservationMember();
+	}
 }

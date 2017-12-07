@@ -15,9 +15,9 @@ $("#serachBtn").on("click", function(){
 	    checkboxValues.push($(this).val());
 	});
 
-	var selectService = $("#selectServiceId").val();
+	/* var selectService = $("#selectServiceId").val();
 
-	var allData = {"selectService": selectService, "checkArray": checkboxValues};
+	var allData = {"selectService": selectService, "checkArray": checkboxValues}; */
 	
 	$.ajax({
 		"url" : "${initParam.rootPath}/member/find_sitter.do",
