@@ -64,6 +64,7 @@ DROP TABLE WAITING
 -- 예약 상세 테이블
 DROP TABLE RES_DETAIL 
 	CASCADE CONSTRAINTS;
+		
 --------------------------------------------------
 --create
 --시터 대기자

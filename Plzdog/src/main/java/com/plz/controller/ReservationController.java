@@ -19,6 +19,7 @@ import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
 
@@ -149,7 +150,7 @@ public class ReservationController {
 				
 				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
 				
-				//시터에게 온 회원 + 강아지 정보
+				//시터에게 온 회원 + 회원 강아지 정보
 				model.addAttribute("memberList",memberList);
 		return "sitter/select_reservation_simple_result.tiles";
 	}
@@ -160,11 +161,22 @@ public class ReservationController {
 	 * @param model
 	 * @return
 	 */
+	
+	// 수정 중 입니다.
 	@RequestMapping("/sitter/select_reservation_detail")
-	public String selectDetailReservationSitter(@RequestParam String email, Model model) {
-		//예약과 관련된 스킬
-		List<Reservation> list = rService.selectDetailReservationSitter(email);
-		model.addAttribute("list", list);
+	public String selectDetailReservationSitter(@RequestParam String siiterEmail, Model model) {
+		
+		//시터에게 온 회원 + 회원의 강아지 정보
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(siiterEmail);
+		//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
+		List<ResDetail> dogList = new ArrayList<>();
+		for(int i =0; i< memberList.size() ; i++) {
+			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
+				memberList.get(i).getResDetailList().get(j).getDogId();
+			}
+		}
+		
+		model.addAttribute("list", siiterEmail);
 		return "sitter/select_reservation_detail_result.tiles";
 	}
 	

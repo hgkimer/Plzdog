@@ -75,7 +75,7 @@
 
 </body>
 <div class="all">
-	<div class="reservation" onclick="location.href='member/select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
+	<div class="reservation" onclick="location.href='member/select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>'">
 		<div class="dogImage">
 			<c:forEach var="list" items="${reqeustScope.list}">
 				<ul class="nav">
