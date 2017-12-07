@@ -380,7 +380,13 @@ INSERT INTO DOGINFO VALUES(11 ,'dog-6');
 INSERT INTO DOGINFO VALUES(11 ,'dog-4');
 INSERT INTO DOGINFO VALUES(11 ,'dog-3');
 
-
+insert into DEMAND values (1,'sitter-1'); 
+insert into DEMAND values (2,'sitter-2'); 
+insert into DEMAND values (3,'sitter-3');
+insert into DEMAND values (3,'sitter-1');
+insert into DEMAND values (3,'sitter-2');
+insert into Demand values (4,'sitter-4');
+insert into demand values (5,'sitter-1');
 
 --강아지 이미지
 INSERT INTO DOG_IMAGE VALUES('1.jpg','1');
@@ -501,13 +507,9 @@ insert into RES_DETAIL values('8','9');
 insert into RES_DETAIL values('8','10');
 --서비스 요구사항
 
-insert into DEMAND values (1,'sitter-1'); 
-insert into DEMAND values (2,'sitter-2'); 
-insert into DEMAND values (3,'sitter-3');
-insert into DEMAND values (3,'sitter-1');
-insert into DEMAND values (3,'sitter-2');
-insert into Demand values (4,'sitter-4');
-insert into demand values (5,'sitter-1');
+insert into delete values (5,'res-1');
+insert into delete values (5,'res-2');
+insert into delete values (5,'res-1');
 
 --매출
 insert into SALES values(1,100000 ,90000 ,10000, '2017/07/03');

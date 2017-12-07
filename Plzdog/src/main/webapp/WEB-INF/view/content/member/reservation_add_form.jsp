@@ -75,9 +75,6 @@ $(document).ready(function(){
 	    scrollbar: true
 	});
 	
-	
-	
-
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
 		var selValue = this.selectedIndex;
@@ -181,11 +178,5 @@ $(document).ready(function(){
 			<input type="button" value="전송" id="regBtn">
 			 -->
 			 <br>
-<<<<<<< HEAD
-			 <br>
-			 <button type="button" onclick="formCheck();">등록</button>
-=======
-			 <br>
 			 <button type="submit" id="regBtn">등록</button>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 	</form>
