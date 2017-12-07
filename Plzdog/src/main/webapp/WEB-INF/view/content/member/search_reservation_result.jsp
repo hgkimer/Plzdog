@@ -8,9 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-search_reservation_result.do<br>
 
-오류 메세지 : ${requsetScope.errorMessage }
+오류 메세지 : ${requestScope.errorMessage }
 <br>
 =----------------------------------------------------------<br>
 내가 견주<br>

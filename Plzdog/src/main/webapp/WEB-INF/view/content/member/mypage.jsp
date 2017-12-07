@@ -9,13 +9,10 @@
 <div class="mypage-form">
 	<form action="${initParam.rootPath }/member/search_reservation.do" method="post" class="myform">
 		<sec:csrfInput/>
-		<input type="text" name="mEmail">
-		<button type="submit">전송</button>
+		<input type="hidden" name="mEmail" value='<sec:authentication property="principal.email"/>'>
+		<button type="submit">내가 신청한 예약 조회</button>
 	</form>
 	<br>
-	<div class="member-form">
-		<a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a>
-	</div>
 	<form action="${initParam.rootPath }/sitter/select_reservation_simple.do" method="post" class="myform">
 		<sec:csrfInput/>
 		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>

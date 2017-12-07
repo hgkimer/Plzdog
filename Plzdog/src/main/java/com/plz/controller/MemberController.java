@@ -171,15 +171,20 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping("select_all_sitter")
-	public String selectAllSitter(ModelMap model) {
+	public String selectAllSitter(String email, ModelMap model) {
 		List<Member> sitterList = new ArrayList<>();
 		
 		for(Member member : service.selectAllSitter()) {
 			//ROLE_MEMBER, ROLE_SITTER
 			if(member.getAuthorityList().size() == 2) {
 				sitterList.add(member);
+				if(member.getEmail().equals(email)) {
+					sitterList.remove(member);
+					
+				}
 			}
 		}
+		System.out.println(sitterList);
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}

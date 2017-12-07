@@ -81,6 +81,7 @@ public class ReservationController {
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";
 	}
+	//입력받은 시간과 날짜정보를 합치는 메소드
 	private void setTimeToDate(Date date, String time) {
 		String [] str = time.split(":");
 		date.setHours(Integer.parseInt(str[0].trim()));
@@ -160,7 +161,6 @@ public class ReservationController {
 						}
 					}
 				}
-				
 				//시터에게 온 회원 + 강아지 정보
 				model.addAttribute("memberList",memberList);
 		return "sitter/select_reservation_simple_result.tiles";

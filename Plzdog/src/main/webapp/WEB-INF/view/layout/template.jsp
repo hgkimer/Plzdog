@@ -59,7 +59,6 @@
 	<tiles:insertAttribute name="footer" />
 </div>
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
-	<a href="${initParam.rootPath }/admin/select_waiting.do">대기시터 테스트</a><br>
 <%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
 </body>
 </html>

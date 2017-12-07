@@ -61,10 +61,11 @@
 					href="${initParam.rootPath }/member/reservation_add_form.do">시터
 						추천 받기</a>
 			</div>
-			<div class="move">
-				<a href="${initParam.rootPath }/member/select_all_sitter.do">시터
-					검색</a><br>
-			</div>
+				<form action="${initParam.rootPath }/member/select_all_sitter.do" method="post">
+					<sec:csrfInput/>
+					<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
+					<button type="submit" class="sbtn">시터 검색</button>
+				</form>
 		</div>
 	</div>
 </body>
