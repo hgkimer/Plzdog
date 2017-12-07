@@ -129,7 +129,6 @@
 		<association property="member" javaType="Member">
 			<id column="email" property="email"/>
 			<result column="member_name" property="memberName"/>
-			<result column="password" property="password"/>
 			<result column="main_address" property="mainAddress"/>
 			<result column="sub_address" property="subAddress"/>
 			<result column="zipcode" property="zipcode"/>

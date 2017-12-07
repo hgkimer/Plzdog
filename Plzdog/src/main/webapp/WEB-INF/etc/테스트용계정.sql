@@ -354,4 +354,17 @@ and r.email_sitter = 'soo1@naver.com'
 and t.res_id = r.res_id
 and t.dog_id = d.dog_id 
 and d.dog_id = i.dog_id(+)
+
+
+select	r.res_id,
+				r.res_status,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.email,
+				r.email_sitter,
+				s.member_name,
+				s.member_image
+from			reservation r, member s
+where 			r.email_sitter = s.email and r.email = 'dbsrb0322@naver.com'
 		
