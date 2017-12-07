@@ -151,9 +151,7 @@ $(document).ready(function(){
 <div class="row">
 	<div class="col-lg-12">
 		<h2>의뢰 접수</h2>
-
-		<form action="${initParam.rootPath }/member/reservation_add.do"
-			method="post" id="reservationForm">
+		<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm">
 			<sec:csrfInput />
 			<div class="form-group">
 				<label for="demand">서비스 종류</label> <select name="demand"
@@ -208,9 +206,8 @@ $(document).ready(function(){
 						value="${en.code }">${en.codeName }<br>
 				</c:forEach>
 			</div>
-			
-			<div class="form-group">
-				<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
+			<div class = "form-group">
+			<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
 				<c:if test="${requestScope.sitter != null}">
 					<label for="price">금액</label>
 					<input type="number" id="price" name="price" value="" readonly>

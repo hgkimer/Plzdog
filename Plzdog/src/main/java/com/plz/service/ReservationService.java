@@ -132,5 +132,13 @@ public interface ReservationService {
 	 * @return
 	 */
 	Reservation findDetailSitterReservationDemandCodeByResId(int resId);
+	
+	/**
+	 * sitterEmail에 해당하는 회원정보 + 강아지 정보 
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findSimpleSitterReservationInfoByEmail(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
+	
 }
