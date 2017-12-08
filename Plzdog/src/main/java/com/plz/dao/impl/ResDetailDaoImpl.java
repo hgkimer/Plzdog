@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.ResDetailDao;
 import com.plzdog.vo.ResDetail;
@@ -17,6 +18,7 @@ public class ResDetailDaoImpl implements ResDetailDao {
 		return "com.plz.config.mybatis.mapper.resDetailMapper." + id;
 	}
 	@Override
+	@Transactional
 	public int insertResDetail(ResDetail resDetail) {
 		return session.insert(makeSqlId("insertResDetail"), resDetail);
 	}

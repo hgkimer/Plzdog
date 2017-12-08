@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.ReservationDao;
 import com.plzdog.vo.Demand;
@@ -92,6 +93,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	
 	//서비스 요구 사항을 추가, 수정 , 삭제
 	@Override
+	@Transactional
 	public int insertDemand(Demand demand) {
 		return session.insert(makeSqlId("insertDemand"),demand);
 	}
