@@ -183,7 +183,7 @@ public class ReservationController {
 			
 			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
 				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
-				memberList.get(i).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
+				memberList.get(i).getResDetailList().get(j).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
 			}
 		}
 		

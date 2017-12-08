@@ -171,14 +171,14 @@
 	<resultMap type="Reservation" id="simple-sitter-res-resdetail-dog-resulmap" extends="reservation-resultmap">
 		<collection property="resDetailList" ofType="ResDetail">
 			<result column="dog_id" property="dogId"/>
-			<collection property="dogList" ofType="Dog">
+			<association property="dog" javaType="Dog">
 				<id column="dog_id" property="dogId"/>
 				<result column="dog_name" property="dogName"/>
 				<result column="species" property="species"/>
 				<result column="gender" property="gender"/>
 				<result column="birth" property="birth"/>
 				<result column="email" property="email"/>
-			</collection>
+			</association>
 		</collection>
 	</resultMap>
 	
@@ -197,7 +197,7 @@
 	<!-- 관리자가 보는 정보 -->
 	<resultMap type="Reservation" id="simple-res-admin-resultmap" extends="simple-res-member-resultmap">
 		<collection property="resDetailList" ofType="ResDetail">
-			<collection property="dogList" ofType="Dog">
+			<association property="dog" javaType="Dog">
 				<id column="dog_id" property="dogId"/>
 				<result column="dog_name" property="dogName"/>
 				<result column="species" property="species"/>
@@ -207,7 +207,7 @@
 				<collection property="dogImage" ofType="dogImage">
 					<result column="dog_Image" property="dogImage"/>
 				</collection>
-			</collection>
+			</association>
 		</collection>
 	</resultMap>
 	

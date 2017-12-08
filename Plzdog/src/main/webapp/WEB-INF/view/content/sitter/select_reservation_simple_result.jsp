@@ -87,9 +87,7 @@ a {
 							<li>끝날짜 : ${reservation.resEDate}</li>
 							<li>예약에 대한 가격 : ${reservation.price}</li>
 							<c:forEach items="${reservation.resDetailList}" var="resDetail">
-								<c:forEach items="${resDetail.dogList }" var="dog">
-									<li>강아지 이름 : ${dog.dogName }</li>
-								</c:forEach>
+									<li>강아지 이름 : ${resDetail.dog.dogName }</li>
 							</c:forEach>
 						</ul>
 					</div>

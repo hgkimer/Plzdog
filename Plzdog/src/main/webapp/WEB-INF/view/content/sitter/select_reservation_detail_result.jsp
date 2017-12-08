@@ -87,7 +87,7 @@ $(document).ready(function(){
 					<img src="${initParam.rootPath }/memberImage/${requestScope.resMember.member.memberImage }" width="350px"><br>
 					<li>견주이메일 : ${requestScope.resMember.member.email}</li>
 					<li>견주 이름 : ${requestScope.resMember.member.memberName }</li>
-					<li>회원 주소 : ${requestScope.resMember.member.mainAddress } ${requestScope.resMember.member.mainAddress }</li>
+					<li>회원 주소 : ${requestScope.resMember.member.mainAddress } ${requestScope.resMember.member.subAddress }</li>
 					<li>전화번호 :  ${requestScope.resMember.member.phoneNum }</li>
 					<li>의뢰내용 : ${requestScope.resMember.resContents}</li>
 					<li>가격 : ${requestScope.resMember.price}</li>
@@ -95,20 +95,20 @@ $(document).ready(function(){
 						<li>서비스 요구사항 : ${demand.code.codeName}</li>
 					</c:forEach>
 				
-					<li>회원의 강아지 정보</li>
-					<c:forEach items="${requestScope.resMember.member.dogList }" var="dog" >
-					 강아지 이름 : ${dog.dogName}<br>
-					 강아지 종 : ${dog.species }<br>
-					 강아지 성별 : ${dog.gender }<br>
-					 강아지 몸무게 : ${dog.weight }<br>
-					 강아지 생년월일 : ${dog.birth }<br>
+					<li>예약한 회원의 강아지 정보</li>
+					<c:forEach items="${requestScope.resMember.resDetailList }" var="resDetail" >
+					 강아지 이름 : ${resDetail.dog.dogName}<br>
+					 강아지 종 : ${resDetail.dog.species }<br>
+					 강아지 성별 : ${resDetail.dog.gender }<br>
+					 강아지 몸무게 : ${resDetail.dog.weight }<br>
+					 강아지 생년월일 : ${resDetail.dog.birth }<br>
 					 강아지 상세 정보 : <br>
-						 <c:forEach items="${dog.dogInfoList }" var="dogInfo">
-						 	${dogInfo.code.codeName } (O) <br>
-						 </c:forEach>
-						 <c:forEach items="${dog.dogImage }" var="dogImage">
-						 		강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
-						 </c:forEach>
+							 <c:forEach items="${resDetail.dog.dogInfoList }" var="dogInfo">
+							 	${dogInfo.code.codeName } (O) <br>
+							 </c:forEach>
+							 <c:forEach items="${resDetail.dog.dogImage }" var="dogImage">
+							 		강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
+							 </c:forEach>
 					</c:forEach>
 				</ul>
 		</div>
