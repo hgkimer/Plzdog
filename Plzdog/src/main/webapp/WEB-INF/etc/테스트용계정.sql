@@ -333,7 +333,6 @@ select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipc
         	and  	d.email = 'soo1@naver.com'
 			and d.dog_id = '11'
 		
-			
 select	r.res_id,
 				r.res_sdate,
 				r.res_edate,
