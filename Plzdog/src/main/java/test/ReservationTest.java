@@ -1,12 +1,12 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.plz.service.ReservationService;
-import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
 public class ReservationTest {
@@ -65,11 +65,11 @@ public class ReservationTest {
 		//list = service.selectSimpleReservationSitter("soo1@naver.com");
 		//printReservation(list, "회원 해당 예약 정보 + 강아지 이미지");
 		
-		list = service.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
+		/*list = service.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
 		printReservation(list,"예약에 해당하는 회원 정보");
 		
 		list = service.findSimpleSitterReservationResDetailDogByEmail("soo1@naver.com");
-		printReservation(list, "예약에 해당하는 회원의 강아지 정보");
+		printReservation(list, "예약에 해당하는 회원의 강아지 정보");*/
 		
 		/*Reservation res = service.findDetailSitterReservationDemandCodeByResId(1);
 		System.out.println("예약에 해당하는 회원의 요구사항"+res);
@@ -77,7 +77,7 @@ public class ReservationTest {
 		Reservation res1 = service.findDetailSitterReservationDemandCodeByResId(11);
 		System.out.println("예약에 해당하는 회원의 요구사항"+res1);*/
 		
-		List<Reservation> memberList = service.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
+		/*List<Reservation> memberList = service.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
 		
 		//해당 시터가 가진 견주들의 강아지 정보
 		List<Reservation> dogList = service.findSimpleSitterReservationResDetailDogByEmail("soo1@naver.com");
@@ -92,14 +92,34 @@ public class ReservationTest {
 		
 		for(Reservation res1 : memberList) {
 			System.out.println("회원에 해당된 예약 : "+res1);
-		}
+		}*/
 		
 		//전체 의뢰 조회
 		List<Reservation> memberList1 = service.findAllMemberReservationMember();
 		for(Reservation res2 : memberList1) {
 			System.out.println("각 의뢰 : " + res2);
 		}
-	}
+		
+		//견주에 해당하는 개정보
+		System.out.println("견주에 해당 개정보"+
+				service.findMemberReservationResDetailDogByEmail("dbsrb0322@naver.com"));
+		
+		List<Reservation> dogList1 = new ArrayList<>();
+		for(int i =0 ; i<memberList1.size() ; i++) {
+			// resid 34 , 35 , 36
+			dogList1 = service.findMemberReservationResDetailDogByEmail(memberList1.get(i).getMemberEmail());
+				 
+				if(memberList1.get(i).getResId() == dogList1.get(i).getResId()) {
+				memberList1.get(i).setResDetailList(dogList1.get(i).getResDetailList());
+			}
+		}
+		
+		//예약에 해당하는 견주 + 강아지 정보
+		for(int k =0 ; k<memberList1.size() ; k++) {
+			System.out.println("각 의뢰 : " + memberList1.get(k));
+			}
+		}
+	
 	
 	public static void printReservation(List<Reservation> list,String label) {
 		System.out.println("---------"+label+"-----------");

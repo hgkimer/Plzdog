@@ -55,7 +55,6 @@ public class ReservationServiceImpl implements ReservationService{
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
 		}
 		//해당 예약 Id를 가지고 있는 강아지 ID를 반복해서 ResDetail 테이블에 insert
-		
 		for(int dogId : dogList) {
 			resdDao.insertResDetail(new ResDetail(reservation.getResId(), dogId));
 		}
@@ -186,6 +185,10 @@ public class ReservationServiceImpl implements ReservationService{
 	//------------------------Yoon gue seok------------------------------
 	@Override
 	public List<Reservation> findAllMemberReservationMember() {
-		return dao.findAllMemberReservationMember();
+		return dao.selectAllMemberReservationMember();
+	}
+	
+	public List<Reservation> findMemberReservationResDetailDogByEmail(String email) {
+		return dao.selectMemberReservationResDetailDogByEmail(email);
 	}
 }

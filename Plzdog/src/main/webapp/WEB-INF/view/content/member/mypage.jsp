@@ -22,7 +22,7 @@
 		<button type="submit">내게 온 예약 조회</button>
 	</form>
 	
-	<form action="${initParam.rootPath }/sitter/selectAllReservation.do" method="post">
+	<form action="${initParam.rootPath }/sitter/select_all_request_reservation.do" method="post">
 		<sec:csrfInput/>
 		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
 		<button type="submit">전체 예약 조회</button>

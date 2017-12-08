@@ -153,8 +153,11 @@ public interface ReservationDao {
 	Reservation selectDetailSitterReservationDemandCodeByResId(int resId);
 	
 	// -----------------------Lee su il----------------------------------
+	List<Reservation> selectAllMemberReservationMember();
+	
+	List<Reservation> selectMemberReservationResDetailDogByEmail(String email);
 	
 	// -----------------------Yoon gue seok--------------------------------
-	List<Reservation> findAllMemberReservationMember();
+	
 	
 }

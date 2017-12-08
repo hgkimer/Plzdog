@@ -384,7 +384,7 @@ where 			res_status = 'res_2'
 		and r.res_id = d.res_id 
 		and d.code_demand = c.code(+)
 		
-		select * from reservation
+		
 		select  r.res_id,
 				r.res_sdate,
 				r.res_edate,
@@ -404,3 +404,39 @@ where 			res_status = 'res_2'
 		from	reservation r, member m
 		where r.RES_STATUS = 'res-1'
 		and	  r.email_sitter is null
+		
+		select * from dog
+		
+		insert into RESERVATION values(34,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-1','dbsrb0322@naver.com',null);
+		insert into res_detail values(34,21);
+		insert into res_detail values(34,22);
+		
+		
+		insert into RESERVATION values(35,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-1','dbsrb0322@naver.com',null);
+		insert into res_detail values(35,21);
+		insert into res_detail values(35,22);
+		
+		
+		insert into RESERVATION values(36,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-1','dbsrb0322@naver.com',null);
+		insert into res_detail values(36,21);
+		insert into res_detail values(36,22);
+		
+		
+		
+		select  r.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.res_status,
+				r.email,
+				r.email_sitter,
+				d.dog_id,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.birth
+		from	reservation r, res_detail t, dog d
+		where r.email ='dbsrb0322@naver.com'
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id 
+		

@@ -84,6 +84,9 @@
 	<mvc:view-controller path="/sitter/care_edit_form.do" view-name="sitter/care_edit_form.tiles"/>
 	<!-- 돌봄일지 테스트 -->
 	<mvc:view-controller path="/sitter/care_test.do" view-name="sitter/care_test.tiles" />
+	<!-- 전체 의뢰 조회-->
+	<mvc:view-controller path="/sitter/select_all_request_reservation.do" view-name="sitter/select_all_request_reservation_result.tiles" />
+	
 	<!-- FAQ  -->
 	<mvc:view-controller path="/faq.do" view-name="/faq.tiles"/>
 	<!-- 관리자(주요 기능 구현 후 추가 작성) -->

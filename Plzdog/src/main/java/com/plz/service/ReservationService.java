@@ -137,4 +137,6 @@ public interface ReservationService {
 
 	//-----------------------Yoon gue seok----------------------------------
 	List<Reservation> findAllMemberReservationMember();
+	
+	List<Reservation> findMemberReservationResDetailDogByEmail(String email);
 }
