@@ -10,15 +10,11 @@
 <script type="text/javascript">
 
 </script>
-<style type="text/css">
-	.resmember {
-		width:600px;
-		height:200px;
-		border:1px solid black;
-	}
-</style>
 </head>
 <body>
+<div class="panel-group">
+</div>
+
 	<div class="resmember">
 		<ul class="navmember">
 			<li>이름 :</li>

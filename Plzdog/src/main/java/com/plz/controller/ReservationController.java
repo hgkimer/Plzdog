@@ -202,6 +202,7 @@ public class ReservationController {
 	 * @param model
 	 * @return
 	 */
+	
 	@RequestMapping("/sitter/select_all_request_reservation")
 	public String selectSimpleReservationMember(Model model) {
 		//전체 의뢰 조회
@@ -224,6 +225,13 @@ public class ReservationController {
 		return "sitter/select_all_request_reservation_result.tiles";
 	}
 	
+	@RequestMapping("/member/select_reservation_simple")
+	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
+		List<Reservation> list = rService.selectSimpleReservationMember(email);
+		System.out.println(list);
+		model.addAttribute("list", list);
+		return "member/select_reservation_simple_result.tiles";
+	}
 	/**
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email

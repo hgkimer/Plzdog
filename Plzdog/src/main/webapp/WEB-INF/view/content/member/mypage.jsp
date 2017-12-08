@@ -9,9 +9,9 @@
 
 <h2 style="margin-top:30px;">마이페이지</h2>
 <div class="mypage-form">
-	<form action="${initParam.rootPath }/member/search_reservation.do" method="post" class="myform">
+	<form action="${initParam.rootPath }/member/select_reservation_simple.do" method="post" class="myform">
 		<sec:csrfInput/>
-		<input type="hidden" name="mEmail" value='<sec:authentication property="principal.email"/>'>
+		<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
 		<button type="submit">내가 신청한 예약 조회</button>
 	</form>
 	<br>

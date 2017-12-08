@@ -79,19 +79,7 @@
 		from	reservation r, demand d, code c
 	</sql>
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
-	<sql id="simple-res-member-sql">
-		select	r.res_id,
-				r.res_status,
-				r.res_sdate,
-				r.res_edate,
-				r.price,
-				r.email,
-				r.email_sitter,
-				s.member_name,
-				s.member_image
-		from	reservation r, member s
-	</sql>
+
 	
 	<!-- 관리자 페이지 - 예약 조회 - 간단히 보기 -->
 	<sql id="simple-res-admin-sql">
@@ -238,10 +226,29 @@
 	
 	<!-- lee su il -->
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
-	<select id="selectSimpleReservationMember" parameterType="string" resultMap="simple-res-member-resultmap">
+	<!-- 
+	####################################################################################################
+		김호규 / 건들지 마시오 
+	-->
+		<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
+	<sql id="simple-res-member-sql">
+		select	r.res_id,
+				r.res_status,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.email,
+				r.email_sitter,
+				s.member_name,
+				s.member_image
+		from	reservation r, member s
+	</sql>
+	<!-- 견주의 마이페이지 - 예약조회 - res-1 -간단히보기 -->
+	<select id="selectMemberRes1Simple" parameterType="string" resultMap="simple-res-member-resultmap">
 		<include refid="simple-res-member-sql"/>
-		where r.email_sitter = s.email and r.email = #{value}
+		WHERE 	r.email = #{value}
+		AND		r.email = s.email
+		AND		r.res_status = 'res-1'
 	</select>
 	
 	<!-- 견주의 마이페이지 - 예약조회 - 자세히보기 -->
@@ -249,6 +256,10 @@
 		<include refid="detail-sitter-res-demand-code-sql"/>
 		where r.res_id = d.res_id and r.email = #{value}
 	</select>
+	<!-- 
+	####################################################################################################
+	-->
+	
 	
 	<!-- yoon gue seok -->
 	<!-- 시터의 마이페이지 - 전체 의뢰 찾기  -->
@@ -358,7 +369,6 @@
 	<!-- 
 		서비스 요구 사항(demand) insert , update, delete  
 	 -->
-	 
 	 <insert id = "insertDemand" parameterType="Demand">
 	 	insert into demand values(#{resId}, #{codeDemand})
 	 </insert>
