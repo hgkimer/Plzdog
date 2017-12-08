@@ -16,7 +16,7 @@ select * from CARE_IMAGE;
 select * from member;
 select * from res_detail;
 select * from waiting;
-
+delete from reservation where email = 'dog@naver.com'
 insert into AUTHORITY values('zxc','ROLE_SITTER');
 -----------------------------------------
 --시터용 값 insert------------------------

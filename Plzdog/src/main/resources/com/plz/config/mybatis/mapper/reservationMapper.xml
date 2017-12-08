@@ -243,6 +243,10 @@
 				s.member_image
 		from	reservation r, member s
 	</sql>
+	
+	<resultMap type="reservation" id="reservation-all-resultmap">
+		
+	</resultMap>
 	<!-- 견주의 마이페이지 - 예약조회 - res-1 -간단히보기 -->
 	<select id="selectMemberRes1Simple" parameterType="string" resultMap="simple-res-member-resultmap">
 		<include refid="simple-res-member-sql"/>

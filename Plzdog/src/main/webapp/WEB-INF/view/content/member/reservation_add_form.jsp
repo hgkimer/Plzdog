@@ -215,11 +215,11 @@ $(document).ready(function(){
 			</div>
 			<div class="form-group">
 				<!-- 강아지 목록을 불러오는 버튼(AJAX) -->
-				<input type="button" class="btn btn-info" id="dogBtn" value="강아지 선택" />
+				<input type="button" class="btn btn-info btn-block" id="dogBtn" value="강아지 선택" />
 				<br>
 			</div>
 			<div class="form-group">
-				<button type="submit" id="regBtn" class="btn btn-default">등록</button>
+				<button type="submit" id="regBtn" class="btn btn-default btn-lg btn-block">등록</button>
 			</div>
 			<!-- 로그인한 신청자 이메일을 전달하기 위함. 나중에 hidden 처리 -->
 			<input type="hidden"

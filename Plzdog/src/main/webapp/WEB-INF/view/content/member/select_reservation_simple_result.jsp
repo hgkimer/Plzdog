@@ -12,18 +12,17 @@
 </script>
 </head>
 <body>
-<div class="panel-group">
-</div>
+<c:forEach items="${list }"></c:forEach>
+<p>개 이미지:</p>
+<p>개 성별:</p>
+<p>개 이름:</p>
+<p>개 성별:</p>
+<p>예약 상태:</p>
+<p>시작 날짜:</p>
+<p>종료 날짜:</p>
 
-	<div class="resmember">
-		<ul class="navmember">
-			<li>이름 :</li>
-			<li>학교이름 :</li>
-			<li>평점 :</li>
-			<li>방문돌봄가격 :</li>
-			<li>위탁돌봄가격 :</li>
-			<li>전화번호 :</li>
-		</ul>
-	</div>
+
+<!-- 수정하기/ 상세보기 / 삭제하기 버튼 -->
+<!-- 수락/ 거절 버튼 -->
 </body>
 </html>

@@ -172,6 +172,9 @@ public class ReservationController {
 		
 		//시터에게 온 회원 + 회원의 강아지 정보
 		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
+		for(Reservation r : memberList) {
+			System.out.println(r);
+		}
 		//시터에게 온 회원의 요구사항
 		Reservation skillList = new Reservation();
 		

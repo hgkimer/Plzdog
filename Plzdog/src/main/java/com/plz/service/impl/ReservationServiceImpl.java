@@ -57,7 +57,6 @@ public class ReservationServiceImpl implements ReservationService{
 	public void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList) {
 		dao.insertReservation(reservation);
 		//요구사항 리스트를 반복해서 Demand 테이블에 insert
-		System.out.println(reservation);
 		for(String demand : demandList) {
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
 		}
@@ -154,6 +153,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Override
 	public List<Reservation> selectSimpleReservationMember(String email) {
+		System.out.println(dao.selectMemberRes1Simple(email));
 		return dao.selectMemberRes1Simple(email);
 	}
 
