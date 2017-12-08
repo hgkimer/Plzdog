@@ -1,6 +1,7 @@
 package com.plz.controller;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class ReservationController {
 	@RequestMapping("/member/reservation_add")
 	public String addReservation(@ModelAttribute Reservation res, @RequestParam(name="demand") List<String> demandList,  
 			@RequestParam(name="mydog")List<Integer> dogList, String sTime, String eTime ) {
+
 		//1. 요청파라미터 받기(매개변수)
 		//2. Business Logic
 			//매개변수로 받은 시간을 기존의 날짜와 합침
@@ -195,11 +197,34 @@ public class ReservationController {
 	}
 	
 	/**
-	 * 견주 마이페이지 - 예약 조회 - 간단히 보기
+	 * 시터 마이페이지 - 전체 의뢰 조회
 	 * @param email
 	 * @param model
 	 * @return
 	 */
+	
+	@RequestMapping("/sitter/select_all_request_reservation")
+	public String selectSimpleReservationMember(Model model) {
+		//전체 의뢰 조회
+		List<Reservation> memberList = rService.findAllMemberReservationMember();
+		
+		//견주에 해당하는 개정보
+		System.out.println("견주에 해당 개정보"+
+				rService.findMemberReservationResDetailDogByEmail("dbsrb0322@naver.com"));
+		
+		List<Reservation> dogList = new ArrayList<>();
+		for(int i =0 ; i<memberList.size() ; i++) {
+			// resid 34 , 35 , 36
+			dogList = rService.findMemberReservationResDetailDogByEmail(memberList.get(i).getMemberEmail());
+				if(memberList.get(i).getResId() == dogList.get(i).getResId()) {
+				memberList.get(i).setResDetailList(dogList.get(i).getResDetailList());
+			}
+		}
+		System.out.println(memberList);
+		model.addAttribute("memberList",memberList);
+		return "sitter/select_all_request_reservation_result.tiles";
+	}
+	
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.selectSimpleReservationMember(email);
@@ -207,7 +232,6 @@ public class ReservationController {
 		model.addAttribute("list", list);
 		return "member/select_reservation_simple_result.tiles";
 	}
-	
 	/**
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email

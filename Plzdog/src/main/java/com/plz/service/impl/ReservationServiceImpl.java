@@ -57,6 +57,7 @@ public class ReservationServiceImpl implements ReservationService{
 	public void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList) {
 		dao.insertReservation(reservation);
 		//요구사항 리스트를 반복해서 Demand 테이블에 insert
+		System.out.println(reservation);
 		for(String demand : demandList) {
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
 		}
@@ -64,7 +65,6 @@ public class ReservationServiceImpl implements ReservationService{
 		for(int dogId : dogList) {
 			resdDao.insertResDetail(new ResDetail(reservation.getResId(), dogId));
 		}
-		
 	}
 
 	@Override
@@ -207,4 +207,14 @@ public class ReservationServiceImpl implements ReservationService{
 		return memberList;
 	}
 	// -----------------------Lee su il----------------------------------
+
+	//------------------------Yoon gue seok------------------------------
+	@Override
+	public List<Reservation> findAllMemberReservationMember() {
+		return dao.selectAllMemberReservationMember();
+	}
+	
+	public List<Reservation> findMemberReservationResDetailDogByEmail(String email) {
+		return dao.selectMemberReservationResDetailDogByEmail(email);
+	}
 }

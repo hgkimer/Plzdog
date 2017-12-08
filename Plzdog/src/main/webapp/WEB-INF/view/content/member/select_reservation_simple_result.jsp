@@ -15,5 +15,15 @@
 <div class="panel-group">
 </div>
 
+	<div class="resmember">
+		<ul class="navmember">
+			<li>이름 :</li>
+			<li>학교이름 :</li>
+			<li>평점 :</li>
+			<li>방문돌봄가격 :</li>
+			<li>위탁돌봄가격 :</li>
+			<li>전화번호 :</li>
+		</ul>
+	</div>
 </body>
 </html>

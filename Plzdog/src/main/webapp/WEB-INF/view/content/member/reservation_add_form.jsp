@@ -230,10 +230,8 @@ $(document).ready(function(){
 			<c:if test='${requestScope.sitter != null}'>
 				<input type="hidden" value='${requestScope.sitter.email }'
 					name="sitterEmail" readonly />
-				<br>
 			</c:if>
+			
 		</form>
 	</div>
-	
 </div>
-

@@ -3,7 +3,6 @@ package com.plz.dao;
 import java.util.List;
 
 import com.plzdog.vo.Demand;
-import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
 
 public interface ReservationDao {
@@ -161,5 +160,11 @@ public interface ReservationDao {
 	Reservation selectDetailSitterReservationDemandCodeByResId(int resId);
 	
 	// -----------------------Lee su il----------------------------------
+	List<Reservation> selectAllMemberReservationMember();
+	
+	List<Reservation> selectMemberReservationResDetailDogByEmail(String email);
+	
+	// -----------------------Yoon gue seok--------------------------------
+	
 	
 }

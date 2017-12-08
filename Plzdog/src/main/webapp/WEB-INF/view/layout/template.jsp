@@ -48,9 +48,9 @@
 	<div class="row whole">
 		
 		<%-- 메뉴 --%>
-		<nav class="col-sm-2 side">
+	
 			<tiles:insertAttribute name="menu"/>
-		</nav>
+	
 		<!-- 내용 -->
 		<nav class="col-sm-9 content">
 			<tiles:insertAttribute name="content"/>
@@ -59,6 +59,8 @@
 	<tiles:insertAttribute name="footer" />
 </div>
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
+	<a href="${initParam.rootPath }/admin/select_waiting.do">대기시터 테스트</a><br>
+	<a href="${initParam.rootPath }/member/select_reservation_simple_result.do">회원 예약 조회 페이지 테스트</a>
 <%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
 </body>
 </html>

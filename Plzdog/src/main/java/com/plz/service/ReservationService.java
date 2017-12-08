@@ -140,5 +140,9 @@ public interface ReservationService {
 	 */
 	List<Reservation> findSimpleSitterReservationInfoByEmail(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
+
+	//-----------------------Yoon gue seok----------------------------------
+	List<Reservation> findAllMemberReservationMember();
 	
+	List<Reservation> findMemberReservationResDetailDogByEmail(String email);
 }

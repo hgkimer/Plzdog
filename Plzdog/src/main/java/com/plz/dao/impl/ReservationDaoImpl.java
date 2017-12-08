@@ -151,4 +151,17 @@ public class ReservationDaoImpl implements ReservationDao{
 		params.put("memberEmail", memberEmail);
 		return session.selectList(makeSqlId("selectDetailReservationAdmin"), params);
 	}
+	
+	//---------------윤 규석 ----------------------
+	@Override
+	public List<Reservation> selectAllMemberReservationMember() {
+		return session.selectList(makeSqlId("selectAllMemberReservationMember"));
+	}
+
+	@Override
+	public List<Reservation> selectMemberReservationResDetailDogByEmail(String email) {
+		return session.selectList(makeSqlId("selectMemberReservationResDetailDogByEmail"),email);
+	}
+	
+	//------------------윤규석-------------------
 }

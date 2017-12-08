@@ -10,11 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>header</title>
 
-<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 	* {
 		margin:0 auto;
@@ -38,10 +33,11 @@
 		background-color:#009688;
 		box-shadow:0px 5px 5px gray;
 		position:relative;
+		z-index:1;
 	}
 	
 	.nav {
-		width:90%;
+		width:60%;
 		height:100%;
 		float:right;
 	}
@@ -53,13 +49,13 @@
 	
 	.navi {
 		font-weight:bold;
-		font-size:18px;
+		font-size:20px;
 		float:left;
 		width:auto;
 		height:100%;
 		text-align:center;
 		line-height:80px;
-		margin-left:30px;
+		margin-left:40px;
 		color:white;
 	}
 	
@@ -70,6 +66,10 @@
 	::-webkit-scrollbar {
 		display:none;
 	} 
+	
+	.w3-teal {
+		display:none;
+	}
 </style>
 </head>
 
@@ -139,9 +139,7 @@
 					<li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="${initParam.rootPath }/image/foot.png">도그시터 신청하기</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="${initParam.rootPath }/image/search.png">도그시터 찾기</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
-					<li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/member/mypage.do">마이페이지</a></li>
-					<li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
 				</sec:authorize>
 			</ul>
 	</header>
