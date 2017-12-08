@@ -45,7 +45,7 @@
 	<tiles:insertAttribute name="header" />
 	<div class="clear"></div>
 	<%--메인 body --%>
-	<div class="row whole">
+	<div class="row whole" style="width:100%;">
 		
 		<%-- 메뉴 --%>
 	
