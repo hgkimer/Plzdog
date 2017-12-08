@@ -48,9 +48,9 @@
 	<div class="row whole">
 		
 		<%-- 메뉴 --%>
-		<nav class="col-sm-2 side">
+	
 			<tiles:insertAttribute name="menu"/>
-		</nav>
+	
 		<!-- 내용 -->
 		<nav class="col-sm-9 content">
 			<tiles:insertAttribute name="content"/>

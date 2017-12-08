@@ -2,7 +2,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style type="text/css">
-	
+	.w3-teal {
+		display:block;
+	}
 </style>
 
 <h2 style="margin-top:30px;">마이페이지</h2>
