@@ -10,7 +10,7 @@ public class ResDetail implements Serializable{
 	private int resId; //해당 예약의 ID
 	private int dogId; //해당 예약의 강아지
 	
-	private List<Dog> dogList;
+	private Dog dog;
 	
 	public ResDetail() {}
 	public ResDetail(int resId, int dogId) {
@@ -19,6 +19,12 @@ public class ResDetail implements Serializable{
 		this.dogId = dogId;
 	}
 	
+	public ResDetail(int resId, int dogId, Dog dog) {
+		super();
+		this.resId = resId;
+		this.dogId = dogId;
+		this.dog = dog;
+	}
 	
 	public int getResId() {
 		return resId;
@@ -32,22 +38,22 @@ public class ResDetail implements Serializable{
 	public void setDogId(int dogId) {
 		this.dogId = dogId;
 	}
-	public List<Dog> getDogList() {
-		return dogList;
+	public Dog getDog() {
+		return dog;
 	}
-	public void setDogList(List<Dog> dogList) {
-		this.dogList = dogList;
+	public void setDog(Dog dog) {
+		this.dog = dog;
 	}
 	@Override
 	public String toString() {
-		return "ResDetail [resId=" + resId + ", dogId=" + dogId + ", dogList=" + dogList + "]";
+		return "ResDetail [resId=" + resId + ", dogId=" + dogId + ", dog=" + dog + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((dog == null) ? 0 : dog.hashCode());
 		result = prime * result + dogId;
-		result = prime * result + ((dogList == null) ? 0 : dogList.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -60,15 +66,17 @@ public class ResDetail implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ResDetail other = (ResDetail) obj;
-		if (dogId != other.dogId)
-			return false;
-		if (dogList == null) {
-			if (other.dogList != null)
+		if (dog == null) {
+			if (other.dog != null)
 				return false;
-		} else if (!dogList.equals(other.dogList))
+		} else if (!dog.equals(other.dog))
+			return false;
+		if (dogId != other.dogId)
 			return false;
 		if (resId != other.resId)
 			return false;
 		return true;
 	}
+	
+	
 }

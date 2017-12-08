@@ -14,11 +14,10 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
-select * from resdetail;
+select * from res_detail;
 select * from waiting;
 
 insert into AUTHORITY values('zxc','ROLE_SITTER');
-delete from MEMBER where email = 'soo1@naver.com';
 -----------------------------------------
 --시터용 값 insert------------------------
 
@@ -278,6 +277,11 @@ and 	m.email = a.email
 		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'
 
+update reservation set res_status = 'res-5' where res_id = '13';
+update reservation set res_status = 'res-5' where res_id = '11';
+update reservation set res_status = 'res-5' where res_id = '1';
+
+select * from reservation
 
 select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
 				m.member_image, m.phonenum, m.member_enable,
@@ -334,7 +338,6 @@ select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipc
         	and  	d.email = 'soo1@naver.com'
 			and d.dog_id = '11'
 		
-			
 select	r.res_id,
 				r.res_sdate,
 				r.res_edate,

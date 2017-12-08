@@ -26,7 +26,7 @@ public interface ReservationService {
 	void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList);
 	/**
 	 * 예약을 수정하는 메소드
-	 * @param reservation
+	 * @param reservation	
 	 */
 	void updateReservation(Reservation reservation);
 	/**
@@ -139,10 +139,18 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findSimpleSitterReservationInfoByEmail(String sitterEmail);
+	
+	/**
+	 * sitterEmail로 결제가 완료된 회원정보 + 강아지 정보 
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findCompletePaymentReservationInfoByEmail(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
 
 	//-----------------------Yoon gue seok----------------------------------
 	List<Reservation> findAllMemberReservationMember();
 	
 	List<Reservation> findMemberReservationResDetailDogByEmail(String email);
+	
 }

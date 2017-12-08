@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.ReservationDao;
 import com.plzdog.vo.Demand;
@@ -88,10 +89,21 @@ public class ReservationDaoImpl implements ReservationDao{
 		return session.selectOne(makeSqlId("selectDetailSitterReservationDemandCodeByResId"), resId);
 	}
 	
+	@Override
+	public List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail){
+		return session.selectList(makeSqlId("selectCompletePaymentReservationMemberByEmail"),sitterEmail);
+	}
+	
+	@Override
+	public List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail){
+		return session.selectList(makeSqlId("selectCompletePaymentReservationResDetailDogByEmail"),sitterEmail);
+	}
+	
 	//----------------------------------------------
 	
 	//서비스 요구 사항을 추가, 수정 , 삭제
 	@Override
+	@Transactional
 	public int insertDemand(Demand demand) {
 		return session.insert(makeSqlId("insertDemand"),demand);
 	}
@@ -130,8 +142,8 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 
 	@Override
-	public List<Reservation> selectSimpleReservationMember(String email) {
-		return session.selectList(makeSqlId("selectSimpleReservationMember"), email);
+	public List<Reservation> selectMemberRes1Simple(String email) {
+		return session.selectList(makeSqlId("selectMemberRes1Simple"), email);
 	}
 
 	@Override

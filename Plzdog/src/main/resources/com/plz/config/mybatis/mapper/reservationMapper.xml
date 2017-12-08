@@ -79,19 +79,7 @@
 		from	reservation r, demand d, code c
 	</sql>
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
-	<sql id="simple-res-member-sql">
-		select	r.res_id,
-				r.res_status,
-				r.res_sdate,
-				r.res_edate,
-				r.price,
-				r.email,
-				r.email_sitter,
-				s.member_name,
-				s.member_image
-		from	reservation r, member s
-	</sql>
+
 	
 	<!-- 관리자 페이지 - 예약 조회 - 간단히 보기 -->
 	<sql id="simple-res-admin-sql">
@@ -171,14 +159,14 @@
 	<resultMap type="Reservation" id="simple-sitter-res-resdetail-dog-resulmap" extends="reservation-resultmap">
 		<collection property="resDetailList" ofType="ResDetail">
 			<result column="dog_id" property="dogId"/>
-			<collection property="dogList" ofType="Dog">
+			<association property="dog" javaType="Dog">
 				<id column="dog_id" property="dogId"/>
 				<result column="dog_name" property="dogName"/>
 				<result column="species" property="species"/>
 				<result column="gender" property="gender"/>
 				<result column="birth" property="birth"/>
 				<result column="email" property="email"/>
-			</collection>
+			</association>
 		</collection>
 	</resultMap>
 	
@@ -197,7 +185,7 @@
 	<!-- 관리자가 보는 정보 -->
 	<resultMap type="Reservation" id="simple-res-admin-resultmap" extends="simple-res-member-resultmap">
 		<collection property="resDetailList" ofType="ResDetail">
-			<collection property="dogList" ofType="Dog">
+			<association property="dog" javaType="Dog">
 				<id column="dog_id" property="dogId"/>
 				<result column="dog_name" property="dogName"/>
 				<result column="species" property="species"/>
@@ -207,41 +195,79 @@
 				<collection property="dogImage" ofType="dogImage">
 					<result column="dog_Image" property="dogImage"/>
 				</collection>
-			</collection>
+			</association>
 		</collection>
 	</resultMap>
 	
 	<!-- lee su il -->
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
 	<select id="selectSimpleSitterReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
 		<include refid="simple-sitter-res-member-sql"/>
 		where r.email_sitter = #{email} 
 		and r.email = m.email
+		and	r.res_status = 'res-3'
 	</select> 
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
 	<select id="selectSimpleSitterReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"/>
 		where r.email_sitter = #{email}
 		and r.res_id = t.res_id
-		and t.dog_id = d.dog_id 
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-3' 
 	</select> 
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원이 선택한 서비스 요구사항-->
+	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기(예약 신청한 회원의 정보를 조회) 회원이 선택한 서비스 요구사항-->
 	<select id="selectDetailSitterReservationDemandCodeByResId" parameterType="_int" resultMap="detail-sitter-res-demand-code-resulmap">
 		<include refid="detail-sitter-res-demand-code-sql"/>
 		where r.res_id = #{resId}
 		and r.res_id = d.res_id 
 		and d.code_demand = c.code(+)
 	</select>
+
+	<!-- 시터의 마이페이지 - 확정된 예약 조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
+	<select id="selectCompletePaymentReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
+		<include refid="simple-sitter-res-member-sql"/>
+		where r.email_sitter = #{email} 
+		and r.email = m.email
+		and	r.res_status = 'res-5'
+	</select> 
+	
+	<!-- 시터의 마이페이지 - 확정된 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
+	<select id="selectCompletePaymentReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"/>
+		where r.email_sitter = #{email}
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-5' 
+	</select> 
 	
 	<!-- lee su il -->
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
-	<select id="selectSimpleReservationMember" parameterType="string" resultMap="simple-res-member-resultmap">
+	<!-- 
+	####################################################################################################
+		김호규 / 건들지 마시오 
+	-->
+		<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
+	<sql id="simple-res-member-sql">
+		select	r.res_id,
+				r.res_status,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.email,
+				r.email_sitter,
+				s.member_name,
+				s.member_image
+		from	reservation r, member s
+	</sql>
+	<!-- 견주의 마이페이지 - 예약조회 - res-1 -간단히보기 -->
+	<select id="selectMemberRes1Simple" parameterType="string" resultMap="simple-res-member-resultmap">
 		<include refid="simple-res-member-sql"/>
-		where r.email_sitter = s.email and r.email = #{value}
+		WHERE 	r.email = #{value}
+		AND		r.email = s.email
+		AND		r.res_status = 'res-1'
 	</select>
 	
 	<!-- 견주의 마이페이지 - 예약조회 - 자세히보기 -->
@@ -249,6 +275,10 @@
 		<include refid="detail-sitter-res-demand-code-sql"/>
 		where r.res_id = d.res_id and r.email = #{value}
 	</select>
+	<!-- 
+	####################################################################################################
+	-->
+	
 	
 	<!-- yoon gue seok -->
 	<!-- 시터의 마이페이지 - 전체 의뢰 찾기  -->
@@ -358,7 +388,6 @@
 	<!-- 
 		서비스 요구 사항(demand) insert , update, delete  
 	 -->
-	 
 	 <insert id = "insertDemand" parameterType="Demand">
 	 	insert into demand values(#{resId}, #{codeDemand})
 	 </insert>

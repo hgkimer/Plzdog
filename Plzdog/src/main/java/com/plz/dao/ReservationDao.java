@@ -95,12 +95,16 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectDetailReservationSitter(String email);
 	
+	/*
+	 * ################################################################
+	 *  김호규/ 건들지 마시오
+	 */
 	/**
-	 * 견주의 마이페이지 - 예약 조회 - 간단히 보기
-	 * @param email 견주 email
+	 * Res-1 예약 상태(견주가 직접 의뢰 작성)인 예약을 조회하는 메소드.
+	 * @param email
 	 * @return
 	 */
-	List<Reservation> selectSimpleReservationMember(String email);
+	List<Reservation> selectMemberRes1Simple(String email);
 	
 	/**
 	 * 견주의 마이페이지 - 예약 조회 - 자세히 보기
@@ -108,6 +112,9 @@ public interface ReservationDao {
 	 * @return
 	 */
 	List<Reservation> selectDetailReservationMember(String email);
+	/*
+	 * ################################################################
+	 */
 	
 	/**
 	 * 관리자 페이지 - 모든 예약 조회 - 간단히 보기
@@ -151,6 +158,20 @@ public interface ReservationDao {
 	 * @return
 	 */
 	Reservation selectDetailSitterReservationDemandCodeByResId(int resId);
+	
+	/**
+	 * 시터 이메일로 확정된 예약을 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 이메일로 강아지 정보 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail);
 	
 	// -----------------------Lee su il----------------------------------
 	List<Reservation> selectAllMemberReservationMember();

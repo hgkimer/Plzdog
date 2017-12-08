@@ -181,9 +181,9 @@ CREATE TABLE RESERVATION (
 CREATE TABLE RES_DETAIL (
 	RES_ID NUMBER(10) NOT NULL, /* 예약ID */
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
-	CONSTRAINT PK_RESDETAIL PRIMARY KEY(RES_ID, DOG_ID),
-	CONSTRAINT FK_RESDETAIL_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION on delete cascade,
-	CONSTRAINT FK_RESDETAIL_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG on delete cascade
+	CONSTRAINT PK_res_detail PRIMARY KEY(RES_ID, DOG_ID),
+	CONSTRAINT FK_res_detail_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION on delete cascade,
+	CONSTRAINT FK_res_detail_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG on delete cascade
 );
 	
 /* 매출 */
@@ -322,8 +322,10 @@ insert into code values('res-1','예약대기','예약');
 insert into code values('res-2','견주의 승인 대기','예약');
 -- 견주가 시터 자신에게 직접 예약을 등록하고, 시터 자신의 승인 요청을 기다리는 상태
 insert into code values('res-3','시터의 승인 대기','예약');
--- 견주나 시터가 승인을 완료(res-2 나 res-3 상태에서 승인 버튼을 눌렀을 때)한 상태
-insert into code values('res-4','결제완료','예약');
+-- 승인이 완료 되고, 견주의 결제를 기다리는 상태
+insert into code values('res-4','결제 대기','예약');
+-- 견주가 해당 예약에 대해서 결제를 완료한 상태
+insert into code values('res-5','결제완료','예약');
 -------서비스 종류------------------------------------------------------------
 insert into code values('service-1', '방문돌봄', '서비스');
 insert into code values('service-2', '위탁돌봄', '서비스');
@@ -484,7 +486,6 @@ insert into demand values (5,'sitter-1');
 insert into demand values (11,'sitter-1');
 insert into demand values (11,'sitter-2');
 
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2017/03/22','2017/04/17',122000,'잘 부탁드립니다','예약대기','dbsrb0322@naver.com','soo10@naver.com');
 
 insert into res_detail values('10','10');
 insert into res_detail values('11','9');

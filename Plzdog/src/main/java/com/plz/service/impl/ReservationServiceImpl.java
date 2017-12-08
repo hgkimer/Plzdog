@@ -30,6 +30,13 @@ public class ReservationServiceImpl implements ReservationService{
 	@Autowired
 	private MemberDao mDao;
 	
+	
+	/*
+	 *  프로필 페이지에 접근할 때, 시터인지 아닌지 확인해 주는 메소드
+	 *  	이메일을 요청파라미터로 받아 권한을 검색한뒤 ROLE_SITTER 가 있으면
+	 *  	리스트에 시터의 정보들을 담은 MEMBER 객체를 리턴한다.
+	 *  		- 없으면 siiter객체가 NULL인 멤버 객체를 리턴한다.
+	 */
 	@Override
 	public Member checkSitter(String sitterEmail) {
 		Member sitter = null;
@@ -147,7 +154,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Override
 	public List<Reservation> selectSimpleReservationMember(String email) {
-		return dao.selectSimpleReservationMember(email);
+		return dao.selectMemberRes1Simple(email);
 	}
 
 	@Override
@@ -199,6 +206,26 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		return memberList;
 	}
+	
+	@Override
+	public List<Reservation> findCompletePaymentReservationInfoByEmail(String sitterEmail){
+		//시터이메일 해당하는 예약
+		//견주들이 해당 시터한테 신청한 예약
+		List<Reservation> memberList = dao.selectCompletePaymentReservationMemberByEmail(sitterEmail);
+
+		//해당 시터가 가진 견주들의 강아지 정보
+		List<Reservation> dogList = dao.selectCompletePaymentReservationResDetailDogByEmail(sitterEmail);
+
+		for(Reservation resMember : memberList) {
+			for(Reservation resDog : dogList) {
+				if(resMember.getResId() == resDog.getResId()) {
+					resMember.setResDetailList(resDog.getResDetailList());
+				}
+			}
+		}
+		return memberList;
+	}
+	
 	// -----------------------Lee su il----------------------------------
 
 	//------------------------Yoon gue seok------------------------------
