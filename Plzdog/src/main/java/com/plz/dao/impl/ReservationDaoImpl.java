@@ -130,8 +130,8 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 
 	@Override
-	public List<Reservation> selectSimpleReservationMember(String email) {
-		return session.selectList(makeSqlId("selectSimpleReservationMember"), email);
+	public List<Reservation> selectMemberRes1Simple(String email) {
+		return session.selectList(makeSqlId("selectMemberRes1Simple"), email);
 	}
 
 	@Override

@@ -57,9 +57,11 @@
 	<div class="gores">
 		<div class="move1">
 			<div class="move">
-				<li><a
-					href="${initParam.rootPath }/member/reservation_add_form.do">시터
-						추천 받기</a>
+				<ul>
+					<li>
+						<a href="${initParam.rootPath }/member/reservation_add_form.do">시터추천 받기</a>
+					</li>
+				</ul>
 			</div>
 				<form action="${initParam.rootPath }/member/select_all_sitter.do" method="post">
 					<sec:csrfInput/>

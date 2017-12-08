@@ -14,6 +14,8 @@ $(document).ready(function(){
 	//폼 제출 시 서비스 종류, 요구사항, 강아지 선택 입력 체크
 	$("#regBtn").on("click", function(){
 		$("#reservationForm").submit(function(){
+			var sDate = $("#sDate").val();
+			var eDate = $("#eDate").val();
 			var index = $("#serviceSel")[0].selectedIndex;
 			if(index == 0){
 				//서비스 선택 유효성 체크
@@ -21,41 +23,40 @@ $(document).ready(function(){
 				$("#serviceSel").focus();
 				return false;
 			}else{
-				var sDate = $("#sDate").val();
-				var eDate = $("#eDate").val();
-				if(sDate > eDate){
-					alert("종료 날짜는 서비스 시작 날짜보다 앞설 수 없습니다.");
+				if(sDate == 0 || eDate == 0){
+					alert("시작 날짜와 종료 날짜를 선택해 주세요");
+					$("#sDate").focus();
 					return false;
 				}else{
-					var	sTime = $("input[name=sTime]").val();
-					var eTime = $("input[name=eTime]").val();
-					if(sTime >= eTime){
-						alert("서비스 종료 시간은 서비스 시작시간 보다 크거나 같을 수 없습니다.");
+					if(sDate > eDate){
+						alert("종료 날짜는 서비스 시작 날짜보다 앞설 수 없습니다.");
 						return false;
 					}else{
-						var dogCount = $("input[name=mydog]:checked").length;
-						if(dogCount < 1){
-							alert("강아지를 선택한 강아지가 없습니다. 강아지를 선택하거나 강아지를 등록해 주세요.");
+						var	sTime = $("input[name=sTime]").val();
+						var eTime = $("input[name=eTime]").val();
+						//서비스 시간에 대한 유효성 체크
+						if(sDate == eDate && sTime >= eTime){
+							alert("서비스 종료 시간은 서비스 시작시간 보다 크거나 같을 수 없습니다.");
 							return false;
-						}else{	
-							var checkS = $("input[name=resSDate]").val();
-							var checkE = $("input[name=resEDate]").val();
-							if(checkS == null || checkE == null){
-								alert("야");
+						}else{
+							var dogCount = $("input[name=mydog]:checked").length;
+							//강아지 선택에 대한 유형성 체크.
+							if(dogCount < 1){
+								alert("선택한 강아지가 없습니다. 강아지를 선택하거나 강아지를 등록해 주세요.");
 								return false;
 							}else{
 								return true;
-							}//
+							}
 							return true;
-						}//end of 강아지 여부
+						}
 						return true;
-					}//end of 시간 비교
+					}
 					return true;
-				}//end of 날짜 비교
+				}
 				return true;
-			}//end of 서비스
-		});//end of submit()
-	});//end of #regBtn
+			}
+		});
+	});	
 	
 	
 	//날짜 선택을 위한 jQuery ui API
@@ -107,7 +108,6 @@ $(document).ready(function(){
 	    dropdown: true,
 	    scrollbar: true
 	});
-	$("#datetimepicker").data("DateTimePicker");
 	
 	//서비스 종류에 따른 금액값을 다른게 넣어주기 위한 JQuery
 	$("#serviceSel").on("change", function(){
@@ -234,4 +234,6 @@ $(document).ready(function(){
 			</c:if>
 		</form>
 	</div>
+	
 </div>
+
