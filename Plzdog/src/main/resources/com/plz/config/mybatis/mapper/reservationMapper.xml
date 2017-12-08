@@ -201,28 +201,47 @@
 	
 	<!-- lee su il -->
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
 	<select id="selectSimpleSitterReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
 		<include refid="simple-sitter-res-member-sql"/>
 		where r.email_sitter = #{email} 
 		and r.email = m.email
+		and	r.res_status = 'res-3'
 	</select> 
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
+	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
 	<select id="selectSimpleSitterReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"/>
 		where r.email_sitter = #{email}
 		and r.res_id = t.res_id
-		and t.dog_id = d.dog_id 
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-3' 
 	</select> 
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원이 선택한 서비스 요구사항-->
+	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기(예약 신청한 회원의 정보를 조회) 회원이 선택한 서비스 요구사항-->
 	<select id="selectDetailSitterReservationDemandCodeByResId" parameterType="_int" resultMap="detail-sitter-res-demand-code-resulmap">
 		<include refid="detail-sitter-res-demand-code-sql"/>
 		where r.res_id = #{resId}
 		and r.res_id = d.res_id 
 		and d.code_demand = c.code(+)
 	</select>
+
+	<!-- 시터의 마이페이지 - 확정된 예약 조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
+	<select id="selectCompletePaymentReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
+		<include refid="simple-sitter-res-member-sql"/>
+		where r.email_sitter = #{email} 
+		and r.email = m.email
+		and	r.res_status = 'res-5'
+	</select> 
+	
+	<!-- 시터의 마이페이지 - 확정된 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
+	<select id="selectCompletePaymentReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"/>
+		where r.email_sitter = #{email}
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-5' 
+	</select> 
 	
 	<!-- lee su il -->
 	

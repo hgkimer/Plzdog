@@ -141,6 +141,8 @@ public class ReservationController {
 		return new ModelAndView("member/delete_reservation_result.tiles");
 	}
 	
+	
+	//---------------- lee su il -------------------
 	/**
 	 * 시터 마이페이지 - 예약 조회 - 간단히 보기
 	 * @param email
@@ -148,7 +150,7 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/sitter/select_reservation_simple")
-	public String selectSimpleReservationSitter(@RequestParam String sitterEmail, Model model) {
+	public String findSimpleReservationSitter(@RequestParam String sitterEmail, Model model) {
 				//시터이메일 해당하는 예약
 				//견주들이 해당 시터한테 신청한 예약
 				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
@@ -165,7 +167,7 @@ public class ReservationController {
 	 */
 	
 	@RequestMapping("/sitter/select_reservation_detail")
-	public String selectDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
+	public String findDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
 				@RequestParam(name="memberEmail") String memberEmail, ModelMap model) {
 		
 		System.out.println(memberEmail);
@@ -200,6 +202,26 @@ public class ReservationController {
 	}
 	
 	/**
+	 * 결제 완료 된 예약들을 확인 하는 페이지
+	 * @param sitterEmail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("sitter/complete_payment_reservation_result.do")
+	public String findCompletePaymentReservationSitter(@RequestParam String sitterEmail, Model model) {
+				//시터이메일 해당하는 예약
+				//견주들이 해당 시터한테 신청한 예약들 중에 결제 완료 한 예약
+		
+				//sitterEmail, res-5 : 결제 완료
+				List<Reservation> memberList = rService.findCompletePaymentReservationInfoByEmail(sitterEmail);
+				
+				model.addAttribute("memberList",memberList);
+		return "sitter/complete_payment_reservation_result.tiles";
+	}
+	
+	//---------------- lee su il -------------------
+	
+	/**
 	 * 시터 마이페이지 - 전체 의뢰 조회
 	 * @param email
 	 * @param model
@@ -228,9 +250,7 @@ public class ReservationController {
 		return "sitter/select_all_request_reservation_result.tiles";
 	}
 	
-	
-	
-	/*
+	/* 수정 중
 	 * ####################################################################################
 	 */
 	/**

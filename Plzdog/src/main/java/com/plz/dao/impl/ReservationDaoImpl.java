@@ -89,6 +89,16 @@ public class ReservationDaoImpl implements ReservationDao{
 		return session.selectOne(makeSqlId("selectDetailSitterReservationDemandCodeByResId"), resId);
 	}
 	
+	@Override
+	public List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail){
+		return session.selectList(makeSqlId("selectCompletePaymentReservationMemberByEmail"),sitterEmail);
+	}
+	
+	@Override
+	public List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail){
+		return session.selectList(makeSqlId("selectCompletePaymentReservationResDetailDogByEmail"),sitterEmail);
+	}
+	
 	//----------------------------------------------
 	
 	//서비스 요구 사항을 추가, 수정 , 삭제

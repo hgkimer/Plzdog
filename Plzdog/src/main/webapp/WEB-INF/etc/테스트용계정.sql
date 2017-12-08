@@ -277,6 +277,11 @@ and 	m.email = a.email
 		
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u'
 
+update reservation set res_status = 'res-5' where res_id = '13';
+update reservation set res_status = 'res-5' where res_id = '11';
+update reservation set res_status = 'res-5' where res_id = '1';
+
+select * from reservation
 
 select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
 				m.member_image, m.phonenum, m.member_enable,

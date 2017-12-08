@@ -206,6 +206,26 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		return memberList;
 	}
+	
+	@Override
+	public List<Reservation> findCompletePaymentReservationInfoByEmail(String sitterEmail){
+		//시터이메일 해당하는 예약
+		//견주들이 해당 시터한테 신청한 예약
+		List<Reservation> memberList = dao.selectCompletePaymentReservationMemberByEmail(sitterEmail);
+
+		//해당 시터가 가진 견주들의 강아지 정보
+		List<Reservation> dogList = dao.selectCompletePaymentReservationResDetailDogByEmail(sitterEmail);
+
+		for(Reservation resMember : memberList) {
+			for(Reservation resDog : dogList) {
+				if(resMember.getResId() == resDog.getResId()) {
+					resMember.setResDetailList(resDog.getResDetailList());
+				}
+			}
+		}
+		return memberList;
+	}
+	
 	// -----------------------Lee su il----------------------------------
 
 	//------------------------Yoon gue seok------------------------------

@@ -159,6 +159,20 @@ public interface ReservationDao {
 	 */
 	Reservation selectDetailSitterReservationDemandCodeByResId(int resId);
 	
+	/**
+	 * 시터 이메일로 확정된 예약을 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 이메일로 강아지 정보 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail);
+	
 	// -----------------------Lee su il----------------------------------
 	List<Reservation> selectAllMemberReservationMember();
 	

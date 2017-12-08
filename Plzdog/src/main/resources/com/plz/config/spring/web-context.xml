@@ -73,6 +73,8 @@
 	<!-- 견주에게 온 예약 -->
 	<mvc:view-controller path="/member/select_reservation_detail_result.do" view-name="member/select_reservation_detail_result.tiles" />
 	<mvc:view-controller path="/member/select_reservation_simple_result.do" view-name="member/select_reservation_simple_result.tiles" />
+	<!-- 결제 완료 된 예약 조회 -->
+	<mvc:view-controller path="/sitter/complete_payment_reservation_result.do" view-name="sitter/complete_payment_reservation_result.tiles"/>
 	<!-- 관리자 예약상태 조회 -->
 	<mvc:view-controller path="/admin/select_reservation_detail_result.do" view-name="admin/select_reservation_detail_result.tiles" />
 	<mvc:view-controller path="/admin/select_reservation_simple_result.do" view-name="admin/select_reservation_simple_result.tiles" />

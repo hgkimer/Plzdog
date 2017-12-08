@@ -139,10 +139,18 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findSimpleSitterReservationInfoByEmail(String sitterEmail);
+	
+	/**
+	 * sitterEmail로 결제가 완료된 회원정보 + 강아지 정보 
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findCompletePaymentReservationInfoByEmail(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
 
 	//-----------------------Yoon gue seok----------------------------------
 	List<Reservation> findAllMemberReservationMember();
 	
 	List<Reservation> findMemberReservationResDetailDogByEmail(String email);
+	
 }
