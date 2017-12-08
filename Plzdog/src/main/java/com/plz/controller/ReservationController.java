@@ -168,6 +168,8 @@ public class ReservationController {
 	public String selectDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
 				@RequestParam(name="memberEmail") String memberEmail, ModelMap model) {
 		
+		System.out.println(memberEmail);
+		
 		//시터에게 온 회원 + 회원의 강아지 정보
 		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
 		//시터에게 온 회원의 요구사항
