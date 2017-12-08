@@ -94,7 +94,7 @@ $(document).ready(function(){
 					<c:forEach items ="${requestScope.resMember.demandList }" var="demand">
 						<li>서비스 요구사항 : ${demand.code.codeName}</li>
 					</c:forEach>
-					
+				
 					<li>회원의 강아지 정보</li>
 					<c:forEach items="${requestScope.resMember.member.dogList }" var="dog" >
 					 강아지 이름 : ${dog.dogName}<br>
