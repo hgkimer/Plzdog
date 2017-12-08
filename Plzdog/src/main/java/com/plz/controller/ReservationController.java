@@ -168,6 +168,8 @@ public class ReservationController {
 	public String selectDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
 				@RequestParam(name="memberEmail") String memberEmail, ModelMap model) {
 		
+		System.out.println(memberEmail);
+		
 		//시터에게 온 회원 + 회원의 강아지 정보
 		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
 		//시터에게 온 회원의 요구사항
@@ -184,7 +186,7 @@ public class ReservationController {
 			System.out.println(memberList.get(0).getResDetailList());
 			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
 				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
-				memberList.get(i).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
+				memberList.get(i).getResDetailList().get(j).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
 			}
 		}
 		

@@ -16,30 +16,30 @@
 	<!-- Data 변경 Mapper -->
 	<!-- Insert sql -->
 	<insert id="insertResDetail" parameterType="ResDetail">
-		INSERT INTO res_detail
+		INSERT INTO RES_DETAIL
 		VALUES( #{resId},
 				#{dogId}
 		)
 	</insert>
 	<!-- 예약번호화 같은 예약 상세 정보의 강아지 아이디를 변경하는 sql -->
 	<update id="updateResDetail" parameterType="ResDetail">
-		UPDATE res_detail
+		UPDATE RES_DETAIL
 		SET dog_id = #{dogId}
 		WHERE res_id = #{resId}
 	</update>
 	<!-- 예약번호로 예약 상세 정보를 삭제하는 sql -->
 	<delete id="deleteResDetailByResId" parameterType="_int">
-		DELETE FROM res_detail
+		DELETE FROM RES_DETAIL
 		WHERE res_id = #{value}
 	</delete>
 	<!-- 개의 아이디로 예약 상세 정보를 삭제하는 sql -->
 	<delete id="deleteResDetailByDogId" parameterType="_int">
-		DELETE FROM res_detail
+		DELETE FROM RES_DETAIL
 		WHERE dog_id = #{value}
 	</delete>
 	<!-- 예약번호와 개의 정보 두가지가 모두 일치하는 예약 상세정보를 삭제하는 sql -->
 	<delete id="deleteResDetailByResIdAndDogId" parameterType="ResDetail">
-		DELETE FROM res_detail
+		DELETE FROM RES_DETAIL
 		WHERE res_id = #{resId}
 		AND dog_id = #{dogId}
 	</delete>

@@ -75,27 +75,24 @@ a {
 <body>
 	<div class="all">
 		<c:forEach items="${requestScope.memberList }" var="reservation">
-			<div class="reservation" onclick="location.href='select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>&memberEmail=${reservation.member.email }'">
+			<div class="reservation" onclick="location.href='select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>&memberEmail=${reservation.memberEmail }'">
 				<div class="navImage">
 					<img src="${initParam.rootPath }/memberImage/${reservation.member.memberImage }"><br>
 					회원 이름 : ${reservation.member.memberName } <br>
 				</div>
-					<div class="dogOwner">
-						<ul class="navList">
-							<li>예약상태 : ${reservation.resStatus}</li>
-							<li>시작날짜 : ${reservation.resSDate}</li>
-							<li>끝날짜 : ${reservation.resEDate}</li>
-							<li>예약에 대한 가격 : ${reservation.price}</li>
-							<c:forEach items="${reservation.resDetailList}" var="resDetail">
-								<c:forEach items="${resDetail.dogList }" var="dog">
-									<li>강아지 이름 : ${dog.dogName }</li>
-								</c:forEach>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:forEach>
+				<div class="dogOwner">
+					<ul class="navList">
+						<li>예약상태 : ${reservation.resStatus}</li>
+						<li>시작날짜 : ${reservation.resSDate}</li>
+						<li>끝날짜 : ${reservation.resEDate}</li>
+						<li>예약에 대한 가격 : ${reservation.price}</li>
+						<c:forEach items="${reservation.resDetailList}" var="resDetail">
+								<li>강아지 이름 : ${resDetail.dog.dogName }</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
 	<%-- <li>강아지종 : ${dog.species}</li>
 									<li>강아지성별 : ${dog.gender}</li>

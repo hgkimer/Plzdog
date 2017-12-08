@@ -484,7 +484,6 @@ insert into demand values (5,'sitter-1');
 insert into demand values (11,'sitter-1');
 insert into demand values (11,'sitter-2');
 
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2017/03/22','2017/04/17',122000,'잘 부탁드립니다','예약대기','dbsrb0322@naver.com','soo10@naver.com');
 
 insert into res_detail values('10','10');
 insert into res_detail values('11','9');
