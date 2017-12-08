@@ -4,7 +4,7 @@
 	<sql id="select-sql">
 		SELECT res_id,
 		dog_id
-		FROM RESDETAIL
+		FROM res_detail
 	</sql>
 
 	<resultMap type="ResDetail" id="resdetail-resultmap">

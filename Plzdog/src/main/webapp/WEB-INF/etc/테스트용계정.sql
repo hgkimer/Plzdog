@@ -14,7 +14,7 @@ select * from SALES;
 select * from care;
 select * from CARE_IMAGE;
 select * from member;
-select * from resdetail;
+select * from res_detail;
 select * from waiting;
 
 insert into AUTHORITY values('zxc','ROLE_SITTER');

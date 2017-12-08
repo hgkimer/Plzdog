@@ -183,6 +183,7 @@ public class ReservationController {
 			//해당 회원의 요구사항을 회원 리스트에 넣는다.
 			memberList.get(i).setDemandList(skillList.getDemandList());
 			
+			System.out.println(memberList.get(0).getResDetailList());
 			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
 				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
 				memberList.get(i).getResDetailList().get(j).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
@@ -227,6 +228,17 @@ public class ReservationController {
 		return "sitter/select_all_request_reservation_result.tiles";
 	}
 	
+	
+	
+	/*
+	 * ####################################################################################
+	 */
+	/**
+	 * 
+	 * @param email
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.selectSimpleReservationMember(email);
@@ -246,7 +258,9 @@ public class ReservationController {
 		model.addAttribute("list", list);
 		return "member/select_reservation_detail_result.tiles";
 	}
-	
+	/*
+	 * ####################################################################################
+	 */
 	/**
 	 * 관리자 페이지  - 예약 조회 - 간단히 보기
 	 * @param email

@@ -26,7 +26,7 @@ public interface ReservationService {
 	void addReservation(Reservation reservation, List<String> demandList, List<Integer> dogList);
 	/**
 	 * 예약을 수정하는 메소드
-	 * @param reservation
+	 * @param reservation	
 	 */
 	void updateReservation(Reservation reservation);
 	/**
