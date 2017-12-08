@@ -151,9 +151,7 @@ $(document).ready(function(){
 <div class="row">
 	<div class="col-lg-12">
 		<h2>의뢰 접수</h2>
-
-		<form action="${initParam.rootPath }/member/reservation_add.do"
-			method="post" id="reservationForm">
+		<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm">
 			<sec:csrfInput />
 			<div class="form-group">
 				<label for="demand">서비스 종류</label> <select name="demand"
@@ -208,6 +206,21 @@ $(document).ready(function(){
 						value="${en.code }">${en.codeName }<br>
 				</c:forEach>
 			</div>
+			<div class = "form-group">
+			<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
+				<c:if test="${requestScope.sitter != null}">
+					<label for="price">금액</label>
+					<input type="number" id="price" name="price" value="" readonly>
+				</c:if>
+			</div>
+			<div class="form-group">
+				<!-- 강아지 목록을 불러오는 버튼(AJAX) -->
+				<input type="button" class="btn btn-info" id="dogBtn" value="강아지 선택" />
+				<br>
+			</div>
+			<div class="form-group">
+				<button type="submit" id="regBtn" class="btn btn-default">등록</button>
+			</div>
 			<!-- 로그인한 신청자 이메일을 전달하기 위함. 나중에 hidden 처리 -->
 			<input type="hidden"
 				value='<sec:authentication property="principal.email"/>'
@@ -218,6 +231,7 @@ $(document).ready(function(){
 				<input type="hidden" value='${requestScope.sitter.email }'
 					name="sitterEmail" readonly />
 				<br>
+
 			</c:if>
 			<div>
 				<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
@@ -231,9 +245,10 @@ $(document).ready(function(){
 				<input type="button" class="btn btn-info" id="dogBtn" value="강아지 선택" />
 				<br>
 			</div>
-			<div class="form-groub">
+			<div class="form-group">
 				<button type="submit" id="regBtn" class="btn btn-default">등록</button>
 			</div>
 		</form>
 	</div>
 </div>
+

@@ -18,7 +18,7 @@ select * from resdetail;
 select * from waiting;
 
 insert into AUTHORITY values('zxc','ROLE_SITTER');
-
+delete from MEMBER where email = 'soo1@naver.com';
 -----------------------------------------
 --시터용 값 insert------------------------
 

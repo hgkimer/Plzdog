@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,6 +83,7 @@ public class ReservationController {
 		//3. View로 이동
 		return "member/reservation_add_success.tiles";
 	}
+	//입력받은 시간과 날짜정보를 합치는 메소드
 	private void setTimeToDate(Date date, String time) {
 		String [] str = time.split(":");
 		date.setHours(Integer.parseInt(str[0].trim()));
@@ -149,20 +151,8 @@ public class ReservationController {
 	public String selectSimpleReservationSitter(@RequestParam String sitterEmail, Model model) {
 				//시터이메일 해당하는 예약
 				//견주들이 해당 시터한테 신청한 예약
-				List<Reservation> memberList = rService.findSimpleSitterReservationMemberByEmail("soo1@naver.com");
-		
-				//해당 시터가 가진 견주들의 강아지 정보
-				List<Reservation> dogList = rService.findSimpleSitterReservationResDetailDogByEmail("soo1@naver.com");
-		
-				for(Reservation resMember : memberList) {
-					for(Reservation resDog : dogList) {
-						if(resMember.getResId() == resDog.getResId()) {
-							resMember.setResDetailList(resDog.getResDetailList());
-						}
-					}
-				}
-				
-				//시터에게 온 회원 + 강아지 정보
+				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
+
 				model.addAttribute("memberList",memberList);
 		return "sitter/select_reservation_simple_result.tiles";
 	}
@@ -173,11 +163,36 @@ public class ReservationController {
 	 * @param model
 	 * @return
 	 */
+	
 	@RequestMapping("/sitter/select_reservation_detail")
-	public String selectDetailReservationSitter(@RequestParam String email, Model model) {
-		//예약과 관련된 스킬
-		List<Reservation> list = rService.selectDetailReservationSitter(email);
-		model.addAttribute("list", list);
+	public String selectDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
+				@RequestParam(name="memberEmail") String memberEmail, ModelMap model) {
+		
+		//시터에게 온 회원 + 회원의 강아지 정보
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
+		//시터에게 온 회원의 요구사항
+		Reservation skillList = new Reservation();
+		
+		//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
+		for(int i =0; i< memberList.size() ; i++) {
+			
+			skillList = rService.findDetailSitterReservationDemandCodeByResId(memberList.get(i).getResId());
+			
+			//해당 회원의 요구사항을 회원 리스트에 넣는다.
+			memberList.get(i).setDemandList(skillList.getDemandList());
+			
+			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
+				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
+				memberList.get(i).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
+			}
+		}
+		
+		for(Reservation res : memberList) {
+			System.out.println(res);
+			if(res.getMemberEmail().equals(memberEmail)) {
+				model.addAttribute("resMember", res);
+			}
+		}
 		return "sitter/select_reservation_detail_result.tiles";
 	}
 	

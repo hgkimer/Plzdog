@@ -104,10 +104,10 @@ public class ReservationDaoImpl implements ReservationDao{
 		return session.update(makeSqlId("updateDemand"), params);
 	}
 	
-	@Override
+	/*@Override
 	public List<Reservation> selectSimpleReservationMemberByEmail(String email){
 		return session.selectList(makeSqlId("selectSimpleReservationMemberByEmail"),email);
-	}
+	}*/
 	
 	@Override
 	public int deleteDemand(int resId) {

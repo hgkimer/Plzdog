@@ -11,8 +11,6 @@ import com.plzdog.vo.DogImage;
 
 public interface DogService {
 	
-	List<Dog> selectDogByEmail(String email);
-	
 	void updateDog(Dog dog);
 	
 	void deleteDog(int dogId);
@@ -24,4 +22,18 @@ public interface DogService {
 	void deleteDogImage(String dogImage);
 
 	List<Code> addDog(Dog dog, List<String> dogCodeList, HttpServletRequest request) throws IllegalStateException, IOException;
+	
+	/**
+	 * 이메일로 강아지 정보 조회
+	 * @param email
+	 * @return
+	 */
+	List<Dog> selectDogByEmail(String email);
+	
+	/**
+	 * dogId로 강아지 정보 조회
+	 * @param email
+	 * @return
+	 */
+	Dog findDogJoinDogInfoDogImageByDogId(int dogId);
 }

@@ -76,7 +76,7 @@ a {
 <body>
 	<div class="all">
 		<c:forEach items="${requestScope.memberList }" var="reservation">
-			<div class="reservation" onclick="location.href='select_reservation_detail.do?email=<sec:authentication property="principal.email"/>'">
+			<div class="reservation" onclick="location.href='select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>&memberEmail=${reservation.member.email }'">
 				<div class="navImage">
 					<img src="${initParam.rootPath }/memberImage/${reservation.member.memberImage }"><br>
 					회원 이름 : ${reservation.member.memberName } <br>

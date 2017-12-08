@@ -128,7 +128,7 @@ public interface ReservationDao {
 	 * @param email
 	 * @return
 	 */
-	List<Reservation> selectSimpleReservationMemberByEmail(String email);
+	//List<Reservation> selectSimpleReservationMemberByEmail(String email);
 	
 	// -----------------------Lee su il----------------------------------
 	/**
