@@ -27,6 +27,10 @@
 		color:inherit;
 	}
 	
+	a:hover {
+		text-decoration:none;
+	}
+	
 	header {
 		width:100%;
 		height:100px;
@@ -37,9 +41,13 @@
 	}
 	
 	.nav {
-		width:60%;
+		width:70%;
 		height:100%;
 		float:right;
+	}
+	
+	.afew:hover {
+		background-color:rgba(0,0,0,0.1);
 	}
 	
 	.nav img {
@@ -70,6 +78,11 @@
 	.w3-teal {
 		display:none;
 	}
+	
+	
+	.afew {
+		display:none;
+	}
 </style>
 </head>
 
@@ -83,7 +96,7 @@
 	</div>
 			
 	<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
-		<button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+		<button onclick="w3_close()" class="w3-bar-item w3-large" id="also">Close &times;</button>
 		<ul class="nav" style="margin-top:20px; width:100%; text-align:center;">
 			<sec:authorize access="isAuthenticated()">
 				 <!-- Authentication의 getPrincipal() 호출 - User 리턴 -->
@@ -91,20 +104,23 @@
 			</sec:authorize>
 			
 			<%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_MEMBER')"></li>
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_SITTER')">
 				<li><a href="${initParam.rootPath }/member/mydog_register_form.do">강아지 등록</a></li>
 				<li><a href="${initParam.rootPath }/member/member_result_form.do">사용자 정보조회</a></li>
 			</sec:authorize>
 			
-			<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
-			<sec:authorize access="isAuthenticated()">
-				<li><a id="logout" style="cursor: pointer;">로그아웃</a></li>
-				<li><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a>
+			<sec:authorize access="hasRole('ROLE_MEMBER')">
+				<li><a id="few" style="cursor: pointer;">예약 조회</a>
+					<ul class="big">
+						<li class="afew"><a href="${initParam.rootPath }/member/search_reservation.do">내가 작성한 예약 조회</a></li>
+						<sec:authorize access="hasRole('ROLE_SITTER')">
+							<li class="afew"><a href="${initParam.rootPath }/sitter/select_reservation_simple.do">내게 온 예약 조회</a></li>
+						</sec:authorize>
+						<li class="afew"><a href="${initParam.rootPath }/member/.do">결제 완료된 예약 조회</a></li>
+					</ul>
+				</li>
 			</sec:authorize>
 			
-			<sec:authorize access="hasRole('ROLE_SITTER')">
-				<li><a href="${initParam.rootPath }/sitter/care_register_form.do">돌봄일지 등록</a></li>
-			</sec:authorize>
 			
 			<%--관리자 메뉴 /admin 으로 시작--%>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -113,6 +129,11 @@
 			</sec:authorize>
 			
 			<%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
+			
+			<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
+			<sec:authorize access="isAuthenticated()">
+				<li><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a>
+			</sec:authorize>
 		</ul>
 		
 		<!-- 
@@ -140,6 +161,7 @@
 					<li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="${initParam.rootPath }/image/search.png">도그시터 찾기</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
 					<li class="navi"><a href="${initParam.rootPath }/member/mypage.do">마이페이지</a></li>
+					<li class="navi"><a id="logout" style="cursor: pointer;">로그아웃</a></li>
 				</sec:authorize>
 			</ul>
 	</header>
@@ -152,8 +174,14 @@ function w3_close() {
 }	
 
 $(document).ready(function(){
-	$("#logout").on("click", function(){
+	$(".navi > #logout").on("click", function(){
 		$("#logoutForm").submit();
+	});
+	$("#few").on("click", function(){
+		$(".afew").slideToggle();
+	});
+	$("#also").on("click", function(){
+		$(".afew").hide();
 	});
 });
 </script>

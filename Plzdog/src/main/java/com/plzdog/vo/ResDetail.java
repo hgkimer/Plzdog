@@ -19,7 +19,6 @@ public class ResDetail implements Serializable{
 		this.dogId = dogId;
 	}
 	
-	
 	public ResDetail(int resId, int dogId, Dog dog) {
 		super();
 		this.resId = resId;

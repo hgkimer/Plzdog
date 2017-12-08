@@ -3,9 +3,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
-	
-</script>
 <style type="text/css">
 * {
 	margin: 0 auto;
@@ -70,11 +67,9 @@ a {
 <body>
 	<div class="all">
 		<c:forEach items="${requestScope.memberList }" var="reservation">
-			<div class="reservation" onclick="location.href='select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>&memberEmail=${reservation.memberEmail }'">
 				<div class="navImage">
-					회원 이미지 : <br> 
-					<img src="${initParam.rootPath }/memberImage/${requestScope.resMember.member.memberImage }" width="350px"><br>
-					회원 이름 : ${reservation.member.memberName } 
+					<img src="${initParam.rootPath }/memberImage/${reservation.member.memberImage }"><br>
+					회원 이름 : ${reservation.member.memberName } <br>
 				</div>
 				<div class="dogOwner">
 					<ul class="navList">
@@ -84,26 +79,18 @@ a {
 						<li>예약에 대한 가격 : ${reservation.price}</li>
 						<c:forEach items="${reservation.resDetailList}" var="resDetail">
 								<li>강아지 이름 : ${resDetail.dog.dogName }</li>
+								<li>강아지종 : ${resDetail.dog.species}</li>
+								<li>강아지성별 : ${resDetail.dog.gender}</li>
+								<li>강아지몸무게 : ${resDetail.dog.weigth}</li>
+								<li>강아지생년월일 : ${resDetail.dog.birth}</li>
 						</c:forEach>
 					</ul>
 				</div>
-			</div>
 		</c:forEach>
 	</div>
-	
-   <%-- <li>강아지종 : ${dog.species}</li>
-                           <li>강아지성별 : ${dog.gender}</li>
-                           <li>강아지생년월일 : ${dog.birth}</li> --%>
-                        <%-- <c:forEach items="${dog.dogImage }" var="dogImage">
-                                 강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
-                              </c:forEach> --%>
-                              
-   <div class="clear"></div>
 	<%-- <li>강아지종 : ${dog.species}</li>
 									<li>강아지성별 : ${dog.gender}</li>
 									<li>강아지생년월일 : ${dog.birth}</li> --%>
 								<%-- <c:forEach items="${dog.dogImage }" var="dogImage">
 											강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
 										</c:forEach> --%>
-										
-	<div class="clear"></div>
