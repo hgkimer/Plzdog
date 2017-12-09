@@ -10,20 +10,11 @@
 
 </script>
 <style type="text/css">
-	.group {
-		width:800px;
-		height:300px;
-		box-shadow:10px 10px 20px black;
-		margin-top:20px;
-		margin-bottom:20px;
-		border-radius:10px;
-	}
 	
 	.every {
 		width:700px;
 		height:750px;
 		margin-top:30px;
-		margin-left:130px;
 	}
 	
 	.form-group {
