@@ -194,18 +194,7 @@
 
 					});//end of document
 </script>
-<<<<<<< HEAD
-<div class="row">
-	<div class="col-lg-12">
-		<h2>의뢰 접수</h2>
-		<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm">
-			<sec:csrfInput />
-			<div class="form-group">
-				<label for="demand">서비스 종류</label> <select name="demand" id="serviceSel" required class="form-control">
-					<option>서비스를 선택하세요</option>
-					<c:forEach var="service" items="${applicationScope.serviceList }">
-						<option value="${service.code }">${service.codeName}</option>
-=======
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6">
@@ -297,32 +286,11 @@
 				<input type="hidden"
 					value='<sec:authentication property="principal.email"/>'
 					name="memberEmail" id="memberEmail" /><br>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 
-<<<<<<< HEAD
-			<div class="form-group">
-				<label for="demandChk">요구사항</label><br>
-				<c:forEach var="demand" items="${applicationScope.skillList }">
-					<input type="checkbox" name="demand" class="demandChk" value="${demand.code }">${demand.codeName }<br>
-				</c:forEach>
-			</div>
-			<div class="form-group">
-				<label for="enChk">돌봄 환경 선택</label><br>
-				<c:forEach var="en" items="${applicationScope.enList }">
-					<input type="checkbox" name="demand" class="enChk" value="${en.code }">${en.codeName }<br>
-				</c:forEach>
-			</div>
-			<div class = "form-group">
-			<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
-				<c:if test="${requestScope.sitter != null}">
-					<label for="price">금액</label>
-					<input type="number" id="price" name="price" value="" readonly>
-=======
 				<!-- 시터 이메일을 전달하기 위함. 나중에 hidden 처리 -->
 				<c:if test='${requestScope.sitter != null}'>
 					<input type="hidden" value='${requestScope.sitter.email }'
 						name="sitterEmail" readonly />
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 				</c:if>
 			</form>
 		</div>
