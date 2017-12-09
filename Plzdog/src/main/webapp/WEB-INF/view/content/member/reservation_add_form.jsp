@@ -154,8 +154,7 @@ $(document).ready(function(){
 		<form action="${initParam.rootPath }/member/reservation_add.do" method="post" id="reservationForm">
 			<sec:csrfInput />
 			<div class="form-group">
-				<label for="demand">서비스 종류</label> <select name="demand"
-					id="serviceSel" required class="form-control">
+				<label for="demand">서비스 종류</label> <select name="demand" id="serviceSel" required class="form-control">
 					<option>서비스를 선택하세요</option>
 					<c:forEach var="service" items="${applicationScope.serviceList }">
 						<option value="${service.code }">${service.codeName}</option>
@@ -163,23 +162,16 @@ $(document).ready(function(){
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="resSDate">시작일 선택</label><br> <input type="text"
-					id="sDate" name="resSDate" class="form-control" required
-					placeholder="클릭 후 시작 날짜를 선택" readonly /> <input type="text"
-					id="sTime" name="sTime" class="form-control"
-					placeholder="시간을 선택해 주세요" required readonly />
+				<label for="resSDate">시작일 선택</label><br> <input type="text" id="sDate" name="resSDate" class="form-control" required placeholder="클릭 후 시작 날짜를 선택" readonly /> 
+					<input type="text" id="sTime" name="sTime" class="form-control" placeholder="시간을 선택해 주세요" required readonly />
 			</div>
 			<div class="form-group">
-				<label for="resEDate">종료일 선택</label><br> <input type="text"
-					id="eDate" name="resEDate" class="form-control" required
-					placeholder="클릭 후 종료 날짜를 선택" readonly /> <input type="text"
-					id="eTime" name="eTime" class="form-control"
-					placeholder="시간을 선택해 주세요" required readonly /><br>
+				<label for="resEDate">종료일 선택</label><br> <input type="text" id="eDate" name="resEDate" class="form-control" required placeholder="클릭 후 종료 날짜를 선택" readonly /> 
+				<input type="text" id="eTime" name="eTime" class="form-control" placeholder="시간을 선택해 주세요" required readonly /><br>
 			</div>
 			<div class="form-group">
 				<label for="resContents">의뢰내용</label><br>
-				<textarea rows="5" name="resContents" class="form-control" required
-					placeholder="의뢰 내용을 입력하세요"></textarea>
+				<textarea rows="5" name="resContents" class="form-control" required placeholder="의뢰 내용을 입력하세요"></textarea>
 			</div>
 			<div class="checkbox">
 				<c:choose>
@@ -195,15 +187,13 @@ $(document).ready(function(){
 			<div class="form-group">
 				<label for="demandChk">요구사항</label><br>
 				<c:forEach var="demand" items="${applicationScope.skillList }">
-					<input type="checkbox" name="demand" class="demandChk"
-						value="${demand.code }">${demand.codeName }<br>
+					<input type="checkbox" name="demand" class="demandChk" value="${demand.code }">${demand.codeName }<br>
 				</c:forEach>
 			</div>
 			<div class="form-group">
 				<label for="enChk">돌봄 환경 선택</label><br>
 				<c:forEach var="en" items="${applicationScope.enList }">
-					<input type="checkbox" name="demand" class="enChk"
-						value="${en.code }">${en.codeName }<br>
+					<input type="checkbox" name="demand" class="enChk" value="${en.code }">${en.codeName }<br>
 				</c:forEach>
 			</div>
 			<div class = "form-group">
