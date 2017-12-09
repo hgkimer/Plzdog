@@ -28,6 +28,7 @@ public class Reservation implements Serializable {
 	private Sales sales;
 	private Member member;
 	private Dog dog;
+	private List<Dog> resDogList;
 	
 	public Reservation() {}
 	
@@ -173,6 +174,14 @@ public class Reservation implements Serializable {
 		this.dog = dog;
 	}
 
+	public List<Dog> getResDogList() {
+		return resDogList;
+	}
+
+	public void setResDogList(List<Dog> resDogList) {
+		this.resDogList = resDogList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -185,6 +194,7 @@ public class Reservation implements Serializable {
 		result = prime * result + price;
 		result = prime * result + ((resContents == null) ? 0 : resContents.hashCode());
 		result = prime * result + ((resDetailList == null) ? 0 : resDetailList.hashCode());
+		result = prime * result + ((resDogList == null) ? 0 : resDogList.hashCode());
 		result = prime * result + ((resEDate == null) ? 0 : resEDate.hashCode());
 		result = prime * result + resId;
 		result = prime * result + ((resSDate == null) ? 0 : resSDate.hashCode());
@@ -240,6 +250,11 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!resDetailList.equals(other.resDetailList))
 			return false;
+		if (resDogList == null) {
+			if (other.resDogList != null)
+				return false;
+		} else if (!resDogList.equals(other.resDogList))
+			return false;
 		if (resEDate == null) {
 			if (other.resEDate != null)
 				return false;
@@ -275,6 +290,9 @@ public class Reservation implements Serializable {
 		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
 				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
 				+ ", sitterEmail=" + sitterEmail + ", resDetailList=" + resDetailList + ", careList=" + careList
-				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + ", dog=" + dog + "]";
+				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + ", dog=" + dog
+				+ ", resDogList=" + resDogList + "]";
 	}
+
+	
 }

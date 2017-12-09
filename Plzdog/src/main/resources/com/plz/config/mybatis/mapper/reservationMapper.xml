@@ -16,6 +16,19 @@
 			    email_sitter
 		from    reservation
 	</sql>
+		<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
+	<sql id="simple-res-member-sql">
+		select	r.res_id,
+				r.res_status,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.email,
+				r.email_sitter,
+				s.member_name,
+				s.member_image
+		from	reservation r, member s
+	</sql>
 	
 	<!-- 
 		시터의 마이페이지 - 내게 온 예약조회 - 간단히보기
@@ -249,36 +262,48 @@
 	####################################################################################################
 		김호규 / 건들지 마시오 
 	-->
-		<!-- 견주의 마이페이지 - 예약조회 - 간단히보기 -->
-	<sql id="simple-res-member-sql">
-		select	r.res_id,
-				r.res_status,
-				r.res_sdate,
-				r.res_edate,
-				r.price,
-				r.email,
-				r.email_sitter,
-				s.member_name,
-				s.member_image
-		from	reservation r, member s
-	</sql>
 	
-	<resultMap type="reservation" id="reservation-all-resultmap">
-		
-	</resultMap>
-	<!-- 견주의 마이페이지 - 예약조회 - res-1 -간단히보기 -->
-	<select id="selectMemberRes1Simple" parameterType="string" resultMap="simple-res-member-resultmap">
-		<include refid="simple-res-member-sql"/>
-		WHERE 	r.email = #{value}
-		AND		r.email = s.email
-		AND		r.res_status = 'res-1'
-	</select>
+	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 회원정보 - 간단히-->
+	<select id="selectSimpleMemberWaitingProposalReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
+		<include refid="simple-sitter-res-member-sql"/>
+		where r.email = #{email} 
+		and r.email = m.email
+		and	r.res_status = 'res-1'
+	</select> 
 	
-	<!-- 견주의 마이페이지 - 예약조회 - 자세히보기 -->
-	<select id="selectDetailReservationMember" parameterType="string" resultMap="detail-sitter-res-demand-code-resulmap">
+	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 강아지 정보 -간단히-->
+	<select id="selectSimpleMemberWaitingProposalReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"/>
+		where r.email = #{email}
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-1' 
+	</select> 
+	
+	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 회원이 선택한 서비스 요구사항 - 자세히-->
+	<select id="selectDetailMemberWaitingProposalReservationDemandCodeByResId" parameterType="_int" resultMap="detail-sitter-res-demand-code-resulmap">
 		<include refid="detail-sitter-res-demand-code-sql"/>
-		where r.res_id = d.res_id and r.email = #{value}
+		where r.res_id = #{resId}
+		and r.res_id = d.res_id 
+		and d.code_demand = c.code(+)
 	</select>
+
+	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 회원정보 -간단히-->
+	<select id="selectSimpleMemberWaitingApprovaltReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
+		<include refid="simple-sitter-res-member-sql"/>
+		where r.email = #{email} 
+		and r.email = m.email
+		and	r.res_status = 'res-2'
+	</select> 
+	
+	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -간단히-->
+	<select id="selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"/>
+		where r.email = #{email}
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-2' 
+	</select> 
 	<!-- 
 	####################################################################################################
 	-->

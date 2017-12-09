@@ -58,6 +58,6 @@ html, body {
 	<!-- 푸터 -->
 	<tiles:insertAttribute name="footer" />
 </div>
-<%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
+
 </body>
 </html>

@@ -54,6 +54,7 @@
 <body>
 <div class="col-xs-3" style="float:left;"></div>
 
+
 <div class="dbox">
 	<c:forEach items="${list }"></c:forEach>
 		<ul class="dogul">

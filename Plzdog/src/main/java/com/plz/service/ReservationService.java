@@ -93,11 +93,7 @@ public interface ReservationService {
 	List<Reservation> selectSimpleReservationSitter(String email);
 	
 	List<Reservation> selectDetailReservationSitter(String email);
-	
-	List<Reservation> selectSimpleReservationMember(String email);
-	
-	List<Reservation> selectDetailReservationMember(String email);
-	
+		
 	List<Reservation> selectSimpleReservationAdmin();
 	
 	List<Reservation> selectDetailReservationAdmin(String sitterEmail, String memberEmail);
@@ -152,5 +148,45 @@ public interface ReservationService {
 	List<Reservation> findAllMemberReservationMember();
 	
 	List<Reservation> findMemberReservationResDetailDogByEmail(String email);
+	
+	//--------------------------------------------------------------------------
+	
+	
+	
+	//-------------------------김호규--------------------------------------------
+	/**
+	 * 의뢰자 이메일로 예약에 해당하는 회원 정보를 조회(simple 페이지)
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findSimpleMemberWaitingProposalReservationMemberByEmail(String email);
+	
+	/**
+	 * 의뢰자 이메일로 예약에 해당하는 강아지 정보를 조회(simple 페이지)
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email);
+	
+	/**
+	 * resId로 예약에 해당하는 서비스 요구사항 조회(detail 페이지)
+	 * @param resId
+	 * @return
+	 */
+	Reservation findDetailMemberWaitingProposalReservationDemandCodeByResId(int resId);
+	
+	/**
+	 * 의뢰자 email에 해당하는 회원정보 + 강아지 정보 
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findSimpleMemberWaitingApprovaltReservationMemberByEmail(String email);
+	
+	/**
+	 * 의뢰자 email 로 결제가 완료된 회원정보 + 강아지 정보 
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email);
 	
 }
