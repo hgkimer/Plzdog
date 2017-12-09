@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-dd
+<h1>시터 신청 완료</h1>
 </body>
 </html>

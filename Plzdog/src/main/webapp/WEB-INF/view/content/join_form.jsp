@@ -64,30 +64,10 @@ function inputCheck(){
 }
 </script>
 
-<style type="text/css">
-	.form-group {
-		width:400px;
-		float:left;
-		margin-left:20px;
-	}
-	
-	.bottom {
-		width:500px;
-		height:150px;
-	}
-	
-	#btn {
-		width:400px;
-		height:50px;
-		font-weight:bold;
-		font-size:18px;
-		border-radius:20px;
-		text-align:center;
-	}
-</style>
+
 
 <h2>회원 가입폼</h2>
-<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck()" style="width:950px; height:450px;">
+<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck();">
 	<sec:csrfInput/>
 	<div class="form-group">
 		<label for="pId">Email : </label>
@@ -126,9 +106,8 @@ function inputCheck(){
 		<label for="pPhone">전화번호 : </label>
 		<input type="text" name="phoneNum" id="pPhone" class="form-control" required="required">
 	</div>
-	<div class="clear"></div>
 	<input type="hidden" name="memberEnable" value='1'>
-	<div class="bottom">
-		<input type="submit" value="전송" class="btn btn-default" id="btn">
+	<div class="form-group">
+		<input type="submit" value="전송" class="btn btn-default btn-lg btn-block " id="btn">
 	</div>
 </form>

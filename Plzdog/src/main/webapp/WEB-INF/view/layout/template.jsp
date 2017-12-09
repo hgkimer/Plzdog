@@ -59,7 +59,7 @@ html, body {
 	<tiles:insertAttribute name="footer" />
 </div>
 	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
-	<a href="${initParam.rootPath }/admin/select_waiting.do">대기시터 테스트</a><br>
+	<!-- 대기 시터 테스트 페이지는 관리자의 마이페이지 사이드 메뉴로 옮김 -->
 	<a href="${initParam.rootPath }/member/select_reservation_simple_result.do">회원 예약 조회 페이지 테스트</a>
 <%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
 </body>
