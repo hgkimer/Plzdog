@@ -13,43 +13,43 @@ import com.plzdog.vo.Demand;
 import com.plzdog.vo.Reservation;
 
 @Repository
-public class ReservationDaoImpl implements ReservationDao{
-	
+public class ReservationDaoImpl implements ReservationDao {
+
 	@Autowired
 	private SqlSessionTemplate session;
-	
+
 	private String makeSqlId(String id) {
-		return "com.plz.config.mybatis.mapper.reservationMapper."+id;
+		return "com.plz.config.mybatis.mapper.reservationMapper." + id;
 	}
-	
+
 	@Override
 	public int insertReservation(Reservation reservation) {
-		return session.insert(makeSqlId("insertReservation"),reservation);
+		return session.insert(makeSqlId("insertReservation"), reservation);
 	}
 
 	@Override
 	public int deleteReservation(int resId) {
-		return session.delete(makeSqlId("deleteReservation"),resId);
+		return session.delete(makeSqlId("deleteReservation"), resId);
 	}
 
 	@Override
 	public int updateReservation(Reservation reservation) {
-		return session.update(makeSqlId("updateReservation"),reservation);
+		return session.update(makeSqlId("updateReservation"), reservation);
 	}
-	
+
 	@Override
 	public List<Reservation> selectAllReservation() {
 		return session.selectList(makeSqlId("selectAllReservation"));
 	}
-	
+
 	@Override
 	public List<Reservation> selectMemberReservationByEmail(String email) {
-		return session.selectList(makeSqlId("selectMemberReservationByEmail"),email);
+		return session.selectList(makeSqlId("selectMemberReservationByEmail"), email);
 	}
 
 	@Override
 	public List<Reservation> selectReservationJoinDemandByEmail(String email) {
-		return session.selectList(makeSqlId("selectReservationJoinDemandByEmail"),email);
+		return session.selectList(makeSqlId("selectReservationJoinDemandByEmail"), email);
 	}
 
 	@Override
@@ -64,49 +64,50 @@ public class ReservationDaoImpl implements ReservationDao{
 
 	@Override
 	public List<Reservation> selectMemberCareByEmail(String email) {
-		return session.selectList(makeSqlId("selectMemberCareByEmail"),email);
+		return session.selectList(makeSqlId("selectMemberCareByEmail"), email);
 	}
 
 	@Override
 	public List<Reservation> selectSitterCareByEmail(String sitterEmail) {
-		return session.selectList(makeSqlId("selectSitterCareByEmail"),sitterEmail);
+		return session.selectList(makeSqlId("selectSitterCareByEmail"), sitterEmail);
 	}
-	
+
 	// ---------------------lee su il -----------------------------------
-	
+
 	@Override
-	public List<Reservation> selectSimpleSitterReservationMemberByEmail(String sitterEmail){
-		return session.selectList(makeSqlId("selectSimpleSitterReservationMemberByEmail"),sitterEmail);
+	public List<Reservation> selectSimpleSitterReservationMemberByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectSimpleSitterReservationMemberByEmail"), sitterEmail);
 	}
-	
+
 	@Override
-	public List<Reservation> selectSimpleSitterReservationResDetailDogByEmail(String sitterEmail){
-		return session.selectList(makeSqlId("selectSimpleSitterReservationResDetailDogByEmail"),sitterEmail);
+	public List<Reservation> selectSimpleSitterReservationResDetailDogByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectSimpleSitterReservationResDetailDogByEmail"), sitterEmail);
 	}
-	
+
 	@Override
-	public Reservation selectDetailSitterReservationDemandCodeByResId(int resId){
+	public Reservation selectDetailSitterReservationDemandCodeByResId(int resId) {
 		return session.selectOne(makeSqlId("selectDetailSitterReservationDemandCodeByResId"), resId);
 	}
-	
+
 	@Override
-	public List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail){
-		return session.selectList(makeSqlId("selectCompletePaymentReservationMemberByEmail"),sitterEmail);
+	public List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectCompletePaymentReservationMemberByEmail"), sitterEmail);
 	}
-	
+
 	@Override
-	public List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail){
-		return session.selectList(makeSqlId("selectCompletePaymentReservationResDetailDogByEmail"),sitterEmail);
+	public List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectCompletePaymentReservationResDetailDogByEmail"), sitterEmail);
 	}
-	
-	//----------------------------------------------
-	
-	//서비스 요구 사항을 추가, 수정 , 삭제
+
+	// ----------------------------------------------
+
+	// 서비스 요구 사항을 추가, 수정 , 삭제
 	@Override
 	@Transactional
 	public int insertDemand(Demand demand) {
-		return session.insert(makeSqlId("insertDemand"),demand);
+		return session.insert(makeSqlId("insertDemand"), demand);
 	}
+
 	@Override
 	public int updateDemand(Demand demand, String originalCodeDemand) {
 		HashMap<String, Object> params = new HashMap<>();
@@ -115,17 +116,19 @@ public class ReservationDaoImpl implements ReservationDao{
 		params.put("originalCodeDemand", originalCodeDemand);
 		return session.update(makeSqlId("updateDemand"), params);
 	}
-	
-	/*@Override
-	public List<Reservation> selectSimpleReservationMemberByEmail(String email){
-		return session.selectList(makeSqlId("selectSimpleReservationMemberByEmail"),email);
-	}*/
-	
+
+	/*
+	 * @Override public List<Reservation>
+	 * selectSimpleReservationMemberByEmail(String email){ return
+	 * session.selectList(makeSqlId("selectSimpleReservationMemberByEmail"),email);
+	 * }
+	 */
+
 	@Override
 	public int deleteDemand(int resId) {
-		return session.delete(makeSqlId("deleteDemand"),resId);
+		return session.delete(makeSqlId("deleteDemand"), resId);
 	}
-	
+
 	@Override
 	public Reservation selectReservationById(int resId) {
 		return session.selectOne(makeSqlId("selectReservationById"), resId);
@@ -142,16 +145,6 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 
 	@Override
-	public List<Reservation> selectMemberRes1Simple(String email) {
-		return session.selectList(makeSqlId("selectMemberRes1Simple"), email);
-	}
-
-	@Override
-	public List<Reservation> selectDetailReservationMember(String email) {
-		return session.selectList(makeSqlId("selectDetailReservationMember"), email);
-	}
-
-	@Override
 	public List<Reservation> selectSimpleReservationAdmin() {
 		return session.selectList(makeSqlId("selectSimpleReservationAdmin"));
 	}
@@ -163,8 +156,8 @@ public class ReservationDaoImpl implements ReservationDao{
 		params.put("memberEmail", memberEmail);
 		return session.selectList(makeSqlId("selectDetailReservationAdmin"), params);
 	}
-	
-	//---------------윤 규석 ----------------------
+
+	// ---------------윤 규석 ----------------------
 	@Override
 	public List<Reservation> selectAllMemberReservationMember() {
 		return session.selectList(makeSqlId("selectAllMemberReservationMember"));
@@ -172,8 +165,35 @@ public class ReservationDaoImpl implements ReservationDao{
 
 	@Override
 	public List<Reservation> selectMemberReservationResDetailDogByEmail(String email) {
-		return session.selectList(makeSqlId("selectMemberReservationResDetailDogByEmail"),email);
+		return session.selectList(makeSqlId("selectMemberReservationResDetailDogByEmail"), email);
 	}
-	
-	//------------------윤규석-------------------
+	// ------------------윤규석-------------------
+
+	// ------------------김호규-------------------
+	@Override
+	public List<Reservation> selectSimpleMemberWaitingProposalReservationMemberByEmail(String email) {
+		return session.selectList(makeSqlId("selectSimpleMemberWaitingProposalReservationMemberByEmail"), email);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
+		return session.selectList(makeSqlId("selectSimpleMemberWaitingProposalReservationResDetailDogByEmail"), email);
+	}
+
+	@Override
+	public Reservation selectDetailMemberWaitingProposalReservationDemandCodeByResId(int resId) {
+		return session.selectOne(makeSqlId("selectDetailMemberWaitingProposalReservationDemandCodeByResId"), resId);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleMemberWaitingApprovaltReservationMemberByEmail(String email) {
+		return session.selectList(makeSqlId("selectSimpleMemberWaitingApprovaltReservationMemberByEmail"), email);
+	}
+
+	@Override
+	public List<Reservation> selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email) {
+		return session.selectList(makeSqlId("selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail"), email);
+	}
+	// ------------------------------------------
+
 }

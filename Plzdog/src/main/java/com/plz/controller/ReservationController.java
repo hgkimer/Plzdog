@@ -154,7 +154,7 @@ public class ReservationController {
 				//시터이메일 해당하는 예약
 				//견주들이 해당 시터한테 신청한 예약
 				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
-
+				
 				model.addAttribute("memberList",memberList);
 		return "sitter/select_reservation_simple_result.tiles";
 	}
@@ -264,8 +264,10 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
-		List<Reservation> list = rService.selectSimpleReservationMember(email);
-		System.out.println(list);
+		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		for(Reservation res : list) {
+			System.out.println(res);
+		}
 		model.addAttribute("list", list);
 		return "member/select_reservation_simple_result.tiles";
 	}
@@ -275,12 +277,14 @@ public class ReservationController {
 	 * @param model
 	 * @return
 	 */
+	/*
 	@RequestMapping("/member/select_reservation_detail")
 	public String selectDetailReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.selectDetailReservationMember(email);
 		model.addAttribute("list", list);
 		return "member/select_reservation_detail_result.tiles";
 	}
+	*/
 	/*
 	 * ####################################################################################
 	 */

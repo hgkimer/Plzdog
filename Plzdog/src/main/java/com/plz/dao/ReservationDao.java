@@ -100,18 +100,38 @@ public interface ReservationDao {
 	 *  김호규/ 건들지 마시오
 	 */
 	/**
-	 * Res-1 예약 상태(견주가 직접 의뢰 작성)인 예약을 조회하는 메소드.
+	 * 매개변수로 받은 Email을 가지고 있는 견적 대기 예약정보와 회원정보를 조회하는 메소드.
 	 * @param email
 	 * @return
 	 */
-	List<Reservation> selectMemberRes1Simple(String email);
+	List<Reservation> selectSimpleMemberWaitingProposalReservationMemberByEmail(String email);
 	
 	/**
-	 * 견주의 마이페이지 - 예약 조회 - 자세히 보기
+	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
 	 * @param email 견주 email
 	 * @return
 	 */
-	List<Reservation> selectDetailReservationMember(String email);
+	List<Reservation> selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email);
+	/**
+	 * 매개변수로 받은 예약아이디와 일치하는 견적 대기 예약의 요구사항을 조회하는 메소드.
+	 * @param resId
+	 * @return
+	 */
+	Reservation selectDetailMemberWaitingProposalReservationDemandCodeByResId(int resId);
+	/**
+	 * 매개변수로 받은 Email을 가지고 있는 견적 대기 예약정보와 회원정보를 조회하는 메소드.
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectSimpleMemberWaitingApprovaltReservationMemberByEmail(String email);
+	/**
+	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지 정보를 조회하는 메소드.
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email);
+	
+	
 	/*
 	 * ################################################################
 	 */

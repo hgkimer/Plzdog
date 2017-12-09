@@ -151,17 +151,7 @@ public class ReservationServiceImpl implements ReservationService{
 		return dao.selectSimpleReservationMemberByEmail(email);
 	}*/
 	
-	@Override
-	public List<Reservation> selectSimpleReservationMember(String email) {
-		System.out.println(dao.selectMemberRes1Simple(email));
-		return dao.selectMemberRes1Simple(email);
-	}
-
-	@Override
-	public List<Reservation> selectDetailReservationMember(String email) {
-		return dao.selectDetailReservationMember(email);
-	}
-
+	
 	@Override
 	public List<Reservation> selectSimpleReservationAdmin() {
 		return dao.selectSimpleReservationAdmin();
@@ -237,4 +227,42 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> findMemberReservationResDetailDogByEmail(String email) {
 		return dao.selectMemberReservationResDetailDogByEmail(email);
 	}
+	//-------------------------------------------------------------------
+	
+	
+	
+	
+	//-------------------------김호규------------------------------------
+	@Override
+	public List<Reservation> findSimpleMemberWaitingProposalReservationMemberByEmail(String email) {
+		//1. 자신의 이메일에 해당하는 res-1 예약 조회
+		return null;
+	}
+
+	@Override
+	public List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
+		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
+		
+		return dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+	}
+
+	@Override
+	public Reservation findDetailMemberWaitingProposalReservationDemandCodeByResId(int resId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reservation> findSimpleMemberWaitingApprovaltReservationMemberByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reservation> findSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//----------------------------------------------------------------------
 }

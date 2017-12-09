@@ -12,14 +12,16 @@
 </script>
 </head>
 <body>
-<c:forEach items="${list }"></c:forEach>
-<p>개 이미지:</p>
-<p>개 성별:</p>
-<p>개 이름:</p>
-<p>개 성별:</p>
-<p>예약 상태:</p>
-<p>시작 날짜:</p>
-<p>종료 날짜:</p>
+<c:forEach items="${requestScope.list }" var="res">
+<p>예약 Id:${res.resId } </p>
+<p>개 아이디:${res.dog.dogId }</p>
+<p>개 이미지:${res.dog.dogImage }</p>
+<p>개 성별:{$res.dog.gender}</p>
+<p>개 이름:${res.dog.dogName }</p>
+<p>예약 상태:${res.resStatus }</p>
+<p>시작 날짜:${res.resSDate }</p>
+<p>종료 날짜:${res.resEDate }</p>
+</c:forEach>
 
 
 <!-- 수정하기/ 상세보기 / 삭제하기 버튼 -->
