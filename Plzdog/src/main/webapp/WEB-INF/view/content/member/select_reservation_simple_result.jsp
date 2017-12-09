@@ -12,9 +12,10 @@
 </script>
 </head>
 <body>
+ddddddd
 <c:forEach items="${requestScope.list }" var="res">
 <p>예약 Id:${res.resId } </p>
-<p>개 아이디:${res.dog.dogId }</p>
+<p>개 아이디:${res.resDetailList.dogId }</p>
 <p>개 이미지:${res.dog.dogImage }</p>
 <p>개 성별:{$res.dog.gender}</p>
 <p>개 이름:${res.dog.dogName }</p>

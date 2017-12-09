@@ -242,7 +242,6 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
 		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
-		
 		return dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
 	}
 
