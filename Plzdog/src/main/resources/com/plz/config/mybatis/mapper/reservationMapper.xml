@@ -22,6 +22,7 @@
 				r.res_status,
 				r.res_sdate,
 				r.res_edate,
+				r.res_contents,
 				r.price,
 				r.email,
 				r.email_sitter,
@@ -40,6 +41,7 @@
 				r.res_edate,
 				r.price,
 				r.res_status,
+				r.res_contents,
 				r.email,
 				r.email_sitter,
 				d.dog_id,
@@ -62,6 +64,7 @@
 				r.res_edate,
 				r.price,
 				r.res_status,
+				r.res_contents,
 				r.email,
 				r.email_sitter,
 				m.email,
@@ -100,6 +103,7 @@
 				r.res_sdate,
 				r.res_edate,
 				r.res_status,
+				r.res_contents,
 				r.email,
 				r.email_sitter,
 				m.member_image,
@@ -436,13 +440,13 @@
 	
 	<!-- 예약ID를 통해 수정한다. -->
 	<update id="updateReservation" parameterType="Reservation">
-		update   reservation 	
-			     res_sDate = #{resSDate},
+		update   reservation
+		set	     res_sDate = #{resSDate},
 			     res_eDate = #{resEDate},
 			     res_contents = #{resContents},
-		set 	 res_status = #{resStatus},
+		 		 res_status = #{resStatus},
 			     email = #{memberEmail},
-			     email_sitter = #{sitterEmail}
+			     email_sitter = #{sitterEmail}     
 		where    res_id = #{resId}
 	</update>
 	

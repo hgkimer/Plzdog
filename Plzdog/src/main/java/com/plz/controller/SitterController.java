@@ -3,16 +3,18 @@ package com.plz.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.plz.service.AuthorityService;
 import com.plz.service.CareService;
 import com.plz.service.MemberService;
+import com.plz.service.ReservationService;
 import com.plz.service.SitterService;
 import com.plz.service.WaitingService;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Care;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Reservation;
 import com.plzdog.vo.Sitter;
 
 @Controller
@@ -46,6 +50,9 @@ public class SitterController {
 	
 	@Autowired
 	private WaitingService waitingService;
+	
+	@Autowired
+	private ReservationService rService;
 
 	@RequestMapping("/admin/select_waiting")
 	public ModelAndView selectWaiting(HttpServletRequest request) {
@@ -73,6 +80,13 @@ public class SitterController {
 		
 		model.addAttribute("email",authority.getEmail());
 		return "admin/sitter_enroll_result.tiles";
+	}
+	
+	@RequestMapping("/admin/delete_sitter")
+	public String deleteSitter(@RequestParam String email, Model model) {
+		memberService.deleteMember(email);
+		model.addAttribute(email);
+		return "sitter/sitter_delete_result.tiles";
 	}
 	
 	/**
@@ -133,8 +147,7 @@ public class SitterController {
 			return "sitter/fail.tiles";
 		}
 	}*/
-	
-	
+
 	@RequestMapping("/sitter/update_sitter")
 	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
 		if(memberService.findMemberByEmail(sitter.getEmail()) != null) {
@@ -146,13 +159,27 @@ public class SitterController {
 		}
 	}
 	
-	@RequestMapping("/admin/delete_sitter")
-	public String deleteSitter(@RequestParam String email, Model model) {
-		memberService.deleteMember(email);
-		model.addAttribute(email);
-		return "sitter/sitter_delete_result.tiles";
+	@RequestMapping("/sitter/approve_reservation")
+	@Transactional
+	public ModelAndView approveReservation(HttpSession session, ModelMap model) {
+		Reservation resMember = (Reservation)session.getAttribute("resMember");
+		Reservation res = new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),resMember.getPrice(),resMember.getResContents(),"res-4",resMember.getMemberEmail(),resMember.getSitterEmail());
+		rService.updateReservation(res);
+		
+		HashMap<String, String> emailAndApprove = new HashMap<>();
+		emailAndApprove.put("approveMessage", resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
+		emailAndApprove.put("sitterEmail", resMember.getSitterEmail());
+		System.out.println(emailAndApprove);
+		return new ModelAndView("redirect:/sitter/select_reservation_simple_approve.do","emailAndApprove",emailAndApprove);
 	}
 	
+	/*@RequestMapping("/sitter/reject_reservation")
+	@Transactional
+	public String rejectReservation(@ModelAttribute Reservation resMember, ModelMap model) {
+		 rService.updateReservation(new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),resMember.getPrice(),resMember.getResContents(),"res-4",resMember.getMemberEmail(),resMember.getSitterEmail()));
+		 model.addAttribute("resMember",resMember);
+		 return "sitter/select_reservation_detail_result.tiles";
+	}*/
 	
 	
 	@RequestMapping("/member/select_sitter_name")
