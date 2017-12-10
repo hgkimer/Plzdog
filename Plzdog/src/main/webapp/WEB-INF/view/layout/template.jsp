@@ -13,6 +13,11 @@
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <style>
 
+html, body {
+	width:100%;
+	height:100%;
+}
+
 /* @media screen and (max-width: 750px) {
 	/*화면이 웹 스크린이고 width가 750px 이하가 되면 적용될 style*/
 	.side {
@@ -35,6 +40,7 @@
 	}
 	
 	html, body {
+		width:100%;
 		height:100%;
 	}
 } 
@@ -45,22 +51,13 @@
 	<tiles:insertAttribute name="header" />
 	<div class="clear"></div>
 	<%--메인 body --%>
-	<div class="row whole" style="width:100%;">
-		
 		<%-- 메뉴 --%>
-	
 			<tiles:insertAttribute name="menu"/>
-	
 		<!-- 내용 -->
-		<nav class="col-sm-9 content">
 			<tiles:insertAttribute name="content"/>
-		</nav>
-	</div>
+	<!-- 푸터 -->
 	<tiles:insertAttribute name="footer" />
 </div>
-	<a href="${initParam.rootPath }/sitter/care_test.do">돌봄일지 테스트</a><br>
-	<a href="${initParam.rootPath }/admin/select_waiting.do">대기시터 테스트</a><br>
-	<a href="${initParam.rootPath }/member/select_reservation_simple_result.do">회원 예약 조회 페이지 테스트</a>
-<%-- 	<a href="${initParam.rootPath }/res_test.do">예약 조회 테스트</a><br> --%>
+
 </body>
 </html>

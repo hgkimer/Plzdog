@@ -116,7 +116,7 @@
 						<sec:authorize access="hasRole('ROLE_SITTER')">
 							<li class="afew"><a href="${initParam.rootPath }/sitter/select_reservation_simple.do">내게 온 예약 조회</a></li>
 						</sec:authorize>
-						<li class="afew"><a href="${initParam.rootPath }/member/.do">결제 완료된 예약 조회</a></li>
+						<li class="afew"><a href="${initParam.rootPath }/sitter/complete_payment_reservation_result.do">결제 완료된 예약 조회</a></li>
 					</ul>
 				</li>
 			</sec:authorize>
