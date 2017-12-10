@@ -50,8 +50,8 @@ a {
 }
 
 .dogOwner {
-	width: 450px;
-	height: 400px;
+	width: 600px;
+	height: 1000px;
 	float: right;
 	font-size: 15px;
 	line-height: 40px;
