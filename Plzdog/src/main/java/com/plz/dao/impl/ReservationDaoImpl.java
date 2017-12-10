@@ -196,4 +196,9 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 	// ------------------------------------------
 
+	@Override
+	public List<Demand> selectDemandJoinCodebyResId(int resId) {
+		return session.selectList(makeSqlId("selectDemandJoinCodebyResId"),resId);
+	}
+
 }

@@ -26,7 +26,10 @@ public class Reservation implements Serializable {
 	private List<Care> careList;
 	private List<Demand> demandList;
 	private Sales sales;
+	//예약을 신청한 회원의 정보를 담을 Member객체 변수
 	private Member member;
+	//예약을 담당하는 시터의 정보를 담을 Member객체 변수
+	private Member sitter;
 	private Dog dog;
 	private List<Dog> resDogList;
 	
@@ -165,7 +168,15 @@ public class Reservation implements Serializable {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	
+
+	public Member getSitter() {
+		return sitter;
+	}
+
+	public void setSitter(Member sitter) {
+		this.sitter = sitter;
+	}
+
 	public Dog getDog() {
 		return dog;
 	}
@@ -180,6 +191,15 @@ public class Reservation implements Serializable {
 
 	public void setResDogList(List<Dog> resDogList) {
 		this.resDogList = resDogList;
+	}
+
+	@Override
+	public String toString() {
+		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
+				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
+				+ ", sitterEmail=" + sitterEmail + ", resDetailList=" + resDetailList + ", careList=" + careList
+				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + ", sitter=" + sitter
+				+ ", dog=" + dog + ", resDogList=" + resDogList + "]";
 	}
 
 	@Override
@@ -200,6 +220,7 @@ public class Reservation implements Serializable {
 		result = prime * result + ((resSDate == null) ? 0 : resSDate.hashCode());
 		result = prime * result + ((resStatus == null) ? 0 : resStatus.hashCode());
 		result = prime * result + ((sales == null) ? 0 : sales.hashCode());
+		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
 		result = prime * result + ((sitterEmail == null) ? 0 : sitterEmail.hashCode());
 		return result;
 	}
@@ -277,21 +298,17 @@ public class Reservation implements Serializable {
 				return false;
 		} else if (!sales.equals(other.sales))
 			return false;
+		if (sitter == null) {
+			if (other.sitter != null)
+				return false;
+		} else if (!sitter.equals(other.sitter))
+			return false;
 		if (sitterEmail == null) {
 			if (other.sitterEmail != null)
 				return false;
 		} else if (!sitterEmail.equals(other.sitterEmail))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Reservation [resId=" + resId + ", resSDate=" + resSDate + ", resEDate=" + resEDate + ", price=" + price
-				+ ", resContents=" + resContents + ", resStatus=" + resStatus + ", memberEmail=" + memberEmail
-				+ ", sitterEmail=" + sitterEmail + ", resDetailList=" + resDetailList + ", careList=" + careList
-				+ ", demandList=" + demandList + ", sales=" + sales + ", member=" + member + ", dog=" + dog
-				+ ", resDogList=" + resDogList + "]";
 	}
 
 	
