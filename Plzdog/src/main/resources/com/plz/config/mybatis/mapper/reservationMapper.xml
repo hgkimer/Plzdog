@@ -262,12 +262,48 @@
 	####################################################################################################
 		김호규 / 건들지 마시오 
 	-->
+	<sql id="simple-res-resdetail-dog-select">
+		SELECT	r.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.res_contents
+				r.res_status,
+				r.email,
+				r.email_sitter,
+				rd.res_id,
+				rd.dog_id,
+				d.dog_id,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth,
+				d.email
+		FROM	reservation r, res_detail rd, dog d
+	</sql>
 	
+	<resultMap type="Reservation" id="simple-reservation-res_detail-dog-resultmap" 
+	extends="reservation-resultmap">
+		<collection property="resDetailList" ofType="ResDetail">
+			<id column="res_id" property="resId"/>
+			<result column="dog_id" property="dogId"/>
+			<association property="dog" javaType="Dog">
+				<id column="dog_id" property="dogId"/>
+				<result column="dog_name" property="dogName"/>
+				<result column="species" property="species"/>
+				<result column="gender" property="gender"/>
+				<result column="birth" property="birth"/>
+				<result column="email" property="email"/>
+			</association>
+		</collection>
+	</resultMap>
 	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 회원정보 - 간단히-->
-	<select id="selectSimpleMemberWaitingProposalReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
-		<include refid="simple-sitter-res-member-sql"/>
-		where r.email = #{email} 
-		and r.email = m.email
+	<select id="selectSimpleMemberWaitingProposalReservationMemberByEmail" parameterType="string" resultMap="simple-reservation-res_detail-dog-resultmap">
+		<include refid="simple-res-resdetail-dog-select"/>
+		where r.email = #{email}
+		and r.res_id = rd.res_id 
+		and r.email = d.email
 		and	r.res_status = 'res-1'
 	</select> 
 	
