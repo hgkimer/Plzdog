@@ -269,7 +269,7 @@ public class ReservationController {
 			System.out.println(res);
 		}
 		model.addAttribute("list", list);
-		return "member/select_reservation_simple_result.tiles";
+		return "member/search_reservation_simple_test.tiles";
 	}
 	/**
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
