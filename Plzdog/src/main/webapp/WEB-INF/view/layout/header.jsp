@@ -41,9 +41,10 @@
 	}
 	
 	.nav {
-		width:70%;
+		width:auto;
 		height:100%;
 		float:right;
+		margin-right:20px;
 	}
 	
 	.afew:hover {

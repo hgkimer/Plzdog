@@ -66,7 +66,6 @@
 			<li class="dogli">개 종류:</li>
 		</ul>
 		<ul class="dogul1">
-			
 			<li class="dogli">예약 상태:</li>
 			<li class="dogli">시작 날짜:</li>
 			<li class="dogli">종료 날짜:</li>

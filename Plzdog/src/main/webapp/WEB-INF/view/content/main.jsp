@@ -20,6 +20,24 @@
 	height:100%;
 }
 
+.one {
+	width:100%;
+	height:150px;
+	text-align:center;
+}
+
+h2, h4 {
+	font-weight:bold;
+}
+
+h2 {
+	margin-top:100px;
+}
+
+h4 {
+	color:gray;
+}
+
 </style>
 
 <div class="slide">
@@ -28,6 +46,12 @@
   <img class="mySlides" src="${initParam.rootPath }/slideImage/image3.jpg">
   <img class="mySlides" src="${initParam.rootPath }/slideImage/image4.jpg">
   <img class="mySlides" src="${initParam.rootPath }/slideImage/image5.jpg">
+</div>
+
+
+<div class="one">
+	<h2>믿음이 가는 수의대생이 돌보는 도그시팅</h2>
+	<h4>내 아이 믿고 맡길 수 있는 도그시터를 찾아보세요!</h4>
 </div>
 
 

@@ -14,7 +14,7 @@
 </script>
 <style type="text/css">
 .gores {
-	width: 800px;
+	width: 500px;
 	height: 100px;
 	margin-top: 50px;
 }
@@ -54,6 +54,8 @@
 </style>
 </head>
 <body>
+
+
 	<div class="gores">
 		<div class="move1">
 			<div class="move">

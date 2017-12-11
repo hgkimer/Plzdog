@@ -5,31 +5,71 @@
 	.w3-teal {
 		display:block;
 	}
+	
+	.two {
+		width:850px;
+		height:300px;
+		margin-top:100px;
+	}
+	
+	.member-form1 {
+		float:left;
+		font-weight:bold;
+		font-size:17px;
+		width:200px;
+		height:80px;
+		text-align:center;
+		margin-left:10px;
+		border:1px solid black;
+		line-height:80px;
+		border-radius:10px;
+		background-color:#337ab7;
+		border-color:#2e6da4;
+		color:white;
+		box-shadow:0px 0px 10px black;
+	}
+	
+	.member-form {
+		float:left;
+		font-weight:bold;
+		font-size:17px;
+		width:200px;
+		height:80px;
+		text-align:center;
+		margin-left:10px;
+		line-height:80px;
+		border-radius:10px;
+	}
+	
+	.btn-primary {
+		border-radius:10px;
+		box-shadow:0px 0px 10px black;
+	}
+	
 </style>
-
-<h2 style="margin-top:30px;">마이페이지</h2>
-<div class="mypage-form">
-	<form action="${initParam.rootPath }/member/select_reservation_simple.do" method="post" class="myform">
-		<sec:csrfInput/>
-		<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
-		<button type="submit">내가 신청한 예약 조회</button>
-	</form>
-	<br>
-	<div class="member-form">
-		<a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a>
-	</div>
+<div class="col-lg-3"></div>
 	
-	<form action="${initParam.rootPath }/sitter/select_reservation_simple.do" method="post" class="myform">
-		<sec:csrfInput/>
-		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
-		<button type="submit">내게 온 예약 조회</button>
-	</form>
-	
-	<form action="${initParam.rootPath }/sitter/complete_payment_reservation_result.do" method="post">
-		<sec:csrfInput/>
-		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
-		<button type="submit">결제가 완료된 예약 조회</button>
-	</form>
-	
-	
+<div class="two">
+	<div class="mypage-form">
+		<form action="${initParam.rootPath }/member/select_reservation_simple.do" method="post" class="member-form">
+			<sec:csrfInput/>
+			<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
+			<button type="submit" class="btn-primary">내가 신청한 예약 조회</button>
+		</form>
+		<div class="member-form1">
+			<a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a>
+		</div>
+		
+		<form action="${initParam.rootPath }/sitter/select_reservation_simple.do" method="post" class="member-form">
+			<sec:csrfInput/>
+			<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
+			<button type="submit" class="btn-primary">내게 온 예약 조회</button>
+		</form>
+		
+		<form action="${initParam.rootPath }/sitter/complete_payment_reservation_result.do" method="post" class="member-form">
+			<sec:csrfInput/>
+			<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
+			<button type="submit" class="btn-primary">결제가 완료된 예약 조회</button>
+		</form>
+	</div>			
 </div>
