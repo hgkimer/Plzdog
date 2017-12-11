@@ -278,6 +278,7 @@ public class ReservationController {
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		
 		for(Reservation res : list) {
 			System.out.println(res);
 		}

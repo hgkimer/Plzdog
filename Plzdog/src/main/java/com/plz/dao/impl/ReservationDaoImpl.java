@@ -194,11 +194,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	public List<Reservation> selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email) {
 		return session.selectList(makeSqlId("selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail"), email);
 	}
-	// ------------------------------------------
-
 	@Override
 	public List<Demand> selectDemandJoinCodebyResId(int resId) {
 		return session.selectList(makeSqlId("selectDemandJoinCodebyResId"),resId);
 	}
+	// ------------------------------------------
+
 
 }
