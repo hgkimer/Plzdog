@@ -89,6 +89,8 @@ public class SitterController {
 		return "sitter/sitter_delete_result.tiles";
 	}
 	
+	//------------- lee su il -------------------------
+	
 	/**
 	 * 관리자 승인 이전의 시터 등록 : 시터 정보는 저장되지만 권한은 견주의 권한으로 받는다.
 	 * @param sitter
@@ -159,27 +161,52 @@ public class SitterController {
 		}
 	}
 	
+	/**
+	 * 시터가 승인을 누르면 예약 상태가 res-4 (결제 대기) 상태로 변환
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/sitter/approve_reservation")
 	@Transactional
-	public ModelAndView approveReservation(HttpSession session, ModelMap model) {
+	public String approveReservation(HttpSession session, ModelMap model) {
 		Reservation resMember = (Reservation)session.getAttribute("resMember");
 		Reservation res = new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),resMember.getPrice(),resMember.getResContents(),"res-4",resMember.getMemberEmail(),resMember.getSitterEmail());
+		//예약 수정
 		rService.updateReservation(res);
 		
-		HashMap<String, String> emailAndApprove = new HashMap<>();
-		emailAndApprove.put("approveMessage", resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
-		emailAndApprove.put("sitterEmail", resMember.getSitterEmail());
-		System.out.println(emailAndApprove);
-		return new ModelAndView("redirect:/sitter/select_reservation_simple_approve.do","emailAndApprove",emailAndApprove);
+		//다시 조회 후(refresh)에 memberList로 데이터 전달
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
+		model.addAttribute("approveMessage", resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
+		model.addAttribute("memberList",memberList);
+		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
-	/*@RequestMapping("/sitter/reject_reservation")
+	/**
+	 * 시터가 거절을 누르면 res-1(예약 대기) sitterEmail 삭제 , price 삭제
+	 * @param resMember
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/sitter/reject_reservation")
 	@Transactional
-	public String rejectReservation(@ModelAttribute Reservation resMember, ModelMap model) {
-		 rService.updateReservation(new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),resMember.getPrice(),resMember.getResContents(),"res-4",resMember.getMemberEmail(),resMember.getSitterEmail()));
-		 model.addAttribute("resMember",resMember);
-		 return "sitter/select_reservation_detail_result.tiles";
-	}*/
+	public String rejectReservation(HttpSession session, ModelMap model) {
+		Reservation resMember = (Reservation)session.getAttribute("resMember");
+		//시터가 거절을 누르면 res-1(예약 대기) sitterEmail 삭제 , price 삭제
+		Reservation res = new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),0,resMember.getResContents(),"res-1",resMember.getMemberEmail(),null);
+		
+		//예약 수정
+		rService.updateReservation(res);
+		
+		System.out.println(res);
+		//다시 조회 후(refresh)에 memberList로 데이터 전달
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
+		model.addAttribute("rejectMessage", resMember.getMember().getMemberName()+"님의 예약이 거절되었습니다.");
+		model.addAttribute("memberList",memberList);
+		return "sitter/select_reservation_simple_result.tiles";
+	}
+	
+	//------------- lee su il -------------------------
 	
 	
 	@RequestMapping("/member/select_sitter_name")

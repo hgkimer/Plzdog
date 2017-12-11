@@ -14,14 +14,19 @@ $(document).ready(function(){
 		$(".care").show();
 	});
 });
-
 function approve(){
 	if(confirm("승인 하시겠습니까?")){
-		/* location.href="${initParam.rootPath }/sitter/approve_reservation.do"; */
-		location.href='approve_reservation.do';
-	} else{
+		location.href="${initParam.rootPath }/sitter/approve_reservation.do"; 
+	} else{ 
 		return false;
-	}
+	} 
+}
+function reject(){
+	if(confirm("거절 하시겠습니까?")){
+		location.href="${initParam.rootPath }/sitter/reject_reservation.do"; 
+	} else{ 
+		return false;
+	} 
 }
 </script>
 <style type="text/css">
@@ -58,7 +63,6 @@ function approve(){
 		height:100%;
 		float:left;
 		border:1px solid black;
-		display:none;
 	}
 	
 	.care {
@@ -83,7 +87,7 @@ function approve(){
 			<button class="btn1">예약상세</button>
 			<button class="btn2">돌봄일지</button>
 			<button id ='approveId' onclick='approve()'>승인</button>
-			<button onclick="location.href='reject_reservation.do">거절</button>
+			<button id ='rejectId' onclick='reject()'>거절</button>
 		</div>
 		<div class="res">
 			<%--이메일에 해당하는 예약에 대한 리스트 --%>
