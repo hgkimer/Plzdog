@@ -40,6 +40,7 @@ public class DogServiceImpl implements DogService {
 						String fileName = UUID.randomUUID().toString();	
 						File dest = new File(request.getServletContext().getRealPath("/dogImage"), fileName);
 						dogImage.transferTo(dest);
+						
 						//careImage 등록 처리
 						dogDao.insertDogImage(new DogImage(fileName,dog.getDogId()));
 						list.add(new DogImage(fileName,dog.getDogId()));
