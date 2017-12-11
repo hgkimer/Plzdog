@@ -3,12 +3,14 @@ package com.plz.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -159,6 +161,19 @@ public class ReservationController {
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
+	@RequestMapping("/sitter/select_reservation_simple_approve")
+	public String findSimpleReservationSitter1(@ModelAttribute(name="emailAndApprove") HashMap<String, String> emailAndApprove, Model model) {
+				//시터이메일 해당하는 예약
+				//견주들이 해당 시터한테 신청한 예약
+				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(emailAndApprove.get("sitterEmail"));
+				
+				model.addAttribute("memberList",memberList);
+				model.addAttribute("approveMessage",emailAndApprove.get("approveMessage"));
+				System.out.println(memberList);
+				System.out.println(emailAndApprove.get("approveMessage"));
+		return "sitter/select_reservation_simple_result.tiles";
+	}
+	
 	/**
 	 * 시터 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email
@@ -168,9 +183,7 @@ public class ReservationController {
 	
 	@RequestMapping("/sitter/select_reservation_detail")
 	public String findDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
-				@RequestParam(name="memberEmail") String memberEmail, ModelMap model) {
-		
-		System.out.println(memberEmail);
+				@RequestParam(name="memberEmail") String memberEmail, HttpSession session) {
 		
 		//시터에게 온 회원 + 회원의 강아지 정보
 		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
@@ -198,7 +211,7 @@ public class ReservationController {
 		for(Reservation res : memberList) {
 			System.out.println(res);
 			if(res.getMemberEmail().equals(memberEmail)) {
-				model.addAttribute("resMember", res);
+				session.setAttribute("resMember", res);
 			}
 		}
 		return "sitter/select_reservation_detail_result.tiles";
@@ -265,11 +278,12 @@ public class ReservationController {
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		
 		for(Reservation res : list) {
 			System.out.println(res);
 		}
 		model.addAttribute("list", list);
-		return "member/select_reservation_simple_result.tiles";
+		return "member/search_reservation_simple_test.tiles";
 	}
 	/**
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기

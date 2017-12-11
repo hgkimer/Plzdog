@@ -50,8 +50,8 @@ a {
 }
 
 .dogOwner {
-	width: 450px;
-	height: 400px;
+	width: 600px;
+	height: 1000px;
 	float: right;
 	font-size: 15px;
 	line-height: 40px;
@@ -81,7 +81,7 @@ a {
 								<li>강아지 이름 : ${resDetail.dog.dogName }</li>
 								<li>강아지종 : ${resDetail.dog.species}</li>
 								<li>강아지성별 : ${resDetail.dog.gender}</li>
-								<li>강아지몸무게 : ${resDetail.dog.weigth}</li>
+								<li>강아지몸무게 : ${resDetail.dog.weight}</li>
 								<li>강아지생년월일 : ${resDetail.dog.birth}</li>
 						</c:forEach>
 					</ul>

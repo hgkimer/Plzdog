@@ -100,6 +100,12 @@ public interface ReservationDao {
 	 *  김호규/ 건들지 마시오
 	 */
 	/**
+	 * 매개변수로 받은 예약번호에 해당하는 Demand객체로 이루어진 리스트를 조회하는 메소드.
+	 * @param resId
+	 * @return
+	 */
+	List<Demand> selectDemandJoinCodebyResId(int resId);
+	/**
 	 * 매개변수로 받은 Email을 가지고 있는 견적 대기 예약정보와 회원정보를 조회하는 메소드.
 	 * @param email
 	 * @return

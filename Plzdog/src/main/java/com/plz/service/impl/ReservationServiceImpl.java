@@ -1,6 +1,7 @@
 package com.plz.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.plz.dao.AuthorityDao;
+import com.plz.dao.DogDao;
 import com.plz.dao.MemberDao;
 import com.plz.dao.ResDetailDao;
 import com.plz.dao.ReservationDao;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Demand;
+import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
@@ -29,6 +32,8 @@ public class ReservationServiceImpl implements ReservationService{
 	private AuthorityDao aDao;
 	@Autowired
 	private MemberDao mDao;
+	@Autowired
+	private DogDao dDao;
 	
 	
 	/*
@@ -242,7 +247,25 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
 		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
-		return dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		List<Reservation> resList = dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		//2. 의뢰자, 강아지, 요구사항 내용을 각 예약객체에 세팅한다.
+		for(Reservation r : resList) {
+			//의뢰자 정보 세팅
+			r.setMember(mDao.selectMemberByEmail(r.getMemberEmail()));
+			ArrayList<Dog> dogList = new ArrayList<>();
+ 			//강아지들의 아이디를 통해  예약 상세정보당 강아지의 부가 정보와 이미지들을 반복해서 세팅.
+			for(ResDetail rd : r.getResDetailList()) {
+				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
+				//정보를 저장한 강아지들을 리스트에 담는다.
+				dogList.add(rd.getDog());
+			}
+			//강아지의 전체 정보를 담은 리스트를 각 예약객체에 세팅.
+			r.setResDogList(dogList);
+			//예약 아이디와 일치하는 Demand 리스트 세팅.
+			r.setDemandList(dao.selectDemandJoinCodebyResId(r.getResId()));
+		}
+		System.out.println(resList);
+		return resList;
 	}
 
 	@Override

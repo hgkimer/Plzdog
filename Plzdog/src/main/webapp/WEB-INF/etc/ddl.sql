@@ -240,10 +240,10 @@ create sequence CARE_id_seq;
 -- INSERT
 
 -- MEMBER
-insert into member values('kim@naver.com','김호규','1111','경기','용인', 52635,'image1','010-7415-6323',1);
-insert into member values('lee@naver.com','이효주','1111','서울','광진',12345,'image2','010-8965-5823',1);
-insert into member values('yoon@naver.com','윤규석','1111','제주도','서귀포',41523,'image3','010-6412-9223',1);
-insert into member values('jang@naver.com','이수일','1111','서울','마포',12345,'image4','010-9123-0223',1);
+insert into member values('kim@naver.com','김호규','1111','경기','용인', 52635,'회원1.jpg','010-7415-6323',1);
+insert into member values('lee@naver.com','이효주','1111','서울','광진',12345,'회원2.jpg','010-8965-5823',1);
+insert into member values('yoon@naver.com','윤규석','1111','제주도','서귀포',41523,'회원3.jpg','010-6412-9223',1);
+insert into member values('jang@naver.com','이수일','1111','서울','마포',12345,'회원4.jpg','010-9123-0223',1);
 -- sitter용
 insert into member values('soo1@naver.com','강시터','1111','서울','마포',12345,'시터1.jpg','010-1234-0223',1);
 insert into member values('soo2@naver.com','허시터','1111','서울','상암',12345,'시터2.jpg','010-2344-0223',1);
