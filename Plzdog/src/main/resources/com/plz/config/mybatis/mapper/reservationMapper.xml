@@ -489,7 +489,7 @@
 	 			c.code_name,
 	 			c.category
 	 	FROM	demand d, code c
-	 	WHERE	d.code_demand = c.code
-	 	AND		d.res_id = #{value}
+	 	WHERE	d.res_id = #{value}
+	 	AND		d.code_demand(+) = c.code
 	 </select>
 </mapper>
