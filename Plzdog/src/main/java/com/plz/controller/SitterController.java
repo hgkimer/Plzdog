@@ -3,7 +3,6 @@ package com.plz.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.plz.service.AuthorityService;
 import com.plz.service.CareService;
@@ -169,17 +169,27 @@ public class SitterController {
 	 */
 	@RequestMapping("/sitter/approve_reservation")
 	@Transactional
-	public String approveReservation(HttpSession session, ModelMap model) {
+	//이번 내용은 리다이렉트 전송시 parameter를 URL에 붙여서 전송하지 않을 때
+	public String approveReservation(RedirectAttributes redirectAttributes, HttpSession session, ModelMap model) {
 		Reservation resMember = (Reservation)session.getAttribute("resMember");
 		Reservation res = new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),resMember.getPrice(),resMember.getResContents(),"res-4",resMember.getMemberEmail(),resMember.getSitterEmail());
 		//예약 수정
 		rService.updateReservation(res);
 		
 		//다시 조회 후(refresh)에 memberList로 데이터 전달
-		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
-		model.addAttribute("approveMessage", resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
-		model.addAttribute("memberList",memberList);
-		return "sitter/select_reservation_simple_result.tiles";
+		//List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
+		//model.addAttribute("memberList",memberList);
+		//model.addAttribute("approveMessage", resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
+		redirectAttributes.addFlashAttribute("approveMessage",resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
+		return "redirect:/sitter/approve_reservation_success.do";
+	}
+	
+	/**
+	 * 예약 확인 redirect handler
+	 */
+	@RequestMapping("/sitter/approve_reservation_success")
+	public String approveReservationView() {
+		return "member/mypage.tiles";
 	}
 	
 	/**
@@ -190,7 +200,7 @@ public class SitterController {
 	 */
 	@RequestMapping("/sitter/reject_reservation")
 	@Transactional
-	public String rejectReservation(HttpSession session, ModelMap model) {
+	public String rejectReservation(RedirectAttributes redirectAttributes,HttpSession session, ModelMap model) {
 		Reservation resMember = (Reservation)session.getAttribute("resMember");
 		//시터가 거절을 누르면 res-1(예약 대기) sitterEmail 삭제 , price 삭제
 		Reservation res = new Reservation(resMember.getResId(),resMember.getResSDate(),resMember.getResEDate(),0,resMember.getResContents(),"res-1",resMember.getMemberEmail(),null);
@@ -198,12 +208,19 @@ public class SitterController {
 		//예약 수정
 		rService.updateReservation(res);
 		
-		System.out.println(res);
 		//다시 조회 후(refresh)에 memberList로 데이터 전달
-		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
-		model.addAttribute("rejectMessage", resMember.getMember().getMemberName()+"님의 예약이 거절되었습니다.");
-		model.addAttribute("memberList",memberList);
-		return "sitter/select_reservation_simple_result.tiles";
+		//List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
+		//model.addAttribute("memberList",memberList);
+		redirectAttributes.addFlashAttribute("rejectMessage",resMember.getMember().getMemberName()+"님의 예약이 거절되었습니다.");
+		return "redirect:/sitter/reject_reservation_success.do";
+	}
+	
+	/**
+	 * 예약 거절 redirect handler
+	 */
+	@RequestMapping("/sitter/reject_reservation_success")
+	public String rejectReservationView() {
+		return "member/mypage.tiles";
 	}
 	
 	//------------- lee su il -------------------------

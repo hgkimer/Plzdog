@@ -4,20 +4,8 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${not empty requestScope.approveMessage}">
-	<div class="well text-danger">
-		${requestScope.approveMessage }
-	</div>
-</c:if>
-
-<c:if test="${not empty requestScope.rejectMessage}">
-	<div class="well text-danger">
-		${requestScope.rejectMessage }
-	</div>
-</c:if>
-
 <script type="text/javascript">
-	
+
 </script>
 <style type="text/css">
 * {
@@ -74,9 +62,7 @@ a {
 	<div class="all">
 		<c:forEach items="${requestScope.memberList }" var="reservation">
 			<c:if test="${reservation eq null }">
-			<div class="reservation">
 				시터에게 온 예약이 없습니다.
-			</div>
 			</c:if>
 			<div class="reservation" onclick="location.href='select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>&memberEmail=${reservation.memberEmail }'">
 				<div class="navImage">
@@ -97,19 +83,4 @@ a {
 			</div>
 		</c:forEach>
 	</div>
-   <%-- <li>강아지종 : ${dog.species}</li>
-                           <li>강아지성별 : ${dog.gender}</li>
-                           <li>강아지생년월일 : ${dog.birth}</li> --%>
-                        <%-- <c:forEach items="${dog.dogImage }" var="dogImage">
-                                 강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
-                              </c:forEach> --%>
-                              
-   <div class="clear"></div>
-	<%-- <li>강아지종 : ${dog.species}</li>
-									<li>강아지성별 : ${dog.gender}</li>
-									<li>강아지생년월일 : ${dog.birth}</li> --%>
-								<%-- <c:forEach items="${dog.dogImage }" var="dogImage">
-											강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
-										</c:forEach> --%>
-										
-	<div class="clear"></div>
+  

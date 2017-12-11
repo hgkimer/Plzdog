@@ -285,10 +285,6 @@ public class ReservationController {
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
-		
-		for(Reservation res : list) {
-			System.out.println(res);
-		}
 		model.addAttribute("list", list);
 		return "member/search_reservation_simple_test.tiles";
 	}
@@ -296,7 +292,7 @@ public class ReservationController {
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email
 	 * @param model
-	 * @return
+	 * @return``
 	 */
 	/*
 	@RequestMapping("/member/select_reservation_detail")

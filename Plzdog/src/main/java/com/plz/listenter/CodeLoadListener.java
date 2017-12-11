@@ -42,7 +42,7 @@ public class CodeLoadListener implements ServletContextListener {
       ctx.setAttribute("enList", enList);
       //전체 서비스 종류(service-1 : 방문돌봄, service-2 : 위탁돌봄)에 대한 코드 리스트를 ApplicationScope에 저장
       ctx.setAttribute("serviceList", serviceList);
-      //전체 예약 상태 종류(res-1, res-2,res-3, res-4)에 대한 코드 리스트를 ApplicationScope에 저장
+      //전체 예약 상태 종류(res-1, res-2,res-3, res-4, res-5)에 대한 코드 리스트를 ApplicationScope에 저장
       ctx.setAttribute("resList", resList);
       //전체 강아지 관련 정보
       ctx.setAttribute("dogInfoList", dogInfoList);
