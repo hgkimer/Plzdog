@@ -10,6 +10,12 @@
 	</div>
 </c:if>
 
+<c:if test="${not empty requestScope.rejectMessage}">
+	<div class="well text-danger">
+		${requestScope.rejectMessage }
+	</div>
+</c:if>
+
 <script type="text/javascript">
 	
 </script>
@@ -20,21 +26,17 @@
 	list-style: none;
 	text-decoration: none;
 }
-
 a {
 	color: inherit;
 }
-
 .clear {
 	clear: both;
 }
-
 .all {
 	width: 700px;
 	height: 0%;
 	margin-top: 20px;
 }
-
 .reservation {
 	width: 700px;
 	height: 200px;
@@ -43,7 +45,6 @@ a {
 	position: relative;
 	box-shadow: 0px 0px 5px;
 }
-
 .navImage {
 	width: 150px;
 	height: 150px;
@@ -52,13 +53,11 @@ a {
 	margin-top: 25px;
 	margin-left: 10px;
 }
-
 .navImage img {
 	width: 100%;
 	height: 100%;
 	border-radius: 100px;
 }
-
 .dogOwner {
 	width: 450px;
 	height: 400px;
@@ -67,7 +66,6 @@ a {
 	line-height: 40px;
 	font-weight: bold;
 }
-
 .navList {
 	width: 100%;
 	height: 100%;
@@ -100,7 +98,6 @@ a {
 			</div>
 		</c:forEach>
 	</div>
-	
    <%-- <li>강아지종 : ${dog.species}</li>
                            <li>강아지성별 : ${dog.gender}</li>
                            <li>강아지생년월일 : ${dog.birth}</li> --%>
