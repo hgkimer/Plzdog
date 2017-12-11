@@ -261,9 +261,10 @@ public class ReservationServiceImpl implements ReservationService{
 			}
 			//강아지의 전체 정보를 담은 리스트를 각 예약객체에 세팅.
 			r.setResDogList(dogList);
+			
 			//예약 아이디와 일치하는 Demand 리스트 세팅.
 			r.setDemandList(dao.selectDemandJoinCodebyResId(r.getResId()));
-		}
+			}
 		System.out.println(resList);
 		return resList;
 	}

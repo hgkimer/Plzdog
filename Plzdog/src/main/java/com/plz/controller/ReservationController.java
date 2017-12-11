@@ -281,6 +281,7 @@ public class ReservationController {
 		
 		for(Reservation res : list) {
 			System.out.println(res);
+			System.out.println(res.getResDogList());
 		}
 		model.addAttribute("list", list);
 		return "member/search_reservation_simple_test.tiles";

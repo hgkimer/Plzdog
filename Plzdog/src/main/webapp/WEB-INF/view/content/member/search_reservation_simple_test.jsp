@@ -13,8 +13,9 @@
 				<c:forEach items="${requestScope.list }" var="res">
 					<div class="panel panel-default">
 						<div class="panel-heading">
+						${res.resDogList[0].dogImage[0].dogImage}
 							강아지 사진: <img alt="dog"
-								src="${initParam.rootPath }/dogImage/ ${res.resDogList[0].dogImage[0]}">
+								src="${initParam.rootPath }/dogImage/${res.resDogList[0].dogImage[0].dogImage}">
 
 							<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
 							<p>강아지 이름 : 
