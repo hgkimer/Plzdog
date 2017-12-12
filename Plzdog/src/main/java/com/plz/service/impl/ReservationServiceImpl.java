@@ -63,6 +63,7 @@ public class ReservationServiceImpl implements ReservationService{
 		dao.insertReservation(reservation);
 		//요구사항 리스트를 반복해서 Demand 테이블에 insert
 		for(String demand : demandList) {
+			System.out.println(demand);
 			dao.insertDemand(new Demand(reservation.getResId(),demand));
 		}
 		//해당 예약 Id를 가지고 있는 강아지 ID를 반복해서 ResDetail 테이블에 insert
@@ -257,15 +258,15 @@ public class ReservationServiceImpl implements ReservationService{
 			for(ResDetail rd : r.getResDetailList()) {
 				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
 				//정보를 저장한 강아지들을 리스트에 담는다.
-				dogList.add(rd.getDog());
+				dogList.add(rd.getDog()); 
 			}
 			//강아지의 전체 정보를 담은 리스트를 각 예약객체에 세팅.
 			r.setResDogList(dogList);
 			
 			//예약 아이디와 일치하는 Demand 리스트 세팅.
-			r.setDemandList(dao.selectDemandJoinCodebyResId(r.getResId()));
-			}
-		System.out.println(resList);
+			Reservation res= dao.selectDetailSitterReservationDemandCodeByResId(r.getResId());
+			r.setDemandList(res.getDemandList());
+		}
 		return resList;
 	}
 

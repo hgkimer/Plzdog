@@ -1,13 +1,17 @@
 package com.plz.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -161,10 +165,13 @@ public class ReservationController {
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
-	@RequestMapping("/sitter/select_reservation_simple_approve")
-	public String findSimpleReservationSitter1(@ModelAttribute(name="emailAndApprove") HashMap<String, String> emailAndApprove, Model model) {
+	/*@RequestMapping("/sitter/select_reservation_simple_approve")
+	public String findSimpleReservationSitterApprove(@RequestParam HashMap<String,String> emailAndApprove, 
+			HttpServletRequest reqeust,	Model model) {
 				//시터이메일 해당하는 예약
 				//견주들이 해당 시터한테 신청한 예약
+				System.out.println(emailAndApprove);
+				
 				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(emailAndApprove.get("sitterEmail"));
 				
 				model.addAttribute("memberList",memberList);
@@ -172,7 +179,7 @@ public class ReservationController {
 				System.out.println(memberList);
 				System.out.println(emailAndApprove.get("approveMessage"));
 		return "sitter/select_reservation_simple_result.tiles";
-	}
+	}*/
 	
 	/**
 	 * 시터 마이페이지 - 예약 조회 - 자세히 보기
@@ -278,11 +285,6 @@ public class ReservationController {
 	@RequestMapping("/member/select_reservation_simple")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
-		
-		for(Reservation res : list) {
-			System.out.println(res);
-			System.out.println(res.getResDogList());
-		}
 		model.addAttribute("list", list);
 		return "member/search_reservation_simple_test.tiles";
 	}
@@ -290,7 +292,7 @@ public class ReservationController {
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email
 	 * @param model
-	 * @return
+	 * @return``
 	 */
 	/*
 	@RequestMapping("/member/select_reservation_detail")

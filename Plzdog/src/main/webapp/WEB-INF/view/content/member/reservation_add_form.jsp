@@ -194,10 +194,11 @@
 
 					});//end of document
 </script>
+<div class="col-lg-3"></div>
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-6" style="margin-left:100px;">
 			<h2>의뢰 접수</h2>
 			<c:if test="${requestScope.sitter != null }">
 				<h3>${requestScope.sitter.memberName }에게보내는 의뢰 접수</h3>

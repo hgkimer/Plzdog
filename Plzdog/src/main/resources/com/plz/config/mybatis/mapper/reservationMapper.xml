@@ -472,15 +472,16 @@
 	 	delete from Demand where res_id = #{resId}
 	 </delete>
 	 
-	 <resultMap type="com.plzdog.vo.Demand" id="demand-code-resultmap">
+	 <resultMap type="Demand" id="demand-code-resultmap">
 	 	<id column="res_id" property="resId"/>
 	 	<result column="code_demand" property="codeDemand"/>
-	 	<association property="code" javaType="com.plzdog.vo.Code">
+	 	<association property="code" javaType="Code">
 	 		<id column="code" property="code"/>
 	 		<result column="code_name" property="codeName"/>
 	 		<result column="category" property="category"/>
 	 	</association>
 	 </resultMap>
+	 
 	 <select id="selectDemandJoinCodebyResId" resultMap="demand-code-resultmap" parameterType="_int">
 	 	SELECT 	d.res_id, 
 	 			d.code_demand,
@@ -488,6 +489,7 @@
 	 			c.code_name,
 	 			c.category
 	 	FROM	demand d, code c
-	 	WHERE	res_id = #{value}
+	 	WHERE	d.res_id = #{value}
+	 	AND		d.code_demand(+) = c.code
 	 </select>
 </mapper>

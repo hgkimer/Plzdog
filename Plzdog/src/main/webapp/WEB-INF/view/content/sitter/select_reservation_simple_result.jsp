@@ -4,14 +4,8 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${not empty requestScope.approveMessage}">
-	<div class="well text-danger">
-		${requestScope.approveMessage }
-	</div>
-</c:if>
-
 <script type="text/javascript">
-	
+
 </script>
 <style type="text/css">
 * {
@@ -20,21 +14,17 @@
 	list-style: none;
 	text-decoration: none;
 }
-
 a {
 	color: inherit;
 }
-
 .clear {
 	clear: both;
 }
-
 .all {
 	width: 700px;
 	height: 0%;
 	margin-top: 20px;
 }
-
 .reservation {
 	width: 700px;
 	height: 200px;
@@ -43,7 +33,6 @@ a {
 	position: relative;
 	box-shadow: 0px 0px 5px;
 }
-
 .navImage {
 	width: 150px;
 	height: 150px;
@@ -52,13 +41,11 @@ a {
 	margin-top: 25px;
 	margin-left: 10px;
 }
-
 .navImage img {
 	width: 100%;
 	height: 100%;
 	border-radius: 100px;
 }
-
 .dogOwner {
 	width: 450px;
 	height: 400px;
@@ -67,7 +54,6 @@ a {
 	line-height: 40px;
 	font-weight: bold;
 }
-
 .navList {
 	width: 100%;
 	height: 100%;
@@ -76,9 +62,7 @@ a {
 	<div class="all">
 		<c:forEach items="${requestScope.memberList }" var="reservation">
 			<c:if test="${reservation eq null }">
-			<div class="reservation">
 				시터에게 온 예약이 없습니다.
-			</div>
 			</c:if>
 			<div class="reservation" onclick="location.href='select_reservation_detail.do?sitterEmail=<sec:authentication property="principal.email"/>&memberEmail=${reservation.memberEmail }'">
 				<div class="navImage">
@@ -88,7 +72,6 @@ a {
 				</div>
 				<div class="dogOwner">
 					<ul class="navList">
-						<li>예약상태 : ${reservation.resStatus}</li>
 						<li>시작날짜 : ${reservation.resSDate}</li>
 						<li>끝날짜 : ${reservation.resEDate}</li>
 						<li>예약에 대한 가격 : ${reservation.price}</li>
@@ -100,20 +83,4 @@ a {
 			</div>
 		</c:forEach>
 	</div>
-	
-   <%-- <li>강아지종 : ${dog.species}</li>
-                           <li>강아지성별 : ${dog.gender}</li>
-                           <li>강아지생년월일 : ${dog.birth}</li> --%>
-                        <%-- <c:forEach items="${dog.dogImage }" var="dogImage">
-                                 강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
-                              </c:forEach> --%>
-                              
-   <div class="clear"></div>
-	<%-- <li>강아지종 : ${dog.species}</li>
-									<li>강아지성별 : ${dog.gender}</li>
-									<li>강아지생년월일 : ${dog.birth}</li> --%>
-								<%-- <c:forEach items="${dog.dogImage }" var="dogImage">
-											강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="100px;"><br>
-										</c:forEach> --%>
-										
-	<div class="clear"></div>
+  
