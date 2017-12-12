@@ -76,7 +76,7 @@
 	}
 	
 	
-	.w3-teal, .afew, .much, ::-webkit-scrollbar, ::-webkit-scrollbar {
+	.afew, .much, ::-webkit-scrollbar {
 		display:none;
 	}
 	
@@ -93,15 +93,8 @@
 
 <body>
 	<header>
-	<%-- 사이드 바 --%>
-	<div class="w3-teal" style="width:50px; height:100px; float:left;">
-	<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
-		<div class="w3-container">
-		</div>
-	</div>
 			
 	<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
-		<button onclick="w3_close()" class="w3-bar-item w3-large" id="also">Close &times;</button>
 		<ul class="nav" style="margin-top:20px; width:100%; text-align:center;">
 			
 			<%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
@@ -155,7 +148,6 @@
 			<form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
 			    <sec:csrfInput/>
 			</form>
-	</div>
 
 		<%-- 헤더 부분 --%>
 			<ul class="nav">
@@ -186,19 +178,6 @@ function w3_close() {
 $(document).ready(function(){
 	$(".navi > #logout").on("click", function(){
 		$("#logoutForm").submit();
-	});
-	$("#few").on("click", function(){
-		$(".afew").slideToggle();
-	});
-	$("#also").on("click", function(){
-		$(".afew").hide();
-	});
-	
-	$("#more").on("click", function(){
-		$(".much").slideToggle();
-	});
-	$("#also").on("click", function(){
-		$(".much").hide();
 	});
 });
 </script>

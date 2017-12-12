@@ -1,37 +1,37 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<div class="container" style="font-size: 20px;">
-	<div class="row">
-		<div class="col-sm-12">
-			<h1>회원정보 조회결과</h1>
-		</div>
+<style type="text/css">
+	.blank {
+		width:100%;
+		height:200px;
+	}
+	
+	.img-responsive {
+		height:250px;
+	}
+</style>
+
+<div class="col-lg-3" style="height:100%; float:left;"></div>
+<div class="col-lg-6" style="font-size:18px; margin-top:150px;">
+	<div class="col-lg-6 memberImage">
+		<img src="${initParam.rootPath }/memberImage/<sec:authentication property='principal.memberImage'/>" class="img-responsive" width="350px">
 	</div>
-	<div class="row">
-		<div class="col-sm-2">Email</div>
-		<div class="col-sm-10"><sec:authentication property="principal.email"/></div>
+	<div class="blank">
+		<div class="col-lg-2">Email</div>
+		<div class="col-lg-4"><sec:authentication property="principal.email"/></div>
+	
+		<div class="col-lg-2">이름</div>
+		<div class="col-lg-4"><sec:authentication property="principal.memberName"/></div>
+	
+		<div class="col-lg-2">회원 주소</div>
+		<div class="col-lg-4"><sec:authentication property="principal.mainAddress"/> <sec:authentication property="principal.subAddress"/></div>
+		
+		<div class="col-lg-2">우편번호</div>
+		<div class="col-lg-4" ><sec:authentication property="principal.zipcode"/></div>
 	</div>
-	<div class="row">
-		<div class="col-sm-2">이름</div>
-		<div class="col-sm-10"><sec:authentication property="principal.memberName"/></div>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">회원 주소</div>
-		<div class="col-sm-10"><sec:authentication property="principal.mainAddress"/> <sec:authentication property="principal.subAddress"/></div>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">우편번호</div>
-		<div class="col-sm-10"><sec:authentication property="principal.zipcode"/></div>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">회원 이미지</div>
-		<div class="col-sm-12">
-			<img src="${initParam.rootPath }/memberImage/<sec:authentication property='principal.memberImage'/>" class="img-responsive" width="350px">
-		</div>
-	</div>
-	<div class="row" style="margin-top:20px">
-		<div class="col-sm-12">
-			<a href="${initParam.rootPath }/member/member_edit_form.do" class="btn btn-default">정보수정</a>
-		</div>
+	<div class="col-lg-6">
+		<a href="${initParam.rootPath }/member/member_edit_form.do" class="btn btn-default">정보수정</a>
 	</div>
 </div>
+<div class="col-lg-3" style="height:100%; float:right;"></div>
