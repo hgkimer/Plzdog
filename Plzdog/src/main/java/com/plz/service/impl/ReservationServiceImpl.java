@@ -245,6 +245,29 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
+	public List<Reservation> findWaitingForApprovalReservationSitter(String sitterEmail){
+		//시터에게 온 회원 + 회원의 강아지 정보
+		List<Reservation> memberList = findSimpleSitterReservationInfoByEmail(sitterEmail);
+		
+		//시터에게 온 회원의 요구사항
+		Reservation skillList = new Reservation();
+		
+		//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
+		for(int i =0; i< memberList.size() ; i++) {
+			
+			skillList = findDetailSitterReservationDemandCodeByResId(memberList.get(i).getResId());
+			
+			//해당 회원의 요구사항을 회원 리스트에 넣는다.
+			memberList.get(i).setDemandList(skillList.getDemandList());
+			
+			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
+				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
+				memberList.get(i).getResDetailList().get(j).setDog(dDao.selectDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
+			}
+		}
+		return memberList;
+	}	
+	@Override
 	public List<Reservation> findCompletePaymentReservationSitter(String sitterEmail){
 				//시터이메일 해당하는 예약
 				//견주들이 해당 시터한테 신청한 예약들 중에 결제 완료 한 예약

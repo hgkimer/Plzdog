@@ -1,17 +1,13 @@
 package com.plz.controller;
 
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +22,6 @@ import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
-import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
 
@@ -154,7 +149,7 @@ public class ReservationController {
 	 * @param email
 	 * @param model
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/sitter/select_reservation_simple")
 	public String findSimpleReservationSitter(@RequestParam String sitterEmail, Model model) {
 				//시터이메일 해당하는 예약
@@ -165,13 +160,12 @@ public class ReservationController {
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
-	/**
+	*//**
 	 * 시터 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email
 	 * @param model
 	 * @return
-	 */
-	
+	 *//*
 	@RequestMapping("/sitter/select_reservation_detail")
 	public String findDetailReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
 				@RequestParam(name="memberEmail") String memberEmail, HttpSession session) {
@@ -203,10 +197,27 @@ public class ReservationController {
 			}
 		}
 		return "sitter/select_reservation_detail_result.tiles";
+	}*/
+	
+	/**
+	 * 승인 대기 처리 controller
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/sitter/waiting_for_approval_reservation_result")
+	public String findWatingForApprovalReservationSitter(@RequestParam(name="sitterEmail") String sitterEmail, 
+			HttpSession session) {
+		
+		//시터에게 온 회원 + 회원의 강아지 정보
+		List<Reservation> memberList = rService.findWaitingForApprovalReservationSitter(sitterEmail);
+		
+		session.setAttribute("resList", memberList);
+		return "sitter/waiting_for_approval_reservation_result.tiles";
 	}
 	
 	/**
-	 * 
+	 * 결제 대기 중인 예약들을 확인 하는 controller
 	 * @param sitterEmail
 	 * @param model
 	 * @return
@@ -216,11 +227,11 @@ public class ReservationController {
 				//결제 완료된 시터 정보
 				List<Reservation> memberList = rService.findWaitingPaymentReservationSitter(sitterEmail);
 				model.addAttribute("memberList",memberList);				
-		return "sitter/complete_payment_reservation_result.tiles";
+		return "sitter/waiting_payment_reservation_result.tiles";
 	}
 	
 	/**
-	 * 결제 완료 된 예약들을 확인 하는 페이지
+	 * 결제 완료 된 예약들을 확인 하는 controller
 	 * @param sitterEmail
 	 * @param model
 	 * @return

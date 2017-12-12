@@ -98,7 +98,7 @@
 									<div class="row">
 										<div class="col-lg-4">
 											<img alt="회원사진"
-												src="${initParam.rootPath }/memberImage/${res.member.imageMember}">
+												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
 											<p>신청자 이메일 : ${res.member.email }</p>

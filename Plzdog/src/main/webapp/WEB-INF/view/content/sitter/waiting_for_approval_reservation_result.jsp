@@ -5,24 +5,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".btn1").on("click", function(){
-			$(".care").hide();
-			$(".res").show();
-		});
-		$(".btn2").on("click", function(){
-			$(".res").hide();
-			$(".care").show();
-		});
-	});
-</script>
+<c:if test="${not empty requestScope.approveMessage}">
+	<script type="text/javascript">
+	var value = '<c:out value="${requestScope.approveMessage }"/>';
+		alert(value);
+	</script>
+</c:if>
 
-<h2>시터 입장에서 결제 대기중 페이지</h2>
+<c:if test="${not empty requestScope.rejectMessage}">
+	<script type="text/javascript">
+	var value = '<c:out value="${requestScope.rejectMessage }"/>';
+		alert(value);
+	</script>
+</c:if>
+
+<h2>시터 입장에서 승인 대기중 페이지</h2>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("")
 });
+
+function approve(){
+	if(confirm("승인 하시겠습니까?")){
+		location.href="${initParam.rootPath }/sitter/approve_reservation.do"; 
+	} else{ 
+		return false;
+	} 
+}
+function reject(){
+	if(confirm("거절 하시겠습니까?")){
+		location.href="${initParam.rootPath }/sitter/reject_reservation.do"; 
+	} else{ 
+		return false;
+	} 
+}
 </script>
 
 	<div class="container">
@@ -31,7 +47,7 @@ $(document).ready(function(){
 			<div class="col-lg-8">
 				<a href=""></a>
 				<div class="row">
-					<c:forEach items="${requestScope.memberList }" var="res">
+					<c:forEach items="${sessionScope.resList }" var="res">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="col-lg-4">
@@ -71,6 +87,8 @@ $(document).ready(function(){
 										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a> --%>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
+											<button type="button" class="btn btn-info btn-sm" id ='approveId' onclick="location.href='approve_reservation.do?sitterEmail=${res.sitterEmail}&memberEmail=${res.memberEmail}'">승인</button>
+											<button type="button" class="btn btn-info btn-sm" id ='rejectId' onclick="location.href='reject_reservation.do?sitterEmail=${res.sitterEmail}&memberEmail=${res.memberEmail}'">거절</button>
 									</div>
 								</div>
 							</div> <!-- panel 헤드 -->
