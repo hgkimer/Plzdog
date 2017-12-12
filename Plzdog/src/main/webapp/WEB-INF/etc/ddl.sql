@@ -486,7 +486,6 @@ insert into demand values (5,'sitter-1');
 insert into demand values (11,'sitter-1');
 insert into demand values (11,'sitter-2');
 
-
 insert into res_detail values('10','10');
 insert into res_detail values('11','9');
 -- yoon : dogId = 8,9,10

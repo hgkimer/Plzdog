@@ -26,6 +26,7 @@ import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
 
@@ -165,22 +166,6 @@ public class ReservationController {
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
-	/*@RequestMapping("/sitter/select_reservation_simple_approve")
-	public String findSimpleReservationSitterApprove(@RequestParam HashMap<String,String> emailAndApprove, 
-			HttpServletRequest reqeust,	Model model) {
-				//시터이메일 해당하는 예약
-				//견주들이 해당 시터한테 신청한 예약
-				System.out.println(emailAndApprove);
-				
-				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(emailAndApprove.get("sitterEmail"));
-				
-				model.addAttribute("memberList",memberList);
-				model.addAttribute("approveMessage",emailAndApprove.get("approveMessage"));
-				System.out.println(memberList);
-				System.out.println(emailAndApprove.get("approveMessage"));
-		return "sitter/select_reservation_simple_result.tiles";
-	}*/
-	
 	/**
 	 * 시터 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email
@@ -222,37 +207,31 @@ public class ReservationController {
 	}
 	
 	/**
+	 * 
+	 * @param sitterEmail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("sitter/waiting_payment_reservation_result.do")
+	public String findWaitingPaymentReservation(@RequestParam String sitterEmail, Model model) {
+				//결제 완료된 시터 정보
+				List<Reservation> memberList = rService.findWaitingPaymentReservationSitter(sitterEmail);
+				model.addAttribute("memberList",memberList);				
+		return "sitter/complete_payment_reservation_result.tiles";
+	}
+	
+	/**
 	 * 결제 완료 된 예약들을 확인 하는 페이지
 	 * @param sitterEmail
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("sitter/complete_payment_reservation_result.do")
-	public String findCompletePaymentReservationSitter(@RequestParam String sitterEmail, Model model) {
-				//시터이메일 해당하는 예약
-				//견주들이 해당 시터한테 신청한 예약들 중에 결제 완료 한 예약
-		
-				//sitterEmail, res-5 : 결제 완료
-				List<Reservation> memberList = rService.findCompletePaymentReservationInfoByEmail(sitterEmail);
-				
-				//시터에게 온 회원의 요구사항
-				Reservation skillList = new Reservation();
-				
-				//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
-				for(int i =0; i< memberList.size() ; i++) {
-					
-					skillList = rService.findDetailSitterReservationDemandCodeByResId(memberList.get(i).getResId());
-					
-					//해당 회원의 요구사항을 회원 리스트에 넣는다.
-					memberList.get(i).setDemandList(skillList.getDemandList());
-					
-					for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
-						//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
-						memberList.get(i).getResDetailList().get(j).setDog(dogService.findDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
-					}
-				}
-				
+	public String findCompletePaymentReservation(@RequestParam String sitterEmail, Model model) {
+				//결제 완료된 시터 정보
+				List<Reservation> memberList = rService.findCompletePaymentReservationSitter(sitterEmail);
 				model.addAttribute("memberList",memberList);
+				
 		return "sitter/complete_payment_reservation_result.tiles";
 	}
 	

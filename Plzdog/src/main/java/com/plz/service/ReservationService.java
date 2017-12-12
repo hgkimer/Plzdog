@@ -130,18 +130,39 @@ public interface ReservationService {
 	Reservation findDetailSitterReservationDemandCodeByResId(int resId);
 	
 	/**
-	 * sitterEmail에 해당하는 회원정보 + 강아지 정보 
+	 * sitterEmail에 해당하는 회원정보 + 강아지 정보 (간단히)
 	 * @param sitterEmail
 	 * @return
 	 */
 	List<Reservation> findSimpleSitterReservationInfoByEmail(String sitterEmail);
 	
 	/**
-	 * sitterEmail로 결제가 완료된 회원정보 + 강아지 정보 
+	 * 시터 email로 결제 대기 중인 회원 정보 + 강아지 정보(간단히) 
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findWaitingPaymentReservationInfoByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 email로 결제 대기 중인 회원 정보 + 강아지 정보 (자세히)
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findWaitingPaymentReservationSitter(String sitterEmail);
+	
+	/**
+	 * sitterEmail로 결제가 완료된 회원정보 + 강아지 정보 (간단히)
 	 * @param sitterEmail
 	 * @return
 	 */
 	List<Reservation> findCompletePaymentReservationInfoByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 email 로 결제가 완료된 회원 정보 + 강아지 정보(자세히)
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findCompletePaymentReservationSitter(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
 
 	//-----------------------Yoon gue seok----------------------------------

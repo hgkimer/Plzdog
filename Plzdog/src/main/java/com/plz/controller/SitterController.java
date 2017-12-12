@@ -177,10 +177,11 @@ public class SitterController {
 		rService.updateReservation(res);
 		
 		//다시 조회 후(refresh)에 memberList로 데이터 전달
-		//List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
 		//model.addAttribute("memberList",memberList);
 		//model.addAttribute("approveMessage", resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
 		redirectAttributes.addFlashAttribute("approveMessage",resMember.getMember().getMemberName()+"님의 예약이 완료되었습니다.");
+		redirectAttributes.addFlashAttribute("memberList",memberList);
 		return "redirect:/sitter/approve_reservation_success.do";
 	}
 	
@@ -189,7 +190,7 @@ public class SitterController {
 	 */
 	@RequestMapping("/sitter/approve_reservation_success")
 	public String approveReservationView() {
-		return "member/mypage.tiles";
+		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
 	/**
@@ -209,9 +210,10 @@ public class SitterController {
 		rService.updateReservation(res);
 		
 		//다시 조회 후(refresh)에 memberList로 데이터 전달
-		//List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
+		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(resMember.getSitterEmail());
 		//model.addAttribute("memberList",memberList);
 		redirectAttributes.addFlashAttribute("rejectMessage",resMember.getMember().getMemberName()+"님의 예약이 거절되었습니다.");
+		redirectAttributes.addFlashAttribute("memberList",memberList);
 		return "redirect:/sitter/reject_reservation_success.do";
 	}
 	
@@ -220,7 +222,7 @@ public class SitterController {
 	 */
 	@RequestMapping("/sitter/reject_reservation_success")
 	public String rejectReservationView() {
-		return "member/mypage.tiles";
+		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
 	//------------- lee su il -------------------------
