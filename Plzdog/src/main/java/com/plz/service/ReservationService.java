@@ -183,32 +183,24 @@ public interface ReservationService {
 	
 	//-------------------------김호규--------------------------------------------
 	/**
-	 * 의뢰자 이메일로 예약에 해당하는 회원 정보를 조회(simple 페이지)
+	 * 의뢰자 이메일로 예약에 해당하는 강아지 정보를 조회
+	 * 	1. res-1인 예약들을 전체 조회
+	 * 	2. 의뢰자, 강아지, 요구사항을 해당 예약 객체에 세팅한다.
+	 * 	3. list return
 	 * @param email
 	 * @return
 	 */
-	List<Reservation> findSimpleMemberWaitingProposalReservationMemberByEmail(String email);
-	
+	List<Reservation> findReservationRes1(String email);
 	/**
-	 * 의뢰자 이메일로 예약에 해당하는 강아지 정보를 조회(simple 페이지)
+	 * 의뢰자 이메일로 예약에 해당하는 강아지 정보를 조회
+	 * 	1. res-2인 예약들을 전체 조회
+	 * 	2. 의뢰자, 강아지, 요구사항을 해당 예약 객체에 세팅한다.
+	 * 	3. 견적을 보낸 시터의 정보를 예약 객체에 세팅한다.
+	 * 	3. list return
 	 * @param email
 	 * @return
 	 */
-	List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email);
-	
-	/**
-	 * resId로 예약에 해당하는 서비스 요구사항 조회(detail 페이지)
-	 * @param resId
-	 * @return
-	 */
-	Reservation findDetailMemberWaitingProposalReservationDemandCodeByResId(int resId);
-	
-	/**
-	 * 의뢰자 email에 해당하는 회원정보 + 강아지 정보 
-	 * @param email
-	 * @return
-	 */
-	List<Reservation> findSimpleMemberWaitingApprovaltReservationMemberByEmail(String email);
+	List<Reservation> findReservationRes2(String email);
 	
 	/**
 	 * 의뢰자 email 로 결제가 완료된 회원정보 + 강아지 정보 

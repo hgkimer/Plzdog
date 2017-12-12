@@ -14,7 +14,7 @@
 
 	$(document).ready(function() {
 		$("#addDogImage").on("click",function() {
-			$("#dogImage").after("<br><input type='file' name='dogImageList' id='dogImage'/>");
+			$("#dogImage").siblings().last().after("<input type='file' name='dogImageList' id='dogImage'/>");
 		});
 		
 		$("#dDate").datepicker(
@@ -32,7 +32,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6" style="margin-left:100px;">
-		<h1 style="text-align:center">강아지 등록하기</h1>
+		<h1 style="text-align:center">강아지 등록</h1>
 			<form action="${initParam.rootPath }/dog/insertDog.do"
 				method="post" enctype="multipart/form-data">
 				<sec:csrfInput />
@@ -68,7 +68,7 @@
 						required="required" />
 				</div>
 				<div class="form-group">
-					강아지 상세 정보 :
+					<strong>강아지 상세 정보</strong>
 				</div>
 				<div class="checkbox">
 					<c:forEach items="${applicationScope.dogInfoList }" var="code">
@@ -76,12 +76,20 @@
 						<label><input type="checkbox" name="dogCodeList" id="code"value="${code.code }"/>${code.codeName }</label><br>
 					</c:forEach>
 				</div>
-				<div class="form-group">
-					<label for="dogImage">강아지 이미지 :</label><input type="file" name="dogImageList" id="dogImage" /><br>
-					<button id="addDogImage" type="button" class="btn btn-warning">강아지 이미지 추가</button><br>
+				<div class="row">
+					<div class="col-lg-6">
+					<label for="dogImage">강아지 이미지 :</label><input type="file" name="dogImageList" id="dogImage" placeholder="강아지 선택"/>
+					</div>
+					<div class="col-lg-6">
+					<div class="form-group">
+					<button id="addDogImage" type="button" class="btn btn-info">강아지 이미지 추가</button>
+					</div>
 				</div>
+				</div>
+				<p></p>
+				<div></div>
 				<div class="form-group">
-					<input type="submit" value="전송" class="btn btn-default">
+					<input type="submit" value="전송" class="btn btn-warning btn-block">
 				</div>
 			</form>
 		</div>

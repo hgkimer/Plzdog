@@ -76,7 +76,7 @@
 	}
 	
 	
-	.w3-teal, .afew, .much, ::-webkit-scrollbar, ::-webkit-scrollbar {
+	.afew, .much, ::-webkit-scrollbar {
 		display:none;
 	}
 	
@@ -93,15 +93,8 @@
 
 <body>
 	<header>
-	<%-- 사이드 바 --%>
-	<div class="w3-teal" style="width:50px; height:100px; float:left;">
-	<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
-		<div class="w3-container">
-		</div>
-	</div>
 			
 	<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
-		<button onclick="w3_close()" class="w3-bar-item w3-large" id="also">Close &times;</button>
 		<ul class="nav" style="margin-top:20px; width:100%; text-align:center;">
 			
 			<%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
@@ -113,7 +106,7 @@
 			<sec:authorize access="hasRole('ROLE_MEMBER')">
 				<li><a id="few" style="cursor: pointer;">예약 조회</a>
 					<ul class="big">
-						<li class="afew"><a href="#">견적 대기중인 예약</a></li>
+						<li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res1.do?email=<sec:authentication property="principal.email"/>">견적 대기중인 예약</a></li>
 						<li class="afew"><a href="#">승인 대기중 예약</a></li>
 						<li class="afew"><a href="#">결제 완료 예약</a></li>
 					</ul>
@@ -123,6 +116,7 @@
 			<sec:authorize access="hasRole('ROLE_SITTER')">
 				<li><a id="more" style="cursor: pointer;">내게 온 예약 조회</a>
 					<ul class="small">
+						<li class="much"><a href="#">나를 기다리는 예약</a></li>
 						<li class="much"><a href="${initParam.rootPath }/sitter/waiting_for_approval_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
 						<li class="much"><a href="${initParam.rootPath }/sitter/waiting_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 대기중 예약</a></li>
 						<li class="much"><a href="${initParam.rootPath }/sitter/complete_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 완료 예약</a></li>
@@ -154,7 +148,6 @@
 			<form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
 			    <sec:csrfInput/>
 			</form>
-	</div>
 
 		<%-- 헤더 부분 --%>
 			<ul class="nav">
@@ -173,6 +166,7 @@
 					<li class="navi"><a id="logout" style="cursor: pointer;">로그아웃</a></li>
 				</sec:authorize>
 			</ul>
+			</div>
 	</header>
 <script>
 function w3_open() {
@@ -185,19 +179,6 @@ function w3_close() {
 $(document).ready(function(){
 	$(".navi > #logout").on("click", function(){
 		$("#logoutForm").submit();
-	});
-	$("#few").on("click", function(){
-		$(".afew").slideToggle();
-	});
-	$("#also").on("click", function(){
-		$(".afew").hide();
-	});
-	
-	$("#more").on("click", function(){
-		$(".much").slideToggle();
-	});
-	$("#also").on("click", function(){
-		$(".much").hide();
 	});
 });
 </script>

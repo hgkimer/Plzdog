@@ -180,34 +180,22 @@ public class ReservationDaoImpl implements ReservationDao {
 	// ------------------윤규석-------------------
 
 	// ------------------김호규-------------------
+	
 	@Override
-	public List<Reservation> selectSimpleMemberWaitingProposalReservationMemberByEmail(String email) {
-		return session.selectList(makeSqlId("selectSimpleMemberWaitingProposalReservationMemberByEmail"), email);
+	public List<Reservation> selectReservationRes1JoinResDetailAndDog(String email) {
+		return session.selectList(makeSqlId("selectReservationRes1JoinResDetailAndDog"), email);
 	}
 
 	@Override
-	public List<Reservation> selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
-		return session.selectList(makeSqlId("selectSimpleMemberWaitingProposalReservationResDetailDogByEmail"), email);
+	public Reservation selectReservationDemandCodeByResId(int resId) {
+		return session.selectOne(makeSqlId("selectReservationDemandCodeByResId"), resId);
 	}
 
 	@Override
-	public Reservation selectDetailMemberWaitingProposalReservationDemandCodeByResId(int resId) {
-		return session.selectOne(makeSqlId("selectDetailMemberWaitingProposalReservationDemandCodeByResId"), resId);
+	public List<Reservation> selectReservationRes2JoinResDetailAndDog(String email) {
+		return session.selectList(makeSqlId("selectReservationRes2JoinResDetailAndDog"), email);
 	}
 
-	@Override
-	public List<Reservation> selectSimpleMemberWaitingApprovaltReservationMemberByEmail(String email) {
-		return session.selectList(makeSqlId("selectSimpleMemberWaitingApprovaltReservationMemberByEmail"), email);
-	}
-
-	@Override
-	public List<Reservation> selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email) {
-		return session.selectList(makeSqlId("selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail"), email);
-	}
-	@Override
-	public List<Demand> selectDemandJoinCodebyResId(int resId) {
-		return session.selectList(makeSqlId("selectDemandJoinCodebyResId"),resId);
-	}
 	// ------------------------------------------
 
 
