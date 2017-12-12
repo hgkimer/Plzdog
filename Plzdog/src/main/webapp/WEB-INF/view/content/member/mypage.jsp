@@ -66,7 +66,7 @@
 
 <div class="two">
 	<div class="mypage-form" style="margin-left:20px;">
-		<form action="${initParam.rootPath }/member/select_reservation_simple.do" method="post" class="member-form">
+		<form action="${initParam.rootPath }/member/search_reservation_res1.do" method="post" class="member-form">
 			<sec:csrfInput/>
 			<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
 			<button type="submit" class="btn-primary">내가 신청한 예약 조회</button>

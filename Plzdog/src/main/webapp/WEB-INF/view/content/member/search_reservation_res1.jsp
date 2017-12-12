@@ -1,17 +1,17 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("")
+});
+</script>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
+				<a href=""></a>
 				<div class="row">
 					<c:forEach items="${requestScope.list }" var="res">
 						<div class="panel panel-default">
@@ -24,39 +24,38 @@
 								<div class="col-lg-8">
 									<div class="col-lg-6">
 										<p></p>
-										<p>
-											강아지 이름 :
+											<p>강아지 이름</p>
 											<c:forEach items="${res.resDogList }" var="dog">
-											${dog.dogName }			
+											<p><span class="glyphicon glyphicon-tag"></span>${dog.dogName }</p>	
 										</c:forEach>
-										</p>
-										강아지 성별 :
+										<p>성별</p>
 										<c:forEach items="${res.resDogList }" var="dog">
-										${dog.gender }								
-									</c:forEach>
+										<p><span class="glyphicon glyphicon-tag"></span>${dog.gender }</p>
+										</c:forEach>
 									</div>
 									<div class="col-lg-6">
 										<p></p>
 										<p>
-											서비스 시작 :
+											 <span class="glyphicon glyphicon-calendar"></span>서비스 시작
 											<fmt:formatDate value="${res.resSDate }" pattern="yyyy-MM-dd" />
 										</p>
 										<p>
-											서비스 종료 :
+											 <span class="glyphicon glyphicon-calendar"></span>서비스 종료
 											<fmt:formatDate value="${res.resEDate }" pattern="yyyy-MM-dd" />
 										</p>
 									</div>
 								</div>
 								<div class="row">
+								<!-- 다음 줄 시작 -->
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
 										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
-										<button type="button" class="btn btn-danger btn-sm">삭제하기</button>
+										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
 								</div>
-							</div>
+							</div> <!-- panel 헤드 -->
 							<div class="panel-body">
 								<div class="collapse" id="${res.resId }">
 									<div class="row">
@@ -66,10 +65,9 @@
 												<c:if test="${demand.code.category == '서비스' }">
 													<p>서비스 종류 : ${res.demandList[0].code.codeName }</p>
 												</c:if>
-
 											</c:forEach>
 											<p>
-												서비스 시작 :
+												 <span class="glyphicon glyphicon-calendar"></span>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
 													pattern="yyyy-MM-dd HH시 mm분" />
 											</p>
@@ -89,7 +87,7 @@
 												</c:if>
 											</c:forEach>
 											<p>
-												서비스 종료 :
+												 <span class="glyphicon glyphicon-calendar"></span>서비스 종료 :
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" />
 											</p>
@@ -116,7 +114,23 @@
 												</c:forEach>
 											</ul>
 										</div>
-										<div class="row">
+									</div>
+									<div class="row">
+											<div class="col-lg-5"></div>
+											<div class="col-lg-4">
+												<h5>요청 내용 상세</h5>
+											</div>
+											<div class="col-lg-3"></div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+												<div class="well-lg">
+												${res.resContents }
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
 											<div class="col-lg-10"></div>
 											<div class="col-lg-2">
 												<div class="col-lg-4"></div>
@@ -126,8 +140,8 @@
 												</div>
 												<div class="col-lg-4"></div>
 											</div>
-										</div>
-								<!--  --------- TODO: 여기서 부턴 시터 정보 -----------		-->
+									</div>
+										<!--  --------- TODO: 여기서 부턴 시터 정보 입력 -----------		-->
 									<!--  
 										<div class="row">
 										<div class="col-lg-4">
@@ -149,17 +163,18 @@
 										</div>
 										
 										-->
-										
-									</div>
 								</div>
-							</div>
-						</div>
-					</c:forEach>
+								
+							</div> <!-- panel 바디 -->
+						</div><!-- panel 폼-->
+						
+					</c:forEach><!-- 전체 예약 객체 ForEach문 끝 -->
 				</div>
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
 	</div>
 
-</body>
-</html>
+	
+	
+	
