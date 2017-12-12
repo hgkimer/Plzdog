@@ -199,9 +199,9 @@
 	<div class="row">
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
-			<h2 style="text-align: center">예약 의뢰 요청</h2>
+			<h2 style="text-align: center">예약 의뢰</h2>
 			<c:if test="${requestScope.sitter != null }">
-				<h3>${requestScope.sitter.memberName }에게보내는의뢰접수</h3>
+				<h3>${requestScope.sitter.memberName }님에게 보내는 의뢰접수</h3>
 			</c:if>
 			<form action="${initParam.rootPath }/member/reservation_add.do"
 				method="post" id="reservationForm">
@@ -249,8 +249,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<label>요구사항 체크</label>
-						</div>
+							<p><strong>요구 사항 체크</strong></p>
 						<div class="checkbox">
 							<c:forEach var="demand" items="${applicationScope.skillList }">
 								<label><input type="checkbox" name="demand"
@@ -258,11 +257,11 @@
 								<br>
 							</c:forEach>
 						</div>
+						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="form-group">
-							<label>돌봄 환경 체크</label>
-						</div>
+							<p><strong>돌봄 환경 체크</strong></p>
 						<div class="checkbox">
 							<c:forEach var="en" items="${applicationScope.enList }">
 								<label><input type="checkbox" name="demand"
@@ -270,15 +269,21 @@
 								<br>
 							</c:forEach>
 						</div>
+						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
-					<c:if test="${requestScope.sitter != null}">
-						<label for="price">금액</label>
-						<input type="number" id="price" name="price" value="" readonly>
-					</c:if>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+						<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->
+							<c:if test="${requestScope.sitter != null}">
+								<label for="price">가격</label><span class="glyphicons glyphicons-globe"></span>
+								<input type="number" id="price" name="price" value="" readonly class="form-control">
+							</c:if>
+						</div>
+					</div>
 				</div>
+				
 				<div class="form-group">
 					<!-- 강아지 목록을 불러오는 버튼(AJAX) -->
 					<input type="button" class="btn btn-info btn-block" id="dogBtn"
@@ -286,7 +291,7 @@
 				</div>
 				<div class="form-group">
 					<button type="submit" id="regBtn"
-						class="btn btn-default btn-lg btn-block">등록</button>
+						class="btn btn-warning btn-block">등록</button>
 				</div>
 				<!-- 로그인한 신청자 이메일을 전달하기 위함. 나중에 hidden 처리 -->
 				<input type="hidden"

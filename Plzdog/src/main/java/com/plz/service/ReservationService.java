@@ -172,7 +172,7 @@ public interface ReservationService {
 	 * @param email
 	 * @return
 	 */
-	List<Reservation> findReservationRes2(String mEmail, String sEmail);
+	List<Reservation> findReservationRes2(String email);
 	
 	/**
 	 * 의뢰자 email 로 결제가 완료된 회원정보 + 강아지 정보 
