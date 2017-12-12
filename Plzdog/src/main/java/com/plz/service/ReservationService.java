@@ -163,6 +163,13 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findCompletePaymentReservationSitter(String sitterEmail);
+	
+	/**
+	 * 시터 email로 승인 대기 중인 회원정보 + 강아지 정보 (자세히)
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> findWaitingForApprovalReservationSitter(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
 
 	//-----------------------Yoon gue seok----------------------------------

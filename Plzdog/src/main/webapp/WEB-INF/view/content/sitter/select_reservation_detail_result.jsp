@@ -29,6 +29,7 @@ function reject(){
 	} 
 }
 </script>
+
 <style type="text/css">
 	* {
 		margin:0 auto;
@@ -90,7 +91,7 @@ function reject(){
 			<button id ='rejectId' onclick='reject()'>거절</button>
 		</div>
 		<div class="res">
-			<%--이메일에 해당하는 예약에 대한 리스트 --%>
+			이메일에 해당하는 예약에 대한 리스트
 				<ul>
 					<li>예약상태 : ${sessionScope.resMember.resStatus}</li>
 					<li>시작날짜 : ${sessionScope.resMember.resSDate}</li>
@@ -130,4 +131,4 @@ function reject(){
 		</div>
 	</div>
 	
-	<div class="clear"></div>
+	<div class="clear"></div> --%>

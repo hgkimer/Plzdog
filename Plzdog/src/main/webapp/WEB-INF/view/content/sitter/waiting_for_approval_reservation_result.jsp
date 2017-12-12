@@ -1,10 +1,44 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:if test="${not empty requestScope.approveMessage}">
+	<script type="text/javascript">
+	var value = '<c:out value="${requestScope.approveMessage }"/>';
+		alert(value);
+	</script>
+</c:if>
+
+<c:if test="${not empty requestScope.rejectMessage}">
+	<script type="text/javascript">
+	var value = '<c:out value="${requestScope.rejectMessage }"/>';
+		alert(value);
+	</script>
+</c:if>
+
+<h2>시터 입장에서 승인 대기중 페이지</h2>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("")
 });
+
+function approve(){
+	if(confirm("승인 하시겠습니까?")){
+		location.href="${initParam.rootPath }/sitter/approve_reservation.do"; 
+	} else{ 
+		return false;
+	} 
+}
+function reject(){
+	if(confirm("거절 하시겠습니까?")){
+		location.href="${initParam.rootPath }/sitter/reject_reservation.do"; 
+	} else{ 
+		return false;
+	} 
+}
 </script>
 
 	<div class="container">
@@ -13,24 +47,24 @@ $(document).ready(function(){
 			<div class="col-lg-8">
 				<a href=""></a>
 				<div class="row">
-					<c:forEach items="${requestScope.list }" var="res">
+					<c:forEach items="${sessionScope.resList }" var="res">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="col-lg-4">
-									<img style="width: 300px" alt="강아지 사진"
-										src="${initParam.rootPath }/dogImage/${res.resDogList[0].dogImage[0].dogImage}">
+									<img style="width: 200px" alt="강아지 사진"
+										src="${initParam.rootPath }/dogImage/${res.resDetailList[0].dog.dogImage[0].dogImage}">
 								</div>
 								<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
 								<div class="col-lg-8">
 									<div class="col-lg-6">
 										<p></p>
 											<p>강아지 이름</p>
-											<c:forEach items="${res.resDogList }" var="dog">
-											<p><span class="glyphicon glyphicon-tag"></span>${dog.dogName }</p>	
-										</c:forEach>
+											<c:forEach items="${res.resDetailList}" var="resDetail">
+											<p><span class="glyphicon glyphicon-tag"></span>${resDetail.dog.dogName }</p>	
+											</c:forEach>
 										<p>성별</p>
-										<c:forEach items="${res.resDogList }" var="dog">
-										<p><span class="glyphicon glyphicon-tag"></span>${dog.gender }</p>
+										<c:forEach items="${res.resDetailList}" var="resDetail">
+										<p><span class="glyphicon glyphicon-tag"></span>${resDetail.dog.gender}</p>
 										</c:forEach>
 									</div>
 									<div class="col-lg-6">
@@ -49,10 +83,12 @@ $(document).ready(function(){
 								<!-- 다음 줄 시작 -->
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
-										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
-										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a>
+										<%-- <button type="button" class="btn btn-warning btn-sm">수정하기</button>
+										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a> --%>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
+											<button type="button" class="btn btn-info btn-sm" id ='approveId' onclick="location.href='approve_reservation.do?sitterEmail=${res.sitterEmail}&memberEmail=${res.memberEmail}'">승인</button>
+											<button type="button" class="btn btn-info btn-sm" id ='rejectId' onclick="location.href='reject_reservation.do?sitterEmail=${res.sitterEmail}&memberEmail=${res.memberEmail}'">거절</button>
 									</div>
 								</div>
 							</div> <!-- panel 헤드 -->
@@ -74,8 +110,6 @@ $(document).ready(function(){
 											<c:if test="${res.price > 0 }">
 												<p>금액 ${res.price }</p>
 											</c:if>
-
-
 										</div>
 										<div class="col-lg-6">
 											<!-- ApplicationScope에 저장된 예약 상태를 표시하는 코드리스트들을 가져와서 
@@ -98,7 +132,7 @@ $(document).ready(function(){
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<img alt="회원사진"
+											<img alt="회원사진" style="width: 200px"
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
@@ -141,28 +175,6 @@ $(document).ready(function(){
 												<div class="col-lg-4"></div>
 											</div>
 									</div>
-										<!--  --------- TODO: 여기서 부턴 시터 정보 입력 -----------		-->
-									<!--  
-										<div class="row">
-										<div class="col-lg-4">
-											<img
-												src="${initParam.rootPath }/memberImage/${res.member.imageMember}">
-										</div>
-										<div class="col-lg-4">
-											<p>시터 이메일 : ${res.member.email }</p>
-											<p>시터 이름 : ${res.member.memberName }</p>
-											<p>시터 전화번호 ${res.member.phoneNum }</p>
-										</div>
-										<div class="col-lg-4">
-											<p>※요구 사항※</p>
-											<ul>
-												<c:forEach items="${res.demandList }" var="demand">
-													<li>${demand.code.codeName }</li>
-												</c:forEach>
-											</ul>
-										</div>
-										
-										-->
 								</div>
 								
 							</div> <!-- panel 바디 -->
@@ -174,7 +186,3 @@ $(document).ready(function(){
 			<div class="col-lg-2"></div>
 		</div>
 	</div>
-
-	
-	
-	
