@@ -65,45 +65,49 @@ function inputCheck(){
 </script>
 
 
-
-<h2>회원 가입폼</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<h2></h2>
 <form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck();">
 	<sec:csrfInput/>
 	<div class="form-group">
-		<label for="pId">Email : </label>
+		<span class="glyphicon glyphicon-envelope"></span><label for="pId"> Email </label>
 		<input type="text" name="email" id="pId" class="form-control" required="required">
 	</div>
 	<div class="form-group">
-		<label for="pName">이름 : </label> 
+		<span class="glyphicon glyphicon-user"></span><label for="pName"> 이름 </label>
 		<input type="text" name="memberName" id="pName" class="form-control" required="required">
 	</div>
 	<div class="form-group">
-		<label for="pPwd">비밀번호 : </label>
+		<span class="glyphicon glyphicon-lock"></span><label for="pPwd"> 비밀번호 </label>
 		<input type="password" name="password" id="pPwd" class="form-control" required="required">
 	</div>
 	<div class="form-group">
-		<label for="pPwd2">비밀번호 확인 : </label>
+		<span class="glyphicon glyphicon-lock"></span><label for="pPwd2"> 비밀번호 확인 </label>
 		<input type="password" name="passwordTest" id="pPwd" class="form-control" required="required">
 	</div>
 	<div class="form-group">
-		<label for="pZip">우편번호 : </label>
+		<span class="glyphicon glyphicon-home"></span><label for="pZip"> 우편번호 </label>
 		<input class="btn btn-default"type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+		<p></p>
 		<input type="number" name="zipcode" id="pZip" class="form-control" required="required" readonly placeholder="우편번호">
 	</div>
 	<div class="form-group">
-		<label for="pMain">기본주소 : </label>
+		<span class="glyphicon glyphicon-home"></span><label for="pMain"> 기본주소 </label>
 		<input type="text" name="mainAddress" id="pMain" class="form-control" required="required" readonly placeholder="기본주소">
 	</div>
 	<div class="form-group">
-		<label for="pSub">상세주소 : </label>
+		<span class="glyphicon glyphicon-home"></span><label for="pSub"> 상세주소 </label>
 		<input type="text" name="subAddress" id="pSub" class="form-control" required="required" placeholder="상제 주소를 입력해 주세요.">
 	</div>
 	<div class="form-group">
-		<label for="pMember">이미지 : </label>
+		<span class="glyphicon glyphicon-picture"></span><label for="pMember">이미지</label>
 		<input type="file" name="imageMember" id="pMember" class="form-control" required="required">
 	</div>
 	<div class="form-group">
-		<label for="pPhone">전화번호 : </label>
+		<span class="glyphicon glyphicon-phone"></span><label for="pPhone">전화번호 </label>
 		<input type="text" name="phoneNum" id="pPhone" class="form-control" required="required">
 	</div>
 	<input type="hidden" name="memberEnable" value='1'>
@@ -111,3 +115,11 @@ function inputCheck(){
 		<input type="submit" value="전송" class="btn btn-default btn-lg btn-block " id="btn">
 	</div>
 </form>
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+</div>
+
+
+
+
