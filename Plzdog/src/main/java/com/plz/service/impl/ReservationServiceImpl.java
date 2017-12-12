@@ -268,6 +268,29 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		return resList;
 	}
+	
+	public List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail1(String email) {
+		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
+		List<Reservation> resList = dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		//2. 의뢰자, 강아지, 요구사항 내용을 각 예약객체에 세팅한다.
+		for(Reservation r : resList) {
+			//의뢰자 정보 세팅
+			r.setMember(mDao.selectMemberByEmail(r.getMemberEmail()));
+			ArrayList<Dog> dogList = new ArrayList<>();
+ 			//강아지들의 아이디를 통해  예약 상세정보당 강아지의 부가 정보와 이미지들을 반복해서 세팅.
+			for(ResDetail rd : r.getResDetailList()) {
+				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
+				//정보를 저장한 강아지들을 리스트에 담는다.
+				dogList.add(rd.getDog()); 
+			}
+			//강아지의 전체 정보를 담은 리스트를 각 예약객체에 세팅.
+			r.setResDogList(dogList);
+			//예약 아이디와 일치하는 Demand 리스트 세팅.
+			Reservation res= dao.selectDetailSitterReservationDemandCodeByResId(r.getResId());
+			r.setDemandList(res.getDemandList());
+		}
+		return resList;
+	}
 
 	@Override
 	public Reservation findDetailMemberWaitingProposalReservationDemandCodeByResId(int resId) {
