@@ -72,7 +72,6 @@ a {
 				</div>
 				<div class="dogOwner">
 					<ul class="navList">
-						<li>예약상태 : ${reservation.resStatus}</li>
 						<li>시작날짜 : ${reservation.resSDate}</li>
 						<li>끝날짜 : ${reservation.resEDate}</li>
 						<li>예약에 대한 가격 : ${reservation.price}</li>

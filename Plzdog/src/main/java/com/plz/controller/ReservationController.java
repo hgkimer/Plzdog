@@ -144,7 +144,7 @@ public class ReservationController {
 		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
 		}
 		rService.removeReservation(resId);
-		return new ModelAndView("member/delete_reservation_result.tiles");
+		return new ModelAndView("member/search_reservation_res1.tiles");
 	}
 	
 	
@@ -291,16 +291,16 @@ public class ReservationController {
 	 * ####################################################################################
 	 */
 	/**
-	 * 
+	 * 매개변수로 받은 사용자의 이메일을 통해 res-1 상태인 예약을 조회하여 list에 저장한다.
 	 * @param email
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/member/select_reservation_simple")
+	@RequestMapping("/member/search_reservation_res1")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
 		model.addAttribute("list", list);
-		return "member/search_reservation_simple_test.tiles";
+		return "member/search_reservation_res1.tiles";
 	}
 	/**
 	 * 견주 마이페이지 - 예약 조회 - 자세히 보기

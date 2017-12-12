@@ -27,10 +27,11 @@
 				});
 	});
 </script>
+<div class="col-lg-3"></div>
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-6" style="margin-left:100px;">
 		<h1 style="text-align:center">강아지 등록하기</h1>
 			<form action="${initParam.rootPath }/dog/insertDog.do"
 				method="post" enctype="multipart/form-data">

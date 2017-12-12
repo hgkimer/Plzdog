@@ -170,7 +170,7 @@
 																	.each(
 																			function() {
 																				var dog = this;
-																				txt += "<label><input type='checkbox' class='dogChk' name='mydog' value='"+this.dogId+"''/>"
+																				txt += "<label class='checkbox-inline'><input type='checkbox' class='dogChk' name='mydog' value='"+this.dogId+"''/>"
 																						+ this.dogName
 																						+ "</label>";
 																			});//end of each
@@ -197,8 +197,9 @@
 
 <div class="container">
 	<div class="row">
+		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
-			<h2>의뢰 접수</h2>
+			<h2 style="text-align: center">시터에게 의뢰 접수</h2>
 			<c:if test="${requestScope.sitter != null }">
 				<h3>${requestScope.sitter.memberName }에게보내는 의뢰 접수</h3>
 			</c:if>
@@ -294,5 +295,6 @@
 				</c:if>
 			</form>
 		</div>
+		<div class="col-lg-3"></div>
 	</div>
 </div>

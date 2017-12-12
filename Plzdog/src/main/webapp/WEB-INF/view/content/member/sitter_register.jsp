@@ -13,6 +13,8 @@
 </head>
 <body>
 	<div class="container">
+		<div class=col-lg-3></div>
+	
 		<div class="row">
 			<div class="col-lg-6">
 				<h2>시터 등록</h2>
