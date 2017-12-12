@@ -65,6 +65,9 @@
 <div class="col-lg-3"></div>
 
 <div class="two">
+	<a href="#">승인 대기중 예약</a>
+	
+	
 	<div class="mypage-form" style="margin-left:20px;">
 		<form action="${initParam.rootPath }/member/search_reservation_res1.do" method="post" class="member-form">
 			<sec:csrfInput/>
@@ -86,5 +89,5 @@
 		<input type="hidden" name="sitterEmail" value='<sec:authentication property="principal.email"/>'/>
 		<button type="submit" class="btn-primary">결제가 완료된 예약 조회(시터)</button>
 	</form>
-
+		</div>
 </div>

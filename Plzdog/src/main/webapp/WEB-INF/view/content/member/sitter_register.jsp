@@ -17,7 +17,7 @@
 	
 		<div class="row">
 			<div class="col-lg-6">
-				<h2>시터 등록</h2>
+				<p></p>
 				<form action="${initParam.rootPath }/member/insert_sitter.do"
 					method="post" enctype="multipart/form-data">
 					<sec:csrfInput />
@@ -48,7 +48,9 @@
 							type="number" name="givePrice" id="givePrice"
 							class="form-control" required="required">
 					</div>
-					<div class="form-group">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
 						<label>보유 기술 목록 :</label>
 						<div class="checkbox">
 							<c:forEach var="skill" items="${applicationScope.skillList }">
@@ -59,7 +61,9 @@
 							</c:forEach>
 						</div>
 					</div>
-					<div class="form-group">
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
 						<label>보유 환경 목록 : </label>
 						<div class="checkbox">
 							<c:forEach var="en" items="${applicationScope.enList }">
@@ -69,11 +73,13 @@
 							</c:forEach>
 						</div>
 					</div>
+						</div>
+					</div>
 					<input type="hidden" name="sitterRate" value="0">
 					<div class="clear"></div>
-					<div class="btn">
+					<div class="form-group">
 						<input type="submit" value="전송" id="sitterBtn" name="sitterBtn"
-							class="btn btn-default">
+							class="btn btn-warning btn-block">
 					</div>
 				</form>
 			</div>

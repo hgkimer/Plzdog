@@ -199,9 +199,9 @@
 	<div class="row">
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
-			<h2 style="text-align: center">시터에게 의뢰 접수</h2>
+			<h2 style="text-align: center">예약 의뢰 요청</h2>
 			<c:if test="${requestScope.sitter != null }">
-				<h3>${requestScope.sitter.memberName }에게보내는 의뢰 접수</h3>
+				<h3>${requestScope.sitter.memberName }에게보내는의뢰접수</h3>
 			</c:if>
 			<form action="${initParam.rootPath }/member/reservation_add.do"
 				method="post" id="reservationForm">
@@ -246,26 +246,31 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="form-group">
-					<label>요구사항 체크</label>
-				</div>
-				<div class="checkbox">
-					<c:forEach var="demand" items="${applicationScope.skillList }">
-						<label><input type="checkbox" name="demand"
-							class="demandChk" value="${demand.code }">${demand.codeName }</label>
-						<br>
-					</c:forEach>
-
-				</div>
-				<div class="form-group">
-					<label>돌봄 환경 체크</label>
-				</div>
-				<div class="checkbox">
-					<c:forEach var="en" items="${applicationScope.enList }">
-						<label><input type="checkbox" name="demand" class="enChk"
-							value="${en.code }">${en.codeName }</label>
-						<br>
-					</c:forEach>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>요구사항 체크</label>
+						</div>
+						<div class="checkbox">
+							<c:forEach var="demand" items="${applicationScope.skillList }">
+								<label><input type="checkbox" name="demand"
+									class="demandChk" value="${demand.code }">${demand.codeName }</label>
+								<br>
+							</c:forEach>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>돌봄 환경 체크</label>
+						</div>
+						<div class="checkbox">
+							<c:forEach var="en" items="${applicationScope.enList }">
+								<label><input type="checkbox" name="demand"
+									class="enChk" value="${en.code }">${en.codeName }</label>
+								<br>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<!-- jQuery로 서비스 종류에 따라 다른 금액이 들어가게 -->

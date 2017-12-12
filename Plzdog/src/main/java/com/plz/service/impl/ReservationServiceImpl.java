@@ -240,15 +240,9 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	//-------------------------김호규------------------------------------
 	@Override
-	public List<Reservation> findSimpleMemberWaitingProposalReservationMemberByEmail(String email) {
-		//1. 자신의 이메일에 해당하는 res-1 예약 조회
-		return null;
-	}
-
-	@Override
-	public List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
+	public List<Reservation> findReservationRes1(String email) {
 		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
-		List<Reservation> resList = dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		List<Reservation> resList = dao.selectReservationRes1JoinResDetailAndDog(email);
 		//2. 의뢰자, 강아지, 요구사항 내용을 각 예약객체에 세팅한다.
 		for(Reservation r : resList) {
 			//의뢰자 정보 세팅
@@ -262,23 +256,23 @@ public class ReservationServiceImpl implements ReservationService{
 			}
 			//강아지의 전체 정보를 담은 리스트를 각 예약객체에 세팅.
 			r.setResDogList(dogList);
-			
 			//예약 아이디와 일치하는 Demand 리스트 세팅.
-			Reservation res= dao.selectDetailSitterReservationDemandCodeByResId(r.getResId());
+			Reservation res= dao.selectReservationDemandCodeByResId(r.getResId());
 			r.setDemandList(res.getDemandList());
 		}
 		return resList;
 	}
-
 	@Override
-	public Reservation findDetailMemberWaitingProposalReservationDemandCodeByResId(int resId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reservation> findSimpleMemberWaitingApprovaltReservationMemberByEmail(String email) {
-		// TODO Auto-generated method stub
+	public List<Reservation> findReservationRes2(String mEmail, String sEmail) {
+		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
+		List<Reservation> resList = dao.selectReservationRes2JoinResDetailAndDog(mEmail);
+		//2. 의뢰자, 시터, 강아지 요구사항 정보를 각 예약 겍체에 세팅한다.
+		for(Reservation r : resList) {
+			//
+			r.setMember(mDao.selectMemberByEmail(mEmail));
+		}
+		
+		
 		return null;
 	}
 

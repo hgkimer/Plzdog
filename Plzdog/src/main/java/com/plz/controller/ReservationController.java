@@ -138,7 +138,6 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/delete_reservation")
 	public ModelAndView removeReservation(@RequestParam int resId) {
-		System.out.println(resId);
 		if(rService.findReservationById(resId) == null) {
 			String error = "삭제할 예약이 없습니다.";
 		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
@@ -273,7 +272,7 @@ public class ReservationController {
 		return "sitter/select_all_request_reservation_result.tiles";
 	}
 	
-	/* 수정 중
+	/* 김호규
 	 * ####################################################################################
 	 */
 	/**
@@ -284,24 +283,11 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/search_reservation_res1")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
-		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		List<Reservation> list = rService.findReservationRes1(email);
 		model.addAttribute("list", list);
 		return "member/search_reservation_res1.tiles";
 	}
-	/**
-	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
-	 * @param email
-	 * @param model
-	 * @return``
-	 */
-	/*
-	@RequestMapping("/member/select_reservation_detail")
-	public String selectDetailReservationMember(@RequestParam String email, Model model) {
-		List<Reservation> list = rService.selectDetailReservationMember(email);
-		model.addAttribute("list", list);
-		return "member/select_reservation_detail_result.tiles";
-	}
-	*/
+	
 	/*
 	 * ####################################################################################
 	 */

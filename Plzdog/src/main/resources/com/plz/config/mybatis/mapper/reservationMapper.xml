@@ -302,49 +302,32 @@
 			</association>
 		</collection>
 	</resultMap>
-	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 회원정보 - 간단히-->
-	<select id="selectSimpleMemberWaitingProposalReservationMemberByEmail" parameterType="string" resultMap="simple-reservation-res_detail-dog-resultmap">
-		<include refid="simple-res-resdetail-dog-select"/>
-		where r.email = #{email}
-		and r.res_id = rd.res_id 
-		and r.email = d.email
-		and rd.dog_id = d.dog_id
-		and	r.res_status = 'res-1'
-	</select> 
 	
-	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 강아지 정보 -간단히-->
-	<select id="selectSimpleMemberWaitingProposalReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - + res detail + dog-->
+	<select id="selectReservationRes1JoinResDetailAndDog" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"/>
 		where r.email = #{email}
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-1' 
 	</select> 
-	
-	<!-- 의뢰자의 마이페이지 - 견적대기 예약(res-1) - 회원이 선택한 서비스 요구사항 - 자세히-->
-	<select id="selectDetailMemberWaitingProposalReservationDemandCodeByResId" parameterType="_int" resultMap="detail-sitter-res-demand-code-resulmap">
-		<include refid="detail-sitter-res-demand-code-sql"/>
-		where r.res_id = #{resId}
-		and r.res_id = d.res_id 
-		and d.code_demand = c.code(+)
-	</select>
 
-	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 회원정보 -간단히-->
-	<select id="selectSimpleMemberWaitingApprovaltReservationMemberByEmail" parameterType="string" resultMap="simple-res-member-resultmap">
-		<include refid="simple-sitter-res-member-sql"/>
-		where r.email = #{email} 
-		and r.email = m.email
-		and	r.res_status = 'res-2'
-	</select> 
-	
-	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -간단히-->
-	<select id="selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -->
+	<select id="selectReservationRes2JoinResDetailAndDog" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"/>
 		where r.email = #{email}
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-2' 
 	</select> 
+	
+	<!-- 회원이 선택한 서비스 요구사항 - demand + code-->
+	<select id="selectReservationDemandCodeByResId" parameterType="_int" resultMap="detail-sitter-res-demand-code-resulmap">
+		<include refid="detail-sitter-res-demand-code-sql"/>
+		where r.res_id = #{resId}
+		and r.res_id = d.res_id 
+		and d.code_demand = c.code(+)
+	</select>
 	<!-- 
 	####################################################################################################
 	-->
@@ -471,25 +454,5 @@
 	 <delete id = "deleteDemand" parameterType="_int">
 	 	delete from Demand where res_id = #{resId}
 	 </delete>
-	 
-	 <resultMap type="Demand" id="demand-code-resultmap">
-	 	<id column="res_id" property="resId"/>
-	 	<result column="code_demand" property="codeDemand"/>
-	 	<association property="code" javaType="Code">
-	 		<id column="code" property="code"/>
-	 		<result column="code_name" property="codeName"/>
-	 		<result column="category" property="category"/>
-	 	</association>
-	 </resultMap>
-	 
-	 <select id="selectDemandJoinCodebyResId" resultMap="demand-code-resultmap" parameterType="_int">
-	 	SELECT 	d.res_id, 
-	 			d.code_demand,
-	 			c.code,
-	 			c.code_name,
-	 			c.category
-	 	FROM	demand d, code c
-	 	WHERE	d.res_id = #{value}
-	 	AND		d.code_demand(+) = c.code
-	 </select>
+
 </mapper>
