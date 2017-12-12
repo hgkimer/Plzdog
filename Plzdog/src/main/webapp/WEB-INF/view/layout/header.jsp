@@ -42,12 +42,15 @@
 	
 	.nav {
 		width:auto;
-		height:100%;
 		float:right;
-		margin-right:20px;
+		font-weight:bold;
 	}
 	
 	.afew:hover {
+		background-color:rgba(0,0,0,0.1);
+	}
+	
+	.much:hover {
 		background-color:rgba(0,0,0,0.1);
 	}
 	
@@ -72,18 +75,19 @@
 		height:100px;
 	}
 	
-	::-webkit-scrollbar {
-		display:none;
-	} 
 	
-	.w3-teal {
+	.w3-teal, .afew, .much, ::-webkit-scrollbar, ::-webkit-scrollbar {
 		display:none;
 	}
 	
-	
-	.afew {
-		display:none;
+	.much, .afew {
+		width:100%;
+		height:30px;
+		font-size:15px;
+		background-color:#d1d1d1;
+		line-height:30px;
 	}
+
 </style>
 </head>
 
@@ -99,25 +103,29 @@
 	<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
 		<button onclick="w3_close()" class="w3-bar-item w3-large" id="also">Close &times;</button>
 		<ul class="nav" style="margin-top:20px; width:100%; text-align:center;">
-			<sec:authorize access="isAuthenticated()">
-				 <!-- Authentication의 getPrincipal() 호출 - User 리턴 -->
-				<sec:authentication property="principal.memberName"/> 님 환영합니다.<br>
-			</sec:authorize>
 			
 			<%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_SITTER')">
-				<li><a href="${initParam.rootPath }/member/mydog_register_form.do">강아지 등록</a></li>
-				<li><a href="${initParam.rootPath }/member/member_result_form.do">사용자 정보조회</a></li>
+				<li><a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a></li>
+				<li><a href="${initParam.rootPath }/member/mydog_register_form.do">강아지 관리</a></li>
 			</sec:authorize>
 			
 			<sec:authorize access="hasRole('ROLE_MEMBER')">
 				<li><a id="few" style="cursor: pointer;">예약 조회</a>
 					<ul class="big">
-						<li class="afew"><a href="${initParam.rootPath }/member/search_reservation.do">내가 작성한 예약 조회</a></li>
-						<sec:authorize access="hasRole('ROLE_SITTER')">
-							<li class="afew"><a href="${initParam.rootPath }/sitter/select_reservation_simple.do">내게 온 예약 조회</a></li>
-						</sec:authorize>
-						<li class="afew"><a href="${initParam.rootPath }/sitter/complete_payment_reservation_result.do">결제 완료된 예약 조회</a></li>
+						<li class="afew"><a href="#">견적 대기중인 예약</a></li>
+						<li class="afew"><a href="#">승인 대기중 예약</a></li>
+						<li class="afew"><a href="#">결제 완료 예약</a></li>
+					</ul>
+				</li>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ROLE_SITTER')">
+				<li><a id="more" style="cursor: pointer;">내게 온 예약 조회</a>
+					<ul class="small">
+						<li class="much"><a href="#">승인 대기중 예약</a></li>
+						<li class="much"><a href="#">결제 대기중 예약</a></li>
+						<li class="much"><a href="#">결제 완료 예약</a></li>
 					</ul>
 				</li>
 			</sec:authorize>
@@ -183,6 +191,13 @@ $(document).ready(function(){
 	});
 	$("#also").on("click", function(){
 		$(".afew").hide();
+	});
+	
+	$("#more").on("click", function(){
+		$(".much").slideToggle();
+	});
+	$("#also").on("click", function(){
+		$(".much").hide();
 	});
 });
 </script>
