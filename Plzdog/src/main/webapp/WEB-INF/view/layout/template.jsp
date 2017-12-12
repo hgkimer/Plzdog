@@ -48,7 +48,7 @@ html, body {
 </head>
 <body>
 <div class="wrap">
-	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="header"/>
 	<div class="clear"></div>
 	<%--메인 body --%>
 		<%-- 메뉴 --%>
