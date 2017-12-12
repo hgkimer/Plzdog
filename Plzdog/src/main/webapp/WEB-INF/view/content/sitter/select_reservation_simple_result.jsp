@@ -4,9 +4,20 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript">
+<c:if test="${not empty requestScope.approveMessage}">
+	<script type="text/javascript">
+	var value = '<c:out value="${requestScope.approveMessage }"/>';
+		alert(value);
+	</script>
+</c:if>
 
-</script>
+<c:if test="${not empty requestScope.rejectMessage}">
+	<script type="text/javascript">
+	var value = '<c:out value="${requestScope.rejectMessage }"/>';
+		alert(value);
+	</script>
+</c:if>
+
 <style type="text/css">
 * {
 	margin: 0 auto;

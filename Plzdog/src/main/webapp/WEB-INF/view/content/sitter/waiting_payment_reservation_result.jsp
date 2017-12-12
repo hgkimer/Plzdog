@@ -18,7 +18,7 @@
 	});
 </script>
 
-<h2>시터 입장에서 결제 완료된 페이지</h2>
+<h2>시터 입장에서 결제 대기중인 페이지</h2>
 <div class="container">
 		<div class="row">
 			<div class="col-lg-2"></div>

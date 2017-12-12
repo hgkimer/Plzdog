@@ -98,6 +98,16 @@ public class ReservationDaoImpl implements ReservationDao {
 	public List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail) {
 		return session.selectList(makeSqlId("selectCompletePaymentReservationResDetailDogByEmail"), sitterEmail);
 	}
+	
+	@Override
+	public List<Reservation> selectWaitingPaymentReservationMemberByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectWaitingPaymentReservationMemberByEmail"), sitterEmail);
+	}
+
+	@Override
+	public List<Reservation> selectWaitingPaymentReservationResDetailDogByEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectWaitingPaymentReservationResDetailDogByEmail"), sitterEmail);
+	}
 
 	// ----------------------------------------------
 
