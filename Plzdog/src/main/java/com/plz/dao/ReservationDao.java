@@ -100,43 +100,25 @@ public interface ReservationDao {
 	 *  김호규/ 건들지 마시오
 	 */
 	/**
-	 * 매개변수로 받은 예약번호에 해당하는 Demand객체로 이루어진 리스트를 조회하는 메소드.
-	 * @param resId
-	 * @return
-	 */
-	List<Demand> selectDemandJoinCodebyResId(int resId);
-	/**
-	 * 매개변수로 받은 Email을 가지고 있는 견적 대기 예약정보와 회원정보를 조회하는 메소드.
-	 * @param email
-	 * @return
-	 */
-	List<Reservation> selectSimpleMemberWaitingProposalReservationMemberByEmail(String email);
-	
-	/**
 	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
+	 * res-1
 	 * @param email 견주 email
 	 * @return
 	 */
-	List<Reservation> selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email);
+	List<Reservation> selectReservationRes1JoinResDetailAndDog(String email);
 	/**
-	 * 매개변수로 받은 예약아이디와 일치하는 견적 대기 예약의 요구사항을 조회하는 메소드.
+	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
+	 * res-2
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectReservationRes2JoinResDetailAndDog(String email);
+	/**
+	 * 매개변수로 받은 예약아이디와 일치하는 예약의 요구사항을 조회하는 메소드.
 	 * @param resId
 	 * @return
 	 */
-	Reservation selectDetailMemberWaitingProposalReservationDemandCodeByResId(int resId);
-	/**
-	 * 매개변수로 받은 Email을 가지고 있는 견적 대기 예약정보와 회원정보를 조회하는 메소드.
-	 * @param email
-	 * @return
-	 */
-	List<Reservation> selectSimpleMemberWaitingApprovaltReservationMemberByEmail(String email);
-	/**
-	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지 정보를 조회하는 메소드.
-	 * @param email
-	 * @return
-	 */
-	List<Reservation> selectSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email);
-	
+	Reservation selectReservationDemandCodeByResId(int resId);
 	
 	/*
 	 * ################################################################
@@ -186,23 +168,39 @@ public interface ReservationDao {
 	Reservation selectDetailSitterReservationDemandCodeByResId(int resId);
 	
 	/**
-	 * 시터 이메일로 확정된 예약을 조회
+	 * 시터 이메일로 결제완료된 예약을 조회
 	 * @param sitterEmail
 	 * @return
 	 */
 	List<Reservation> selectCompletePaymentReservationMemberByEmail(String sitterEmail);
 	
 	/**
-	 * 시터 이메일로 강아지 정보 조회
+	 * 시터 이메일로 결제완료 된 강아지 정보 조회
 	 * @param sitterEmail
 	 * @return
 	 */
 	List<Reservation> selectCompletePaymentReservationResDetailDogByEmail(String sitterEmail);
 	
+	/**
+	 * 시터 이메일로  결제대기 증인 예약을 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectWaitingPaymentReservationMemberByEmail(String sitterEmail);
+	
+	/**
+	 * 시터 이메일로  결제대기 증인 강아지 정보 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Reservation> selectWaitingPaymentReservationResDetailDogByEmail(String sitterEmail);
 	// -----------------------Lee su il----------------------------------
+	
 	List<Reservation> selectAllMemberReservationMember();
 	
 	List<Reservation> selectMemberReservationResDetailDogByEmail(String email);
+	
+	
 	
 	// -----------------------Yoon gue seok--------------------------------
 	

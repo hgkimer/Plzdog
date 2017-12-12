@@ -4,9 +4,12 @@ package com.plz.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicToolBarUI.DockingListener;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.plz.dao.AuthorityDao;
 import com.plz.dao.DogDao;
@@ -222,6 +225,79 @@ public class ReservationServiceImpl implements ReservationService{
 		return memberList;
 	}
 	
+	@Override
+	public List<Reservation> findWaitingPaymentReservationInfoByEmail(String sitterEmail){
+		//시터이메일 해당하는 예약
+		//견주들이 해당 시터한테 신청한 예약
+		List<Reservation> memberList = dao.selectWaitingPaymentReservationMemberByEmail(sitterEmail);
+
+		//해당 시터가 가진 견주들의 강아지 정보
+		List<Reservation> dogList = dao.selectWaitingPaymentReservationResDetailDogByEmail(sitterEmail);
+
+		for(Reservation resMember : memberList) {
+			for(Reservation resDog : dogList) {
+				if(resMember.getResId() == resDog.getResId()) {
+					resMember.setResDetailList(resDog.getResDetailList());
+				}
+			}
+		}
+		return memberList;
+	}
+	
+	@Override
+	public List<Reservation> findCompletePaymentReservationSitter(String sitterEmail){
+				//시터이메일 해당하는 예약
+				//견주들이 해당 시터한테 신청한 예약들 중에 결제 완료 한 예약
+		
+				//sitterEmail, res-5 : 결제 완료
+				List<Reservation> memberList = findCompletePaymentReservationInfoByEmail(sitterEmail);
+				
+				//시터에게 온 회원의 요구사항
+				Reservation skillList = new Reservation();
+				
+				//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
+				for(int i =0; i< memberList.size() ; i++) {
+					
+					skillList = findDetailSitterReservationDemandCodeByResId(memberList.get(i).getResId());
+					
+					//해당 회원의 요구사항을 회원 리스트에 넣는다.
+					memberList.get(i).setDemandList(skillList.getDemandList());
+					
+					for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
+						//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
+						memberList.get(i).getResDetailList().get(j).setDog(dDao.selectDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
+					}
+				}
+				return memberList;
+	}
+	
+	@Override 
+	public List<Reservation> findWaitingPaymentReservationSitter(String sitterEmail){
+		//시터이메일 해당하는 예약
+		//견주들이 해당 시터한테 신청한 예약들 중에 결제 완료 한 예약
+
+		//sitterEmail, res-4 : 결제 대기
+		List<Reservation> memberList = findWaitingPaymentReservationInfoByEmail(sitterEmail);
+		
+		//시터에게 온 회원의 요구사항
+		Reservation skillList = new Reservation();
+		
+		//시터에게 온 회원의 강아지 스킬 + 강아지 이미지
+		for(int i =0; i< memberList.size() ; i++) {
+			
+			skillList = findDetailSitterReservationDemandCodeByResId(memberList.get(i).getResId());
+			
+			//해당 회원의 요구사항을 회원 리스트에 넣는다.
+			memberList.get(i).setDemandList(skillList.getDemandList());
+			
+			for(int j=0; j < memberList.get(i).getResDetailList().size() ; j++) {
+				//해당 회원의 강아지들의 정보를 회원의 dogList에 넣는다.
+				memberList.get(i).getResDetailList().get(j).setDog(dDao.selectDogJoinDogInfoDogImageByDogId(memberList.get(i).getResDetailList().get(j).getDogId()));
+			}
+		}
+		return memberList;
+	}
+	
 	// -----------------------Lee su il----------------------------------
 
 	//------------------------Yoon gue seok------------------------------
@@ -240,21 +316,15 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	//-------------------------김호규------------------------------------
 	@Override
-	public List<Reservation> findSimpleMemberWaitingProposalReservationMemberByEmail(String email) {
-		//1. 자신의 이메일에 해당하는 res-1 예약 조회
-		return null;
-	}
-
-	@Override
-	public List<Reservation> findSimpleMemberWaitingProposalReservationResDetailDogByEmail(String email) {
+	public List<Reservation> findReservationRes1(String email) {
 		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
-		List<Reservation> resList = dao.selectSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		List<Reservation> resList = dao.selectReservationRes1JoinResDetailAndDog(email);
 		//2. 의뢰자, 강아지, 요구사항 내용을 각 예약객체에 세팅한다.
 		for(Reservation r : resList) {
 			//의뢰자 정보 세팅
 			r.setMember(mDao.selectMemberByEmail(r.getMemberEmail()));
 			ArrayList<Dog> dogList = new ArrayList<>();
- 			//강아지들의 아이디를 통해  예약 상세정보당 강아지의 부가 정보와 이미지들을 반복해서 세팅.
+			//예약 상세 리스트를 반복문을 돌려 해당하는 강아지의 ID를 통해 강아지 상세 정보와 이미지들을 반복해서 세팅.
 			for(ResDetail rd : r.getResDetailList()) {
 				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
 				//정보를 저장한 강아지들을 리스트에 담는다.
@@ -262,24 +332,36 @@ public class ReservationServiceImpl implements ReservationService{
 			}
 			//강아지의 전체 정보를 담은 리스트를 각 예약객체에 세팅.
 			r.setResDogList(dogList);
-			
 			//예약 아이디와 일치하는 Demand 리스트 세팅.
-			Reservation res= dao.selectDetailSitterReservationDemandCodeByResId(r.getResId());
+			Reservation res= dao.selectReservationDemandCodeByResId(r.getResId());
 			r.setDemandList(res.getDemandList());
 		}
+		//모든 정보를 저장한 예약 타입의 리스트들을 리턴.
 		return resList;
 	}
-
 	@Override
-	public Reservation findDetailMemberWaitingProposalReservationDemandCodeByResId(int resId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reservation> findSimpleMemberWaitingApprovaltReservationMemberByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reservation> findReservationRes2(String email) {
+		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
+		List<Reservation> resList = dao.selectReservationRes2JoinResDetailAndDog(email);
+		//2. 의뢰자, 시터, 강아지 요구사항 정보를 각 예약 겍체에 세팅한다.
+		for(Reservation r : resList) {
+			//의뢰자 정보 세팅
+			r.setMember(mDao.selectMemberByEmail(email));
+			//의뢰를 접수하기 희망하는 시터의 정보 세팅
+			r.setSitter(mDao.selectSitterByEmail(r.getSitterEmail()));
+			//예약 상세 리스트를 반복문을 돌려 해당하는 강아지의 ID를 통해 강아지 상세 정보와 이미지들을 반복해서 세팅.
+			ArrayList<Dog> dogList = new ArrayList<>();
+			for(ResDetail rd : r.getResDetailList()) {
+				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
+				//정보를 저장한 강아지들을 리스트에 담는다.
+				dogList.add(rd.getDog());
+			}
+			//강아지의 전체 정보를 담은 리스트를 각 예약 객체에 세팅
+			Reservation res = dao.selectReservationDemandCodeByResId(r.getResId());
+			r.setDemandList(res.getDemandList());
+		}
+		//모든 정보를 저장한 예약 타입의 리스트들을 리턴.
+		return resList;
 	}
 
 	@Override

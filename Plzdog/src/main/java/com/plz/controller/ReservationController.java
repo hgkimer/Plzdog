@@ -26,6 +26,7 @@ import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Dog;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.ResDetail;
 import com.plzdog.vo.Reservation;
 
 
@@ -138,7 +139,6 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/delete_reservation")
 	public ModelAndView removeReservation(@RequestParam int resId) {
-		System.out.println(resId);
 		if(rService.findReservationById(resId) == null) {
 			String error = "삭제할 예약이 없습니다.";
 		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
@@ -165,22 +165,6 @@ public class ReservationController {
 		return "sitter/select_reservation_simple_result.tiles";
 	}
 	
-	/*@RequestMapping("/sitter/select_reservation_simple_approve")
-	public String findSimpleReservationSitterApprove(@RequestParam HashMap<String,String> emailAndApprove, 
-			HttpServletRequest reqeust,	Model model) {
-				//시터이메일 해당하는 예약
-				//견주들이 해당 시터한테 신청한 예약
-				System.out.println(emailAndApprove);
-				
-				List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(emailAndApprove.get("sitterEmail"));
-				
-				model.addAttribute("memberList",memberList);
-				model.addAttribute("approveMessage",emailAndApprove.get("approveMessage"));
-				System.out.println(memberList);
-				System.out.println(emailAndApprove.get("approveMessage"));
-		return "sitter/select_reservation_simple_result.tiles";
-	}*/
-	
 	/**
 	 * 시터 마이페이지 - 예약 조회 - 자세히 보기
 	 * @param email
@@ -194,9 +178,7 @@ public class ReservationController {
 		
 		//시터에게 온 회원 + 회원의 강아지 정보
 		List<Reservation> memberList = rService.findSimpleSitterReservationInfoByEmail(sitterEmail);
-		for(Reservation r : memberList) {
-			System.out.println(r);
-		}
+		
 		//시터에게 온 회원의 요구사항
 		Reservation skillList = new Reservation();
 		
@@ -216,12 +198,25 @@ public class ReservationController {
 		}
 		
 		for(Reservation res : memberList) {
-			System.out.println(res);
 			if(res.getMemberEmail().equals(memberEmail)) {
 				session.setAttribute("resMember", res);
 			}
 		}
 		return "sitter/select_reservation_detail_result.tiles";
+	}
+	
+	/**
+	 * 
+	 * @param sitterEmail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("sitter/waiting_payment_reservation_result.do")
+	public String findWaitingPaymentReservation(@RequestParam String sitterEmail, Model model) {
+				//결제 완료된 시터 정보
+				List<Reservation> memberList = rService.findWaitingPaymentReservationSitter(sitterEmail);
+				model.addAttribute("memberList",memberList);				
+		return "sitter/complete_payment_reservation_result.tiles";
 	}
 	
 	/**
@@ -231,14 +226,11 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("sitter/complete_payment_reservation_result.do")
-	public String findCompletePaymentReservationSitter(@RequestParam String sitterEmail, Model model) {
-				//시터이메일 해당하는 예약
-				//견주들이 해당 시터한테 신청한 예약들 중에 결제 완료 한 예약
-		
-				//sitterEmail, res-5 : 결제 완료
-				List<Reservation> memberList = rService.findCompletePaymentReservationInfoByEmail(sitterEmail);
-				
+	public String findCompletePaymentReservation(@RequestParam String sitterEmail, Model model) {
+				//결제 완료된 시터 정보
+				List<Reservation> memberList = rService.findCompletePaymentReservationSitter(sitterEmail);
 				model.addAttribute("memberList",memberList);
+				
 		return "sitter/complete_payment_reservation_result.tiles";
 	}
 	
@@ -273,7 +265,7 @@ public class ReservationController {
 		return "sitter/select_all_request_reservation_result.tiles";
 	}
 	
-	/* 수정 중
+	/* 김호규
 	 * ####################################################################################
 	 */
 	/**
@@ -284,24 +276,11 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/search_reservation_res1")
 	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
-		List<Reservation> list = rService.findSimpleMemberWaitingProposalReservationResDetailDogByEmail(email);
+		List<Reservation> list = rService.findReservationRes1(email);
 		model.addAttribute("list", list);
 		return "member/search_reservation_res1.tiles";
 	}
-	/**
-	 * 견주 마이페이지 - 예약 조회 - 자세히 보기
-	 * @param email
-	 * @param model
-	 * @return``
-	 */
-	/*
-	@RequestMapping("/member/select_reservation_detail")
-	public String selectDetailReservationMember(@RequestParam String email, Model model) {
-		List<Reservation> list = rService.selectDetailReservationMember(email);
-		model.addAttribute("list", list);
-		return "member/select_reservation_detail_result.tiles";
-	}
-	*/
+	
 	/*
 	 * ####################################################################################
 	 */
