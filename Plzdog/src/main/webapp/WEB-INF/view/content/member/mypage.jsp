@@ -12,7 +12,6 @@
 		height:250px;
 	}
 </style>
-<<<<<<< HEAD
 
 <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="box-shadow:0px 5px 5px gray;">
 		<ul class="nav" style="margin-top:20px; width:100%; text-align:center; position:absolute; z-index:1000;">
@@ -57,42 +56,14 @@
 				<li><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a>
 			</sec:authorize>
 		</ul>
-=======
-<div class="container" style="font-size: 20px;">
-	<div class="row">
-		<div class="col-sm-2">회원 이미지</div><br>
-		<div class="memberImage">
-			<img src="${initParam.rootPath }/memberImage/<sec:authentication property='principal.memberImage'/>" class="img-responsive" width="350px">
-		</div>
-
-      <div class="col-sm-2">Email</div>
-      <div class="col-sm-6"><sec:authentication property="principal.email"/></div>
-
-      <div class="col-sm-2">이름</div>
-      <div class="col-sm-6"><sec:authentication property="principal.memberName"/></div>
-
-      <div class="col-sm-2">회원 주소</div>
-      <div class="col-sm-6"><sec:authentication property="principal.mainAddress"/> <sec:authentication property="principal.subAddress"/></div>
-
-		<div class="col-sm-2">우편번호</div>
-		<div class="col-sm-6"><sec:authentication property="principal.zipcode"/></div>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
-	</div>
-<<<<<<< HEAD
-
+</div>
 
 <div class="col-lg-3" style="height:100%; float:left;"></div>
 <div class="col-lg-6" style="font-size:18px; margin-top:150px;">
 	<div class="col-lg-6 memberImage">
 		<img src="${initParam.rootPath }/memberImage/<sec:authentication property='principal.memberImage'/>" class="img-responsive" width="350px">
-=======
-	<div class="row" style="margin-top:20px">
-		<div class="col-sm-12">
-			<a href="${initParam.rootPath }/member/member_edit_form.do" class="btn btn-default">정보수정</a>
-		</div>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 	</div>
-<<<<<<< HEAD
+
 	<div class="blank">
 		<div class="col-lg-2">Email</div>
 		<div class="col-lg-4"><sec:authentication property="principal.email"/></div>
@@ -113,6 +84,7 @@
 <div class="col-lg-3" style="height:100%; float:right;"></div>
 
 
+
 <script>
 $(document).ready(function(){
 	$("#few").on("click", function(){
@@ -124,6 +96,4 @@ $(document).ready(function(){
 	});
 });
 </script>
-=======
-</div>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
+
