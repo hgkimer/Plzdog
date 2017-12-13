@@ -11,6 +11,7 @@
 
    <context:component-scan base-package="com.plz.controller" />
 
+<<<<<<< HEAD
    <mvc:annotation-driven />
    
    <!--

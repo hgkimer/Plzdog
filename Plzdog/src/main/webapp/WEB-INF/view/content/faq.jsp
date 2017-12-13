@@ -4,6 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 </head>
 <body>
 FAQ 입니다.

@@ -43,11 +43,14 @@ public class DogController {
 		if(memberService.findMemberByEmail(email) != null) {
 			List<Dog> dogList = service.selectDogByEmail(email);
 			model.addAttribute("dogList", dogList);
-			return "dog/mydog_into";
+			for(Dog dog : dogList) {
+				System.out.println(dog);
+			}
+			return "member/mydog_into.tiles";
 		} else {
 			String errorMessage = "없는 email입니다.";
 			model.addAttribute("errorMessage", errorMessage);
-			return "dog/mydog_into";
+			return "member/mydog_into.tiles";
 		}
 	}
 	
@@ -56,14 +59,14 @@ public class DogController {
 		if(service.selectDogByEmail(dog.getEmail()) != null) {
 			service.updateDog(dog);
 			model.addAttribute("dog", dog);
-			return "dog/update_result";
+			return "dog/update_result.tiles";
 		} else {
 			String errorMessage = "없는 email입니다.";
 			model.addAttribute("errorMessage", errorMessage);
-			return "dog/update_result";
+			return "dog/update_result.tiles";
 		}
 	}
 	
 //	@RequestMapping("delete_dog")
-//	public 
+//	public String deleteDog
 }

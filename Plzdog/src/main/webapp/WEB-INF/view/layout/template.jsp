@@ -12,7 +12,16 @@
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <style>
-
+	footer {
+    	bottom:0;
+    	width:100%;
+    	height:70px;
+   	 	background:#ccc;
+   	 	position:absolute;
+   	 	left:0;
+   	 	right:0;
+   	 	z-index:1;
+	}
 html, body {
 	width:100%;
 	height:100%;
@@ -55,9 +64,12 @@ html, body {
 			<tiles:insertAttribute name="menu"/>
 		<!-- 내용 -->
 			<tiles:insertAttribute name="content"/>
-	<!-- 푸터 -->
-	<tiles:insertAttribute name="footer" />
 </div>
-
+<!-- 푸터 -->
+<div class="row">
+	<div class="col-sm-12">
+		<tiles:insertAttribute name="footer" />
+	</div>
+</div>
 </body>
 </html>
