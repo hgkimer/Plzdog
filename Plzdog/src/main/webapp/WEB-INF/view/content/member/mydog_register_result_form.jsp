@@ -6,7 +6,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style type="text/css">
-	
+#mySidebar {
+	display:none;
+}
 </style>
 
 <h3>강아지 등록 결과</h3>

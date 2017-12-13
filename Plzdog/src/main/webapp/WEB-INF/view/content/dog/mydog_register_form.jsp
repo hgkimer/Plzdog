@@ -27,6 +27,12 @@
 				});
 	});
 </script>
+
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 <div class="col-lg-3"></div>
 
 <div class="container">

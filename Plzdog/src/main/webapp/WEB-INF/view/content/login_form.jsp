@@ -6,6 +6,12 @@
 $(document)
 
 </script>
+
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 <%--
 	CSRF(Cross site request forgery, 사이트간 요청 위조)란 웹 사이트의 취약점을 
 	이용하여 사용자가 의도하지 않는 요청을 송신하도록 하는 공격의 의미합니다.

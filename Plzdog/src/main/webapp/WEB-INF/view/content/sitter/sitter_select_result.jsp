@@ -71,6 +71,10 @@ table td{
 table{
 	border-collapse: collapse;
 }
+
+#mySidebar {
+	display:none;
+}
 </style>
 
 <h2>시터 조회</h2>

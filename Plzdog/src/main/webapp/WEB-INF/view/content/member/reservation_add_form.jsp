@@ -195,6 +195,11 @@
 					});//end of document
 </script>
 
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3"></div>
