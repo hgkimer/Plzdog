@@ -10,6 +10,19 @@
 $(document).ready(function(){
 	$("")
 });
+
+function popupRegisterCare(){
+	window.open("${initParam.rootPath}/sitter/care_register_form.do","newCareRegisterForm","width = 1000, height = 1000");
+}
+function popupEditCare(){
+	window.open("care_edit_form.do","newCareRegisterForm","width = 500, height = 400");
+}
+function popupDeleteCare(){
+	window.open("care_register_form.do","newCareRegisterForm","width = 500, height = 400");
+}
+function popupSelectCare(){
+	window.open("care_register_form.do","newCareRegisterForm","width = 500, height = 400");
+}
 </script>
 
 	<div class="container">
@@ -92,8 +105,8 @@ $(document).ready(function(){
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" />
 											</p>
-											<button type="button" class="btn btn-default">돌봄일지
-												조회</button>
+											<button type="button" class="btn btn-default" onclick='popupRegisterCare()'>돌봄일지
+												관리</button>
 											<p></p>
 										</div>
 									</div>

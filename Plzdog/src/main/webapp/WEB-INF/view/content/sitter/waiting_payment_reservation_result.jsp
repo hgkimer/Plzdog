@@ -107,9 +107,6 @@ $(document).ready(function(){
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" />
 											</p>
-											<button type="button" class="btn btn-default">돌봄일지
-												조회</button>
-											<p></p>
 										</div>
 									</div>
 									<div class="row">
