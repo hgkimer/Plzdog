@@ -43,11 +43,11 @@ public class DogController {
 		if(memberService.findMemberByEmail(email) != null) {
 			List<Dog> dogList = service.selectDogByEmail(email);
 			model.addAttribute("dogList", dogList);
-			return "dog/select_result";
+			return "dog/mydog_into";
 		} else {
 			String errorMessage = "없는 email입니다.";
 			model.addAttribute("errorMessage", errorMessage);
-			return "dog/select_result";
+			return "dog/mydog_into";
 		}
 	}
 	
