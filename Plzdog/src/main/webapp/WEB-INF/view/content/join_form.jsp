@@ -64,6 +64,11 @@ function inputCheck(){
 }
 </script>
 
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 
 <div class="container">
 	<div class="row">

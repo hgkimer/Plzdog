@@ -275,26 +275,7 @@ public class ReservationController {
 		model.addAttribute("memberList",memberList);
 		return "sitter/select_all_request_reservation_result.tiles";
 	}
-	
-	/* 김호규
-	 * ####################################################################################
-	 */
-	/**
-	 * 매개변수로 받은 사용자의 이메일을 통해 res-1 상태인 예약을 조회하여 list에 저장한다.
-	 * @param email
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/member/search_reservation_res1")
-	public String selectSimpleReservationMember(@RequestParam String email, Model model) {
-		List<Reservation> list = rService.findReservationRes1(email);
-		model.addAttribute("list", list);
-		return "member/search_reservation_res1.tiles";
-	}
-	
-	/*
-	 * ####################################################################################
-	 */
+
 	/**
 	 * 관리자 페이지  - 예약 조회 - 간단히 보기
 	 * @param email
@@ -321,4 +302,44 @@ public class ReservationController {
 		model.addAttribute("list", list);
 		return "admin/select_reservation_detail_result.tiles";
 	}
+	
+	/* 김호규
+	 * ####################################################################################
+	 */
+	/**
+	 * 매개변수로 받은 사용자의 이메일을 통해 res-1 상태인 예약을 조회하여 list에 저장한다.
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/search_reservation_res1")
+	public String findReservationRes1Member(@RequestParam String email, Model model) {
+		List<Reservation> list = rService.findReservationRes1(email);
+		if(list.isEmpty()) {
+			model.addAttribute("errorMessage","등록한 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "member/search_reservation_res1.tiles";
+	}
+	/**
+	 * 시터에게 견적을 신청할 수 있는 견적 대기 상태(res-1)의 예약들을 전체 조회하는
+	 * 컨트롤러 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/sitter/search_reservation_res1_all")
+	public String findReservationRes1Sitter(Model model) {
+		List<Reservation> list = rService.findReservationAllRes1Sitter();
+		if(list.isEmpty()) {
+			model.addAttribute("erroMessage", "등록된 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "sitter/search_reservation_res1_sitter.tiles";
+	}
+	
+	/*
+	 * ####################################################################################
+	 */
 }

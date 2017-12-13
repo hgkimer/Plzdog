@@ -38,6 +38,10 @@ h4 {
 	color:gray;
 }
 
+#mySidebar {
+	display:none;
+}
+
 </style>
 
 <div class="slide">

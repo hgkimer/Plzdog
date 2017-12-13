@@ -76,7 +76,7 @@
    }
    
    
-   .w3-teal, .afew, .much, ::-webkit-scrollbar, ::-webkit-scrollbar {
+   .afew, .much, ::-webkit-scrollbar {
       display:none;
    }
    
@@ -87,6 +87,15 @@
       background-color:#d1d1d1;
       line-height:30px;
    }
+   
+   .blank {
+      width:100%;
+      height:200px;
+   }
+   
+   .img-responsive {
+      height:250px;
+   }
 
 </style>
 </head>
@@ -94,26 +103,51 @@
 <body>
    <header>
    <%-- 사이드 바 --%>
-   <div class="w3-teal" style="width:50px; height:100px; float:left;">
-   <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
-      <div class="w3-container">
-      </div>
-   </div>
          
-   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
-      <button onclick="w3_close()" class="w3-bar-item w3-large" id="also">Close &times;</button>
-      <ul class="nav" style="margin-top:20px; width:100%; text-align:center;">
+   
+      
+      <!-- 
+         로그아웃전송폼
+         + 로그인/로그아웃은 반드시 POST방식으로 요청하며 csrf 토큰을 보내야 한다.
+         + 로그아웃은 단순 링크이므로 아래와 같이 hidden 폼을 말들고 클릭시 Javascript에서 form을 submit하여 처리한다.
+       -->
+      
+         <form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
+             <sec:csrfInput/>
+         </form>
+
+      <%-- 헤더 부분 --%>
+         <ul class="nav">
+            <%--인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴 --%>
+            <sec:authorize access="!isAuthenticated()">
+               <li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
+               <li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
+               <li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
+            </sec:authorize>
+            
+            <sec:authorize access="isAuthenticated()">
+               <li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="${initParam.rootPath }/image/foot.png">도그시터 신청하기</a></li>
+               <li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="${initParam.rootPath }/image/search.png">도그시터 찾기</a></li>
+               <li class="navi"><a href="${initParam.rootPath }/member/mypage.do">마이페이지</a></li>
+               <li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
+               <li class="navi"><a id="logout" style="cursor: pointer;">로그아웃</a></li>
+            </sec:authorize>
+         </ul>
+   </header>
+   
+   <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="box-shadow:0px 5px 5px gray;">
+      <ul class="nav" style="margin-top:20px; width:100%; text-align:center; position:absolute; z-index:1000;">
          
          <%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
          <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_SITTER')">
             <li><a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a></li>
-            <li><a href="${initParam.rootPath }/member/mydog_register_form.do">강아지 관리</a></li>
+            <li><a href="${initParam.rootPath }/dog/select_dog.do?email=<sec:authentication property="principal.email"/>">강아지 관리</a></li>
          </sec:authorize>
          
          <sec:authorize access="hasRole('ROLE_MEMBER')">
             <li><a id="few" style="cursor: pointer;">예약 조회</a>
                <ul class="big">
-                  <li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res1.do?email=<sec:authentication property="principal.email"/>">견적 대기중인 예약</a></li>
+                  <li class="afew"><a href="#">견적 대기중인 예약</a></li>
                   <li class="afew"><a href="#">승인 대기중 예약</a></li>
                   <li class="afew"><a href="#">결제 완료 예약</a></li>
                </ul>
@@ -123,10 +157,10 @@
          <sec:authorize access="hasRole('ROLE_SITTER')">
             <li><a id="more" style="cursor: pointer;">내게 온 예약 조회</a>
                <ul class="small">
-                  <li class="much"><a href="#">나를 기다리는 예약</a></li>
-                  <li class="much"><a href="${initParam.rootPath }/sitter/select_reservation_simple.do?sitterEmail=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
-                  <li class="much"><a href="${initParam.rootPath }/sitter/waiting_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 대기중 예약</a></li>
-                  <li class="much"><a href="${initParam.rootPath }/sitter/complete_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 완료 예약</a></li>
+               	  <li class="much"><a href="#">나를 기다리는 예약</a></li>
+                  <li class="much"><a href="${initParam.rootPath }/sitter/waiting_for_approval_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
+				  <li class="much"><a href="${initParam.rootPath }/sitter/waiting_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 대기중 예약</a></li>
+				  <li class="much"><a href="${initParam.rootPath }/sitter/complete_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 완료 예약</a></li>
                </ul>
             </li>
          </sec:authorize>
@@ -145,36 +179,7 @@
             <li><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a>
          </sec:authorize>
       </ul>
-      
-      <!-- 
-         로그아웃전송폼
-         + 로그인/로그아웃은 반드시 POST방식으로 요청하며 csrf 토큰을 보내야 한다.
-         + 로그아웃은 단순 링크이므로 아래와 같이 hidden 폼을 말들고 클릭시 Javascript에서 form을 submit하여 처리한다.
-       -->
-      
-         <form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
-             <sec:csrfInput/>
-         </form>
-   </div>
-
-      <%-- 헤더 부분 --%>
-         <ul class="nav">
-            <%--인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴 --%>
-            <sec:authorize access="!isAuthenticated()">
-               <li class="navi"><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
-               <li class="navi"><a href="${initParam.rootPath }/join_form.do">회원가입</a></li>
-               <li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
-            </sec:authorize>
-            
-            <sec:authorize access="isAuthenticated()">
-               <li class="navi"><a href="${initParam.rootPath }/member/sitter_register.do"><img src="${initParam.rootPath }/image/foot.png">도그시터 신청하기</a></li>
-               <li class="navi"><a href="${initParam.rootPath }/member/search_sitter.do"><img src="${initParam.rootPath }/image/search.png">도그시터 찾기</a></li>
-               <li class="navi"><a href="${initParam.rootPath }/main.do">메인페이지</a></li>
-               <li class="navi"><a href="${initParam.rootPath }/member/mypage.do">마이페이지</a></li>
-               <li class="navi"><a id="logout" style="cursor: pointer;">로그아웃</a></li>
-            </sec:authorize>
-         </ul>
-   </header>
+</div>
 <script>
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
@@ -187,19 +192,15 @@ $(document).ready(function(){
    $(".navi > #logout").on("click", function(){
       $("#logoutForm").submit();
    });
-   $("#few").on("click", function(){
-      $(".afew").slideToggle();
-   });
-   $("#also").on("click", function(){
-      $(".afew").hide();
-   });
    
-   $("#more").on("click", function(){
-      $(".much").slideToggle();
-   });
-   $("#also").on("click", function(){
-      $(".much").hide();
-   });
+   $("#few").on("click", function(){
+	      $(".afew").slideToggle();
+	   });
+	   
+	   $("#more").on("click", function(){
+	      $(".much").slideToggle();
+	   });
+
 });
 </script>
 </body>

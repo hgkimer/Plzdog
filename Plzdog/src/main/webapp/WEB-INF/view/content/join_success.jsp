@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 <h2>가입 정보</h2>
 	email : ${requestScope.member.email}<br>
 	회원이름 : ${requestScope.member.memberName}<br>

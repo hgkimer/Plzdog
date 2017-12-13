@@ -121,6 +121,24 @@ public class SitterController {
 		return "sitter/sitter_register_result.tiles";
 	}
 	
+
+	@RequestMapping("/sitter/update_sitter")
+	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
+		if(memberService.findMemberByEmail(sitter.getEmail()) != null) {
+			memberService.updateMember(sitter);
+			model.addAttribute("sitter", sitter);
+			return "sitter/sitter_update_result.tiles";
+		} else {
+			return "sitter/sitter_update_error.tiles";
+		}
+	}
+	
+	/*@RequestMapping("/sitter/select_res")
+	public String selectResId(@RequestParam String email, Model model) {
+		model.addAttribute("res", rService.findMemberReservationByEmail(email));
+		return null;
+	}*/
+	
 	/**
 	 * 돌봄 일지 등록
 	 * 돌봄 일지의 등록과 여러개의 이미지 처리
@@ -132,36 +150,24 @@ public class SitterController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/sitter/insert_care")
-	public String insertCare(@ModelAttribute Care care,
-			HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
+	public String insertCare(@ModelAttribute Care care, HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
 		if(care == null) {
 			model.addAttribute("errorMessage","객체가 없습니다.");
 		}
 		careService.insertCare(care,request);
 		model.addAttribute(care);
-		return "sitter/care_register_result_form.tiles";
+		return "/WEB-INF/view/content/sitter/care_register_result_form.jsp";
 	}
 	
-	/*@RequestMapping("/sitter/update_care")
+	@RequestMapping("/sitter/update_care")
 	public String updateCare(@ModelAttribute Care care, ModelMap model) {
-		if(service.selectCareJoinCareImage(care.getResId()) != null) {
-//			
-			service.updateCare(care);
+		if(careService.selectCareJoinCareImage(care.getResId()) != null) {
+	
+			careService.updateCare(care);
 			model.addAttribute(care);
 			return "sitter/care_success.tiles";
 		} else {
 			return "sitter/fail.tiles";
-		}
-	}*/
-
-	@RequestMapping("/sitter/update_sitter")
-	public String updateSitter(@ModelAttribute Member sitter, ModelMap model) {
-		if(memberService.findMemberByEmail(sitter.getEmail()) != null) {
-			memberService.updateMember(sitter);
-			model.addAttribute("sitter", sitter);
-			return "sitter/sitter_update_result.tiles";
-		} else {
-			return "sitter/sitter_update_error.tiles";
 		}
 	}
 	

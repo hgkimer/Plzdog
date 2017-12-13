@@ -51,6 +51,10 @@
 	color: white;
 	float: left;
 }
+
+#mySidebar {
+	display:none;
+}
 </style>
 </head>
 <body>

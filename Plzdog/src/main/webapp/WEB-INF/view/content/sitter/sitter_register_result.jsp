@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 </head>
 <body>
 <h1>시터 신청 완료</h1>

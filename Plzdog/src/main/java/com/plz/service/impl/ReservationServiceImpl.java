@@ -379,6 +379,7 @@ public class ReservationServiceImpl implements ReservationService{
 				//정보를 저장한 강아지들을 리스트에 담는다.
 				dogList.add(rd.getDog());
 			}
+			r.setResDogList(dogList);
 			//강아지의 전체 정보를 담은 리스트를 각 예약 객체에 세팅
 			Reservation res = dao.selectReservationDemandCodeByResId(r.getResId());
 			r.setDemandList(res.getDemandList());
@@ -388,10 +389,26 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public List<Reservation> findSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reservation> findReservationAllRes1Sitter() {
+		//1. res-1 상태인 예약 전체 조회
+		List<Reservation> resList = dao.selectReservationAllRes1();
+		for(Reservation r : resList) {
+			//예약 객체의 회원 이메일을 통해 회원정보를 세팅
+			r.setMember(mDao.selectMemberByEmail(r.getMemberEmail()));
+			ArrayList<Dog> dogList = new ArrayList<>();
+			for(ResDetail rd : r.getResDetailList()) {
+				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
+				//정보를 저장한 강아지들을 리스트에 담는다.
+				dogList.add(rd.getDog());
+			}
+			r.setResDogList(dogList);
+			//강아지의 전체 정보를 담은 리스트를 각 예약 객체에 세팅
+			Reservation res = dao.selectReservationDemandCodeByResId(r.getResId());
+			r.setDemandList(res.getDemandList());
+		}
+		return resList;
 	}
+
 
 	//----------------------------------------------------------------------
 }

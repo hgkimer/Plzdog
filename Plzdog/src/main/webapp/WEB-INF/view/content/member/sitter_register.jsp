@@ -10,6 +10,12 @@
 <script type="text/javascript">
 	
 </script>
+
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 </head>
 <body>
 	<div class="container">

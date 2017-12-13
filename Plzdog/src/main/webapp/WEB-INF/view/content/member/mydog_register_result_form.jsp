@@ -6,16 +6,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style type="text/css">
-	
+#mySidebar {
+	display:none;
+}
 </style>
 
 <h3>강아지 등록 결과</h3>
 
-<button onclick="location.href='mydog_register_form.do'">강아지 등록하기</button>
-
 <div class="form-group">
 	<label for="dogImageId">강아지 이미지 : </label><br>
-	<c:forEach items="${dog.dogImage }" var="dogImage">
+	<c:forEach items="${requestScope.dog.dogImage }" var="dogImage">
 		<img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
 	</c:forEach>
 </div>

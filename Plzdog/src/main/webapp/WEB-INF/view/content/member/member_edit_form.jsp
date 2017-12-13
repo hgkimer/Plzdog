@@ -41,6 +41,12 @@ function sample4_execDaumPostcode() {
        window.close();
 }
 </script>
+
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-2"></div>

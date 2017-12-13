@@ -95,34 +95,6 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectDetailReservationSitter(String email);
 	
-	/*
-	 * ################################################################
-	 *  김호규/ 건들지 마시오
-	 */
-	/**
-	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
-	 * res-1
-	 * @param email 견주 email
-	 * @return
-	 */
-	List<Reservation> selectReservationRes1JoinResDetailAndDog(String email);
-	/**
-	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
-	 * res-2
-	 * @param email
-	 * @return
-	 */
-	List<Reservation> selectReservationRes2JoinResDetailAndDog(String email);
-	/**
-	 * 매개변수로 받은 예약아이디와 일치하는 예약의 요구사항을 조회하는 메소드.
-	 * @param resId
-	 * @return
-	 */
-	Reservation selectReservationDemandCodeByResId(int resId);
-	
-	/*
-	 * ################################################################
-	 */
 	
 	/**
 	 * 관리자 페이지 - 모든 예약 조회 - 간단히 보기
@@ -203,6 +175,40 @@ public interface ReservationDao {
 	
 	
 	// -----------------------Yoon gue seok--------------------------------
+	/*
+	 * ################################################################
+	 *  김호규/ 건들지 마시오
+	 */
+	/**
+	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
+	 * res-1
+	 * @param email 견주 email
+	 * @return
+	 */
+	List<Reservation> selectReservationRes1JoinResDetailAndDog(String email);
+	/**
+	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
+	 * res-2
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectReservationRes2JoinResDetailAndDog(String email);
+	/**
+	 * 매개변수로 받은 예약아이디와 일치하는 예약의 요구사항을 조회하는 메소드.
+	 * @param resId
+	 * @return
+	 */
+	Reservation selectReservationDemandCodeByResId(int resId);
+	/**
+	 * 시터가 견적 제출을 위해 모든 회원의 예약들 중 견적 대기 상태(res-1)인
+	 * 예약을 조회해 호는 select 메소드.
+	 * @return
+	 */
+	List<Reservation> selectReservationAllRes1();
+	
+	/*
+	 * ################################################################
+	 */
 	
 	
 }

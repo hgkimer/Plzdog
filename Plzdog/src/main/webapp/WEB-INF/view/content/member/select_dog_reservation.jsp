@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#mySidebar {
+	display:none;
+}
+</style>
 </head>
 <body>
 강아지를 선택해 주세요<br>
