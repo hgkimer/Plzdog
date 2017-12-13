@@ -203,10 +203,12 @@ public interface ReservationService {
 	List<Reservation> findReservationRes2(String email);
 	
 	/**
-	 * 의뢰자 email 로 결제가 완료된 회원정보 + 강아지 정보 
-	 * @param email
+	 * 의뢰자에게 견적을 보내기 위해 견적 대기중인 예약(res-1)상태인 예약 들을 조회해 온다.
+	 * 	1. res-1인 예약들을 전체 조회
+	 * 	2. 의뢰자, 강아지, 요구사항을 해당 예약 객체에 세팅한다.
+	 * 	3. list return
 	 * @return
 	 */
-	List<Reservation> findSimpleMemberWaitingApprovaltReservationResDetailDogByEmail(String email);
+	List<Reservation> findReservationAllRes1Sitter();
 	
 }

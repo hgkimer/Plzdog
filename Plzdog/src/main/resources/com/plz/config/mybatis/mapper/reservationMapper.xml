@@ -345,6 +345,14 @@
 		and r.res_id = d.res_id 
 		and d.code_demand = c.code(+)
 	</select>
+	
+	<!-- 시터가 모든 res-1인 예약을 조회하는 select -->
+	<select id="selectReservationAllRes1" resultMap="simple-reservation-res_detail-dog-resultmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"></include>
+		WHERE	res_status = 'res-1'
+		AND r.res_id = t.res_id
+		AND t.dog_id = d.dog_id
+	</select>
 	<!-- 
 	####################################################################################################
 	-->
