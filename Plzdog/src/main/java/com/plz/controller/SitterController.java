@@ -133,11 +133,11 @@ public class SitterController {
 		}
 	}
 	
-	@RequestMapping("/sitter/select_res")
+	/*@RequestMapping("/sitter/select_res")
 	public String selectResId(@RequestParam String email, Model model) {
 		model.addAttribute("res", rService.findMemberReservationByEmail(email));
 		return null;
-	}
+	}*/
 	
 	/**
 	 * 돌봄 일지 등록
@@ -150,8 +150,7 @@ public class SitterController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/sitter/insert_care")
-	public String insertCare(@ModelAttribute Care care,
-			HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
+	public String insertCare(@ModelAttribute Care care, HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
 		if(care == null) {
 			model.addAttribute("errorMessage","객체가 없습니다.");
 		}
