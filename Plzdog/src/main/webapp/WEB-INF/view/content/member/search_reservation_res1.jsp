@@ -23,24 +23,20 @@
 								<div class="col-lg-8">
 									<div class="col-lg-6">
 										<p></p>
-											<p>강아지 이름</p>
+											<label>강아지 이름</label>
 											<c:forEach items="${res.resDogList }" var="dog">
-											<p><span class="glyphicon glyphicon-tag"></span>${dog.dogName }</p>	
-										</c:forEach>
-										<p>성별</p>
-										<c:forEach items="${res.resDogList }" var="dog">
-										<p><span class="glyphicon glyphicon-tag"></span>${dog.gender }</p>
+											<p><span class="glyphicons glyphicons-dog"></span>${dog.dogName }</p>	
 										</c:forEach>
 									</div>
 									<div class="col-lg-6">
 										<p></p>
 										<p>
-											 <span class="glyphicon glyphicon-calendar"></span>서비스 시작
-											<fmt:formatDate value="${res.resSDate }" pattern="yyyy-MM-dd" />
+											 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작
+											<fmt:formatDate value="${res.resSDate }" pattern="yyyy-MM-dd" /></label>
 										</p>
 										<p>
-											 <span class="glyphicon glyphicon-calendar"></span>서비스 종료
-											<fmt:formatDate value="${res.resEDate }" pattern="yyyy-MM-dd" />
+											 <span class="glyphicon glyphicon-calendar"></span><label>서비스 종료
+											<fmt:formatDate value="${res.resEDate }" pattern="yyyy-MM-dd" /></label>
 										</p>
 									</div>
 								</div>
@@ -54,7 +50,7 @@
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
 								</div>
-							</div> <!-- panel 헤드 -->
+							</div> <!-- END OF panel 헤드 -->
 							<div class="panel-body">
 								<div class="collapse" id="${res.resId }">
 									<div class="row">
@@ -62,19 +58,15 @@
 											<c:forEach items="${res.demandList }" var="demand">
 												<!-- 요구사항 목록중 카테고리가 서비스인 코드만 출력 -->
 												<c:if test="${demand.code.category == '서비스' }">
-													<p>서비스 종류 : ${res.demandList[0].code.codeName }</p>
+													<label>서비스 종류 : ${res.demandList[0].code.codeName }</label><br>
 												</c:if>
 											</c:forEach>
-											<p>
-												 <span class="glyphicon glyphicon-calendar"></span>서비스 시작 :
+												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
-													pattern="yyyy-MM-dd HH시 mm분" />
-											</p>
+													pattern="yyyy-MM-dd HH시 mm분" /></label>
 											<c:if test="${res.price > 0 }">
-												<p>금액 ${res.price }</p>
+												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
 											</c:if>
-
-
 										</div>
 										<div class="col-lg-6">
 											<!-- ApplicationScope에 저장된 예약 상태를 표시하는 코드리스트들을 가져와서 
@@ -82,13 +74,13 @@
 											<c:forEach items="${applicationScope.resList }"
 												var="resStatus">
 												<c:if test="${resStatus.code == res.resStatus }">
-													<p>예약 상태 : ${resStatus.codeName	}</p>
+													<label>예약 상태 : ${resStatus.codeName	}</label><br>
 												</c:if>
 											</c:forEach>
 											<p>
-												 <span class="glyphicon glyphicon-calendar"></span>서비스 종료 :
+												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 종료 :
 												<fmt:formatDate value="${res.resEDate }"
-													pattern="yyyy-MM-dd HH시 mm분" />
+													pattern="yyyy-MM-dd HH시 mm분" /></label>
 											</p>
 											<button type="button" class="btn btn-default">돌봄일지
 												조회</button>
@@ -101,30 +93,58 @@
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
-											<p>신청자 이메일 : ${res.member.email }</p>
-											<p>신청자 이름 : ${res.member.memberName }</p>
-											<p>신청자 전화번호 ${res.member.phoneNum }</p>
+											<p><strong><span class="glyphicon glyphicon-envelope"></span> ${res.member.email }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-user"></span> ${res.member.memberName }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-phone-alt"></span> ${res.member.phoneNum }</strong></p>
 										</div>
 										<div class="col-lg-4">
-											<p>※요구 사항※</p>
-											<ul>
+											<span class="glyphicon glyphicon-th-list"></span><label>요구 사항</label><br>
+											<ol>
 												<c:forEach items="${res.demandList }" var="demand">
-													<li>${demand.code.codeName }</li>
+													<li><strong>${demand.code.codeName }</strong></li>
 												</c:forEach>
-											</ul>
+											</ol>
 										</div>
 									</div>
+									<c:forEach items="${res.resDogList }" var="dog">
+									<div class="row">
+										<div class="col-lg-4">
+											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
+											<c:forEach items="${dog.dogImage }" var="dogImage">
+											<img alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
+											</c:forEach>
+										</div>
+										
+										<div class="col-lg-4">
+											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
+											<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong></p>
+											<p><strong>무게  ${dog.weight }kg</strong></p>
+											<p><strong><span class="glyphicon glyphicon-gift"></span> <fmt:formatDate value="${dog.birth }" pattern="yyyy-MM-dd"/></strong></p>
+										</div>
+										<div class="col-lg-4">
+											<!-- 강아지 상세 정보 -->
+											<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
+											<c:forEach items="${dog.dogInfoList }" var="dogInfo">
+												<ol>
+													<li><strong>${dogInfo.code.codeName }</strong></li>
+												</ol>
+											</c:forEach>
+										</div>
+									</div>
+									</c:forEach>
 									<div class="row">
 											<div class="col-lg-5"></div>
 											<div class="col-lg-4">
-												<h5>요청 내용 상세</h5>
+												<label>요청 내용 상세</label><br>
 											</div>
 											<div class="col-lg-3"></div>
 									</div>
 									<div class="row">
 										<div class="col-lg-12">
 												<div class="well-lg">
-												${res.resContents }
+												<strong>${res.resContents }</strong>
 											</div>
 										</div>
 									</div>
