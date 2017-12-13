@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -150,10 +151,11 @@ public class SitterController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/sitter/insert_care")
+	@Transactional
 	public String insertCare(@ModelAttribute Care care, HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
-		if(care == null) {
+		/*if(care == null) {
 			model.addAttribute("errorMessage","객체가 없습니다.");
-		}
+		}*/
 		careService.insertCare(care,request);
 		model.addAttribute(care);
 		return "/WEB-INF/view/content/sitter/care_register_result_form.jsp";
@@ -162,13 +164,21 @@ public class SitterController {
 	@RequestMapping("/sitter/update_care")
 	public String updateCare(@ModelAttribute Care care, ModelMap model) {
 		if(careService.selectCareJoinCareImage(care.getResId()) != null) {
-	
 			careService.updateCare(care);
 			model.addAttribute(care);
 			return "sitter/care_success.tiles";
 		} else {
 			return "sitter/fail.tiles";
 		}
+	}
+	
+	@RequestMapping("/sitter/select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
+	//request.getParameter
+	public String selectCareJoinCareImage(@RequestParam int resId, ModelMap model) throws Exception {
+		List<Care> list = careService.selectCareJoinCareImage(resId);
+		//request.Dispatcher
+		model.addAttribute("careList", list);
+		return "sitter/complete_payment_reservation_result.tiles";
 	}
 	
 	/**

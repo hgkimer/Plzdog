@@ -6,14 +6,25 @@
 
 <h2>시터 입장에서 결제 완료 페이지</h2>
 <script type="text/javascript">
+
 $(document).ready(function(){
-	$("")
 });
 
-function popupManageCare(resId){
+function popupRegisterCare(resId){
 	alert(resId);
-	var url = '${initParam.rootPath}/sitter/care_manage_form.do?resId='+resId;
+	var url = '${initParam.rootPath}/sitter/care_register_form.do?resId='+resId;
 	window.open(url,"newCareManageForm","width = 1000, height = 1000");
+}
+
+function selectCareList(resId){
+	location.href="${initParam.rootPath }/sitter/select_care.do?resId="+resId;
+	/* popupSelectCare(${requestScope.careList}); */
+}
+
+function popupSelectCare(careList){
+	
+	var url = '${initParam.rootPath}/sitter/care_select_form.do';
+	window.open(url,"newCareSelectForm","width = 1000, height = 1000"); 
 }
 </script>
 	
@@ -91,8 +102,10 @@ function popupManageCare(resId){
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
 											</p>
-											<button type="button" class="btn btn-default" onclick='popupManageCare(${res.resId})'>돌봄일지
-												관리</button>
+											<button type="button" class="btn btn-default" onclick='popupRegisterCare(${res.resId})'>돌봄일지
+												등록</button>
+											<button type="button" id="selectCareId" class="btn btn-default" onclick='selectCareList(${res.resId})'>돌봄일지
+												조회</button>
 											<p></p>
 										</div>
 									</div>

@@ -17,58 +17,13 @@ $(document).ready(function(){
 		$(".selectCare").hide();
 		$(".editCare").hide();
 		$(".registerCare").show();
+	});	
 		
-		var checkboxValues = new Array();
-
-		$("input[name='checkSitter']:checked").each(function() {
-		    checkboxValues.push($(this).val());
-		});
-		
-		$.ajax({
-			"url" : "${initParam.rootPath}/member/find_sitter.do",
-			"type" : "get",
-			"data" : {"selectService" : $("#selectServiceId").val() , "checkArray" : checkboxValues},
-			"dataType" : "json",
-			"beforeSend":function(){
-				/* alert(selectService);
-				alert(checkboxValues);
-				alert(allData); */
-				//선택된 것이 0번 index면 전송하지 않는다.
-				if($("#selectServiceId").get(0).selectedIndex==0){
-					alert("서비스를 선택하세요");
-					return false;
-				}
-			},
-			"success" : function(list){
-				var txt = "";
-				$(list).each(function(){
-					var skillList = this.sitter.skillList;
-					var visitName ='-';
-					var giveName = '-';
-					$(skillList).each(function(){
-						if(this.code.codeName == '방문돌봄'){
-							visitName = this.code.codeName;
-						}
-						if(this.code.codeName == '위탁돌봄'){
-							giveName = this.code.codeName;
-						}
-					}); 					
-					txt += "<tr><td><img src='/Plzdog/memberImage/"+this.memberImage+"' width='150px'></td><td>"+this.memberName+"</td><td>"+this.mainAddress+this.subAddress+"</td><td>"+this.sitter.serviceAddress+"</td><td>"+giveName+"</td><td>"+visitName+"</td><td><a href='/Plzdog/member/goToProfile.do?email="+this.email+"'>프로필로가기</a></td></tr>";	
-				});//end of each
-				
-				$("#listTbody").html(txt); 
-				
-			},//end of success 
-			"error" : function(xhr, status, errorMsg){
-				alert("오류가 발생헀습니다. - " + status+", "+errorMsg);
-			}//end of error
-		})//end of ajax
-	});
-	$("#editCareId").on("click", function(){
+	/* $("#editCareId").on("click", function(){
 		$(".selectCare").hide();
 		$(".registerCare").hide();
 		$(".editCare").show();
-	});
+	}); */
 	$("#selectCareId").on("click", function(){
 		$(".editCare").hide();
 		$(".registerCare").hide();
@@ -139,14 +94,14 @@ $(document).ready(function(){
 </head>
 <body>
 
-	<button type="button" class="btn btn-default" id='registerCareId' onclick='popupRegisterCare()'>돌봄일지등록</button>
+	<button type="button" class="btn btn-default" id='registerCareId' onclick='popupRegisterCare()'>돌봄일지등록겨</button>
 	<button type="button" class="btn btn-default" id='editCareId' onclick='popupEditCare()'>돌봄일지수정</button>
 	<!-- <button type="button" class="btn btn-default" id='deleteCareId' onclick='popupDeleteCare()'>돌봄일지삭제</button> -->
-	<button type="button" class="btn btn-default" id='selectCareId' onclick='popupSelectCare()'>돌봄일지조회</button>
+	<button type="button" class="btn btn-default" id='selectCareId' onclick="location.href='select_care.do?email=${member.email }'">돌봄일지조회</button>
 	
 	<div class="manageCare">
 		
-		<div class="registerCare">
+		<div id="registerCare" class="registerCare">
 			<h3>돌봄일지 등록하기</h3>
 				<form id="addCare" action="${initParam.rootPath }/sitter/insert_care.do" method="post" enctype="multipart/form-data">
 					<sec:csrfInput/>
@@ -168,8 +123,44 @@ $(document).ready(function(){
 		</div>
 		
 		<div class="selectCare">
-			조회
+			<%-- <c:forEach items="careList" var="care">
+				돌봄일지 번호 : ${care.careId }<br>
+				돌봄일지 내용 : ${care.careContents }<br>
+				예약번호 : ${care.resId }<br>
+				<c:forEach items="${care.careImage }" var="CareImage">
+					<img src="${initParam.rootPath }/careImage/${CareImage.imageName }" width="350px"><br>
+				</c:forEach>
+				<button type="button" class="btn btn-default" id='editCareId' onclick=''>돌봄일지수정</button>
+				<button type="button" class="btn btn-default" id='deleteCareId' onclick=''>돌봄일지삭제</button>
+			</c:forEach>	 --%>
 		</div>
 	</div>
 </body>
 </html>
+
+
+ <%-- $.ajax({
+			"url" : "${initParam.rootPath}/sitter/insert_care.do",
+			"type" : "get",
+			"dataType" : "json",
+			"beforeSend":function(){
+			},
+			"success" : function(care){
+				var txt = "";
+				var careImage = "";
+				var imageName = new Array();
+				$(care).each(function(){
+					careImage = this.careImage;
+					$(careImage).each(funciton(){
+						imageName.push(this.imageName);	
+					});
+				});//end of each
+					txt += "돌봄일지 번호 : "+this.careId+"돌봄일지 내용 : "+this.careContents+"예약번호 :"+this.resId+"강아지 이미지 : <img src='/Plzdog/memberImage/"+imageName+";
+				$("#registerCare").html(txt); 
+				
+			},//end of success 
+			"error" : function(xhr, status, errorMsg){
+				alert("오류가 발생헀습니다. - " + status+", "+errorMsg);
+			}//end of error
+		})//end of ajax
+	});   --%>
