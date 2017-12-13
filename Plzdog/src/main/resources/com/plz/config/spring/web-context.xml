@@ -90,10 +90,14 @@
    <mvc:view-controller path="/sitter/care_register_result_form.do" view-name="/WEB-INF/view/content/sitter/care_register_result_form.jsp"/>
    <!-- 돌봄일지 등록(돌봄일지 등록 폼) -->
    <mvc:view-controller path="/sitter/care_register_form.do" view-name="/WEB-INF/view/content/sitter/care_register_form.jsp"/>
+   <!-- 돌봄일지 조회(돌봄일지 조회 폼) -->
+   <mvc:view-controller path="/sitter/care_select_form.do" view-name="/WEB-INF/view/content/sitter/care_select_form.jsp"/>
    <!-- 돌봄일지 수정(돌봄일지 수정 폼)-->
    <mvc:view-controller path="/sitter/care_edit_form.do" view-name="/WEB-INF/view/content/sitter/care_edit_form.jsp"/>
+   
    <!-- 돌봄일지 테스트 -->
    <mvc:view-controller path="/sitter/care_test.do" view-name="sitter/care_test.jsp" /> 
+   
    <!-- ################################### tiles 대신에 viewResolver 사용 ################################### -->
    
    <!-- 전체 의뢰 조회-->

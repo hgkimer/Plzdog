@@ -23,7 +23,7 @@ $(document).ready(function(){
 <h3>돌봄일지 등록하기</h3>
 <form id="addCare" action="${initParam.rootPath }/sitter/insert_care.do" method="post" enctype="multipart/form-data">
 	<sec:csrfInput/>
-	예약 번호 : <input type="number" id="resId" name="resId" required="required"/><br>
+	예약 번호 : <input type="number" id="email" name="resId" value='${param.resId }' required readonly/><br>
 	날짜 : <input type="date" id="careDate" name="careDate" required="required"/><br>
 	내용 : <textarea rows="5" cols="30" id="careContents" name="careContents" required="required"></textarea><br>
 	
