@@ -139,7 +139,7 @@ public class ReservationController {
 		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
 		}
 		rService.removeReservation(resId);
-		return new ModelAndView("member/search_reservation_res1.tiles");
+		return new ModelAndView("redirect:/member/search_reservation_res1.tiles");
 	}
 	
 	
@@ -158,7 +158,7 @@ public class ReservationController {
 				
 				model.addAttribute("memberList",memberList);
 		return "sitter/select_reservation_simple_result.tiles";
-	}
+	}-
 	
 	*//**
 	 * 시터 마이페이지 - 예약 조회 - 자세히 보기

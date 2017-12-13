@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	  {email}님은 시터로 등록 되었습니다.
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<div class="well-danger">
+				 <h1 style="color: tomato">${email}님은 시터로 등록 되었습니다.</h1>
+			</div>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>
+	 
 </body>
 </html>

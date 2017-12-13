@@ -64,7 +64,6 @@ public class SitterController {
 		System.out.println(waitingList);
 		List<Member> memberList = new ArrayList<>();
 			for(int i =0; i < waitingList.size(); i++) {
-				System.out.println(memberService.findMemberByEmail(waitingList.get(i)));
 				memberList.add(memberService.findMemberByEmail(waitingList.get(i)));
 		}
 		return new ModelAndView("admin/select_waiting_result.tiles", "memberList", memberList);
@@ -77,12 +76,11 @@ public class SitterController {
 	 */
 	@RequestMapping("/admin/enroll_sitter")
 	public String enrollSitter(@ModelAttribute Authority authority, ModelMap model) {
-		System.out.println(authority);
 		authorityService.addAuthority(authority);
 		
 		waitingService.deleteWaiting(authority.getEmail());
 		
-		model.addAttribute("email",authority.getEmail());
+		model.addAttribute("email", authority.getEmail());
 		return "admin/sitter_enroll_result.tiles";
 	}
 	
