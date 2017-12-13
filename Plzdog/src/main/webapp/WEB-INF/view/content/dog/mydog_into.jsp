@@ -1,15 +1,4 @@
-<%@page import="com.plzdog.vo.DogImage"%>
-<%@page import="com.plzdog.vo.DogInfo"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<style type="text/css">
-	
-</style>
-
-<h3>강아지 등록 결과</h3>
 
 <div class="form-group">
 	<label for="dogImageId">강아지 이미지 : </label><br>
@@ -33,6 +22,7 @@
 	<div class="form-group">
 		<label for="birthday">생년월일 : <fmt:formatDate value = '${dog.birth }' type="date"/></label>
 	</div>
+	
 	<div class="form-group">
 		<label for="dogImageId">강아지 상세정보 : </label>
 		<c:forEach items="${codeList }" var="code">
