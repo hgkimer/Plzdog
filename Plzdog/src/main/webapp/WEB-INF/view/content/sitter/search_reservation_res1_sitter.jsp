@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
 </script>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-2"></div>
@@ -11,8 +10,7 @@
 				<div class="row">
 					<c:if test="${errorMessage != null }">
 						<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
-						<p style="text-align: center"><strong>예약 등록을 하시려면 아래의 링크를 클릭하세요!</strong><p>
-						<a href="${initParam.rootPath }/member/search_sitter.do" class="btn btn-info btn-block btn-lg">나에게 맞는 시터 찾기</a>
+						<p style="text-align: center"><strong>많은 사람들이 예약을 신청할 수 있도록 주변에 알려주세요!:)</strong><p>
 					</c:if>
 					
 					<c:forEach items="${requestScope.list }" var="res">
@@ -47,8 +45,7 @@
 								<!-- 다음 줄 시작 -->
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
-										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
-										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a>
+										<button type="button" class="btn btn-warning btn-sm">견적 신청 하기</button>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
@@ -66,7 +63,7 @@
 											</c:forEach>
 												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
-													pattern="yyyy-MM-dd HH시 mm분" /></label>
+													pattern="yyyy-MM-dd HH시 mm분" /></label><br>
 											<c:if test="${res.price > 0 }">
 												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
 											</c:if>
@@ -85,8 +82,6 @@
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
 											</p>
-											<button type="button" class="btn btn-default">돌봄일지
-												조회</button>
 											<p></p>
 										</div>
 									</div>

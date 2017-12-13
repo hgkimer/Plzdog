@@ -5,7 +5,6 @@
 <style type="text/css">
    
 </style>
-
 <div class="col-lg-3" style="height:100%; float:left;"></div>
 <div class="col-lg-6" style="font-size:18px; margin-top:150px;">
    <div class="col-lg-6 memberImage">
