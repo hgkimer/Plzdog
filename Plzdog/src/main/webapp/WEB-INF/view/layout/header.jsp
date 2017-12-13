@@ -117,7 +117,7 @@
 				<li><a id="more" style="cursor: pointer;">내게 온 예약 조회</a>
 					<ul class="small">
 						<li class="much"><a href="#">나를 기다리는 예약</a></li>
-						<li class="much"><a href="${initParam.rootPath }/sitter/waiting_for_approval_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
+						<li class="much"><a href="${initParam.rootPath }/sitter/select_reservation_simple.do?sitterEmail=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
 						<li class="much"><a href="${initParam.rootPath }/sitter/waiting_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 대기중 예약</a></li>
 						<li class="much"><a href="${initParam.rootPath }/sitter/complete_payment_reservation_result.do?sitterEmail=<sec:authentication property="principal.email"/>">결제 완료 예약</a></li>
 					</ul>
@@ -148,6 +148,7 @@
 			<form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
 			    <sec:csrfInput/>
 			</form>
+	</div>
 
 		<%-- 헤더 부분 --%>
 			<ul class="nav">
@@ -166,7 +167,6 @@
 					<li class="navi"><a id="logout" style="cursor: pointer;">로그아웃</a></li>
 				</sec:authorize>
 			</ul>
-			</div>
 	</header>
 <script>
 function w3_open() {
