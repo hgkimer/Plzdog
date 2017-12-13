@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-
+<a href="#">나를 기다리는 예약</a>
 
 	<div class="gores">
 		<div class="move1">
