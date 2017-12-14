@@ -62,7 +62,6 @@ public class SitterController {
 	@RequestMapping("/admin/select_waiting")
 	public ModelAndView selectWaiting(HttpServletRequest request) {
 		List<String> waitingList = waitingService.selectAllWaiting();
-		System.out.println(waitingList);
 		List<Member> memberList = new ArrayList<>();
 			for(int i =0; i < waitingList.size(); i++) {
 				memberList.add(memberService.findMemberByEmail(waitingList.get(i)));
@@ -104,8 +103,6 @@ public class SitterController {
 	@RequestMapping("/member/insert_sitter")
 	public String insertSitter(@ModelAttribute Sitter sitter, HttpServletRequest request, @RequestParam(name="skill") List<String> skillList) 
 	throws IllegalStateException, IOException{
-		System.out.println(skillList);
-		System.out.println(sitter);
 		MultipartFile certificationImage = sitter.getCertificationImage();
 		if(certificationImage!=null && !certificationImage.isEmpty()) {
 			//사진 저장할 디렉토리 
@@ -156,7 +153,6 @@ public class SitterController {
 		}*/
 		careService.insertCare(care,request);
 		model.addAttribute(care);
-		System.out.println(sitterName);
 		model.addAttribute("sitterName",sitterName);
 		return "/WEB-INF/view/content/sitter/care_register_result_form.jsp";
 	}

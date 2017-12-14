@@ -432,10 +432,12 @@ public class ReservationServiceImpl implements ReservationService {
 				res.setPrice(sitter.getSitter().getGivePrice());
 			}
 			res.setSitterEmail(sitter.getEmail());// 시터의 이메일 세팅
+			res.setResStatus("res-2");
 			dao.updateReservation(res);// 세팅한 예약으로 수정
 		}else { //견적 신청을 한 경우
 			 res.setSitterEmail(null);
 			 res.setPrice(0);
+			 res.setResStatus("res-1");
 			 dao.updateReservation(res);
 		}
 	}

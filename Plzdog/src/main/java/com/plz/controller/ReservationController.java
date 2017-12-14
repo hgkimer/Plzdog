@@ -105,12 +105,10 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/search_reservation")
 	public String searchReservation(@RequestParam String mEmail, Model model) {
-		System.out.println(mEmail);
 		List<Reservation> rlist = rService.findMemberReservationByEmail(mEmail);
 		if (rlist.isEmpty() || rlist == null) {
 			rlist = rService.findSitterReservationByEmail(mEmail);
 			if (!rlist.isEmpty() && rlist != null) {
-				System.out.println(rlist);
 				model.addAttribute("sresList", rlist);
 				return "member/search_reservation_result.tiles";
 			} else {	
@@ -119,7 +117,6 @@ public class ReservationController {
 				return "member/search_reservation_result.tiles";
 			}
 		} else {
-			System.out.println(rlist);
 			model.addAttribute("mresList", rlist);
 			return "member/search_reservation_result.tiles";
 		}
@@ -341,8 +338,6 @@ public class ReservationController {
 	@RequestMapping("/member/delete_reservation")
 	@ResponseBody
 	public void removeReservation(@RequestParam int resId) {
-		if(rService.findReservationById(resId) == null) {
-		}
 		rService.removeReservation(resId);
 	}
 	

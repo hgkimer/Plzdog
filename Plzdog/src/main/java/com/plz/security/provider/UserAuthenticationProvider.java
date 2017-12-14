@@ -61,7 +61,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 		//패스워드 체크
 		String password = (String)authentication.getCredentials();//사용자가 입력한 패스워드.
 		String password2 = member.getPassword();
-		System.out.println("비밀번호 : "+password2);
 		if(!encoder.matches(password, password2)){//틀린 패스워드
 			throw new BadCredentialsException("패스워드를 확인하세요");
 		}
