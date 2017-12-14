@@ -48,7 +48,7 @@
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
 										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
-										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a>
+										<button type="button" class="btn btn-danger btn-sm" >삭제하기</button>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
@@ -113,9 +113,7 @@
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
-											<c:forEach items="${dog.dogImage }" var="dogImage">
-											<img  class="img-circle" style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
-											</c:forEach>
+											<img  class="img-circle" style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dog.dogImage[0].dogImage}">
 										</div>
 										
 										<div class="col-lg-4">

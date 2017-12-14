@@ -206,6 +206,8 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectReservationAllRes1();
 	
+	
+	
 	/*
 	 * ################################################################
 	 */

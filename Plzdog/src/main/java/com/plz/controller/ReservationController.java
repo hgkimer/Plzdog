@@ -124,24 +124,6 @@ public class ReservationController {
 			return "member/search_reservation_result.tiles";
 		}
 	}
-	/**
-	 * 예약 삭제 Controller
-	 * 사용자가 예약 취소버튼을 누르게 되면 요청파라미터로 받은 예약 번호에 해당하는 예약을 삭제
-	 * 실제 사용은 예약 취소 버튼을 누르면 이동하게끔
-	 * 삭제하면 바로 리스트에서 없어지도록  해야 함 AJAX 처리 필요
-	 * @param resId
-	 * @return
-	 */
-	@RequestMapping("/member/delete_reservation")
-	public ModelAndView removeReservation(@RequestParam int resId) {
-		if(rService.findReservationById(resId) == null) {
-			String error = "삭제할 예약이 없습니다.";
-		return new ModelAndView("member/delete_reservation_result.tiles", "errorMessage", error);
-		}
-		rService.removeReservation(resId);
-		return new ModelAndView("redirect:/member/search_reservation_res1.tiles");
-	}
-	
 	
 	//---------------- lee su il -------------------
 	/**
@@ -338,6 +320,32 @@ public class ReservationController {
 		}
 		return "sitter/search_reservation_res1_sitter.tiles";
 	}
+	/**
+	 * 매개변수로 받은 시터 자신의 이메일과 해당 예약의 예약 아이디를 통해 견적을 제안 및 취소하는 컨트롤러
+	 * @param sEmail
+	 * @param resId
+	 * @return
+	 */
+	@RequestMapping("/sitter/update_proposal")
+	@ResponseBody
+	public void updateProposal(@RequestParam String sEmail, @RequestParam int resId) {
+		rService.updateProposal(sEmail, resId);
+	}
+	
+	/**
+	 * 예약 삭제 Controller For AJAX
+	 * 사용자가 예약 취소버튼을 누르게 되면 요청파라미터로 받은 예약 번호에 해당하는 예약을 삭제
+	 * @param resId
+	 * @return
+	 */
+	@RequestMapping("/member/delete_reservation")
+	@ResponseBody
+	public void removeReservation(@RequestParam int resId) {
+		if(rService.findReservationById(resId) == null) {
+		}
+		rService.removeReservation(resId);
+	}
+	
 	
 	/*
 	 * ####################################################################################

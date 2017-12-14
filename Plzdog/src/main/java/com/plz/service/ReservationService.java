@@ -210,5 +210,12 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findReservationAllRes1Sitter();
+	/**
+	 * 매개변수로 받은 시터의 이메일과 예약 아이디를 통해 시터의 견적 신청 및 취소 요구를 업데이트 하는 서비스 메소드.
+	 * 
+	 * @param sEmail
+	 * @param resId
+	 */
+	void updateProposal(String sEmail, int resId);
 	
 }
