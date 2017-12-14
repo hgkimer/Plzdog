@@ -152,16 +152,19 @@ public class SitterController {
 	 */
 	@RequestMapping("/sitter/insert_care")
 	@Transactional
-	public String insertCare(@ModelAttribute Care care, HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
+	public String insertCare(@ModelAttribute Care care,@RequestParam String sitterName, HttpServletRequest request,ModelMap model) throws IllegalStateException, IOException {
 		/*if(care == null) {
 			model.addAttribute("errorMessage","객체가 없습니다.");
 		}*/
 		careService.insertCare(care,request);
 		model.addAttribute(care);
+		System.out.println(sitterName);
+		model.addAttribute("sitterName",sitterName);
 		return "/WEB-INF/view/content/sitter/care_register_result_form.jsp";
 	}
 	
 	@RequestMapping("/sitter/update_care")
+	@Transactional
 	public String updateCare(@ModelAttribute Care care, ModelMap model) {
 		if(careService.selectCareJoinCareImage(care.getResId()) != null) {
 			careService.updateCare(care);
@@ -171,14 +174,36 @@ public class SitterController {
 			return "sitter/fail.tiles";
 		}
 	}
-	
+	/**
+	 * 예약 ID로 돌봄일지 조회
+	 * @param resId
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/sitter/select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
 	//request.getParameter
 	public String selectCareJoinCareImage(@RequestParam int resId, ModelMap model) throws Exception {
 		List<Care> list = careService.selectCareJoinCareImage(resId);
 		//request.Dispatcher
 		model.addAttribute("careList", list);
-		return "sitter/complete_payment_reservation_result.tiles";
+		return "/WEB-INF/view/content/sitter/care_select_form.jsp";
+	}
+	
+	/**
+	 * 돌봄 ID로 돌봄일지 조회
+	 * @param careId
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/sitter/select_care_careId")  //매개변수를 VO로 받을 땐 @ModelAttribute
+	//request.getParameter
+	public String selectCareJoinCareImageByCareId(@RequestParam int careId, ModelMap model) throws Exception {
+		Care care = careService.selectCareJoinCareImageByCareId(careId);
+		//request.Dispatcher
+		model.addAttribute("care", care);
+		return "/WEB-INF/view/content/sitter/care_edit_form.jsp";
 	}
 	
 	/**

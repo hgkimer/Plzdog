@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,73 +34,54 @@
 }); */
 </script>
 
-<style type="text/css">
-	* {
-		margin:0 auto;
-		padding:0;
-		list-style:none;
-		text-decoration:none;
-	}
-	
-	/* a 태그 자동으로 검정색 */
-	a {
-		color:inherit;
-	}
-	
-	/* 공간을 나누어 준다. */
-	.clear {
-		clear:both;
-	}
-	
-	.top {
-		width:300px;
-		height:100px;
-		float:left;
-	}
-	
-	.manageCare {
-		width:800px;
-		height:800px;
-		float:left;
-		margin:10px;
-	}
-	
-	.registerCare {
-		width:100%;
-		height:100%;
-		float:left;
-		display:none;
-	}
-	
-	.editCare {
-		width:100%;
-		height:100%;
-		float:left;
-		display:none;
-	}
-	
-	.selectCare {
-		width:100%;
-		height:100%;
-		float:left;
-		display:none;
-	}
-	
-</style>
-
 </head>
 <body>
-	
-	<!-- <button type="button" class="btn btn-default" id='registerCareId' onclick='popupRegisterCare()'>돌봄일지등록결과</button>
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<h2></h2>
+	<div class="form-group">
+		<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
+			<fmt:formatDate value = '${requestScope.care.careDate }' type="date"/>
+	</div>
+	<div class="form-group">
+		<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
+			${requestScope.sitterName }
+	</div>
+	<div class="form-group">
+		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 식사 </label>
+			${requestScope.care.careMeal }
+	</div>
+	<div class="form-group">
+		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 산책 </label>
+			${requestScope.care.careWalking }
+	</div>
+	<div class="form-group">
+		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 배변활동 </label>
+			${requestScope.care.careBowelMovement }
+	</div>
+	<div class="form-group">
+		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 돌봄 후기 </label>
+		${requestScope.care.careReview }
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<span class="glyphicon glyphicon-picture"></span><label for="pPwd"> 돌봄 이미지 </label>
+			<c:forEach items="${care.careImage }" var="CareImage">
+					<img src="${initParam.rootPath }/careImage/${CareImage.imageName }" width="350px"><br>
+			</c:forEach>
+		</div>
+	</div>
+	</div>
+		<div class="col-lg-4"></div>
+	</div>
+</div>
+</body>
+</html>
+
+<!-- <button type="button" class="btn btn-default" id='registerCareId' onclick='popupRegisterCare()'>돌봄일지등록결과</button>
 	<button type="button" class="btn btn-default" id='editCareId' onclick='popupEditCare()'>돌봄일지수정</button>
 	<button type="button" class="btn btn-default" id='deleteCareId' onclick='popupDeleteCare()'>돌봄일지삭제</button>
 	<button type="button" class="btn btn-default" id='selectCareId' onclick='popupSelectCare()'>돌봄일지조회</button>
 	<button type="button" class="btn btn-default" id='returnCareId' onclick="location.href='care_manage_form.do'">되돌아가기</button> -->
-				돌봄일지 번호 : ${care.careId }<br>
-				돌봄일지 내용 : ${care.careContents }<br>
-				예약번호 : ${care.resId }<br>
-				<c:forEach items="${care.careImage }" var="CareImage">
-					<img src="${initParam.rootPath }/careImage/${CareImage.imageName }" width="350px"><br>
-				</c:forEach>
-</body>
-</html>

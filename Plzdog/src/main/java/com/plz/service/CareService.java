@@ -23,4 +23,6 @@ public interface CareService {
 	void deleteCareImage(String careImage);
 
 	void insertCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException;
+
+	Care selectCareJoinCareImageByCareId(int careId);
 }

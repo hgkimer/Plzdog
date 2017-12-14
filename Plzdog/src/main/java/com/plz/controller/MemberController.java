@@ -124,7 +124,6 @@ public class MemberController {
 				Authentication authentication = context.getAuthentication();
 //				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 					
-				System.out.println(oldMemberPassword+"--"+((Member)authentication.getPrincipal()).getPassword());
 				//패스워드 체크
 				if(!passwordEncoder.matches(oldMemberPassword, ((Member)authentication.getPrincipal()).getPassword())){ 
 					//정보수정 폼으로 이동

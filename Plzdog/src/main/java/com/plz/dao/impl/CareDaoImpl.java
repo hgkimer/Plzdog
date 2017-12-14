@@ -30,6 +30,11 @@ public class CareDaoImpl implements CareDao {
 	public List<Care> selectCareJoinCareImage(int resId) {
 		return session.selectList(makeSqlId("selectCareJoinCareImage"), resId);
 	}
+	
+	@Override
+	public Care selectCareJoinCareImageByCareId(int careId) {
+		return session.selectOne(makeSqlId("selectCareJoinCareImageByCareId"), careId);
+	}
 
 	@Override
 	public int updateCare(Care care) {

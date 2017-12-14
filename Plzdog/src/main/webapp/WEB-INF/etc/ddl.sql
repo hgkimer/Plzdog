@@ -68,9 +68,6 @@ DROP TABLE RES_DETAIL
 --------------------------------------------------
 --create
 --시터 대기자
-CREATE TABLE WAITING (
-	EMAIL VARCHAR2(100) PRIMARY KEY
-);
 	
 --회원 
 CREATE TABLE MEMBER (
@@ -83,6 +80,11 @@ CREATE TABLE MEMBER (
 	MEMBER_IMAGE VARCHAR2(100), /* 이미지 */
 	PHONENUM VARCHAR2(20) NOT NULL, /* 연락처 */
 	MEMBER_ENABLE NUMBER(1) DEFAULT 1 NOT NULL
+);
+
+CREATE TABLE WAITING (
+	EMAIL VARCHAR2(100) NOT NULL, 
+	CONSTRAINT FK_WAITING_MEMBER FOREIGN KEY(EMAIL) REFERENCES MEMBER on delete cascade
 );
 
 -- 권한
@@ -208,9 +210,12 @@ CREATE TABLE DEMAND (
 /* 돌봄일지 */
 CREATE TABLE CARE (
 	CARE_ID NUMBER(10) PRIMARY KEY, /* 돌봄일지ID */
-	CARE_CONTENTS CLOB NOT NULL, /* 내용 */
 	RES_ID NUMBER(10) NOT NULL, /* 예약ID */
 	CARE_DATE DATE NOT NULL, /* 작성일 */
+	CARE_MEAL CLOB, /* 식사 */
+	CARE_WALKING CLOB, /* 산책 */
+	CARE_BOWEL_MOVEMENT CLOB, /* 배변 */
+	CARE_REVIEW CLOB, /* 돌봄후기 */
 	CONSTRAINT FK_CARE_RESERVATION FOREIGN KEY(RES_ID) REFERENCES RESERVATION on delete cascade
 );
 
@@ -522,28 +527,22 @@ insert into SALES values(2,100000,90000,10000,'2017/07/04');
 insert into SALES values(3,100000,90000,10000,'2017/07/05');
 insert into SALES values(4,100000,90000,10000,'2017/07/06');
 
---돌봄일지
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 귀여워용',1,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 이뻐용',2,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 아름다워요',3,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 사랑스러워용',4,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요',3,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요1',3,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요2',4,'2017/08/09');
-insert into care values(CARE_id_seq.NEXTVAL,'강아지가 너무 작아요3',4,'2017/08/09');
 
+--돌봄일지
+insert into care values(CARE_id_seq.NEXTVAL,1,'2017/08/09','강아지가 맛있게 잘먹었어요','강아지가 산책을 좋아해요','묽은 변이 나와서 병원한번 가보세요','사람을 잘따라서 너무 즐겁게 보냈어요~~');
+insert into care values(CARE_id_seq.NEXTVAL,1,'2017/08/09','강아지가 맛있게 잘먹었어요1','강아지가 산책을 좋아해요1','묽은 변이 나와서 병원한번 가보세요1','사람을 잘따라서 너무 즐겁게 보냈어요1~~');
+insert into care values(CARE_id_seq.NEXTVAL,2,'2017/08/09','강아지가 맛있게 잘먹었어요2','강아지가 산책을 좋아해요2','묽은 변이 나와서 병원한번 가보세요2','사람을 잘따라서 너무 즐겁게 보냈어요2~~');
+insert into care values(CARE_id_seq.NEXTVAL,3,'2017/08/09','강아지가 맛있게 잘먹었어요3','강아지가 산책을 좋아해요3','묽은 변이 나와서 병원한번 가보세요3','사람을 잘따라서 너무 즐겁게 보냈어요3~~');
+insert into care values(CARE_id_seq.NEXTVAL,4,'2017/08/09','강아지가 맛있게 잘먹었어요4','강아지가 산책을 좋아해요4','묽은 변이 나와서 병원한번 가보세요4','사람을 잘따라서 너무 즐겁게 보냈어요4~~');
 --돌봄일지 이미지
-insert into CARE_IMAGE values('돌봄이미지1',1);
-insert into CARE_IMAGE values('돌봄이미지4',1);
-insert into CARE_IMAGE values('돌봄이미지2',2);
-insert into CARE_IMAGE values('돌봄이미지3',3);
-insert into CARE_IMAGE values('돌봄이미지5',3);
-insert into CARE_IMAGE values('돌봄이미지6',4);
-insert into CARE_IMAGE values('돌봄이미지7',4);
-insert into CARE_IMAGE values('돌봄이미지7',4);
-insert into CARE_IMAGE values('돌봄이미지7',4);
+insert into CARE_IMAGE values('돌봄이미지1.jpg',1);
+insert into CARE_IMAGE values('돌봄이미지2.jpg',1);
+insert into CARE_IMAGE values('돌봄이미지3.jpg',2);
+insert into CARE_IMAGE values('돌봄이미지4.jpg',2);
+insert into CARE_IMAGE values('돌봄이미지5.jpg',3);
+insert into CARE_IMAGE values('돌봄이미지6.jpg',3);
+insert into CARE_IMAGE values('돌봄이미지7.jpg',4);
+insert into CARE_IMAGE values('돌봄이미지8.jpg',4);
 -----------------------------------------------
 --select
 -- 예약 간단 조회

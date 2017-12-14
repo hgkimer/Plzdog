@@ -80,6 +80,9 @@ INSERT INTO DOG_IMAGE VALUES('이미지 경로4 ','6');
 
 ------------------------------------------------------------------
 
+select * from RESERVATION
+
+select * from CARE
 
 select	m.email,
 				m.member_name,

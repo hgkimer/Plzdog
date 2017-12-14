@@ -9,14 +9,17 @@
  		<selectKey keyProperty="careId" resultType="_int" order="BEFORE">
 			select care_id_seq.nextval from dual
 		</selectKey>
-		insert into care values(#{careId}, #{careContents}, #{resId}, #{careDate})
+		insert into care values(#{careId}, #{resId}, #{careDate}, #{careMeal}, #{careWalking}, #{careBowelMovement}, #{careReview})
 	</insert>
 	
 	<resultMap type="care" id="care-resultmap">
 		<id column="care_id" property="careId"/>
-		<result column="care_contents" property="careContents"/>
 		<result column="res_id" property="resId"/>
 		<result column="care_date" property="careDate"/>
+		<result column="care_meal" property="careMeal"/>
+		<result column="care_walking" property="careWalking"/>
+		<result column="care_bowel_movement" property="careBowelMovement"/>
+		<result column="care_review" property="careReview"/>
 	</resultMap>
 	
 	<resultMap type="care" id="care-join-care_image-resultmap" extends="care-resultmap">
@@ -27,16 +30,40 @@
 	</resultMap>
 	
 	<select id="selectCareJoinCareImage" parameterType="_int" resultMap="care-join-care_image-resultmap">
-		select	c.care_id, c.care_contents, c.res_id, c.care_date, i.care_image
+		select	c.care_id, 
+				c.res_id, 
+				c.care_date, 
+				c.care_meal, 
+				c.care_walking, 
+				c.care_Bowel_Movement, 
+				c.care_review, 
+				i.care_image
 		from	care c, care_image i
 		where	c.res_id = #{value} and c.care_id = i.care_id(+)
 	</select>
 	
+	<select id="selectCareJoinCareImageByCareId" parameterType="_int" resultMap="care-join-care_image-resultmap">
+		select	c.care_id, 
+				c.res_id, 
+				c.care_date, 
+				c.care_meal, 
+				c.care_walking, 
+				c.care_Bowel_Movement, 
+				c.care_review, 
+				i.care_image
+		from	care c, care_image i
+		where	c.care_id = i.care_id(+)
+		and		c.care_id = #{careId}
+	</select>
+	
 	<update id="updateCare" parameterType="Care">
 		update	care
-		set		care_contents = #{careContents},
-				res_id = #{resId},
-				care_date = #{careDate}
+		set		res_id = #{resId},
+				care_date = #{careDate}, 
+				care_meal = #{careMeal}, 
+				care_walking = #{careWalking}, 
+				care_Bowel_Movement = #{careBowelMovement}, 
+				care_review = #{careReview} 
 		where	care_id = #{careId}
 	</update>
 	
@@ -50,7 +77,10 @@
 	</insert> 
 	
 	<update id="updateCareImage" parameterType="map">
-		update care_image set care_image = #{imageName} where care_id = #{careId} and care_image = #{originalImage}
+		update care_image 
+		set care_image = #{imageName} 
+		where care_id = #{careId} 
+		and care_image = #{originalImage}
 	</update>
 	
 	<delete id="deleteCareImage" parameterType="string">
