@@ -72,7 +72,8 @@ function deleteRes(resId){
 								<!-- 다음 줄 시작 -->
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
-										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
+										<button type="button" class="btn btn-success btn-sm">수락하기</button>
+										<button type="button" class="btn btn-warning btn-sm">거절하기</button>
 										<button type="button" class="btn btn-danger btn-sm" onclick="deleteRes(${res.resId});">삭제하기</button>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>

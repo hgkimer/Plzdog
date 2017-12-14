@@ -10,34 +10,28 @@
 	display:none;
 }
 </style>
-
-<h3>강아지 등록 결과</h3>
-
-<div class="form-group">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<h3 style="text-align: center">강아지 등록 결과</h3>
 	<label for="dogImageId">강아지 이미지 : </label><br>
 	<c:forEach items="${requestScope.dog.dogImage }" var="dogImage">
-		<img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
+		<img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="400px" class="img-circle"><br>
 	</c:forEach>
-</div>
-
-	<div class="form-group">
-		<label for="dogName">이름 : ${dog.dogName }</label>
-	</div>
-	<div class="form-group">
-		<label for="species">견종 : ${dog.species } </label>
-	</div>
-	<div class="form-group">
-		<label for="gender">성별 : ${dog.gender }</label>
-	</div>
-	<div class="form-group">
-		<label for="weight">몸무게 : ${dog.weight }</label>
-	</div>
-	<div class="form-group">
-		<label for="birthday">생년월일 : <fmt:formatDate value = '${dog.birth }' type="date"/></label>
-	</div>
-	<div class="form-group">
-		<label for="dogImageId">강아지 상세정보 : </label>
+		<label for="dogName">이름 : ${dog.dogName }</label><br>
+		<label for="species">견종 : ${dog.species } </label><br>
+		<label for="gender">성별 : ${dog.gender }</label><br>
+		<label for="weight">몸무게 : ${dog.weight }</label><br>
+		<label for="birthday">생년월일 : <fmt:formatDate value = '${dog.birth }' type="date"/></label><br>
+		<label for="dogImageId">강아지 상세정보 : </label><br>
 		<c:forEach items="${codeList }" var="code">
 			${code.codeName } (O)<br>
 		</c:forEach>
 	</div>
+		<div class="col-lg-4"></div>
+	</div>
+</div>
+
+	
+	

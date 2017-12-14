@@ -81,7 +81,7 @@ $(document).ready(function(){
             <li><a id="my_few" style="cursor: pointer;">예약 조회</a>
                <ul class="big">
                   <li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res1.do?email=<sec:authentication property="principal.email"/>">견적 대기중인 예약</a></li>
-                  <li class="afew"><a href="#">승인 대기중 예약</a></li>
+                  <li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res2.do?email=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
                   <li class="afew"><a href="#">결제 완료 예약</a></li>
                </ul>
             </li>
