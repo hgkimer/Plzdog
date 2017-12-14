@@ -1,5 +1,18 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<script>
+$(document).ready(function(){
+	
+	   $("#my_few").on("click", function(){
+	         $(".afew").slideToggle();
+	      });
+	      
+      $("#my_more").on("click", function(){
+         $(".much").slideToggle();
+      });
+	});
+</script>
 <style>
 .nav {
       width:auto;
@@ -54,7 +67,7 @@
    }
 </style>
 
-<div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="box-shadow:0px 5px 5px gray;">
+   <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="box-shadow:0px 5px 5px gray;">
       <ul class="nav" style="margin-top:20px; width:100%; text-align:center; position:absolute; z-index:1000;">
          
          <%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
@@ -100,16 +113,3 @@
          </sec:authorize>
       </ul>
 </div>
-
-
-<script>
-	$(document).ready(function() {
-		$("#few").on("click", function() {
-			$(".afew").slideToggle();
-		});
-
-		$("#more").on("click", function() {
-			$(".much").slideToggle();
-		});
-	});
-</script>
