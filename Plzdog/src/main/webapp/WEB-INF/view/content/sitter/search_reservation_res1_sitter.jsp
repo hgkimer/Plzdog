@@ -1,19 +1,78 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
+function goToProposal(resId){
+	var sEmail = $("#sEmail").val();
+	//견적 신청 하기 버튼을 눌렀을 때의 견적 update AJAX
+		var pCheck = confirm("해당 예약에 견적을 신청하시겠어요?");
+		if(pCheck){
+			$.ajax({
+				"url" : "${initParam.rootPath}/sitter/update_proposal.do",
+				"type" : "get",
+				"data" : {	"sEmail" : sEmail,
+							"resId"	: resId
+							},
+				"success"	: function(){
+					alert("견적 신청이 완료 되었습니다.");
+					location.reload();
+								},//end of success
+				"error" : function(xhr, status, errorMsg){
+							alert("오류가 발생했습니다. - " + status +", " + errorMsg);
+							}//end of error
+			})//end of ajax
+		}else{
+			alert("취소합니다.");
+		}
+	}
+	
+function cancelProposal(resId){
+	var sEmail = $("#sEmail").val();
+	//견적 취소 버튼을 눌렀을 때의 견적 update AJAX
+	var pCheck = confirm("해당 예약에 신청한 견적을 취소하시겠어요?");
+	if(pCheck){
+		$.ajax({
+			"url" : "${initParam.rootPath}/sitter/update_proposal.do",
+			"type" : "get",
+			"data" : {	"sEmail" : sEmail,
+						"resId"	: resId
+						},
+			"success"	: function(){
+				alert("견적 취소가 완료 되었습니다.");
+				location.reload();
+							},//end of success
+			"error" : function(xhr, status, errorMsg){
+						alert("오류가 발생했습니다. - " + status +", " + errorMsg);
+						}//end of error
+		})//end of ajax
+	}else{
+		alert("취소합니다.");
+	}
+}
+
 </script>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<div class="row">
+				<br><br><br><br>
+					<div class="col-lg-6">
+						<button type="button" class="btn btn-lg btn-info">견적 신청 가능한 예약 보기</button>
+					</div>
+					<div class="col-lg-6">
+						<button type="button" class="btn btn-lg btn-info">견적 신청한 예약 보기</button>
+					</div>
+				</div>
+				<div class="row">
+					<p></p>
 					<c:if test="${errorMessage != null }">
 						<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
 						<p style="text-align: center"><strong>많은 사람들이 예약을 신청할 수 있도록 주변에 알려주세요!:)</strong><p>
 					</c:if>
-					
 					<c:forEach items="${requestScope.list }" var="res">
+						<br><br>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="col-lg-4">
@@ -45,7 +104,14 @@
 								<!-- 다음 줄 시작 -->
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
-										<button type="button" class="btn btn-warning btn-sm">견적 신청 하기</button>
+										<c:choose>
+											<c:when test="${res.sitterEmail != null}">
+												<button type="button" class="btn btn-danger btn-sm" onclick="cancelProposal(${res.resId});">견적 신청 취소</button>
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="btn btn-success btn-sm" onclick="goToProposal(${res.resId});">견적 신청 하기</button>
+											</c:otherwise>
+										</c:choose>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
@@ -108,9 +174,7 @@
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
-											<c:forEach items="${dog.dogImage }" var="dogImage">
-											<img  style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
-											</c:forEach>
+											<img  class="img-circle" style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dog.dogImage[0].dogImage}">
 										</div>
 										
 										<div class="col-lg-4">
@@ -187,8 +251,9 @@
 						
 					</c:forEach><!-- 전체 예약 객체 ForEach문 끝 -->
 				</div>
+				<input type="hidden" value="<sec:authentication property='principal.email'/>" readonly id="sEmail">
 			</div>
-			<div class="col-lg-2"></div>
+			<div class="col-lg-3"></div>
 		</div>
 	</div>
 

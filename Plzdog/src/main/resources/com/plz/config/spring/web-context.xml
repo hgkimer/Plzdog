@@ -98,20 +98,8 @@
    <mvc:view-controller path="/sitter/care_test.do" view-name="sitter/care_test.jsp" /> 
    
    <!-- ################################### tiles 대신에 viewResolver 사용 ################################### -->
-   
-   <!-- 전체 의뢰 조회-->
-   <mvc:view-controller path="/sitter/select_all_request_reservation.do" view-name="sitter/select_all_request_reservation_result.tiles" />
-   <!-- FAQ  -->
-   <mvc:view-controller path="/faq.do" view-name="/faq.tiles"/>
-   <!-- 관리자(주요 기능 구현 후 추가 작성) -->
-   <mvc:view-controller path="/admin/admin.do" view-name="admin/admin.tiles"/>
-   <!-- 관리자 등록 폼 -->
-   <mvc:view-controller path="/admin/register_admin_form.do" view-name="admin/register_admin_form.tiles"/>
-   <!-- 관리자 대기시터 치러 결과 폼 -->
-   <mvc:view-controller path="/admin/select_waiting_result.do" view-name="admin/select_waiting_result.tiles"/>
-   
-   <!-- 우편번호 테스트 -->
-   <mvc:view-controller path="/member/address_test.do" view-name="member/address_test.tiles"/>
+   <!-- 견적 팝업 -->
+   <mvc:view-controller path="/sitter/proposal_form.do" view-name="/WEB-INF/view/content/sitter/proposal_form.jsp"/>
    
    <!-- 
    ####################################################################################################

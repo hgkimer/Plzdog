@@ -2,6 +2,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
+function deleteRes(resId){
+	var dCheck = confirm("예약을 삭제하시겠어요?");
+	if(dCheck){
+		var reCheck = confirm("지워진 예약은 복구가 불가능 합니다. 그래도 진행 하시겠어요?");
+		if(reCheck){
+			$.ajax({
+				"url" : "${initParam.rootPath}/member/delete_reservation.do",
+				"type" : "get",
+				"data" : {"resId" : resId},
+				"succecss" : function(){
+					location.reload();
+					alert("예약이 삭제되었습니다.");
+				},//end of success
+				"error" : function(xhr, status, errorMsg){
+					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
+				}//end of error
+			});//end of ajax
+		}else{
+			alert("취소되었습니다.");
+		}
+	}else{
+		alert("취소되었습니다.");
+		location.reload();
+	}
+}
 </script>
 
 	<div class="container">
@@ -48,7 +73,7 @@
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
 										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
-										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a>
+										<button type="button" class="btn btn-danger btn-sm" onclick="deleteRes(${res.resId});">삭제하기</button>
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
@@ -66,7 +91,7 @@
 											</c:forEach>
 												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
-													pattern="yyyy-MM-dd HH시 mm분" /></label>
+													pattern="yyyy-MM-dd HH시 mm분" /></label><br>
 											<c:if test="${res.price > 0 }">
 												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
 											</c:if>
@@ -85,8 +110,6 @@
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
 											</p>
-											<button type="button" class="btn btn-default">돌봄일지
-												조회</button>
 											<p></p>
 										</div>
 									</div>
@@ -113,9 +136,7 @@
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
-											<c:forEach items="${dog.dogImage }" var="dogImage">
-											<img  class="img-circle" style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
-											</c:forEach>
+											<img  class="img-circle" style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dog.dogImage[0].dogImage}">
 										</div>
 										
 										<div class="col-lg-4">

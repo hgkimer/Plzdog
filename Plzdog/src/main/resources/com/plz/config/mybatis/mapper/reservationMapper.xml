@@ -325,7 +325,8 @@
 		where r.email = #{value}
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
-		and	r.res_status = 'res-1' 
+		and	r.res_status = 'res-1'
+		order by res_id 
 	</select> 
 
 	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -->
@@ -335,6 +336,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-2' 
+		order by res_id
 	</select> 
 	
 	<!-- 왜 안나오는지 도저히 모르겠음 ㅈㅅ 강사님한테 물어보겠음-->
@@ -358,9 +360,10 @@
 	<!-- 시터가 모든 res-1인 예약을 조회하는 select -->
 	<select id="selectReservationAllRes1" resultMap="simple-reservation-res_detail-dog-resultmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"></include>
-		WHERE	res_status = 'res-1'
-		AND 	r.res_id = t.res_id
+		WHERE	r.res_id = t.res_id
 		AND 	t.dog_id = d.dog_id
+		AND 	r.res_status = 'res-1'
+		order by res_id
 	</select>
 	<!-- 
 	####################################################################################################
@@ -461,6 +464,7 @@
 		update   reservation
 		set	     res_sDate = #{resSDate},
 			     res_eDate = #{resEDate},
+			     price = #{price},
 			     res_contents = #{resContents},
 		 		 res_status = #{resStatus},
 			     email = #{memberEmail},

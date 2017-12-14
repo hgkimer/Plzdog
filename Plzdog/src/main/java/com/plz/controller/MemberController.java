@@ -64,7 +64,6 @@ public class MemberController {
 		Authentication authentication = context.getAuthentication();
 		//권한을 지운다
 		aService.removeAuthority(email);
-		System.out.println(email);
 		Member member = ((Member)authentication.getPrincipal());
 		
 		//0이면 탈퇴
@@ -182,7 +181,6 @@ public class MemberController {
 				}
 			}
 		}
-		System.out.println(sitterList);
 		model.addAttribute("sitterList", sitterList);
 		return "sitter/sitter_select_result.tiles";
 	}
@@ -231,7 +229,6 @@ public class MemberController {
 		for(int i=0 ; i < checkArray.size() ; i++) {
 			checkList.add(checkArray.get(i));
 		}
-		System.out.println(checkList);
 		
 		for(Member member : service.selectAllSitter()) {
 			//ROLE_MEMBER, ROLE_SITTER
@@ -256,14 +253,4 @@ public class MemberController {
 		return sitterList;
 	}
 	
-	@RequestMapping("zipcode")
-	public String getZipcode(@RequestParam String sample4_postcode, @RequestParam String sample4_mainAddress, @RequestParam String sample4_subAddress, Model model  ) {
-		System.out.println(sample4_postcode);
-		System.out.println(sample4_mainAddress);
-		System.out.println(sample4_subAddress);
-		model.addAttribute("sample4_postcode", sample4_postcode);
-		model.addAttribute("sample4_mainAddress",sample4_mainAddress);
-		model.addAttribute("sample4_subAddress", sample4_subAddress);
-		return "member/address_test_result.tiles";
-	}
 }
