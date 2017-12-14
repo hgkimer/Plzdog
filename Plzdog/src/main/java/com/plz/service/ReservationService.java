@@ -211,4 +211,11 @@ public interface ReservationService {
 	 */
 	List<Reservation> findReservationAllRes1Sitter();
 	
+	/**
+	 * 의뢰자 견적 완료 예약(res-5)상태인 예약 들을 조회해 온다.
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findReservationRes5(String email);
+	
 }

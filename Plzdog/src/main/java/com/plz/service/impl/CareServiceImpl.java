@@ -78,8 +78,22 @@ public class CareServiceImpl implements CareService {
 	}
 	
 	@Override
-	public void updateCare(Care care) {
+	public void updateCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException {
 		careDao.updateCare(care);
+		ArrayList<CareImage> list = new ArrayList<>();
+		System.out.println(care);
+		for(MultipartFile careImage : care.getCareImageList()) {
+			if(careImage != null && ! careImage.isEmpty()) {//업로드된 파일이 있는 경우 파일을 옮기고 파일명을 dogImage에 설정
+				String fileName = UUID.randomUUID().toString();	
+				File dest = new File(request.getServletContext().getRealPath("/careImage"), fileName);
+				careImage.transferTo(dest);
+				//careImage 등록 처리
+				careDao.insertCareImage(new CareImage(care.getCareId(),fileName));
+				list.add(new CareImage(care.getCareId(),fileName));
+			}
+		}
+		//careImage를 care 객체에 등록 
+		care.setCareImage(list);
 	}
 
 	@Override

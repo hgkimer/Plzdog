@@ -34,71 +34,75 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<h3>돌봄일지 수정하기</h3>
+
+
 <div class="container">
 	<div class="row">
-		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
-			<h2></h2>
-<form id="addCare" action="${initParam.rootPath }/sitter/insert_care.do" method="post" enctype="multipart/form-data">
-	<sec:csrfInput/>
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<h2 style="text-align: center">돌봄일지 수정</h2>
+<c:if test="${not empty requestScope.errorMessage}">
+	<div class="well text-danger">
+		${requestScope.errorMessage }
+	</div>
+</c:if>
+<form id="editCareForm" action="${initParam.rootPath }/sitter/update_care.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="resId" name="resId" value="${requestScope.care.resId }" required="required"/><br>
-	<div class="form-group">
-		<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
-		<input type="date" id="careDate" name="careDate" class="form-control" value="${requestScope.care.careDate }" required="required"/><br>
-	</div>
-	<div class="form-group">
-		<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
-		<input type="text" name="sitterName" id="pName" class="form-control" value='<sec:authentication property="principal.memberName"/>' required="required">
-	</div>
-	<div class="form-group">
-		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 식사 </label>
-		<textarea rows="5" cols="30" id="careMeal" name="careMeal" class="form-control">${requestScope.care.careMeal }</textarea>
-	</div>
-	<div class="form-group">
-		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 산책 </label>
-		<textarea rows="5" cols="30" id="careWalking" name="careWalking" class="form-control">${requestScope.care.careWalking }</textarea>
-	</div>
-	<div class="form-group">
-		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 배변활동 </label>
-		<textarea rows="5" cols="30" id="careBowelMovement" name="careBowelMovement" class="form-control">${requestScope.care.careBowelMovement }</textarea>
-	</div>
-	<div class="form-group">
-		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 돌봄 후기 </label>
-		<textarea rows="5" cols="30" id="careReview" name="careReview" class="form-control">${requestScope.care.careReview }</textarea>
-	</div>
-	<div class="row">
-		<div class="col-lg-6">
-			<span class="glyphicon glyphicon-picture"></span><label for="pPwd"> 돌봄 이미지 </label>
-			<c:forEach items="${care.careImage }" var="CareImage">
-					<img src="${initParam.rootPath }/careImage/${CareImage.imageName }" width="350px"><br>
-			</c:forEach>
+	<input type="hidden" id="careId" name="careId" value="${requestScope.care.careId }" required="required"/><br>
+	<div class="col-lg-6">
+		<div class="form-group">
+			<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
+			<input type="date" id="careDate" name="careDate" class="form-control" value="${requestScope.care.careDate }" required="required"/><br>
 		</div>
-		<div class="col-lg-6">
-			<div class="form-group">
-				<button id="addImage" type="button" class="btn btn-info">이미지 추가</button>
-			</div>
+		<div class="form-group">
+			<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
+			<input type="text" name="sitterName" id="pName" class="form-control" value='<sec:authentication property="principal.memberName"/>' required="required">
 		</div>
-		<div class="col-lg-6">
+		<div class="form-group">
+			<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 식사 </label>
+			<textarea rows="5" cols="30" id="careMeal" name="careMeal" class="form-control">${requestScope.care.careMeal }</textarea>
+		</div>
+		<div class="form-group">
+			<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 산책 </label>
+			<textarea rows="5" cols="30" id="careWalking" name="careWalking" class="form-control">${requestScope.care.careWalking }</textarea>
+		</div>
+		<div class="form-group">
+			<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 배변활동 </label>
+			<textarea rows="5" cols="30" id="careBowelMovement" name="careBowelMovement" class="form-control">${requestScope.care.careBowelMovement }</textarea>
+		</div>
+		<div class="form-group">
+			<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 돌봄 후기 </label>
+			<textarea rows="5" cols="30" id="careReview" name="careReview" class="form-control">${requestScope.care.careReview }</textarea>
+		</div>
+		<div class="form-group">
+					<input type="file" name="careImageList" id="imageCare"/>
+					<button id="addImage" type="button" class="btn btn-info">이미지 추가</button>
+		</div>
+	</div>
+	<div class="col-lg-6">
 			<span id="changeSpan">
-				<c:forEach items="${requestScope.dog.dogImage }" var = "dogImage">
-				<img id="careImage" src="${initParam.rootPath }/careImage/${CareImage.imageName }" class="img-responsive" width="350px">
+			<c:forEach items="${requestScope.care.careImage }" var = "careImage">
+				<img id="careImage" src="${initParam.rootPath }/careImage/${careImage.imageName }" class="img-responsive" width="200px">
+				<%-- <input type="hidden" id="imageName" name="imageName" value="${careImage.imageName }" required="required"/><br> --%>
 				<button id="imgChangeBtn" type="button" class="btn btn-success">사진변경</button>
-				</c:forEach>
+			</c:forEach>
 			</span>
 			<span id="cancelSpan" style="display: none;">
 				<button id="cancelImgChangeBtn" type="button" class="btn btn-success">사진변경취소</button>
 				<input type='file' name='imageMember' id='imageMember' class='form-control'>
 			</span>
-		</div>
 	</div>
+	
 	<div class="form-group">
 		<input type="submit" value="돌봄일지수정" class="btn-lg btn-block" id="btn">
 	</div>
+	
+	<sec:csrfInput/><%-- csrf 토큰 --%>
 </form>
-	</div>
-		<div class="col-lg-4"></div>
+		</div>
+		<div class="col-lg-2"></div>
 	</div>
 </div>
+
 </body>
 </html>

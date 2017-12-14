@@ -446,3 +446,21 @@ where 			res_status = 'res_2'
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id 
 		
+		select  t.res_id,
+				r.res_sdate,
+				r.res_edate,
+				r.price,
+				r.res_status,
+				r.res_contents,
+				r.email,
+				r.email_sitter,
+				t.dog_id,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.birth
+		from	reservation r, res_detail t, dog d
+		where r.email = 'lee@naver.com'
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-5'
