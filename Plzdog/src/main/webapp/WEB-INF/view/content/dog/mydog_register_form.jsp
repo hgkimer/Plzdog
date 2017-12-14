@@ -62,11 +62,9 @@
 						required="required" />
 				</div>
 				<div class="form-group">
-					<label for="gender">성별 : </label> <label>
-						<input type="radio" name="gender" value="수컷" id="gendermale" class="radio-inline" />수컷</label> 
-					<label>
-						<input type="radio" name="gender" value="암컷" id="genderfemale" class="radio-inline" />암컷
-					</label>
+					<label for="gender">성별 : </label> 
+					<label><input type="radio" name="gender" value="수컷" id="gendermale" class="radio-inline" />수컷</label> 
+					<label><input type="radio" name="gender" value="암컷" id="genderfemale" class="radio-inline" />암컷</label>
 				</div>
 				<div class="form-group">
 					<label for="birthday">생년월일 : </label> <input type="text"
