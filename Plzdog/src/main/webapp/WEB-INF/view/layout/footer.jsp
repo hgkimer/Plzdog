@@ -11,7 +11,6 @@ footer {
    	right:0;	
    	z-index:1;
 }
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 </style>
 	<footer>
 		<p>
