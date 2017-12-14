@@ -81,8 +81,10 @@ $(document).ready(function(){
 		</div>
 		<div class="col-lg-6">
 			<span id="changeSpan">
+				<c:forEach items="${requestScope.dog.dogImage }" var = "dogImage">
 				<img id="careImage" src="${initParam.rootPath }/careImage/${CareImage.imageName }" class="img-responsive" width="350px">
 				<button id="imgChangeBtn" type="button" class="btn btn-success">사진변경</button>
+				</c:forEach>
 			</span>
 			<span id="cancelSpan" style="display: none;">
 				<button id="cancelImgChangeBtn" type="button" class="btn btn-success">사진변경취소</button>
