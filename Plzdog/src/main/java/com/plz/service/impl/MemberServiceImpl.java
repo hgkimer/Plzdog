@@ -31,7 +31,6 @@ public class MemberServiceImpl implements MemberService {
 	public void insertMember(Member member, String role) {
 		//패스워드 암호화 처리
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
-		System.out.println(member);
 		//member 테이블 insert
 		dao.insertMember(member);
 		//Authority 테이블 insert

@@ -50,18 +50,29 @@ function cancelProposal(resId){
 		alert("취소합니다.");
 	}
 }
-</script>
 
-	<div class="container">
+</script>
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<div class="row">
+				<br><br><br><br>
+					<div class="col-lg-6">
+						<button type="button" class="btn btn-lg btn-info">견적 신청 가능한 예약 보기</button>
+					</div>
+					<div class="col-lg-6">
+						<button type="button" class="btn btn-lg btn-info">견적 신청한 예약 보기</button>
+					</div>
+				</div>
+				<div class="row">
+					<p></p>
 					<c:if test="${errorMessage != null }">
 						<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
 						<p style="text-align: center"><strong>많은 사람들이 예약을 신청할 수 있도록 주변에 알려주세요!:)</strong><p>
 					</c:if>
 					<c:forEach items="${requestScope.list }" var="res">
+						<br><br>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="col-lg-4">
@@ -242,7 +253,7 @@ function cancelProposal(resId){
 				</div>
 				<input type="hidden" value="<sec:authentication property='principal.email'/>" readonly id="sEmail">
 			</div>
-			<div class="col-lg-2"></div>
+			<div class="col-lg-3"></div>
 		</div>
 	</div>
 
