@@ -15,12 +15,18 @@ public interface CareDao {
 	int insertCare(Care care);
 
 	/**
-	 * 돌봄일지 + 돌봄일지 이미지 조회하기
+	 * 예약번호 해당하는 모든 돌봄일지 + 돌봄일지 이미지 조회하기
 	 * @param resId
 	 * @return
 	 */
 	List<Care> selectCareJoinCareImage(int resId);
 	
+	/**
+	 * 돌봄ID로 돌봄일지 + 돌봄일지 이미지 조회하기
+	 * @param careId
+	 * @return
+	 */
+	Care selectCareJoinCareImageByCareId(int careId);
 	/**
 	 * 돌봄일지 수정
 	 * @param care
@@ -55,4 +61,6 @@ public interface CareDao {
 	 * @return
 	 */
 	int deleteCareImage(String careImage);
+
+	
 }

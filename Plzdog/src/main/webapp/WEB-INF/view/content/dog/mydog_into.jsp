@@ -24,8 +24,6 @@
 <div class="col-lg-3" style="float:left; height:-webkit-fill-available;"></div>
 
 	<button onclick="location.href='mydog_register_form.do'">강아지 등록</button>
-	<button onclick="location.href='update_result.do?email=<sec:authentication property="principal.email"/>'">강아지 수정</button>
-	<button onclick="location.href='delete_dog.do'">강아지 삭제</button>
 
 <c:forEach items="${requestScope.dogList }" var="dog">
 <div class="col-lg-6 contents" style="height:100px;">
@@ -58,6 +56,8 @@
 				${dogInfo.code.codeName } (O)<br>
 			</c:forEach>
 		</div>
+		<button onclick="location.href='select_dog_dogInfo_dogImage.do?dogId=${dog.dogId}'">강아지 수정</button>
+		<button onclick="location.href='delete_dog.do?dogId=${dog.dogId}'">강아지 삭제</button>
 </div>
 </c:forEach>
 

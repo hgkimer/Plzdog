@@ -3,13 +3,6 @@
 <%--Spring Security 커스텀태그 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>header</title>
-
 <style type="text/css">
    * {
       margin:0 auto;
@@ -39,73 +32,10 @@
       position:relative;
       z-index:1;
    }
-   
-   .nav {
-      width:auto;
-      float:right;
-      font-weight:bold;
-   }
-   
-   .afew:hover {
-      background-color:rgba(0,0,0,0.1);
-   }
-   
-   .much:hover {
-      background-color:rgba(0,0,0,0.1);
-   }
-   
-   .nav img {
-      width:30px;
-      height:30px;
-   }
-   
-   .navi {
-      font-weight:bold;
-      font-size:20px;
-      float:left;
-      width:auto;
-      height:100%;
-      text-align:center;
-      line-height:80px;
-      margin-left:40px;
-      color:white;
-   }
-   
-   .w3-teal {
-      height:100px;
-   }
-   
-   
-   .afew, .much, ::-webkit-scrollbar {
-      display:none;
-   }
-   
-   .much, .afew {
-      width:100%;
-      height:30px;
-      font-size:15px;
-      background-color:#d1d1d1;
-      line-height:30px;
-   }
-   
-   .blank {
-      width:100%;
-      height:200px;
-   }
-   
-   .img-responsive {
-      height:250px;
-   }
 
 </style>
-</head>
 
-<body>
    <header>
-   <%-- 사이드 바 --%>
-         
-   
-      
       <!-- 
          로그아웃전송폼
          + 로그인/로그아웃은 반드시 POST방식으로 요청하며 csrf 토큰을 보내야 한다.
@@ -134,7 +64,7 @@
             </sec:authorize>
          </ul>
    </header>
-   
+
    <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="box-shadow:0px 5px 5px gray;">
       <ul class="nav" style="margin-top:20px; width:100%; text-align:center; position:absolute; z-index:1000;">
          
@@ -181,28 +111,13 @@
          </sec:authorize>
       </ul>
 </div>
+
 <script>
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-}
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-}   
 
 $(document).ready(function(){
    $(".navi > #logout").on("click", function(){
       $("#logoutForm").submit();
    });
-   
-   $("#few").on("click", function(){
-	      $(".afew").slideToggle();
-	   });
-	   
-	   $("#more").on("click", function(){
-	      $(".much").slideToggle();
-	   });
-
 });
 </script>
-</body>
-</html>
+

@@ -44,8 +44,8 @@
    <mvc:view-controller path="/member/member_result_form.do" view-name="member/member_result_form.tiles"/>
    <!-- 회원정보 수정 페이지(수정 폼) -->
    <mvc:view-controller path="/member/member_edit_form.do" view-name="member/member_edit_form.tiles"/>
-   <!-- 반려견 조회 페이지 -->
-   <mvc:view-controller path="/member/mydog.do" view-name="member/mydog.tiles"/>
+	<!-- 반려견 조회 페이지 -->
+   <mvc:view-controller path="/dog/mydog_into.do" view-name="dog/mydog_into.tiles"/>
    <!-- 반려견 등록 (반려견 등록폼) -->
    <mvc:view-controller path="/dog/mydog_register_form.do" view-name="dog/mydog_register_form.tiles"/>
    <!-- 반려견 등록결과 폼 -->
@@ -56,8 +56,8 @@
    <!-- 예약 전체 조회 -->
    <mvc:view-controller path="/sitter/selectAllReservation.do" view-name="sitter/selectAllReservation.tiles"/>
    
-   <!-- 강아지 관리 페이지 -->
-   <mvc:view-controller path="/member/mydog_into.do" view-name="member/mydog_into.tiles"/>
+   
+
    
    <!-- 시터에게 온 예약 조회 -->
    <mvc:view-controller path="/sitter/sitter_mypage.do" view-name="sitter/sitter_mypage.tiles" />

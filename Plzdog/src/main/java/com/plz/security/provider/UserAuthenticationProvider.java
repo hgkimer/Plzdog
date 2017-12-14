@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.plz.dao.AuthorityDao;
+import com.plz.dao.DogDao;
 import com.plz.dao.MemberDao;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Member;
@@ -29,6 +30,9 @@ import com.plzdog.vo.Member;
 public class UserAuthenticationProvider implements AuthenticationProvider{
 	@Autowired
 	private MemberDao dao;
+	
+	@Autowired
+	private DogDao daodog;
 	
 	@Autowired
 	private AuthorityDao daoAuthority;

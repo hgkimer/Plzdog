@@ -11,10 +11,13 @@ public class Care implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int careId;
-	private String careContents;
 	private int resId;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date careDate;
+	private String careMeal;
+	private String careWalking;
+	private String careBowelMovement;
+	private String careReview;
 	
 	//여러개의 이미지 처리
 	private List<MultipartFile> careImageList;
@@ -23,21 +26,28 @@ public class Care implements Serializable{
 
 	public Care() {}
 
-	public Care(int careId, String careContents, int resId, Date careDate) {
+	public Care(int careId, int resId, Date careDate, String careMeal, String careWalking, String careBowelMovement,
+			String careReview) {
 		super();
 		this.careId = careId;
-		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
+		this.careMeal = careMeal;
+		this.careWalking = careWalking;
+		this.careBowelMovement = careBowelMovement;
+		this.careReview = careReview;
 	}
 
-	public Care(int careId, String careContents, int resId, Date careDate, List<MultipartFile> careImageList,
-			List<CareImage> careImage) {
+	public Care(int careId, int resId, Date careDate, String careMeal, String careWalking, String careBowelMovement,
+			String careReview, List<MultipartFile> careImageList, List<CareImage> careImage) {
 		super();
 		this.careId = careId;
-		this.careContents = careContents;
 		this.resId = resId;
 		this.careDate = careDate;
+		this.careMeal = careMeal;
+		this.careWalking = careWalking;
+		this.careBowelMovement = careBowelMovement;
+		this.careReview = careReview;
 		this.careImageList = careImageList;
 		this.careImage = careImage;
 	}
@@ -48,14 +58,6 @@ public class Care implements Serializable{
 
 	public void setCareId(int careId) {
 		this.careId = careId;
-	}
-
-	public String getCareContents() {
-		return careContents;
-	}
-
-	public void setCareContents(String careContents) {
-		this.careContents = careContents;
 	}
 
 	public int getResId() {
@@ -72,6 +74,38 @@ public class Care implements Serializable{
 
 	public void setCareDate(Date careDate) {
 		this.careDate = careDate;
+	}
+
+	public String getCareMeal() {
+		return careMeal;
+	}
+
+	public void setCareMeal(String careMeal) {
+		this.careMeal = careMeal;
+	}
+
+	public String getCareWalking() {
+		return careWalking;
+	}
+
+	public void setCareWalking(String careWalking) {
+		this.careWalking = careWalking;
+	}
+
+	public String getCareBowelMovement() {
+		return careBowelMovement;
+	}
+
+	public void setCareBowelMovement(String careBowelMovement) {
+		this.careBowelMovement = careBowelMovement;
+	}
+
+	public String getCareReview() {
+		return careReview;
+	}
+
+	public void setCareReview(String careReview) {
+		this.careReview = careReview;
 	}
 
 	public List<MultipartFile> getCareImageList() {
@@ -92,19 +126,23 @@ public class Care implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Care [careId=" + careId + ", careContents=" + careContents + ", resId=" + resId + ", careDate="
-				+ careDate + ", careImageList=" + careImageList + ", careImage=" + careImage + "]";
+		return "Care [careId=" + careId + ", resId=" + resId + ", careDate=" + careDate + ", careMeal=" + careMeal
+				+ ", careWalking=" + careWalking + ", careBowelMovement=" + careBowelMovement + ", careReview="
+				+ careReview + ", careImageList=" + careImageList + ", careImage=" + careImage + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((careContents == null) ? 0 : careContents.hashCode());
+		result = prime * result + ((careBowelMovement == null) ? 0 : careBowelMovement.hashCode());
 		result = prime * result + ((careDate == null) ? 0 : careDate.hashCode());
 		result = prime * result + careId;
 		result = prime * result + ((careImage == null) ? 0 : careImage.hashCode());
 		result = prime * result + ((careImageList == null) ? 0 : careImageList.hashCode());
+		result = prime * result + ((careMeal == null) ? 0 : careMeal.hashCode());
+		result = prime * result + ((careReview == null) ? 0 : careReview.hashCode());
+		result = prime * result + ((careWalking == null) ? 0 : careWalking.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -118,10 +156,10 @@ public class Care implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Care other = (Care) obj;
-		if (careContents == null) {
-			if (other.careContents != null)
+		if (careBowelMovement == null) {
+			if (other.careBowelMovement != null)
 				return false;
-		} else if (!careContents.equals(other.careContents))
+		} else if (!careBowelMovement.equals(other.careBowelMovement))
 			return false;
 		if (careDate == null) {
 			if (other.careDate != null)
@@ -139,6 +177,21 @@ public class Care implements Serializable{
 			if (other.careImageList != null)
 				return false;
 		} else if (!careImageList.equals(other.careImageList))
+			return false;
+		if (careMeal == null) {
+			if (other.careMeal != null)
+				return false;
+		} else if (!careMeal.equals(other.careMeal))
+			return false;
+		if (careReview == null) {
+			if (other.careReview != null)
+				return false;
+		} else if (!careReview.equals(other.careReview))
+			return false;
+		if (careWalking == null) {
+			if (other.careWalking != null)
+				return false;
+		} else if (!careWalking.equals(other.careWalking))
 			return false;
 		if (resId != other.resId)
 			return false;

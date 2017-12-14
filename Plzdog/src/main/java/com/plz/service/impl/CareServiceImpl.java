@@ -27,7 +27,7 @@ public class CareServiceImpl implements CareService {
 	@Override
 	@Transactional
 	public void insertCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException {
-		//dog+이미지 등록 처리
+		//care정보+이미지 등록 처리
 		careDao.insertCare(care);
 		ArrayList<CareImage> list = new ArrayList<>();
 		for(MultipartFile careImage : care.getCareImageList()) {
@@ -71,7 +71,12 @@ public class CareServiceImpl implements CareService {
 	public List<Care> selectCareJoinCareImage(int resId) {
 		return careDao.selectCareJoinCareImage(resId);
 	}
-
+	
+	@Override
+	public Care selectCareJoinCareImageByCareId(int careId) {
+		return careDao.selectCareJoinCareImageByCareId(careId);
+	}
+	
 	@Override
 	public void updateCare(Care care) {
 		careDao.updateCare(care);
