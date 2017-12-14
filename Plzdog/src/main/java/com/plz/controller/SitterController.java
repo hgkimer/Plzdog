@@ -159,15 +159,28 @@ public class SitterController {
 	
 	@RequestMapping("/sitter/update_care")
 	@Transactional
-	public String updateCare(@ModelAttribute Care care, ModelMap model) {
-		if(careService.selectCareJoinCareImage(care.getResId()) != null) {
-			careService.updateCare(care);
-			model.addAttribute(care);
-			return "sitter/care_success.tiles";
-		} else {
-			return "sitter/fail.tiles";
-		}
+	public String updateCare(@ModelAttribute Care care , 
+			HttpServletRequest request, ModelMap model) throws IllegalStateException, IOException {
+
+			careService.updateCare(care,request);
+			model.addAttribute("resId",care.getResId());
+			//return "/WEB-INF/view/content/sitter/care_edit_result_form.jsp";
+			return "/sitter/select_care.do";
 	}
+	
+	@RequestMapping("/sitter/delete_care")
+	@Transactional
+	public String deleteCare(@RequestParam int careId , @RequestParam int resId,
+			HttpServletRequest request, ModelMap model) throws IllegalStateException, IOException {
+			careService.deleteCare(careId);
+			
+			List<Care> list = careService.selectCareJoinCareImage(resId);
+			//request.Dispatcher
+			model.addAttribute("careList", list);
+			
+			return "/WEB-INF/view/content/sitter/care_select_form.jsp";
+	}
+	
 	/**
 	 * 예약 ID로 돌봄일지 조회
 	 * @param resId
@@ -181,6 +194,7 @@ public class SitterController {
 		List<Care> list = careService.selectCareJoinCareImage(resId);
 		//request.Dispatcher
 		model.addAttribute("careList", list);
+		
 		return "/WEB-INF/view/content/sitter/care_select_form.jsp";
 	}
 	

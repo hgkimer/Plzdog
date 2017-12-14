@@ -1,11 +1,11 @@
 package test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.plz.dao.ReservationDao;
 import com.plz.service.ReservationService;
 import com.plzdog.vo.Reservation;
 
@@ -14,6 +14,7 @@ public class ReservationTest {
 	public static void main(String[] args) {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("com/plz/config/spring/model-context.xml");
 		ReservationService service = (ReservationService) ctx.getBean("reservationServiceImpl");
+		ReservationDao dao = (ReservationDao) ctx.getBean("reservationDaoImpl");
 		
 		//service.addReservation(new Reservation(0,1,new Date("2017/11/27"),new Date("2017/11/28"),"저희 강아지가 행복했으면 좋겠어요.","kim@naver.com","lee@naver.com"));
 		
@@ -22,8 +23,8 @@ public class ReservationTest {
 		//service.removeReservation(7);
 		
 		//예약 전체 조회
-		List<Reservation> list = service.findAllReservation();
-		printReservation(list,"전체조회");
+		/*List<Reservation> list = service.findAllReservation();
+		printReservation(list,"전체조회");*/
 		/*//해당 회원,시터 이메일에 해당하는 예약 조회
 		list = service.findMemberReservationByEmail("lee@naver.com");
 		printReservation(list,"회원 해당 예약조회");
@@ -94,17 +95,17 @@ public class ReservationTest {
 			System.out.println("회원에 해당된 예약 : "+res1);
 		}*/
 		
-		//전체 의뢰 조회
-		List<Reservation> memberList1 = service.findAllMemberReservationMember();
+		//전체 의뢰 조회 res-1 null 인것
+		/*List<Reservation> memberList1 = service.findAllMemberReservationMember();
 		for(Reservation res2 : memberList1) {
 			System.out.println("각 의뢰 : " + res2);
-		}
+		}*/
 		
 		//견주에 해당하는 개정보
-		System.out.println("견주에 해당 개정보"+
-				service.findMemberReservationResDetailDogByEmail("dbsrb0322@naver.com"));
+		/*System.out.println("견주에 해당 개정보"+
+				service.findMemberReservationResDetailDogByEmail("dbsrb0322@naver.com"));*/
 		
-		List<Reservation> dogList1 = new ArrayList<>();
+		/*List<Reservation> dogList1 = new ArrayList<>();
 		for(int i =0 ; i<memberList1.size() ; i++) {
 			// resid 34 , 35 , 36
 			dogList1 = service.findMemberReservationResDetailDogByEmail(memberList1.get(i).getMemberEmail());
@@ -112,12 +113,21 @@ public class ReservationTest {
 				if(memberList1.get(i).getResId() == dogList1.get(i).getResId()) {
 				memberList1.get(i).setResDetailList(dogList1.get(i).getResDetailList());
 			}
-		}
+		}*/
 		
 		//예약에 해당하는 견주 + 강아지 정보
-		for(int k =0 ; k<memberList1.size() ; k++) {
+		/*for(int k =0 ; k<memberList1.size() ; k++) {
 			System.out.println("각 의뢰 : " + memberList1.get(k));
-			}
+			}*/
+		
+		List<Reservation> resList = dao.selectReservationRes5JoinResDetailAndDog("lee@naver.com");
+		System.out.println(resList);
+		
+		resList = dao.selectReservationRes1JoinResDetailAndDog("lee@naver.com");
+		System.out.println(resList);
+		
+		resList = dao.selectCompletePaymentReservationMemberByEmail("soo1@naver.com");
+		System.out.println(resList);
 		}
 	
 	

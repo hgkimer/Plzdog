@@ -265,7 +265,7 @@ insert into member values('soo10@naver.com','오시터','1111','서울','연희�
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u';
 
 -- 권한
--- 관리자
+-- 관리자ㄴ
 insert into AUTHORITY values('kim@naver.com','ROLE_MEMBER');
 insert into AUTHORITY values('kim@naver.com','ROLE_ADMIN');
 insert into AUTHORITY values('kim@naver.com','ROLE_SITTER');

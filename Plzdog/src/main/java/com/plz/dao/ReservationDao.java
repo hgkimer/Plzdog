@@ -206,8 +206,13 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectReservationAllRes1();
 	
-	
-	
+
+	/**
+	 * 결제가 완료된 상태 조회
+	 * @return
+	 */
+	List<Reservation> selectReservationRes5JoinResDetailAndDog(String email);
+
 	/*
 	 * ################################################################
 	 */

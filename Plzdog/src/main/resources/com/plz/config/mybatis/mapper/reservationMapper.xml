@@ -304,8 +304,7 @@
 		FROM	reservation r, res_detail rd, dog d
 	</sql>
 	
-	<resultMap type="Reservation" id="simple-reservation-res_detail-dog-resultmap" 
-	extends="reservation-resultmap">
+	<resultMap type="Reservation" id="simple-reservation-res_detail-dog-resultmap" extends="reservation-resultmap">
 		<collection property="resDetailList" ofType="ResDetail">
 			<id column="res_id" property="resId"/>
 			<result column="dog_id" property="dogId"/>
@@ -334,11 +333,21 @@
 	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -->
 	<select id="selectReservationRes2JoinResDetailAndDog" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"/>
-		where r.email = #{value}
+		where r.email = #{email}
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-2' 
 		order by res_id
+	</select> 
+	
+	<!-- 왜 안나오는지 도저히 모르겠음 ㅈㅅ 강사님한테 물어보겠음-->
+	<!-- 의뢰자의 마이페이지 - 견적 결제완료 예약(res-5) - 강아지 정보 -->
+	<select id="selectReservationRes5JoinResDetailAndDog" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"/>
+		where r.email = #{email}
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+		and	r.res_status = 'res-5' 
 	</select> 
 	
 	<!-- 회원이 선택한 서비스 요구사항 - demand + code-->

@@ -25,16 +25,18 @@ $(document).ready(function(){
 	$("")
 });
 
-function approve(){
+function approve(sitterEmail, memberEmail){
 	if(confirm("승인 하시겠습니까?")){
-		location.href="${initParam.rootPath }/sitter/approve_reservation.do"; 
+		var url='${initParam.rootPath }/sitter/approve_reservation.do?sitterEmail='+sitterEmail+'&memberEmail='+memberEmail;
+		location.href=url; 
 	} else{ 
 		return false;
 	} 
 }
-function reject(){
+function reject(sitterEmail, memberEmail){
 	if(confirm("거절 하시겠습니까?")){
-		location.href="${initParam.rootPath }/sitter/reject_reservation.do"; 
+		var url='${initParam.rootPath }/sitter/reject_reservation.do?sitterEmail='+sitterEmail+'&memberEmail='+memberEmail;
+		location.href=url; 
 	} else{ 
 		return false;
 	} 
@@ -81,8 +83,9 @@ function reject(){
 									<div class="col-lg-4">
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
-											<button type="button" class="btn btn-info btn-sm" id ='approveId' onclick="location.href='approve_reservation.do?sitterEmail=${res.sitterEmail}&memberEmail=${res.memberEmail}'">승인</button>
-											<button type="button" class="btn btn-info btn-sm" id ='rejectId' onclick="location.href='reject_reservation.do?sitterEmail=${res.sitterEmail}&memberEmail=${res.memberEmail}'">거절</button>
+											<!-- 문자 처리 ("")-->
+											<button type="button" class="btn btn-info btn-sm" id ='approveId' onclick='approve("${res.sitterEmail}","${res.memberEmail}")'>승인</button>
+											<button type="button" class="btn btn-info btn-sm" id ='rejectId' onclick='reject("${res.sitterEmail}","${res.memberEmail}")'>거절</button>
 									</div>
 								</div>
 							</div> <!-- END OF panel 헤드 -->

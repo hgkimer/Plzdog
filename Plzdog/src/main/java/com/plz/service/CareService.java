@@ -12,8 +12,6 @@ public interface CareService {
 	
 	List<Care> selectCareJoinCareImage(int resId);
 	
-	void updateCare(Care care);
-	
 	void deleteCare(int careId);
 	
 	void insertCareImage(CareImage careImage);
@@ -25,4 +23,6 @@ public interface CareService {
 	void insertCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException;
 
 	Care selectCareJoinCareImageByCareId(int careId);
+
+	void updateCare(Care care, HttpServletRequest request) throws IllegalStateException, IOException;
 }
