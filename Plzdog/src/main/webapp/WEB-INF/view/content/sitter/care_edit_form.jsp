@@ -13,7 +13,7 @@ $(document).ready(function(){
 	});	
 });
 </script>
-<h3>돌봄일지 등록하기</h3>
+<h3>돌봄일지 수</h3>
 <form id="addCare" action="${initParam.rootPath }/sitter/insert_care.do" method="post" enctype="multipart/form-data">
 	<sec:csrfInput/>
 	예약 번호 : <input type="number" id="resId" name="resId" required="required"/><br>

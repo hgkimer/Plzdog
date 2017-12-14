@@ -350,8 +350,8 @@
 	<select id="selectReservationAllRes1" resultMap="simple-reservation-res_detail-dog-resultmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"></include>
 		WHERE	res_status = 'res-1'
-		AND r.res_id = t.res_id
-		AND t.dog_id = d.dog_id
+		AND 	r.res_id = t.res_id
+		AND 	t.dog_id = d.dog_id
 	</select>
 	<!-- 
 	####################################################################################################

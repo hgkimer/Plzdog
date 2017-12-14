@@ -59,7 +59,6 @@
 </head>
 <body>
 
-
 	<div class="gores">
 		<div class="move1">
 			<div class="move">

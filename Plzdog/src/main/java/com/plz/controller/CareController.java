@@ -33,7 +33,7 @@ public class CareController {
 	@Autowired
 	private ReservationService Rservice;
 	
-	@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
+	/*@RequestMapping("select_care")  //매개변수를 VO로 받을 땐 @ModelAttribute
 	//request.getParameter
 	public String selectCareJoinCareImage(@RequestParam int resId, ModelMap model) throws Exception {
 		List<Care> list = service.selectCareJoinCareImage(resId);
@@ -43,7 +43,7 @@ public class CareController {
 		//request.Dispatcher
 		model.addAttribute("list", list);
 		return "sitter/care_success.tiles";
-	}
+	}*/
 	
 	@RequestMapping("care_image_result")
 	public ModelAndView uploadSuccess(@RequestParam int careId) {

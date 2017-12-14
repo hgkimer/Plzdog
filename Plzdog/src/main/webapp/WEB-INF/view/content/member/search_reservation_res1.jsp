@@ -20,7 +20,7 @@
 							<div class="panel-heading">
 								<div class="col-lg-4">
 									<img style="width: 200px" alt="강아지 사진"
-										src="${initParam.rootPath }/dogImage/${res.resDogList[0].dogImage[0].dogImage}">
+										src="${initParam.rootPath }/dogImage/${res.resDogList[0].dogImage[0].dogImage}" class="img-circle">
 								</div>
 								<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
 								<div class="col-lg-8">
@@ -92,7 +92,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<img  style="width: 200px" alt="회원사진"
+											<img  style="width: 200px" class="img-thumnail" alt="회원사진"
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
@@ -114,7 +114,7 @@
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
 											<c:forEach items="${dog.dogImage }" var="dogImage">
-											<img  style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
+											<img  class="img-circle" style="width : 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
 											</c:forEach>
 										</div>
 										
