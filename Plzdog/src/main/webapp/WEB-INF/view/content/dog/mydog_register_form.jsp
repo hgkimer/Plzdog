@@ -37,41 +37,33 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-6" style="margin-left:100px;">
+		<div class="col-lg-6">
 		<h1 style="text-align:center">강아지 등록</h1>
-			<form action="${initParam.rootPath }/dog/insertDog.do"
-				method="post" enctype="multipart/form-data">
+			<form action="${initParam.rootPath }/dog/insertDog.do" method="post" enctype="multipart/form-data">
 				<sec:csrfInput />
 				<%-- 이메일 , dogId --%>
-				<input type="hidden" name="email"
-					value='<sec:authentication property="principal.email"/>'>
+				<input type="hidden" name="email" value='<sec:authentication property="principal.email"/>'>
 				<!-- <input type="hidden" name="dogId" value="0"> -->
 				<div class="form-group">
-					<label for="dogName">이름 : </label> <input type="text"
-						name="dogName" id="dogName" class="form-control"
-						required="required" />
+					<label for="dogName">이름 : </label> 
+					<input type="text" name="dogName" id="dogName" class="form-control" required="required" />
 				</div>
 				<div class="form-group">
-					<label for="species">견종 : </label> <input type="text"
-						name="species" id="species" class="form-control"
-						required="required" />
+					<label for="species">견종 : </label> 
+					<input type="text" name="species" id="species" class="form-control" required="required" />
 				</div>
 				<div class="form-group">
-					<label for="weight">몸무게 : </label> <input type="number"
-						name="weight" id="weight" class="form-control"
-						required="required" />
+					<label for="weight">몸무게 : </label> 
+					<input type="number" name="weight" id="weight" class="form-control" required="required" />
 				</div>
 				<div class="form-group">
-					<label for="gender">성별 : </label> <label>
-						<input type="radio" name="gender" value="수컷" id="gendermale" class="radio-inline" />수컷</label> 
-					<label>
-						<input type="radio" name="gender" value="암컷" id="genderfemale" class="radio-inline" />암컷
-					</label>
+					<label for="gender">성별 : </label> 
+					<label><input type="radio" name="gender" value="수컷" id="gendermale" class="radio-inline" />수컷</label> 
+					<label><input type="radio" name="gender" value="암컷" id="genderfemale" class="radio-inline" />암컷</label>
 				</div>
 				<div class="form-group">
-					<label for="birthday">생년월일 : </label> <input type="text"
-						name="birth" id="dDate" class="form-control"
-						required="required" />
+					<label for="birthday">생년월일 : </label> 
+					<input type="text" name="birth" id="dDate" class="form-control" required="required" />
 				</div>
 				<div class="form-group">
 					<strong>강아지 상세 정보</strong>
@@ -84,13 +76,13 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
-					<label for="dogImage">강아지 이미지 :</label><input type="file" name="dogImageList" id="dogImage" placeholder="강아지 선택"/>
+						<label for="dogImage">강아지 이미지 :</label><input type="file" name="dogImageList" id="dogImage" placeholder="강아지 선택"/>
 					</div>
 					<div class="col-lg-6">
-					<div class="form-group">
-					<button id="addDogImage" type="button" class="btn btn-info">강아지 이미지 추가</button>
+						<div class="form-group">
+							<button id="addDogImage" type="button" class="btn btn-info">강아지 이미지 추가</button>
+						</div>
 					</div>
-				</div>
 				</div>
 				<p></p>
 				<div></div>

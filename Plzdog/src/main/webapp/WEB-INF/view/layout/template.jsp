@@ -12,20 +12,23 @@
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <style>
-	footer {
-    	bottom:0;
-    	width:100%;
-    	height:70px;
-   	 	background:#ccc;
-   	 	position:absolute;
-   	 	left:0;
-   	 	right:0;
-   	 	z-index:1;
-	}
+
+* {
+	margin:0 auto;
+	padding:0;
+	text-decoration:none;
+	list-style:none;
+}
+
 html, body {
 	width:100%;
 	height:100%;
 }
+
+.container {
+		width:100%;
+		padding:0;
+	}
 
 /* @media screen and (max-width: 750px) {
 	/*화면이 웹 스크린이고 width가 750px 이하가 되면 적용될 style*/
@@ -42,12 +45,6 @@ html, body {
 		clear:both;
 	}
 	
-	.wrap {
-		min-height:100%;
-		position:relative;
-		padding-bottom:70px;
-	}
-	
 	html, body {
 		width:100%;
 		height:100%;
@@ -56,19 +53,24 @@ html, body {
 </style>
 </head>
 <body>
-<div class="wrap">
-	<tiles:insertAttribute name="header"/>
-	<div class="clear"></div>
-	<%--메인 body --%>
-		<%-- 메뉴 --%>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<tiles:insertAttribute name="header"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2">
 			<tiles:insertAttribute name="menu"/>
-		<!-- 내용 -->
+		</div>
+		<div class="col-sm-12" style="padding:0;">
 			<tiles:insertAttribute name="content"/>
-</div>
-<!-- 푸터 -->
-<div class="row">
-	<div class="col-sm-12">
-		<tiles:insertAttribute name="footer" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<tiles:insertAttribute name="footer" />
+		</div>
 	</div>
 </div>
 </body>
