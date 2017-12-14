@@ -57,7 +57,7 @@
 			</c:forEach>
 		</div>
 		<button onclick="location.href='select_dog_dogInfo_dogImage.do?dogId=${dog.dogId}'">강아지 수정</button>
-		<button onclick="location.href='delete_dog.do'">강아지 삭제</button>
+		<button onclick="location.href='delete_dog.do?dogId=${dog.dogId}'">강아지 삭제</button>
 </div>
 </c:forEach>
 
