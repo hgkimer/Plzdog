@@ -3,10 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-   
+
+	.img-responsive {
+		height:250px;
+	}
 </style>
 <div class="col-lg-3" style="height:100%; float:left;"></div>
-<div class="col-lg-6" style="font-size:18px; margin-top:150px;">
+<div class="col-lg-6" style="font-size:18px; margin-top:150px; z-index:4;">
    <div class="col-lg-6 memberImage">
       <img src="${initParam.rootPath }/memberImage/<sec:authentication property='principal.memberImage'/>" class="img-responsive" width="350px">
    </div>
