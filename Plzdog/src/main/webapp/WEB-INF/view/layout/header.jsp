@@ -81,8 +81,8 @@
                <li class="navi"><a id="logout" style="cursor: pointer;">로그아웃</a></li>
             </sec:authorize>
          </ul>
-   </header>
 
+   </header>
 <script>
 
 $(document).ready(function(){

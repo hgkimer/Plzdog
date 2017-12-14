@@ -342,6 +342,23 @@ public class ReservationController {
 	}
 	
 	
+	/**
+	 * 결제 완료 (res-5)들을 조회하는 컨트롤러
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/search_reservation_res5")
+	public String findReservationRes5Member(@RequestParam String email, Model model) {
+		List<Reservation> list = rService.findReservationRes5(email);
+		if(list.isEmpty()) {
+			model.addAttribute("errorMessage","결제 완료된 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "member/search_reservation_res5.tiles";
+	}
+	
 	/*
 	 * ####################################################################################
 	 */
