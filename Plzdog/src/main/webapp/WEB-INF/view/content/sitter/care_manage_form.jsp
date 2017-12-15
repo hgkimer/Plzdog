@@ -102,7 +102,6 @@ $(document).ready(function(){
 	<div class="manageCare">
 		
 		<div id="registerCare" class="registerCare">
-			<h3>돌봄일지 등록하기</h3>
 				<form id="addCare" action="${initParam.rootPath }/sitter/insert_care.do" method="post" enctype="multipart/form-data">
 					<sec:csrfInput/>
 					<input type="number" id="email" name="resId" value='${param.resId }' required readonly/><br>

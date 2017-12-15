@@ -18,7 +18,6 @@
 	});
 </script>
 
-<h2>시터 입장에서 결제 대기중 페이지</h2>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("")

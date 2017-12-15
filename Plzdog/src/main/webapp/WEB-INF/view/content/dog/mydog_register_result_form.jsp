@@ -11,8 +11,6 @@
 }
 </style>
 
-<h3>강아지 등록 결과</h3>
-
 <div class="form-group">
 	<label for="dogImageId">강아지 이미지 : </label><br>
 	<c:forEach items="${requestScope.dog.dogImage }" var="dogImage">

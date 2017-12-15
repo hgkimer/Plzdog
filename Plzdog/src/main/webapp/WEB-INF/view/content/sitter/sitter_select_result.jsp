@@ -77,22 +77,29 @@ table{
 }
 </style>
 
-<h2>시터 조회</h2>
-필요한 서비스 : 
-<select name="selectService" id="selectServiceId" required="required">
-	<option value="">모든 서비스</option>
-	<c:forEach items="${applicationScope.serviceList}" var="category">
-		<option value="${category.code}">${category.codeName }</option>
-	</c:forEach>
-</select><br>
-<br>
-
-시터 세부사항 : <br>
-<c:forEach items="${applicationScope.skillList }" var="sitterSkill" begin='3'>
-	<input type="checkbox" name="checkSitter" id="checkSitterId" value=${sitterSkill.code } />${sitterSkill.codeName }<br>
-</c:forEach>
-
-<button id="serachBtn">검색하기</button>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			필요한 서비스 : 
+			<select name="selectService" id="selectServiceId" required="required">
+				<option value="">모든 서비스</option>
+				<c:forEach items="${applicationScope.serviceList}" var="category">
+					<option value="${category.code}">${category.codeName }</option>
+				</c:forEach>
+			</select><br>
+			<br>
+			
+			시터 세부사항 : <br>
+			<c:forEach items="${applicationScope.skillList }" var="sitterSkill" begin='3'>
+				<input type="checkbox" name="checkSitter" id="checkSitterId" value=${sitterSkill.code } />${sitterSkill.codeName }<br>
+			</c:forEach>
+			
+			<button id="serachBtn">검색하기</button>
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+</div>
 
 <table border='1' style="width: 1000px;">
 	<thead>

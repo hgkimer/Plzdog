@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<h2>회원 입장 결제 완료 페이지</h2>
+
 <!DOCTYPE html>
 <div class="container">
 		<div class="row">

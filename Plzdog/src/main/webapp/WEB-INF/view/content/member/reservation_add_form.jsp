@@ -204,7 +204,6 @@
 	<div class="row">
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
-			<h2 style="text-align: center">예약 의뢰</h2>
 			<c:if test="${requestScope.sitter != null }">
 				<h3>${requestScope.sitter.memberName }님에게 보내는 의뢰접수</h3>
 			</c:if>

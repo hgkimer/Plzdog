@@ -25,7 +25,6 @@
 	<div class="row">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8">
-			<h2 style="text-align: center">돌봄일지 수정 결과</h2>
 
 	<div class="col-lg-6">
 		<div class="form-group">

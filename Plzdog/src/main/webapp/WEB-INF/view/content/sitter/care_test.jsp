@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h3>돌봄일지 ID로 돌봄일지 조회하기</h3>
+
 <form action="${initParam.rootPath }/care/select_care.do" method="post">
 	<!-- post, 로그인, 로그아웃 방식은 sec를 꼭 붙여준다. 토큰을 보내줘야한다. -->
 	<sec:csrfInput/>

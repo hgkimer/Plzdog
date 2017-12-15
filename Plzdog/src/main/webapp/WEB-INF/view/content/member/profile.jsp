@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<h2>시터 프로필</h2>
+
 <h1>${requestScope.profile.memberName }</h1>
 <p>이메일 : ${requestScope.profile.email }</p>
 <p>프로필 사진 : <img src="${initParam.rootPath }/memberImage/${profile.memberImage }" width="350px"><br>
