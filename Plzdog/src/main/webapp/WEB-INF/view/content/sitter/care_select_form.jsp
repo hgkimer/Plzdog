@@ -23,10 +23,13 @@ function popupEditCare(careId){
 	window.open(url,"newCareEditForm","width = 1000, height = 800");
 }
 
-function deleteCare(careId){
-	alert(resId);
-	var url = '${initParam.rootPath}/sitter/care_register_form.do?resId='+resId;
-	window.open(url,"newCareDeleteForm","width = 1000, height = 1000");
+function deleteCare(careId ,resId){
+	if(confirm("돌봄일지를 삭제 하시겠습니까?")){
+		var url = '${initParam.rootPath}/sitter/delete_care.do?careId='+careId+'&resId='+resId;
+		location.href=url; 
+	} else{ 
+		return false;
+	} 
 }
 
 </script>
@@ -73,7 +76,7 @@ function deleteCare(careId){
 										<button type="button" class="btn btn-info btn-xs"
 											data-toggle="collapse" data-target="#${care.careId }">상세보기</button>
 										<button type="button" class="btn btn-info btn-xs" id='editCareId' onclick='popupEditCare(${care.careId})'>돌봄일지수정</button>
-										<button type="button" class="btn btn-info btn-xs" id='deleteCareId' onclick=''>돌봄일지삭제</button>
+										<button type="button" class="btn btn-info btn-xs" id='deleteCareId' onclick='deleteCare(${care.careId},${care.resId })'>돌봄일지삭제</button>
 									</div>
 								</div>
 							</div> <!-- END OF panel 헤드 -->

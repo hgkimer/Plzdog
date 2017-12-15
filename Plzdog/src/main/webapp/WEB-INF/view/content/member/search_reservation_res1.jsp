@@ -3,31 +3,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
 function deleteRes(resId){
-		var dCheck = confirm("정말 예약을 삭제하시겠어요?");
-		if(dCheck){
-			var reCheck = confirm("한 번 지워진 예약은 복구할 수 없습니다.");
-			if(reCheck){
+	var dCheck = confirm("예약을 삭제하시겠어요?");
+	if(dCheck){
+		var reCheck = confirm("삭제된 예약은 복구가 불가능 합니다. 그래도 진행 하시겠어요?");
+		if(reCheck){
 			$.ajax({
 				"url" : "${initParam.rootPath}/member/delete_reservation.do",
 				"type" : "get",
 				"data" : {"resId" : resId},
-				"success" : function(){
-					alert("예약 삭제를 완료했습니다.");
+				"succecss" : function(){
 					location.reload();
+					alert("예약이 삭제되었습니다.");
 				},//end of success
 				"error" : function(xhr, status, errorMsg){
 					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
 				}//end of error
 			});//end of ajax
-			}else{
-				alert("취소했습니다.");
-			}
-			}else{
-				alert("취소했습니다.");
+		}else{
+			alert("취소되었습니다.");
 		}
-	}//end of function
-	
-</script>
+	}else{
+		alert("취소되었습니다.");
+		location.reload();
+	}
+}
+</script>	
 
 <div class="container">
 	<div class="row">
@@ -129,6 +129,7 @@ function deleteRes(resId){
 								</div>
 								<div class="row">
 									<div class="col-lg-4">
+<<<<<<< HEAD
 										<img style="width: 200px" class="img-thumnail" alt="회원사진"
 											src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 									</div>
@@ -154,9 +155,73 @@ function deleteRes(resId){
 												<li><strong>${demand.code.codeName }</strong></li>
 											</c:forEach>
 										</ol>
+=======
+										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
+										<button type="button" class="btn btn-danger btn-sm" onclick="deleteRes(${res.resId});">삭제하기</button>
+										<button type="button" class="btn btn-info btn-sm"
+											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 									</div>
 								</div>
+<<<<<<< HEAD
 								<c:forEach items="${res.resDogList }" var="dog">
+=======
+							</div> <!-- END OF panel 헤드 -->
+							<div class="panel-body">
+								<div class="collapse" id="${res.resId }">
+									<div class="row">
+										<div class="col-lg-6">
+											<c:forEach items="${res.demandList }" var="demand">
+												<!-- 요구사항 목록중 카테고리가 서비스인 코드만 출력 -->
+												<c:if test="${demand.code.category == '서비스' }">
+													<label>서비스 종류 : ${res.demandList[0].code.codeName }</label><br>
+												</c:if>
+											</c:forEach>
+												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
+												<fmt:formatDate value="${res.resSDate }"
+													pattern="yyyy-MM-dd HH시 mm분" /></label><br>
+											<c:if test="${res.price > 0 }">
+												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
+											</c:if>
+										</div>
+										<div class="col-lg-6">
+											<!-- ApplicationScope에 저장된 예약 상태를 표시하는 코드리스트들을 가져와서 
+									현재 예약의 상태와 비교후 일치하는 것만 출력 -->
+											<c:forEach items="${applicationScope.resList }"
+												var="resStatus">
+												<c:if test="${resStatus.code == res.resStatus }">
+													<label>예약 상태 : ${resStatus.codeName	}</label><br>
+												</c:if>
+											</c:forEach>
+											<p>
+												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 종료 :
+												<fmt:formatDate value="${res.resEDate }"
+													pattern="yyyy-MM-dd HH시 mm분" /></label>
+											</p>
+											<p></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
+											<img  style="width: 200px" class="img-thumnail" alt="회원사진"
+												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
+										</div>
+										<div class="col-lg-4">
+											<p><strong><span class="glyphicon glyphicon-envelope"></span> ${res.member.email }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-user"></span> ${res.member.memberName }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-phone-alt"></span> ${res.member.phoneNum }</strong></p>
+										</div>
+										<div class="col-lg-4">
+											<span class="glyphicon glyphicon-th-list"></span><label>요구 사항</label><br>
+											<ol>
+												<c:forEach items="${res.demandList }" var="demand">
+													<li><strong>${demand.code.codeName }</strong></li>
+												</c:forEach>
+											</ol>
+										</div>
+									</div>
+									<c:forEach items="${res.resDogList }" var="dog">
+>>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->

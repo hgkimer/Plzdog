@@ -105,12 +105,10 @@ public class ReservationController {
 	 */
 	@RequestMapping("/member/search_reservation")
 	public String searchReservation(@RequestParam String mEmail, Model model) {
-		System.out.println(mEmail);
 		List<Reservation> rlist = rService.findMemberReservationByEmail(mEmail);
 		if (rlist.isEmpty() || rlist == null) {
 			rlist = rService.findSitterReservationByEmail(mEmail);
 			if (!rlist.isEmpty() && rlist != null) {
-				System.out.println(rlist);
 				model.addAttribute("sresList", rlist);
 				return "member/search_reservation_result.tiles";
 			} else {	
@@ -119,7 +117,6 @@ public class ReservationController {
 				return "member/search_reservation_result.tiles";
 			}
 		} else {
-			System.out.println(rlist);
 			model.addAttribute("mresList", rlist);
 			return "member/search_reservation_result.tiles";
 		}
@@ -304,6 +301,16 @@ public class ReservationController {
 		}
 		return "member/search_reservation_res1.tiles";
 	}
+	@RequestMapping("/member/search_reservation_res2")
+	public String findReservationRes2Member(@RequestParam String email, Model model) {
+		List<Reservation> list = rService.findReservationRes2(email);
+		if(list.isEmpty()) {
+			model.addAttribute("errorMessage","시터로부터 견적이 들어온 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "member/search_reservation_res2.tiles";
+	}
 	/**
 	 * 시터에게 견적을 신청할 수 있는 견적 대기 상태(res-1)의 예약들을 전체 조회하는
 	 * 컨트롤러 
@@ -344,6 +351,23 @@ public class ReservationController {
 		rService.removeReservation(resId);
 	}
 	
+	
+	/**
+	 * 결제 완료 (res-5)들을 조회하는 컨트롤러
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/search_reservation_res5")
+	public String findReservationRes5Member(@RequestParam String email, Model model) {
+		List<Reservation> list = rService.findReservationRes5(email);
+		if(list.isEmpty()) {
+			model.addAttribute("errorMessage","결제 완료된 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "member/search_reservation_res5.tiles";
+	}
 	
 	/*
 	 * ####################################################################################

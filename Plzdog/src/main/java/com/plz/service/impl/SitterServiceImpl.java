@@ -24,11 +24,9 @@ public class SitterServiceImpl implements SitterService {
 	@Transactional
 	public void insertSitter(Sitter sitter, List<String> skillList) {
 		sitterDao.insertSitter(sitter);
-		System.out.println(sitter);
 		//시터가 입력한 보유 기술과 환경에 대한 리스트를 저장하는 insert
 		for(String s : skillList) {
 			Skill skill = new Skill(sitter.getEmail(), s);
-			System.out.println(s);
 			skillDao.insertSkill(skill);
 		}
 		

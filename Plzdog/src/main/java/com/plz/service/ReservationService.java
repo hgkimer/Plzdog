@@ -210,6 +210,15 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findReservationAllRes1Sitter();
+
+	
+	/**
+	 * 의뢰자 견적 완료 예약(res-5)상태인 예약 들을 조회해 온다.
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findReservationRes5(String email);
+
 	/**
 	 * 매개변수로 받은 시터의 이메일과 예약 아이디를 통해 시터의 견적 신청 및 취소 요구를 업데이트 하는 서비스 메소드.
 	 * 
@@ -217,5 +226,6 @@ public interface ReservationService {
 	 * @param resId
 	 */
 	void updateProposal(String sEmail, int resId);
+
 	
 }
