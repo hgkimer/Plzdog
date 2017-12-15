@@ -3,7 +3,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
-<h1>${requestScope.profile.memberName }</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<h1>${requestScope.profile.memberName }</h1>
 <p>이메일 : ${requestScope.profile.email }</p>
 <p>프로필 사진 : <img src="${initParam.rootPath }/memberImage/${profile.memberImage }" width="350px"><br>
 <p>우편번호 : ${requestScope.profile.zipcode }</p>
@@ -42,3 +46,7 @@
 	<input type="text" value="${requestScope.profile.email }" name="sitterEmail"/>
 	<button type="submit">예약 신청</button>
 </form>
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+</div>
