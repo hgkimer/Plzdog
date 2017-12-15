@@ -73,7 +73,6 @@ $(document).ready(function(){
          <%--회원/관리자 공통 메뉴 /member로 시작 , 관리자 일수도 있고 , 회원일 수도 있고, 시터일 수도 있고--%>
          <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_SITTER')">
             <li class="sub"><a href="${initParam.rootPath }/member/member_result_form.do">회원 정보 조회</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/dog/mydog_register_form.do">강아지 등록</a></li>
             <li class="sub"><a href="${initParam.rootPath }/dog/select_dog.do?email=<sec:authentication property="principal.email"/>">강아지 관리</a></li>
          </sec:authorize>
          

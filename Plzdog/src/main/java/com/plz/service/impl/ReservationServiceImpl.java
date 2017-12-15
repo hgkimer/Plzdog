@@ -396,7 +396,6 @@ public class ReservationServiceImpl implements ReservationService {
 			r.setResDetailList(resdDao.selectResDetailByResId(r.getResId()));
 			ArrayList<Dog> dogList = new ArrayList<>();
 			for (ResDetail rd : r.getResDetailList()) {
-				// System.out.println(rd);
 				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
 				// 정보를 저장한 강아지들을 리스트에 담는다.
 				dogList.add(rd.getDog());
@@ -413,7 +412,6 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<Reservation> findReservationRes5(String email){
 		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
 				List<Reservation> resList = dao.selectReservationRes5JoinResDetailAndDog(email);
-				System.out.println(resList);
 				//2. 의뢰자, 시터, 강아지 요구사항 정보를 각 예약 겍체에 세팅한다.
 				for(Reservation r : resList) {
 					//의뢰자 정보 세팅
@@ -466,6 +464,21 @@ public class ReservationServiceImpl implements ReservationService {
 			 res.setResStatus("res-1");
 			 dao.updateReservation(res);
 		}
+	}
+
+	@Override
+	public void accpetReservation(int resId) {
+		Reservation res = dao.selectReservationById(resId);
+		res.setResStatus("res-5");
+		dao.updateReservation(res);
+	}
+	
+	@Override
+	public void denyReservation(int resId) {
+		Reservation res = dao.selectReservationById(resId);
+		res.setResStatus("res-1");
+		res.setSitterEmail(null);
+		dao.updateReservation(res);
 	}
 
 	// ----------------------------------------------------------------------

@@ -368,6 +368,24 @@ public class ReservationController {
 		}
 		return "member/search_reservation_res5.tiles";
 	}
+	/**
+	 * 회원이 견적을 승인하는 컨트롤러
+	 * @param resId
+	 */
+	@RequestMapping("/member/accept_reservation")
+	@ResponseBody
+	public void acceptRes(@RequestParam int resId) {
+		rService.accpetReservation(resId);
+	}
+	/**
+	 * 회원이 견적을 거절하는 컨트롤러
+	 * @param resId
+	 */
+	@RequestMapping("/member/deny_reservation")
+	@ResponseBody
+	public void denyRes(@RequestParam int resId) {
+		rService.accpetReservation(resId);
+	}
 	
 	/*
 	 * ####################################################################################

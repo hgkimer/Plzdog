@@ -2,15 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<h2>회원 입장 결제 완료 페이지</h2>
-<!DOCTYPE html>
 <div class="container">
-		<div class="row">
+		<div class="row" style="margin-top:20px;">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
 				<div class="row">
 					<c:if test="${errorMessage != null }">
 						<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
+					<p style="text-align: center">	
+						<strong>견적 승인 대기중인 예약을 확인하세요!</strong>
+					<p>
+						<a href="${initParam.rootPath }/member/search_reservation_res2.do?email=<sec:authentication property='principal.email'/>" class="btn btn-info btn-block btn-lg">승인 대기 예약 조회</a>
 					</c:if>
 					
 					<c:forEach items="${requestScope.list }" var="res">

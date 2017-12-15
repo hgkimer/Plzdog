@@ -226,6 +226,20 @@ public interface ReservationService {
 	 * @param resId
 	 */
 	void updateProposal(String sEmail, int resId);
-
+	/**
+	 * 사용자가 수락버튼을 누르면 매개변수로 받은 예약아이디로  update 하는 메소드.
+	 * 수락하면 res-5로 변경
+	 * 거절하면 res-1로 변경
+	 * @param sEmail
+	 * @param resId
+	 */
+	void accpetReservation(int resId);
+	/**
+	 * 사용자가 거절버튼을 누르면 매개변수로 받은 예약아이디로  update 하는 메소드.
+	 * 수락하면 res-5로 변경
+	 * 거절하면 res-1로 변경
+	 * @param resId
+	 */
+	void denyReservation(int resId);
 	
 }

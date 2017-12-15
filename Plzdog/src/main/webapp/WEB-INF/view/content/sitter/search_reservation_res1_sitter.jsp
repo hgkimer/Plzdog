@@ -54,13 +54,9 @@ function cancelProposal(resId){
 
 </script>
 <div class="container">
-	<div class="row">
+	<div class="row" style="margin-top : 20px;">
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
-			<br>
-			<br>
-			<br>
-			<br>
 			<div class="row">
 				<p></p>
 				<c:if test="${errorMessage != null }">
@@ -293,8 +289,8 @@ function cancelProposal(resId){
 			value="<sec:authentication property='principal.email'/>" readonly
 			id="sEmail">
 	</div>
-		<div class="col-lg-3"></div>
-	</div>
+	<div class="col-lg-3"></div>
+</div>
 </div>
 
 
