@@ -159,7 +159,7 @@ function cancelProposal(resId){
 										<p></p>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row" style="border-bottom: 1px, black;">
 									<div class="col-lg-4">
 										<img style="width: 200px" alt="회원사진"
 											src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
@@ -281,8 +281,8 @@ function cancelProposal(resId){
 						<!-- panel 바디 -->
 					</div>
 					<!-- panel 폼-->
-			</div>
 			</c:forEach>
+			</div>
 			<!-- 전체 예약 객체 ForEach문 끝 -->
 		</div>
 		<input type="hidden"

@@ -25,18 +25,18 @@
 								value='${requestScope.reservation.resSDate }' type="date" /></label><br> 
 						<label>서비스
 							종료 : <fmt:formatDate value='${requestScope.reservation.resEDate }'
-								type="date" /><br>
-						</label>
+								type="date" />
+						</label><br>
 						<c:if test="${reservation.sitterEmail != null }">
-							<p>${requestScope.reservation.price }원</p>
-							<p>${requestScope.reservation.sitterEmail }</p>
+							<label>금액 ${requestScope.reservation.price }원</label><br>
+							<label>시터 이메일 ${requestScope.reservation.sitterEmail }</label><br>
 
 						</c:if>
 					</p>
 				</div>
 				<div class="row" style="margin-top: 20px;">
 					<div class="col-lg-12">
-						<a href="${initParam.rootPath }/memeber/search_sitter.do" class="btn btn-info btn-block">나에게 맞는 시터를 더 찾아보려면 클릭!</a>
+						<a href="${initParam.rootPath }/member/search_sitter.do" class="btn btn-info btn-block">나에게 맞는 시터를 더 찾아보려면 클릭!</a>
 					</div>
 				</div>
 			</div>

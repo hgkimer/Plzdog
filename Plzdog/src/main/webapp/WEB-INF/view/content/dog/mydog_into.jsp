@@ -23,8 +23,6 @@
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
 			<div class="row" style="margin-bottom: 20px;">
-				<button onclick="location.href='mydog_register_form.do'"
-					class="btn btn-warning btn-lg btn-block">강아지 등록</button>
 				<c:forEach items="${requestScope.dogList }" var="dog">
 					<div class="panel panel-warning" style="margin-top: 20px;">
 						<div class="panel-heading">
@@ -64,7 +62,7 @@
 							<div class="col-lg-12">
 								<c:forEach items="${dog.dogImage }" var="dogImage">
 								<img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }"
-											width="200px" class="img-circle">
+											width="200px" class="img-circle" style="margin-bottom: 20px;">
 								</c:forEach>
 							</div>
 							<div class="row" style="margin-top:20px">
@@ -112,6 +110,8 @@
 						</div>
 					</div>
 				</c:forEach>
+				<button onclick="location.href='mydog_register_form.do'"
+					class="btn btn-warning btn-lg btn-block">강아지 등록</button>
 			</div>
 			<div class="col-lg-3"></div>
 		</div>
