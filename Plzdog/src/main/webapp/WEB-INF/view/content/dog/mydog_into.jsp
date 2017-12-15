@@ -16,66 +16,104 @@
 	width: 200px;
 	height: 100px;
 }
-
-.btns {
-	float: right;
-	margin-top: 60px;
-}
 </style>
-<div class="container" style="margin-top: 50px;">
+<p></p>
+<div class="container">
 	<div class="row">
-		
-		<div class="col-lg-2"></div>
-		<div class="col-lg-8">
-			<div class="row" style="margin-bottom : 20px;">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6">
+			<div class="row" style="margin-bottom: 20px;">
 				<button onclick="location.href='mydog_register_form.do'"
-			class="btn btn-info btn-sm" >강아지 등록</button>
-			</div>
-			
-			<div class="row" style="border: 1px solid black; float: left;">
+					class="btn btn-warning btn-lg btn-block">강아지 등록</button>
 				<c:forEach items="${requestScope.dogList }" var="dog">
-					<div class="form-group" id="dogImage">
-						<label for="dogImageId">강아지 이미지 : </label><br>
-						<c:forEach items="${dog.dogImage }" var="dogImage">
-							<img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }"
-								width="200px" class="img-circle">
-							<br>
-						</c:forEach>
+					<div class="panel panel-warning" style="margin-top: 20px;">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-lg-4">
+										<img
+											src="${initParam.rootPath }/dogImage/${dog.dogImage[0].dogImage }"
+											width="200px" class="img-circle">
+								</div>
+								<div class="col-lg-8">
+									<p>
+										<strong><span class="glyphicon glyphicon-search"></span>${dog.dogName }</strong>
+									</p>
+									<p>
+										<strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong>
+									</p>
+								</div>
+							</div>
+							<div class="row">
+									<div class="col-lg-7"></div>
+									<div class="col-lg-5">
+										<div class="btns">
+											<button
+												onclick="location.href='select_dog_dogInfo_dogImage.do?dogId=${dog.dogId}'"
+												class="btn btn-default btn-sm">강아지 수정</button>
+											<button
+												onclick="location.href='delete_dog.do?dogId=${dog.dogId}'"
+												class="btn btn-danger btn-sm">강아지 삭제</button>
+											<button type="button" class="btn btn-info btn-sm"
+												data-toggle="collapse" data-target="#${dog.dogId }">상세보기</button>
+										</div>
+									</div>
+								</div>
+						</div>
+						<div class="panel-body">
+							<div class="collapse" id="${dog.dogId }">
+							<div class="col-lg-12">
+								<c:forEach items="${dog.dogImage }" var="dogImage">
+								<img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }"
+											width="200px" class="img-circle">
+								</c:forEach>
+							</div>
+							<div class="row" style="margin-top:20px">
+								<div class="col-lg-6">
+									<p>
+										<strong><span class="glyphicon glyphicon-search"></span>${dog.dogName }</strong>
+									</p>
+									<p>
+										<strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong>
+									</p>
+									<p>
+										<strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong>
+									</p>
+									<p>
+										<strong>무게 ${dog.weight }kg</strong>
+									</p>
+									<p>
+										<strong><span class="glyphicon glyphicon-gift"></span>
+											<fmt:formatDate value="${dog.birth }" pattern="yyyy-MM-dd" /></strong>
+									</p>
+								</div>
+								<div class="col-lg-6">
+									<!-- 강아지 상세 정보 -->
+									<span class="glyphicon glyphicon-th-list"></span><label>강아지
+										상세 정보</label><br>
+									<c:forEach items="${dog.dogInfoList }" var="dogInfo">
+										<ol>
+											<li><strong>${dogInfo.code.codeName }</strong></li>
+										</ol>
+									</c:forEach>
+								</div>
+								</div>
+									<div class="row">
+									<div class="col-lg-10"></div>
+									<div class="col-lg-2">
+										<div class="col-lg-4"></div>
+										<div class="col-lg-4">
+											<button type="button" class="btn btn-info btn-sm"
+												data-toggle="collapse" data-target="#${dog.dogId }">접기</button>
+										</div>
+										<div class="col-lg-4"></div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="form-group">
-						<label for="dogName">이름 : ${dog.dogName }</label>
-					</div>
-					<div class="form-group">
-						<label for="species">견종 : ${dog.species } </label>
-					</div>
-					<div class="form-group">
-						<label for="gender">성별 : ${dog.gender }</label>
-					</div>
-					<div class="form-group">
-						<label for="weight">몸무게 : ${dog.weight }</label>
-					</div>
-					<div class="form-group">
-						<label for="birthday">생년월일 : <fmt:formatDate
-								value="${dog.birth }" type="date" />
-						</label>
-					</div>
-
-					<div class="form-group">
-						<label for="dogImageId">강아지 상세정보 : </label>
-						<c:forEach items="${dog.dogInfoList }" var="dogInfo">
-							${dogInfo.code.codeName } (O)<br>
-						</c:forEach>
-					</div>
-					<div class="btns">
-						<button
-							onclick="location.href='select_dog_dogInfo_dogImage.do?dogId=${dog.dogId}'"
-							class="btn btn-warning btn-sm">강아지 수정</button>
-						<button onclick="location.href='delete_dog.do?dogId=${dog.dogId}'"
-							class="btn btn-danger btn-sm">강아지 삭제</button>
-					</div>
-			</c:forEach>
+				</c:forEach>
 			</div>
+			<div class="col-lg-3"></div>
 		</div>
-		<div class="col-lg-2"></div>
 	</div>
 </div>

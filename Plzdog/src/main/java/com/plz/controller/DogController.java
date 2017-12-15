@@ -61,11 +61,11 @@ public class DogController {
 		if(service.selectDogByEmail(dog.getEmail()) != null) {
 			service.updateDog(dog);
 			model.addAttribute("dog", dog);
-			return "dog/mydog_edit_form.tiles";
+			return "dog/mydog_edit_result.tiles";
 		} else {
 			String errorMessage = "없는 email입니다.";
 			model.addAttribute("errorMessage", errorMessage);
-			return "dog/mydog_edit_form.tiles";
+			return "dog/mydog_edit_result.tiles";
 		}
 	}
 	

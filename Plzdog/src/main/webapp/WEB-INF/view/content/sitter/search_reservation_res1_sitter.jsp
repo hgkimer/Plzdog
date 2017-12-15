@@ -54,7 +54,7 @@ function cancelProposal(resId){
 
 </script>
 <div class="container">
-	<div class="row" style="margin-top : 20px;">
+	<div class="row" style="margin-top: 20px;">
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
 			<div class="row">
@@ -291,7 +291,7 @@ function cancelProposal(resId){
 	</div>
 	<div class="col-lg-3"></div>
 </div>
-</div>
+
 
 
 
