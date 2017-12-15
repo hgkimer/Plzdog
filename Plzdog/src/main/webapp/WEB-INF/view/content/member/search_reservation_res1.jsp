@@ -155,17 +155,8 @@ function deleteRes(resId){
 												<li><strong>${demand.code.codeName }</strong></li>
 											</c:forEach>
 										</ol>
-=======
-										<button type="button" class="btn btn-warning btn-sm">수정하기</button>
-										<button type="button" class="btn btn-danger btn-sm" onclick="deleteRes(${res.resId});">삭제하기</button>
-										<button type="button" class="btn btn-info btn-sm"
-											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 									</div>
 								</div>
-<<<<<<< HEAD
-								<c:forEach items="${res.resDogList }" var="dog">
-=======
 							</div> <!-- END OF panel 헤드 -->
 							<div class="panel-body">
 								<div class="collapse" id="${res.resId }">
@@ -221,7 +212,6 @@ function deleteRes(resId){
 										</div>
 									</div>
 									<c:forEach items="${res.resDogList }" var="dog">
->>>>>>> branch 'master' of https://github.com/hgkimer/Plzdog.git
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
