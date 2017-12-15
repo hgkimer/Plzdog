@@ -101,7 +101,8 @@ public class SitterController {
 	 * @return
 	 */
 	@RequestMapping("/member/insert_sitter")
-	public String insertSitter(@ModelAttribute Sitter sitter, HttpServletRequest request, @RequestParam(name="skill") List<String> skillList) 
+	public String insertSitter(@ModelAttribute Sitter sitter, HttpServletRequest request, @RequestParam(name="skill") List<String> skillList
+			, Model model) 
 	throws IllegalStateException, IOException{
 		MultipartFile certificationImage = sitter.getCertificationImage();
 		if(certificationImage!=null && !certificationImage.isEmpty()) {
@@ -114,6 +115,8 @@ public class SitterController {
 		}
 		sitterService.insertSitter(sitter, skillList);
 		waitingService.insertWaiting(sitter.getEmail());
+		Member m = memberService.selectSitterByEmail(sitter.getEmail());
+		model.addAttribute("sitter", m);
 		return "sitter/sitter_register_result.tiles";
 	}
 	

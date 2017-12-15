@@ -37,7 +37,17 @@ function deleteCare(careId ,resId){
 <body>
 <c:choose>
 	<c:when test="${empty requestScope.careList }">
-		값이 없습니다.
+		<h2 style="color: tomato; text-align: center;">아직 작성된 돌봄일지가 없습니다</h2>
+					<p style="text-align: center">
+						<strong>첫 돌봄일지를 등록해 주세요!</strong>
+					<p>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+		<a href="${initParam.rootPath }/sitter/care_register_form.do"
+							class="btn btn-info btn-block btn-sm">돌봄일지 등록하기</a>
+							</div>
+		<div class="col-md-4"></div>
+			
 	</c:when>
 	<c:otherwise>
 		<div class="container">

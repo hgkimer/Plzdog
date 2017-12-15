@@ -99,7 +99,7 @@ public class ReservationController {
 	 * 		1-a. 신청한 예약이 없는 경우 => sitter email 컬럼에서 조회 
 	 * 		1-a-1. sitter email에도 없는경우 = 예약자체 정보 X => errorMessage 전달. 
 	 * 2. 리스트 저장
-	 * 3. view로 이동
+	 * 3. view로 이동	
 	 * @param mEmail
 	 * @return
 	 */

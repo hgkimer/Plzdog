@@ -481,6 +481,7 @@ insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/
 
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',90000,'의뢰내용11','res-1','yoon@naver.com','soo1@naver.com');
 
+
 insert into DEMAND values (1,'sitter-1'); 
 insert into DEMAND values (2,'sitter-2'); 
 insert into DEMAND values (3,'sitter-3');

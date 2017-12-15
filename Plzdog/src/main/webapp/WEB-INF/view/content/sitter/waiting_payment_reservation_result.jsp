@@ -25,11 +25,17 @@ $(document).ready(function(){
 </script>
 	
 	<div class="container">
-		<div class="row">
+		<div class="row" style="margin-top:20px">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
 				<a href=""></a>
 				<div class="row">
+				<c:if test= "${empty requestScope.memberList }">
+					<h2 style="color: tomato; text-align: center;">결제 대기중인 예약이 없습니다!</h2>
+					<p style="text-align: center">
+						<strong>회원들이 결제하기 전까지 기다려주세요:)</strong>
+					<p>
+				</c:if>
 					<c:forEach items="${requestScope.memberList }" var="res">
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -98,8 +104,6 @@ $(document).ready(function(){
 												<fmt:formatDate value="${res.resEDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
 											</p>
-											<button type="button" class="btn btn-default" onclick='popupRegisterCare()'>돌봄일지
-												관리</button>
 											<p></p>
 										</div>
 									</div>
