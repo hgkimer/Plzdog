@@ -204,7 +204,7 @@ public class MemberController {
 				}
 			}
 		}
-		for(Member member : sitterList) {
+		for(Member member : sitterList) { `
 			System.out.println(member);
 		}
 		return sitterList;
@@ -252,5 +252,5 @@ public class MemberController {
 		}
 		return sitterList;
 	}
-	
+
 }

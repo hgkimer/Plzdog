@@ -301,6 +301,16 @@ public class ReservationController {
 		}
 		return "member/search_reservation_res1.tiles";
 	}
+	@RequestMapping("/member/search_reservation_res2")
+	public String findReservationRes2Member(@RequestParam String email, Model model) {
+		List<Reservation> list = rService.findReservationRes2(email);
+		if(list.isEmpty()) {
+			model.addAttribute("errorMessage","시터로부터 견적이 들어온 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "member/search_reservation_res2.tiles";
+	}
 	/**
 	 * 시터에게 견적을 신청할 수 있는 견적 대기 상태(res-1)의 예약들을 전체 조회하는
 	 * 컨트롤러 

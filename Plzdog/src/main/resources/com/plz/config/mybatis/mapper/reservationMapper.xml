@@ -326,6 +326,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-1'
+		and r.email_sitter is null
 		order by res_id 
 	</select> 
 
@@ -365,6 +366,8 @@
 		AND 	r.res_status = 'res-1'
 		order by res_id
 	</select>
+	
+	
 	<!-- 
 	####################################################################################################
 	-->
