@@ -49,7 +49,6 @@ public class MainController {
 				}
 				//member의 회원 탈퇴 여부 1 : 탈퇴 X , 0 : 탈퇴 O
 				member.setMemberEnable(1);
-				System.out.println(member);
 				//DB
 				service.insertMember(member, "ROLE_MEMBER");
 				//redirect 방식은 tilesViewer방식이 아닌 일반 ViewResolver로 가기 때문에 
@@ -66,7 +65,6 @@ public class MainController {
 		@RequestMapping("join_success")
 		public ModelAndView joinSuccess(@RequestParam String email) {
 			Member member = service.findMemberByEmail(email);
-			System.out.println(member);
 			return new ModelAndView("join_success.tiles","member",member);
 		}
 	}

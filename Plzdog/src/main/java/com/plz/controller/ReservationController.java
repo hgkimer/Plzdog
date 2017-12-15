@@ -341,8 +341,6 @@ public class ReservationController {
 	@RequestMapping("/member/delete_reservation")
 	@ResponseBody
 	public void removeReservation(@RequestParam int resId) {
-		if(rService.findReservationById(resId) == null) {
-		}
 		rService.removeReservation(resId);
 	}
 	
