@@ -43,8 +43,8 @@
 	</c:forEach></p>
 
 <form action="${initParam.rootPath }/member/checkSitter.do">
-	<input type="text" value="${requestScope.profile.email }" name="sitterEmail"/>
-	<button type="submit">예약 신청</button>
+	<input type="hidden" value="${requestScope.profile.email }" name="sitterEmail"/>
+	<button type="submit" class="btn btn-warning btn-block" style="margin-bottom: 20px;">예약 신청</button>
 </form>
 		</div>
 		<div class="col-lg-4"></div>

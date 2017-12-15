@@ -10,7 +10,6 @@ $(document).ready(function(){
 });
 
 function popupRegisterCare(resId){
-	alert(resId);
 	var url = '${initParam.rootPath}/sitter/care_register_form.do?resId='+resId;
 	window.open(url,"newCareManageForm","width = 1000, height = 600");
 }
@@ -27,11 +26,17 @@ function popupSelectCare(resId){
 </script>
 	
 	<div class="container">
-		<div class="row">
+		<div class="row" style="margin-top:20px">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
 				<a href=""></a>
 				<div class="row">
+				<c:if test= "${empty requestScope.memberList }">
+					<h2 style="color: tomato; text-align: center;">결제 완료된 예약이 없습니다!</h2>
+					<p style="text-align: center">
+						<strong>회원들이 결제하기 전까지 기다려주세요:)</strong>
+					<p>
+				</c:if>
 					<c:forEach items="${requestScope.memberList }" var="res">
 						<div class="panel panel-default">
 							<div class="panel-heading">

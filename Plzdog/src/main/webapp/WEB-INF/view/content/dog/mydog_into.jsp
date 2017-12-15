@@ -47,7 +47,7 @@
 										<div class="btns">
 											<button
 												onclick="location.href='select_dog_dogInfo_dogImage.do?dogId=${dog.dogId}'"
-												class="btn btn-default btn-sm">강아지 수정</button>
+												class="btn btn-default btn-sm" disabled>강아지 수정</button>
 											<button
 												onclick="location.href='delete_dog.do?dogId=${dog.dogId}'"
 												class="btn btn-danger btn-sm">강아지 삭제</button>

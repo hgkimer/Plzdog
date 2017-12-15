@@ -18,6 +18,7 @@ select * from res_detail;
 select * from waiting;
 delete from reservation 
 insert into AUTHORITY values('zxc','ROLE_SITTER');
+
 -----------------------------------------
 --시터용 값 insert------------------------
 

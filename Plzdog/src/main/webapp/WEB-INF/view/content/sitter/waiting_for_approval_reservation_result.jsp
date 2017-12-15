@@ -47,7 +47,14 @@ function reject(sitterEmail, memberEmail){
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
 				<a href=""></a>
-				<div class="row">
+				<div class="row" style="margin-top:20px">
+				<c:if test="${empty sessionScope.resList }">
+					<h2 style="color: tomato; text-align: center;">나의 승인을 기다리는 예약이 없습니다!</h2>
+					<p style="text-align: center">
+						<strong>더 많은 회원들이 예약하도록 홍보해주세요:)</strong>
+					<p>
+					
+				</c:if>
 					<c:forEach items="${sessionScope.resList }" var="res">
 						<div class="panel panel-default">
 							<div class="panel-heading">
