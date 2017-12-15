@@ -6,9 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script
-	src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <script type="javascript/css">
 
 </script>

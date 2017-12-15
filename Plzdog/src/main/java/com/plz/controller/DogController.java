@@ -41,9 +41,6 @@ public class DogController {
 		if(memberService.findMemberByEmail(email) != null) {
 			List<Dog> dogList = service.selectDogByEmail(email);
 			model.addAttribute("dogList", dogList);
-			for(Dog dog : dogList) {
-				System.out.println(dog);
-			}
 			return "dog/mydog_into.tiles";
 		} else {
 			String errorMessage = "없는 email입니다.";

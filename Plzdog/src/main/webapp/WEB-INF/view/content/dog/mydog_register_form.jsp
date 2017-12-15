@@ -38,7 +38,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6">
-		<h1 style="text-align:center">강아지 등록</h1>
 			<form action="${initParam.rootPath }/dog/insertDog.do" method="post" enctype="multipart/form-data">
 				<sec:csrfInput />
 				<%-- 이메일 , dogId --%>

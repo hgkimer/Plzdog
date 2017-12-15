@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<h2>시터 입장에서 결제 완료 페이지</h2>
 <script type="text/javascript">
 
 $(document).ready(function(){

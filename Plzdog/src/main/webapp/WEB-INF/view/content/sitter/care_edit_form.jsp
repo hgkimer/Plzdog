@@ -40,7 +40,6 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8">
-			<h2 style="text-align: center">돌봄일지 수정</h2>
 <c:if test="${not empty requestScope.errorMessage}">
 	<div class="well text-danger">
 		${requestScope.errorMessage }

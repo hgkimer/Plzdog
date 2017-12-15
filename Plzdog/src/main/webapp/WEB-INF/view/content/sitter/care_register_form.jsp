@@ -20,7 +20,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<h3>돌봄일지 등록하기</h3>
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4"></div>
