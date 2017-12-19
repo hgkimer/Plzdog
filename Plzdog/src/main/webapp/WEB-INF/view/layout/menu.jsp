@@ -81,9 +81,7 @@ $(document).ready(function(){
                <ul class="big">
                   <li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res1.do?email=<sec:authentication property="principal.email"/>">견적 대기중인 예약</a></li>
                   <li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res2.do?email=<sec:authentication property="principal.email"/>">승인 대기중 예약</a></li>
-                  <!--  구현 해야 함.
                   <li class="afew"><a href="${initParam.rootPath }/member/search_reservation_res5.do?email=<sec:authentication property="principal.email"/>">결제 완료 예약</a></li>
-                  -->
                </ul>
             </li>
          </sec:authorize>
@@ -103,9 +101,7 @@ $(document).ready(function(){
          <%--관리자 메뉴 /admin 으로 시작--%>
          <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="sub"><a href="${initParam.rootPath }/admin/select_waiting.do">시터 등록</a></li>
-            <!--  나중에 구현
             <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
-            -->
          </sec:authorize>
          
          <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
