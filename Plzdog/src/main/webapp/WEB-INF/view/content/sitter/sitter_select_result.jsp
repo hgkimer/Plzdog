@@ -104,9 +104,9 @@ table{
 <table border='1' style="width: 1000px;">
 	<thead>
 		<tr>
-			<td>회원이미지</td>
-			<td>회원이름</td>
-			<td>회원주소</td>
+			<td>시터이미지</td>
+			<td>시터이름</td>
+			<td>시터주소</td>
 			<td>서비스가능지역</td>
 			<td>위탁돌봄 여부</td>
 			<td>방문돌봄 여부</td>
@@ -115,9 +115,9 @@ table{
 	</thead>
 	<tbody id="listTbody">
 	<c:choose>
-		<c:when test="${requestScope.sitterList eq null}">
+		<c:when test="${empty requestScope.sitterList }">
 					<tr>
-						<td colspan="5">시터가 없습니다.</td>
+						<td colspan="7">시터가 없습니다.</td>
 					</tr>
 		</c:when>
 		<c:otherwise>
@@ -142,68 +142,3 @@ table{
 	</c:choose>
 	</tbody>
 </table>
-
-
-<%-- <c:forEach items="${requestScope.sitterList }" var="member">
-	<div class="sitter" onclick="location.href='goToProfile.do?email=${member.email }'" style="cursor:pointer">
-	email : ${member.email }<br> 
-	회원이름 : ${member.memberName }<br>
-	회원 비밀번호 : ${member.password }<br>
-	회원 주소 : ${member.mainAddress } ${member.subAddress }<br>
-	우편번호 : ${member.zipcode}<br>
-	회원 이미지 : <img src="${initParam.rootPath }/memberImage/${member.memberImage }" width="350px"><br>
-	탈퇴여부 : ${member.memberEnable }<br>
-	
-	학교 이름 : ${member.sitter.school }<br>
-	증명서/면허증 :  <img src="${initParam.rootPath }/sitterImage/${member.sitter.Image}" width="350px"><br>
-	서비스 가능 지역 : ${member.sitter.serviceAddress }<br>
-	평점 : ${member.sitter.sitterRate }<br>
-	방문돌봄 가격 : ${member.sitter.visitPrice }<br>
-	위탁돌봄 가격 : ${member.sitter.givePrice }<br>
-	-----------------------------<br>
-	</div>
-</c:forEach> --%>
-
-
-<%--  $("#selectServiceId").on("change", function(){
-   $.ajax({
-      "url" : "${initParam.rootPath}/member/select_sitter.do",
-      "type" : "get",
-      "data" : {"serviceName" : $("#selectServiceId").val() },
-      "dataType" : "json",
-      "beforeSend":function(){
-         //선택된 것이 0번 index면 전송하지 않는다.
-         if($("#selectServiceId").get(0).selectedIndex==0){
-            alert("서비스를 선택하세요");
-            return false;
-         }
-      },
-      "success" : function(list){
-         var txt = "";
-         $(list).each(function(){
-            //alert(list);
-            var skillList = this.sitter.skillList;
-            var visitName ='-';
-            var giveName = '-';
-            $(skillList).each(function(){
-               if(this.code.codeName == '방문돌봄'){
-                  visitName = this.code.codeName;
-               }
-               if(this.code.codeName == '위탁돌봄'){
-                  giveName = this.code.codeName;
-               }
-            });                
-            txt += "<tr><td><img src='/Plzdog/memberImage/"+this.memberImage+"' width='150px'></td><td>"+this.memberName+"</td><td>"+this.mainAddress+this.subAddress+"</td><td>"+this.sitter.serviceAddress+"</td><td>"+giveName+"</td><td>"+visitName+"</td><td><a href='/Plzdog/member/goToProfile.do?email="+this.email+"'>프로필로가기</a></td></tr>";
-          //alert(this.sitter.skillList[0].code.codeName)
-          //
-          //<input type='hidden' class='emailClass' value='"+this.email+"'>      
-         });//end of each
-         
-         $("#listTbody").html(txt);
-      },//end of success
-      "error" : function(xhr, status, errorMsg){
-         alert("오류가 발생헀습니다. - " + status+", "+errorMsg);
-      }//end of error
-   })//end of ajax
-})//end of #category event
-}) //end of document --%>

@@ -387,8 +387,6 @@ INSERT INTO DOGINFO VALUES(11 ,'dog-6');
 INSERT INTO DOGINFO VALUES(11 ,'dog-4');
 INSERT INTO DOGINFO VALUES(11 ,'dog-3');
 
-
-
 --강아지 이미지
 INSERT INTO DOG_IMAGE VALUES('1.jpg','1');
 INSERT INTO DOG_IMAGE VALUES('2.jpg','2');
@@ -400,9 +398,9 @@ INSERT INTO DOG_IMAGE VALUES('7.jpg','7');
 INSERT INTO DOG_IMAGE VALUES('8.jpg','8');
 INSERT INTO DOG_IMAGE VALUES('9.jpg','9');
 INSERT INTO DOG_IMAGE VALUES('10.jpg','10');
-INSERT INTO DOG_IMAGE VALUES('10.jpg','11');
-INSERT INTO DOG_IMAGE VALUES('10.jpg','12');
-INSERT INTO DOG_IMAGE VALUES('10.jpg','13');
+INSERT INTO DOG_IMAGE VALUES('1.jpg','11');
+INSERT INTO DOG_IMAGE VALUES('2.jpg','12');
+INSERT INTO DOG_IMAGE VALUES('3.jpg','13');
 
 --시터
 INSERT INTO SITTER VALUES('soo1@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
@@ -454,13 +452,19 @@ insert into SKILL values('soo2@naver.com','service-2');
 insert into SKILL values('soo3@naver.com','service-1');
 insert into SKILL values('soo3@naver.com','service-2');
 insert into SKILL values('soo4@naver.com','service-1');
+insert into SKILL values('soo4@naver.com','service-2');
 insert into SKILL values('soo5@naver.com','service-1');
+insert into SKILL values('soo5@naver.com','service-2');
 insert into SKILL values('soo6@naver.com','service-1');
+insert into SKILL values('soo6@naver.com','service-2');
+insert into SKILL values('soo7@naver.com','service-1');
 insert into SKILL values('soo7@naver.com','service-2');
+insert into SKILL values('soo8@naver.com','service-1');
 insert into SKILL values('soo8@naver.com','service-2');
+insert into SKILL values('soo9@naver.com','service-1');
 insert into SKILL values('soo9@naver.com','service-2');
+insert into SKILL values('soo10@naver.com','service-1');
 insert into SKILL values('soo10@naver.com','service-2');
-
 
 --리뷰
 INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
