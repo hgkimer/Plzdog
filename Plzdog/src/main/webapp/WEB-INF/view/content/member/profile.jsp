@@ -16,7 +16,7 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<div class="col-lg-6">
-									<label>${requestScope.profile.memberName } 님의 프로필</label>
+									<label>${requestScope.profile.memberName } 님의 프로필</label><br>
 									<img style="width: 350px" alt="회원 사진" src="${initParam.rootPath }/memberImage/${requestScope.profile.memberImage }"><br>
 								</div>
 								<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
@@ -46,7 +46,7 @@
 							<div class="panel-body">
 								<div class="collapse" id="${requestScope.profile.sitter.school }">
 									<div class="row">
-										<div class="col-lg-4">
+										<div class="col-lg-3">
 											<p><strong></strong></p>
 											<p><strong> 학교 : ${requestScope.profile.sitter.school }</strong></p>
 											<p><strong> 서비스지역 : ${requestScope.profile.sitter.serviceAddress }</strong></p>
@@ -54,10 +54,18 @@
 											<p><strong> 방문돌봄금액 : ${requestScope.profile.sitter.visitPrice }</strong></p>
 											<p><strong> 위탁돌봄금액 : ${requestScope.profile.sitter.givePrice }</strong></p>
 										</div>
-										<div class="col-lg-4">
+										<div class="col-lg-3">
 										<p><strong><span class="glyphicon glyphicon-th-list"></span>시터 스킬 : <br></strong></p>
 										<p>	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
-													<c:if test="${fn:contains(skill.code.code, 'sitter')}">
+													<c:if test="${fn:contains(skill.code.category, '시터')}">
+														<strong>${skill.code.codeName } </strong><br>
+													</c:if>		
+											</c:forEach></p>
+										</div>
+										<div class="col-lg-2">
+										<p><strong><span class="glyphicon glyphicon-th-list"></span>시터 서비스 : <br></strong></p>
+										<p>	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
+													<c:if test="${fn:contains(skill.code.category, '서비스')}">
 														<strong>${skill.code.codeName } </strong><br>
 													</c:if>		
 											</c:forEach></p>
@@ -65,18 +73,18 @@
 										<div class="col-lg-4">
 											<p><strong><span class="glyphicon glyphicon-th-list"></span>시터 환경 : <br></strong></p>
 											<p>	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
-														<c:if test="${fn:contains(skill.code.code, 'sitterEn')}">
+														<c:if test="${fn:contains(skill.code.category, '환경')}">
 															<strong>${skill.code.codeName } </strong><br>
 														</c:if>
 												</c:forEach></p>
-											</div>
-											<button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#dogId">시터의 강아지 보기</button>
+											<button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#dogId">시터의 강아지 보기</button><br>
 											
 											<form action="${initParam.rootPath }/member/checkSitter.do">
 											<input type="hidden" value="${requestScope.profile.email }" name="sitterEmail"/>
 											<button type="submit" class="btn btn-default">예약 신청</button>
 											</form>
-											<p></p>
+										</div>
+										
 										</div>
 									</div>
 							</div> <!-- panel 바디 -->
