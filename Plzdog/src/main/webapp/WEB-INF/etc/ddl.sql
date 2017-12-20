@@ -308,11 +308,11 @@ insert into code values('sitter-4','투약가능','시터');
 insert into code values('sitter-5','노령견 케어 가능','시터');
 insert into code values('sitter-6','퍼피 케어 가능','시터');
 insert into code values('sitter-7','환자 모니터링 가능','시터');
---------시터의 환경-----------------------------------------------------------
-insert into code values('sitterEn-1','아파트','시터환경');
-insert into code values('sitterEn-2','주택','시터환경');
-insert into code values('sitterEn-3','마당유무','시터환경');
-insert into code values('sitterEn-4','흡연유무','시터환경');
+--------시터의 환경 (프로필에서 시터 환경과 시터 스킬을 구분하기 위해 카테고리에서 환경을 수정)---------
+insert into code values('sitterEn-1','아파트','환경');
+insert into code values('sitterEn-2','주택','환경');
+insert into code values('sitterEn-3','마당유무','환경');
+insert into code values('sitterEn-4','흡연유무','환경');
 --------강아지 정보-----------------------------------------------------------
 INSERT INTO CODE VALUES('dog-1','유기견 출신','강아지');
 INSERT INTO CODE VALUES('dog-2','접종여부','강아지');
@@ -419,13 +419,10 @@ INSERT INTO SKILL VALUES('soo1@naver.com','sitter-1');
 INSERT INTO SKILL VALUES('soo1@naver.com','sitter-2');
 INSERT INTO SKILL VALUES('soo1@naver.com','sitter-3');
 INSERT INTO SKILL VALUES('soo1@naver.com','sitterEn-1');
-INSERT INTO SKILL VALUES('soo1@naver.com','sitterEn-2');
-INSERT INTO SKILL VALUES('soo1@naver.com','sitterEn-3');
 
 INSERT INTO SKILL VALUES('soo2@naver.com','sitter-4');
 INSERT INTO SKILL VALUES('soo2@naver.com','sitter-5');
 INSERT INTO SKILL VALUES('soo2@naver.com','sitter-6');
-INSERT INTO SKILL VALUES('soo2@naver.com','sitterEn-1');
 INSERT INTO SKILL VALUES('soo2@naver.com','sitterEn-2');
 INSERT INTO SKILL VALUES('soo2@naver.com','sitterEn-3');
 
@@ -434,13 +431,10 @@ INSERT INTO SKILL VALUES('soo3@naver.com','sitter-2');
 INSERT INTO SKILL VALUES('soo3@naver.com','sitter-3');
 INSERT INTO SKILL VALUES('soo3@naver.com','sitter-4');
 INSERT INTO SKILL VALUES('soo3@naver.com','sitterEn-1');
-INSERT INTO SKILL VALUES('soo3@naver.com','sitterEn-2');
-INSERT INTO SKILL VALUES('soo3@naver.com','sitterEn-3');
 
 INSERT INTO SKILL VALUES('soo4@naver.com','sitter-4');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitter-5');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitter-6');
-INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-1');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-2');
 INSERT INTO SKILL VALUES('soo4@naver.com','sitterEn-3');
 
