@@ -75,7 +75,7 @@ function inputCheck(){
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<h2>관리자 등록</h2>
-<form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck();">
+<form name="regForm" action="${initParam.rootPath }/admin/register_admin.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck();">
 	<sec:csrfInput/>
 	<div class="form-group">
 		<span class="glyphicon glyphicon-envelope"></span><label for="pId"> Email </label>
