@@ -60,7 +60,7 @@ public interface CareDao {
 	 * @param careImage
 	 * @return
 	 */
-	int deleteCareImage(String careImage);
+	int deleteCareImage(int careId);
 
 	
 }

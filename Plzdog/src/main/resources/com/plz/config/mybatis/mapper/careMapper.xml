@@ -40,6 +40,7 @@
 				i.care_image
 		from	care c, care_image i
 		where	c.res_id = #{value} and c.care_id = i.care_id(+)
+				order by care_id asc
 	</select>
 	
 	<select id="selectCareJoinCareImageByCareId" parameterType="_int" resultMap="care-join-care_image-resultmap">
@@ -83,7 +84,8 @@
 		and care_image = #{originalImage}
 	</update>
 	
-	<delete id="deleteCareImage" parameterType="string">
-		delete from care_image where care_image = #{value}
+	<delete id="deleteCareImage" parameterType="_int">
+		delete from care_image where care_id = #{careId}
 	</delete>
+	
 </mapper>

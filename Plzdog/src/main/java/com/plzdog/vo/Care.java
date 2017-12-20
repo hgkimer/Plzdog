@@ -22,7 +22,9 @@ public class Care implements Serializable{
 	//여러개의 이미지 처리
 	private List<MultipartFile> careImageList;
 	//여러개의 파일명 처리
-	private List<CareImage> careImage; 
+	private List<CareImage> careImage;
+	//여러개의 오래된 이미지 처리 (수정 처리용)
+	private List<String> oldImage; 
 
 	public Care() {}
 
@@ -39,7 +41,7 @@ public class Care implements Serializable{
 	}
 
 	public Care(int careId, int resId, Date careDate, String careMeal, String careWalking, String careBowelMovement,
-			String careReview, List<MultipartFile> careImageList, List<CareImage> careImage) {
+			String careReview, List<MultipartFile> careImageList, List<CareImage> careImage, List<String> oldImage) {
 		super();
 		this.careId = careId;
 		this.resId = resId;
@@ -50,6 +52,7 @@ public class Care implements Serializable{
 		this.careReview = careReview;
 		this.careImageList = careImageList;
 		this.careImage = careImage;
+		this.oldImage = oldImage;
 	}
 
 	public int getCareId() {
@@ -124,11 +127,20 @@ public class Care implements Serializable{
 		this.careImage = careImage;
 	}
 
+	public List<String> getOldImage() {
+		return oldImage;
+	}
+
+	public void setOldImage(List<String> oldImage) {
+		this.oldImage = oldImage;
+	}
+
 	@Override
 	public String toString() {
 		return "Care [careId=" + careId + ", resId=" + resId + ", careDate=" + careDate + ", careMeal=" + careMeal
 				+ ", careWalking=" + careWalking + ", careBowelMovement=" + careBowelMovement + ", careReview="
-				+ careReview + ", careImageList=" + careImageList + ", careImage=" + careImage + "]";
+				+ careReview + ", careImageList=" + careImageList + ", careImage=" + careImage + ", oldImage="
+				+ oldImage + "]";
 	}
 
 	@Override
@@ -143,6 +155,7 @@ public class Care implements Serializable{
 		result = prime * result + ((careMeal == null) ? 0 : careMeal.hashCode());
 		result = prime * result + ((careReview == null) ? 0 : careReview.hashCode());
 		result = prime * result + ((careWalking == null) ? 0 : careWalking.hashCode());
+		result = prime * result + ((oldImage == null) ? 0 : oldImage.hashCode());
 		result = prime * result + resId;
 		return result;
 	}
@@ -192,6 +205,11 @@ public class Care implements Serializable{
 			if (other.careWalking != null)
 				return false;
 		} else if (!careWalking.equals(other.careWalking))
+			return false;
+		if (oldImage == null) {
+			if (other.oldImage != null)
+				return false;
+		} else if (!oldImage.equals(other.oldImage))
 			return false;
 		if (resId != other.resId)
 			return false;

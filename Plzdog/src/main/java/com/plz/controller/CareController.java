@@ -50,6 +50,4 @@ public class CareController {
 		List<Care> careList = service.selectCareJoinCareImage(careId);
 		return new ModelAndView("sitter/care_success.tiles", "careList", careList);
 	}
-	
-	
 }

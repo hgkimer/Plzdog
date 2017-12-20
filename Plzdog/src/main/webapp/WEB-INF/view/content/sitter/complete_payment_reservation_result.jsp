@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 function popupRegisterCare(resId){
 	var url = '${initParam.rootPath}/sitter/care_register_form.do?resId='+resId;
-	window.open(url,"newCareManageForm","width = 1000, height = 600");
+	window.open(url,"newCareManageForm","width = 1000, height = 1000");
 }
 
 function selectCareList(resId){
