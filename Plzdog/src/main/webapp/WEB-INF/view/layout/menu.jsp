@@ -103,9 +103,7 @@ $(document).ready(function(){
          <%--관리자 메뉴 /admin 으로 시작--%>
          <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="sub"><a href="${initParam.rootPath }/admin/select_waiting.do">시터 등록</a></li>
-            <!--  나중에 구현
             <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
-            -->
          </sec:authorize>
          
          <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>

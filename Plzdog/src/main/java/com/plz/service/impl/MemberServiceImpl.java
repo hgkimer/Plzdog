@@ -38,9 +38,9 @@ public class MemberServiceImpl implements MemberService {
 		if(role.equals("ROLE_ADMIN")){
 			List<Authority> list = daoAuthority.selectAuthorityByEmail(member.getEmail());
 			for(Authority a : list) {
-				if(a.getAuthority() != "ROLE_SITTER") {
+				if(!a.getAuthority().equals("ROLE_SITTER")) {
 					daoAuthority.insertAuthority(new Authority(member.getEmail(), "ROLE_MEMBER"));
-				} else if(a.getAuthority() != "ROLE_MEMBER") {
+				} else if(!a.getAuthority().equals("ROLE_MEMBER")) {
 					daoAuthority.insertAuthority(new Authority(member.getEmail(), "ROLE_SITTER"));
 				}
 			}
