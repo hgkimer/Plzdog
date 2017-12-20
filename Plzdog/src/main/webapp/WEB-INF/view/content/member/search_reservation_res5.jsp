@@ -44,9 +44,8 @@
 								</div>
 								<div class="row">
 								<!-- 다음 줄 시작 -->
-									<div class="col-lg-8"></div>
-									<div class="col-lg-4">
-										<a class="btn btn-danger btn-sm" href="${initParam.rootPath }/member/delete_reservation.do?resId=${res.resId}">삭제하기</a>
+									<div class="col-lg-10"></div>
+									<div class="col-lg-2">
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>

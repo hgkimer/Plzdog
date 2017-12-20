@@ -321,7 +321,7 @@ public class ReservationController {
 	public String findReservationRes1Sitter(Model model) {
 		List<Reservation> list = rService.findReservationAllRes1Sitter();
 		if(list.isEmpty()) {
-			model.addAttribute("erroMessage", "등록된 예약이 없습니다.");
+			model.addAttribute("errorMessage", "등록된 예약이 없습니다.");
 		}else {
 			model.addAttribute("list", list);
 		}

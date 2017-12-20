@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.plz.service.AuthorityService;
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
+import com.plzdog.vo.Authority;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Sitter;
 
@@ -90,14 +91,18 @@ public class MemberController {
 	public String goToProfile(@RequestParam String email, Model model, HttpSession session) {
 		//먼저 sitter에 등록되어 있는지 확인한다.
 		Member member = service.selectSitterByEmail(email);
-		//해당 회원의 강아지 리스트 추가
-		if(!dService.selectDogByEmail(email).isEmpty()) {
-			//강아지가 등록되지 않는 경우 NullPointerException이 발생하기 때문에 조건문 걸어줌.
+		System.out.println();
+		if(member.getSitter() != null) {//시터라면,
+			//시터임을 나타내는 flag를 scope에 저장
+			model.addAttribute("sitterFlag", true);
+			//강아지들 정보 저장.
 			member.setDogList(dService.selectDogByEmail(email));
 		}else {
-			//시터가 아니라면 일반 회원
+			//일반회원의 경우
+			member = service.findMemberByEmail(email);
+			member.setDogList(dService.selectDogByEmail(email));
 		}
-		//해당 시터의 프로필
+		//회원정보 scope에 저장.
 		model.addAttribute("profile", member);
 		return "member/profile.tiles";
 	}
