@@ -122,7 +122,7 @@ function deleteRes(resId){
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
-											<p><strong><span class="glyphicon glyphicon-envelope"></span> ${res.member.email }</strong></p>
+											<p><strong><span class="glyphicon glyphicon-envelope"></span> ${res.member.email }</strong></p> <a href="${initParam.rootPath }/member/goToProfile.do?email=${res.member.email}">aa</a>
 											<p><strong><span class="glyphicon glyphicon-user"></span> ${res.member.memberName }</strong></p>
 											<p><strong><span class="glyphicon glyphicon-phone-alt"></span> ${res.member.phoneNum }</strong></p>
 										</div>

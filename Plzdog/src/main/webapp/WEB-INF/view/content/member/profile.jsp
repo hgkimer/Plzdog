@@ -38,13 +38,11 @@
 								<!-- 다음 줄 시작 -->
 									<div class="col-lg-8"></div>
 									<div class="col-lg-4">
-										<button type="button" class="btn btn-info btn-sm"
-											data-toggle="collapse" data-target="#${requestScope.profile.sitter.school }">시터 상세보기</button>
+										
 									</div>
 								</div>
 							</div> <!-- END OF panel 헤드 -->
 							<div class="panel-body">
-								<div class="collapse" id="${requestScope.profile.sitter.school }">
 									<div class="row">
 										<div class="col-lg-4">
 											<p><strong></strong></p>
@@ -78,7 +76,6 @@
 											</form>
 											<p></p>
 										</div>
-									</div>
 							</div> <!-- panel 바디 -->
 							<div class="panel-footer">
 									<div class="collapse" id="dogId">

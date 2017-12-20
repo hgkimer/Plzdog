@@ -224,6 +224,7 @@
 		where r.email_sitter = #{email} 
 		and r.email = m.email
 		and	r.res_status = 'res-3'
+		order by res_id desc
 	</select> 
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
@@ -233,6 +234,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-3' 
+		order by res_id desc
 	</select> 
 	
 	<!-- 시터의 마이페이지 - 예약조회 - 자세히보기(예약 신청한 회원의 정보를 조회) 회원이 선택한 서비스 요구사항-->
@@ -241,6 +243,7 @@
 		where r.res_id = #{resId}
 		and r.res_id = d.res_id 
 		and d.code_demand = c.code(+)
+		order by res_id desc
 	</select>
 	
 	<!-- 시터의 마이페이지 - 결제 대기 예약 조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
@@ -249,6 +252,7 @@
 		where r.email_sitter = #{email} 
 		and r.email = m.email
 		and	r.res_status = 'res-4'
+		order by res_id desc
 	</select> 
 	
 	<!-- 시터의 마이페이지 - 결제 대기 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
@@ -258,6 +262,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-4' 
+		order by res_id desc
 	</select>  
 
 	<!-- 시터의 마이페이지 - 결제 완료 예약 조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 회원정보-->
@@ -266,6 +271,7 @@
 		where r.email_sitter = #{email} 
 		and r.email = m.email
 		and	r.res_status = 'res-5'
+		order by res_id desc
 	</select> 
 	
 	<!-- 시터의 마이페이지 - 결제 완료 예약조회 - 간단히보기(예약 신청한 회원의 정보를 조회) 강아지 정보-->
@@ -275,6 +281,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-5' 
+		order by res_id desc
 	</select>
 	
 	<!-- lee su il -->
@@ -327,7 +334,7 @@
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-1'
 		and r.email_sitter is null
-		order by res_id 
+		order by res_id desc
 	</select> 
 
 	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -->
@@ -337,7 +344,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-2' 
-		order by res_id
+		order by res_id desc
 	</select> 
 	
 	<!-- 왜 안나오는지 도저히 모르겠음 ㅈㅅ 강사님한테 물어보겠음-->
@@ -348,7 +355,7 @@
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-5'
-		order by res_id
+		order by res_id desc
 	</select> 
 	
 	<!-- 회원이 선택한 서비스 요구사항 - demand + code-->
@@ -365,7 +372,7 @@
 		WHERE	r.res_id = t.res_id
 		AND 	t.dog_id = d.dog_id
 		AND 	r.res_status = 'res-1'
-		order by res_id
+		order by res_id desc
 	</select>
 	
 	

@@ -433,7 +433,6 @@ public class ReservationServiceImpl implements ReservationService {
 				//모든 정보를 저장한 예약 타입의 리스트들을 리턴.
 				return resList;
 	}
-	//----------------------------------------------------------------------
 	public void updateProposal(String sEmail, int resId) {
 		// 매개변수로 받은 예약 아이디로 예약 객체 생성
 		Reservation res = dao.selectReservationById(resId);
