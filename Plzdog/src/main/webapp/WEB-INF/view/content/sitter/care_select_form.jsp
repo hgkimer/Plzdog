@@ -32,6 +32,8 @@ function deleteCare(careId ,resId){
 	} 
 }
 
+//setTimeout("history.go(0);", 10000); // 1초는 1000 입니다.
+
 </script>
 </head>
 <body>
@@ -73,7 +75,7 @@ function deleteCare(careId ,resId){
 										<p></p>
 										<p>
 											 <span class="glyphicon glyphicon-calendar"></span><label>작성일
-											<fmt:formatDate value="${care.careDate}" pattern="yyyy-MM-dd" /></label>
+											<fmt:formatDate value="${care.careDate}" pattern="yyyy-MM-dd HH시 mm분"/></label>
 										</p>
 									</div>
 								</div>

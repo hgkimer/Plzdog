@@ -1,11 +1,17 @@
 package com.plz.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 //관리자를 관리하느 컨트롤러
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.AuthorityService;
@@ -28,9 +34,18 @@ public class AdminManageController {
 	*/
 	
 	@RequestMapping("register_admin")
-	public ModelAndView registerAdmin(@ModelAttribute Member member) {
+	public ModelAndView registerAdmin(@ModelAttribute Member member,HttpServletRequest request) throws IllegalStateException, IOException {
+		MultipartFile ImageMember = member.getImageMember();
+		if(ImageMember!=null && !ImageMember.isEmpty()) {
+			//사진 저장할 디렉토리 
+			String dir = request.getServletContext().getRealPath("/memberImage");
+			String fileName = ImageMember.getOriginalFilename();
+			File upImage = new File(dir, fileName);
+			ImageMember.transferTo(upImage);
+			member.setMemberImage(fileName);
+		}
 		service.insertMember(member, "ROLE_ADMIN");
 		//redirect 방식이동시 model값은 요청파라미터로 전송된다.
-		return new ModelAndView("redirect:/join_success.do", "email", member.getEmail());
+		return new ModelAndView("redirect:/join_success.do","email", member.getEmail());
 	}
 }

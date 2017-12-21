@@ -61,7 +61,7 @@ public class CareDaoImpl implements CareDao {
 	}
 
 	@Override
-	public int deleteCareImage(String careImage) {
-		return session.delete(makeSqlId("deleteCareImage"), careImage);
+	public int deleteCareImage(int careId) {
+		return session.delete(makeSqlId("deleteCareImage"), careId);
 	}
 }

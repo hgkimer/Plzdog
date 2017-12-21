@@ -59,9 +59,6 @@ h4 {
 </div>
 
 
-
-
-
 <script>
 var myIndex = 0;
 carousel();

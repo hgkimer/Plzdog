@@ -10,6 +10,8 @@ public class CareImage implements Serializable{
 	private String imageName;
 	private int careId;
 	
+	
+	
 	public CareImage() {}
 	
 	public CareImage(int careId, String imageName) {

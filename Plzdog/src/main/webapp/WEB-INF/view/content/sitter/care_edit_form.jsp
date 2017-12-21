@@ -23,13 +23,12 @@ $(document).ready(function(){
 	$("#addImage").on("click",function(){
 		$("#imageCare").siblings().last().after("<input type='file' name='careImageList' id='imageCare'/><br>");
 	});	
-	$("#imgChangeBtn").on("click", function(){
-		$("#changeSpan").hide().next().show();
-	});
-	$("#cancelImgChangeBtn").on("click", function(){
-		$("#memberImage").val("").parent().hide().prev().show();
-	});
 });
+
+function deleteImage(form){
+	$(form).parent().remove();
+}
+
 
 </script>
 </head>
@@ -74,21 +73,19 @@ $(document).ready(function(){
 			<textarea rows="5" cols="30" id="careReview" name="careReview" class="form-control">${requestScope.care.careReview }</textarea>
 		</div>
 		<div class="form-group">
-					<input type="file" name="careImageList" id="imageCare"/>
 					<button id="addImage" type="button" class="btn btn-info">이미지 추가</button>
+					<input type="file" name="careImageList" id="imageCare"/>
 		</div>
 	</div>
 	<div class="col-lg-6">
 			<span id="changeSpan">
-			<c:forEach items="${requestScope.care.careImage }" var = "careImage">
-				<img id="careImage" src="${initParam.rootPath }/careImage/${careImage.imageName }" class="img-responsive" width="200px">
-				<%-- <input type="hidden" id="imageName" name="imageName" value="${careImage.imageName }" required="required"/><br> --%>
-				<button id="imgChangeBtn" type="button" class="btn btn-success">사진변경</button>
+			<c:forEach items="${requestScope.care.careImage }" var = "careImage" varStatus="number">
+			<div> <%-- this는 div의 구역을 나타냄 --%>
+				<img id="careImageId" src="${initParam.rootPath }/careImage/${careImage.imageName }" class="img-responsive" width="200px">
+				<input type="hidden" id="imageName" name="oldImage" value="${careImage.imageName }" required="required"/><br> 
+				<button type="button" id="imageDelete" onclick= deleteImage(this); >돌봄이미지 삭제</button>
+			</div>
 			</c:forEach>
-			</span>
-			<span id="cancelSpan" style="display: none;">
-				<button id="cancelImgChangeBtn" type="button" class="btn btn-success">사진변경취소</button>
-				<input type='file' name='imageMember' id='imageMember' class='form-control'>
 			</span>
 	</div>
 	

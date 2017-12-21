@@ -285,6 +285,8 @@ update reservation set res_status = 'res-5' where res_id = '13';
 update reservation set res_status = 'res-5' where res_id = '11';
 update reservation set res_status = 'res-5' where res_id = '1';
 
+select * from care_image
+
 select * from reservation
 
 select	m.email, m.member_name, m.password, m.main_address, m.sub_address, m.zipcode,
@@ -470,7 +472,9 @@ where 			res_status = 'res_2'
 		select  r.res_id,     r.res_sdate,     r.res_edate,     r.price,     r.res_status,     r.res_contents,     r.email,     r.email_sitter,     d.dog_id,     d.dog_name,     d.species,     d.gender,     d.birth   from reservation r, res_detail t, dog d      
 		where r.email = 'lee@naver.com'   and r.res_id = t.res_id   and t.dog_id = d.dog_id   and r.res_status = 'res-5'   order by res_id
 		
+		delete from care_image where care_id = 2
 		
+		select * from care_image
 		
 		
 		

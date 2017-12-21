@@ -56,8 +56,6 @@
    <mvc:view-controller path="/sitter/selectAllReservation.do" view-name="sitter/selectAllReservation.tiles"/>
    
    
-
-   
    <!-- 시터에게 온 예약 조회 -->
    <mvc:view-controller path="/sitter/sitter_mypage.do" view-name="sitter/sitter_mypage.tiles" />
    <!-- 시터에게 온 예약 조회(상세페이지) -->
@@ -81,6 +79,8 @@
    <!-- 관리자 예약상태 조회 -->
    <mvc:view-controller path="/admin/select_reservation_detail_result.do" view-name="admin/select_reservation_detail_result.tiles" />
    <mvc:view-controller path="/admin/select_reservation_simple_result.do" view-name="admin/select_reservation_simple_result.tiles" />
+   <!-- 관리자 등록 -->
+   <mvc:view-controller path="/admin/register_admin_form.do" view-name="admin/register_admin_form.tiles" />
    
    <!-- ################################### tiles 대신에 viewResolver 사용 ################################### -->
    <!-- 돌봄일지 관리 -->

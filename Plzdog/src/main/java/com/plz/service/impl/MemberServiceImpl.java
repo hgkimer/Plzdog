@@ -35,13 +35,15 @@ public class MemberServiceImpl implements MemberService {
 		dao.insertMember(member);
 		//Authority 테이블 insert
 		daoAuthority.insertAuthority(new Authority(member.getEmail(),role));
+		//가입하는 회원이 관리자 이면 시터권한과 일반 회원 권한을 같이 갖게 된다.
 		if(role.equals("ROLE_ADMIN")){
 			List<Authority> list = daoAuthority.selectAuthorityByEmail(member.getEmail());
 			for(Authority a : list) {
-				if(a.getAuthority() != "ROLE_SITTER") {
+				if(!a.getAuthority().equals("ROLE_SITTER")) {
+					daoAuthority.insertAuthority(new Authority(member.getEmail(),"ROLE_SITTER"));
+				} 
+				if(!a.getAuthority().equals("ROLE_MEMBER")) {
 					daoAuthority.insertAuthority(new Authority(member.getEmail(), "ROLE_MEMBER"));
-				} else if(a.getAuthority() != "ROLE_MEMBER") {
-					daoAuthority.insertAuthority(new Authority(member.getEmail(), "ROLE_SITTER"));
 				}
 			}
 		}

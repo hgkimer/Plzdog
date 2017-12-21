@@ -16,6 +16,14 @@
 
 <script type="text/javascript">
 
+//부모창 새로 고침
+
+function pclose() {
+	opener.parent.location="/WEB-INF/view/content/sitter/care_select_form.jsp";
+	
+	opener.parent.location.reload();
+	window.close();
+}
 </script>
 </head>
 <body>
@@ -29,7 +37,8 @@
 	<div class="col-lg-6">
 		<div class="form-group">
 			<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
-			<input type="date" id="careDate" name="careDate" class="form-control" value="${requestScope.care.careDate }" readOnly required="required"/><br>
+			<%-- <input type="date" id="careDate" name="careDate" class="form-control" value="${requestScope.care.careDate }" readOnly required="required"/><br> --%>
+			<fmt:formatDate value="${requestScope.care.careDate }" pattern="yyyy-MM-dd HH시 mm분"/>
 		</div>
 		<div class="form-group">
 			<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
@@ -52,10 +61,13 @@
 			<textarea rows="5" cols="30" id="careReview" name="careReview" class="form-control" readOnly>${requestScope.care.careReview }</textarea>
 		</div>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-5">
 			<c:forEach items="${requestScope.care.careImage }" var = "careImage">
 				<img id="careImage" src="${initParam.rootPath }/careImage/${careImage.imageName }" class="img-responsive" width="200px">
 			</c:forEach>
+	</div>
+	<div class="col-lg-1">
+		<button type="button" class="btn btn-default" onclick='pclose()'>창 닫기</button>
 	</div>
 		</div>
 		<div class="col-lg-2"></div>

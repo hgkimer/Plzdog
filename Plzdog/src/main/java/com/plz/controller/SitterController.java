@@ -164,11 +164,12 @@ public class SitterController {
 	@Transactional
 	public String updateCare(@ModelAttribute Care care , 
 			HttpServletRequest request, ModelMap model) throws IllegalStateException, IOException {
-
+			
+			System.out.println(care);
 			careService.updateCare(care,request);
 			model.addAttribute("resId",care.getResId());
-			//return "/WEB-INF/view/content/sitter/care_edit_result_form.jsp";
-			return "/sitter/select_care.do";
+			return "/WEB-INF/view/content/sitter/care_edit_result_form.jsp";
+			//return "/sitter/select_care.do";
 	}
 	
 	@RequestMapping("/sitter/delete_care")
