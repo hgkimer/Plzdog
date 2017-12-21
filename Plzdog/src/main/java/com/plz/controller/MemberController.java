@@ -90,9 +90,9 @@ public class MemberController {
 	@RequestMapping("goToProfile")
 	public String goToProfile(@RequestParam String email, Model model, HttpSession session) {
 		//먼저 sitter에 등록되어 있는지 확인한다.
+		System.out.println(email);
 		Member member = service.selectSitterByEmail(email);
-		System.out.println();
-		if(member.getSitter() != null) {//시터라면,
+		if(member.getSitter().getEmail() != null) {//시터라면,
 			//시터임을 나타내는 flag를 scope에 저장
 			model.addAttribute("sitterFlag", true);
 			//강아지들 정보 저장.

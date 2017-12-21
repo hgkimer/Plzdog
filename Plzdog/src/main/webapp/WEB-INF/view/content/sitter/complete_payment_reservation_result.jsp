@@ -27,8 +27,8 @@ function popupSelectCare(resId){
 	
 	<div class="container">
 		<div class="row" style="margin-top:20px">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<a href=""></a>
 				<div class="row">
 				<c:if test= "${empty requestScope.memberList }">
@@ -41,7 +41,7 @@ function popupSelectCare(resId){
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="col-lg-4">
-									<img style="width: 200px" alt="강아지 사진"
+									<img class="img-circle" style="width: 200px" alt="강아지 사진"
 										src="${initParam.rootPath }/dogImage/${res.resDetailList[0].dog.dogImage[0].dogImage}">
 								</div>
 								<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
@@ -50,8 +50,11 @@ function popupSelectCare(resId){
 										<p></p>
 											<label>강아지 이름</label>
 											<c:forEach items="${res.resDetailList}" var="resDetail">
-											<p><span class="glyphicon glyphicon-tag"></span>${resDetail.dog.dogName }</p>	
+											<p>${resDetail.dog.dogName }</p>	
 											</c:forEach>
+											<c:if test="${res.price > 0 }">
+												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
+											</c:if>
 									</div>
 									<div class="col-lg-6">
 										<p></p>
@@ -67,8 +70,8 @@ function popupSelectCare(resId){
 								</div>
 								<div class="row">
 								<!-- 다음 줄 시작 -->
-									<div class="col-lg-8"></div>
-									<div class="col-lg-4">
+									<div class="col-lg-10"></div>
+									<div class="col-lg-2">
 										<button type="button" class="btn btn-info btn-sm"
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
@@ -87,6 +90,7 @@ function popupSelectCare(resId){
 												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
+												<br>
 											<c:if test="${res.price > 0 }">
 												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
 											</c:if>
@@ -114,7 +118,7 @@ function popupSelectCare(resId){
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<img alt="회원사진" style="width: 200px"
+											<img class="img-thumbnail" alt="회원사진" style="width: 200px; height:150px;"
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
@@ -126,23 +130,25 @@ function popupSelectCare(resId){
 											<span class="glyphicon glyphicon-th-list"></span><label>요구 사항</label><br>
 											<ol>
 												<c:forEach items="${res.demandList }" var="demand">
-													<li><strong>${demand.code.codeName }</strong></li>
+													<li><strong>${demand.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</c:forEach>
 											</ol>
 										</div>
 									</div>
+									<hr>
 									<c:forEach items="${res.resDetailList }" var="resDetail">
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
 												<c:forEach items="${resDetail.dog.dogImage }" var="dogImage">
-											<img style="width: 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
+											<img class="img-circle" style="width: 200px" alt="강아지 사진" src="${initParam.rootPath }/dogImage/${dogImage.dogImage}">
 												</c:forEach>
 										</div>
 										
 										<div class="col-lg-4">
 											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
 											<p><strong><span class="glyphicon glyphicon-search"></span>${resDetail.dog.dogName }</strong></p>
+											<hr>
 											<p><strong><span class="glyphicon glyphicon-filter"></span>${resDetail.dog.species }</strong></p>
 											<p><strong><span class="glyphicon glyphicon-heart"></span>${resDetail.dog.gender }</strong></p>
 											<p><strong>무게  ${resDetail.dog.weight }kg</strong></p>
@@ -153,11 +159,12 @@ function popupSelectCare(resId){
 											<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
 											<c:forEach items="${resDetail.dog.dogInfoList }" var="dogInfo">
 												<ol>
-													<li><strong>${dogInfo.code.codeName }</strong></li>
+													<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</ol>
 											</c:forEach>
 										</div>
 									</div>
+									<hr>
 									</c:forEach>
 									<div class="row">
 											<div class="col-lg-5"></div>
@@ -173,7 +180,7 @@ function popupSelectCare(resId){
 											</div>
 										</div>
 									</div>
-									
+									<hr>
 									<div class="row">
 											<div class="col-lg-10"></div>
 											<div class="col-lg-2">
@@ -193,6 +200,6 @@ function popupSelectCare(resId){
 					</c:forEach><!-- 전체 예약 객체 ForEach문 끝 -->
 				</div>
 			</div>
-			<div class="col-lg-2"></div>
+			<div class="col-lg-3"></div>
 		</div>
 	</div>

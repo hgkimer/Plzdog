@@ -31,8 +31,8 @@ function deleteRes(resId){
 
 <div class="container">
 	<div class="row" style="margin-top:20px">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-8">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6">
 			<div class="row">
 				<c:if test="${errorMessage != null }">
 					<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
@@ -118,7 +118,7 @@ function deleteRes(resId){
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<img  style="width: 200px" class="img-thumnail" alt="회원사진"
+											<img style="width: 200px; height: 150px;" class="img-thumbnail" alt="회원사진"
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
@@ -130,11 +130,12 @@ function deleteRes(resId){
 											<span class="glyphicon glyphicon-th-list"></span><label>요구 사항</label><br>
 											<ol>
 												<c:forEach items="${res.demandList }" var="demand">
-													<li><strong>${demand.code.codeName }</strong></li>
+													<li><strong>${demand.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</c:forEach>
 											</ol>
 										</div>
 									</div>
+									<hr>
 									<c:forEach items="${res.resDogList }" var="dog">
 									<div class="row">
 										<div class="col-lg-4">
@@ -145,6 +146,7 @@ function deleteRes(resId){
 										<div class="col-lg-4">
 											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
 											<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName }</strong></p>
+											<hr>
 											<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
 											<p><strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong></p>
 											<p><strong>무게  ${dog.weight }kg</strong></p>
@@ -155,11 +157,12 @@ function deleteRes(resId){
 											<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
 											<c:forEach items="${dog.dogInfoList }" var="dogInfo">
 												<ol>
-													<li><strong>${dogInfo.code.codeName }</strong></li>
+													<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</ol>
 											</c:forEach>
 										</div>
 									</div>
+									<hr>
 									</c:forEach>
 									<div class="row">
 											<div class="col-lg-5"></div>
@@ -175,7 +178,7 @@ function deleteRes(resId){
 											</div>
 										</div>
 									</div>
-									
+									<hr>
 									<div class="row">
 											<div class="col-lg-10"></div>
 											<div class="col-lg-2">
@@ -187,28 +190,6 @@ function deleteRes(resId){
 												<div class="col-lg-4"></div>
 											</div>
 									</div>
-										<!--  --------- TODO: 여기서 부턴 시터 정보 입력 -----------		-->
-									<!--  
-										<div class="row">
-										<div class="col-lg-4">
-											<img
-												src="${initParam.rootPath }/memberImage/${res.member.imageMember}">
-										</div>
-										<div class="col-lg-4">
-											<p>시터 이메일 : ${res.member.email }</p>
-											<p>시터 이름 : ${res.member.memberName }</p>
-											<p>시터 전화번호 ${res.member.phoneNum }</p>
-										</div>
-										<div class="col-lg-4">
-											<p>※요구 사항※</p>
-											<ul>
-												<c:forEach items="${res.demandList }" var="demand">
-													<li>${demand.code.codeName }</li>
-												</c:forEach>
-											</ul>
-										</div>
-										
-										-->
 								</div>
 								
 							</div> <!-- panel 바디 -->
@@ -220,7 +201,7 @@ function deleteRes(resId){
 		</div>
 	</div>
 </div>
-<div class="col-lg-2"></div>
+<div class="col-lg-3"></div>
 
 
 

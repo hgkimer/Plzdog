@@ -3,12 +3,10 @@ package com.plz.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicToolBarUI.DockingListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.plz.dao.AuthorityDao;
 import com.plz.dao.DogDao;
@@ -30,6 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
 	private ReservationDao dao;
 	@Autowired
 	private ResDetailDao resdDao;
+	
 	@Autowired
 	private AuthorityDao aDao;
 	@Autowired
@@ -466,7 +465,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public void accpetReservation(int resId) {
+	public void acceptReservation(int resId) {
 		Reservation res = dao.selectReservationById(resId);
 		res.setResStatus("res-5");
 		dao.updateReservation(res);

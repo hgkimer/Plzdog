@@ -375,7 +375,7 @@ public class ReservationController {
 	@RequestMapping("/member/accept_reservation")
 	@ResponseBody
 	public void acceptRes(@RequestParam int resId) {
-		rService.accpetReservation(resId);
+		rService.acceptReservation(resId);
 	}
 	/**
 	 * 회원이 견적을 거절하는 컨트롤러
@@ -384,7 +384,7 @@ public class ReservationController {
 	@RequestMapping("/member/deny_reservation")
 	@ResponseBody
 	public void denyRes(@RequestParam int resId) {
-		rService.accpetReservation(resId);
+		rService.denyReservation(resId);
 	}
 	
 	/*

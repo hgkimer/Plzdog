@@ -312,14 +312,14 @@ insert into code values('sitter-7','환자 모니터링 가능','시터');
 insert into code values('sitterEn-1','아파트','환경');
 insert into code values('sitterEn-2','주택','환경');
 insert into code values('sitterEn-3','마당유무','환경');
-insert into code values('sitterEn-4','흡연유무','환경');
+insert into code values('sitterEn-4','흡연자 유무','환경');
 --------강아지 정보-----------------------------------------------------------
-INSERT INTO CODE VALUES('dog-1','유기견 출신','강아지');
+INSERT INTO CODE VALUES('dog-1','유기견 출신 여부','강아지');
 INSERT INTO CODE VALUES('dog-2','접종여부','강아지');
 INSERT INTO CODE VALUES('dog-3','심장사상충 예방 여부','강아지');
 INSERT INTO CODE VALUES('dog-4','외부기생충 구제 여부','강아지');
-INSERT INTO CODE VALUES('dog-5','배변훈련','강아지');
-INSERT INTO CODE VALUES('dog-6','다른 강아지들과 잘 지내나요?','강아지');
+INSERT INTO CODE VALUES('dog-5','배변훈련 여부','강아지');
+INSERT INTO CODE VALUES('dog-6','다른 강아지들과 잘 지내는지 여부','강아지');
 --------예약 상태-------------------------------------------------------------
 -- 담당 시터 없이 바로 예약을 등록한 상태
 insert into code values('res-1','예약대기','예약');

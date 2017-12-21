@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="container">
 		<div class="row" style="margin-top:20px;">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<div class="row">
 					<c:if test="${errorMessage != null }">
 						<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
@@ -29,6 +30,11 @@
 											<c:forEach items="${res.resDogList }" var="dog">
 											<p><span class="glyphicons glyphicons-dog"></span>${dog.dogName }</p>	
 										</c:forEach>
+										<br>
+										<c:if test="${res.price > 0 }">
+											<span class="glyphicon glyphicon-piggy-bank"></span>
+										<label> ${res.price }원</label>
+									</c:if>
 									</div>
 									<div class="col-lg-6">
 										<p></p>
@@ -50,7 +56,9 @@
 											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
 								</div>
-							</div> <!-- END OF panel 헤드 -->
+							</div>
+							
+							 <!-- END OF panel 헤드 -->
 							<div class="panel-body">
 								<div class="collapse" id="${res.resId }">
 									<div class="row">
@@ -64,6 +72,7 @@
 												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
+											<br>
 											<c:if test="${res.price > 0 }">
 												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
 											</c:if>
@@ -89,7 +98,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<img  style="width: 200px" class="img-thumnail" alt="회원사진"
+											<img class="img-thumbnail" style="width: 200px; height: 150px;" class="img-thumbnail" alt="회원사진"
 												src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 										</div>
 										<div class="col-lg-4">
@@ -101,11 +110,12 @@
 											<span class="glyphicon glyphicon-th-list"></span><label>요구 사항</label><br>
 											<ol>
 												<c:forEach items="${res.demandList }" var="demand">
-													<li><strong>${demand.code.codeName }</strong></li>
+													<li><strong>${demand.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</c:forEach>
 											</ol>
 										</div>
 									</div>
+									<hr>
 									<c:forEach items="${res.resDogList }" var="dog">
 									<div class="row">
 										<div class="col-lg-4">
@@ -118,6 +128,7 @@
 										<div class="col-lg-4">
 											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
 											<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName }</strong></p>
+											<hr>
 											<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
 											<p><strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong></p>
 											<p><strong>무게  ${dog.weight }kg</strong></p>
@@ -128,11 +139,12 @@
 											<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
 											<c:forEach items="${dog.dogInfoList }" var="dogInfo">
 												<ol>
-													<li><strong>${dogInfo.code.codeName }</strong></li>
+													<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</ol>
 											</c:forEach>
 										</div>
 									</div>
+									<hr>
 									</c:forEach>
 									<div class="row">
 											<div class="col-lg-5"></div>
@@ -148,40 +160,49 @@
 											</div>
 										</div>
 									</div>
-									
+									<hr>
 									<div class="row">
-											<div class="col-lg-10"></div>
-											<div class="col-lg-2">
-												<div class="col-lg-4"></div>
-												<div class="col-lg-4">
+									<div class="col-lg-4">
+										<img style="width: 200px; height: 150px;" class="img-thumbnail" alt="시터사진"
+											src="${initParam.rootPath }/memberImage/${res.sitter.memberImage}">
+									</div>
+									<div class="col-lg-4">
+										<p>
+											<strong><span class="glyphicon glyphicon-envelope"></span>
+												${res.sitter.email }</strong>
+										</p>
+										<p>
+											<strong><span class="glyphicon glyphicon-user"></span>
+												${res.sitter.memberName }</strong>
+										</p>
+										<p>
+											<strong><span class="glyphicon glyphicon-phone-alt"></span>
+												${res.sitter.phoneNum }</strong>
+										</p>
+									</div>
+									<div class="col-lg-4">
+										<span class="glyphicon glyphicon-th-list"></span><label>보유 능력 리스트</label><br>
+										<ol>
+											<c:forEach items="${res.sitter.sitter.skillList }" var="skill">
+												<c:if test="${fn:contains(skill.code.category, '시터')}">
+													<li><strong>${skill.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
+												</c:if>
+											</c:forEach>
+										</ol>
+									</div>
+									<div class="row">
+										<div class="col-lg-10"></div>
+										<div class="col-lg-2">
+											<div class="col-lg-4"></div>
+											<div class="col-lg-4">
 												<button type="button" class="btn btn-info btn-sm"
 													data-toggle="collapse" data-target="#${res.resId }">접기</button>
-												</div>
-												<div class="col-lg-4"></div>
 											</div>
+											<div class="col-lg-4">
+											</div>
+										</div>
 									</div>
-										<!--  --------- TODO: 여기서 부턴 시터 정보 입력 -----------		-->
-									<!--  
-										<div class="row">
-										<div class="col-lg-4">
-											<img
-												src="${initParam.rootPath }/memberImage/${res.member.imageMember}">
-										</div>
-										<div class="col-lg-4">
-											<p>시터 이메일 : ${res.member.email }</p>
-											<p>시터 이름 : ${res.member.memberName }</p>
-											<p>시터 전화번호 ${res.member.phoneNum }</p>
-										</div>
-										<div class="col-lg-4">
-											<p>※요구 사항※</p>
-											<ul>
-												<c:forEach items="${res.demandList }" var="demand">
-													<li>${demand.code.codeName }</li>
-												</c:forEach>
-											</ul>
-										</div>
-										
-										-->
+								</div>
 								</div>
 								
 							</div> <!-- panel 바디 -->
@@ -190,6 +211,6 @@
 					</c:forEach><!-- 전체 예약 객체 ForEach문 끝 -->
 				</div>
 			</div>
-			<div class="col-lg-2"></div>
+			<div class="col-lg-3"></div>
 		</div>
 	</div>
