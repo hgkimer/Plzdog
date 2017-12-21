@@ -10,6 +10,7 @@
 		select  res_id,
 			    res_sdate,
 			    res_edate,
+			    price,
 			    res_contents,
 			    res_status,
 			    email,

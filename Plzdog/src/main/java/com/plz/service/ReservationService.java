@@ -233,7 +233,7 @@ public interface ReservationService {
 	 * @param sEmail
 	 * @param resId
 	 */
-	void accpetReservation(int resId);
+	void acceptReservation(int resId);
 	/**
 	 * 사용자가 거절버튼을 누르면 매개변수로 받은 예약아이디로  update 하는 메소드.
 	 * 수락하면 res-5로 변경

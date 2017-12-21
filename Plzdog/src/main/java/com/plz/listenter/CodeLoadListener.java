@@ -28,7 +28,7 @@ public class CodeLoadListener implements ServletContextListener {
       CodeDao dao = (CodeDao) context.getBean("codeDaoImpl");
       
       List<Code> skillList = dao.selectCodeByCategory("시터");
-      List<Code> enList = dao.selectCodeByCategory("시터환경");
+      List<Code> enList = dao.selectCodeByCategory("환경");
       List<Code> serviceList = dao.selectCodeByCategory("서비스");
       /*List<Code> checkSkillList = new ArrayList<>();
       for(int i = 3 ; i< skillList.size(); i++) {

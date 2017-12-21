@@ -17,7 +17,7 @@
 							<div class="panel-heading">
 								<div class="col-lg-6">
 									<label>${requestScope.profile.memberName } 님의 프로필</label><br>
-									<img style="width: 350px" alt="회원 사진" src="${initParam.rootPath }/memberImage/${requestScope.profile.memberImage }"><br>
+									<img style="width: 350px; height: 350px" alt="회원 사진" src="${initParam.rootPath }/memberImage/${requestScope.profile.memberImage }"><br>
 								</div>
 								<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
 								<div class="col-lg-6">
@@ -53,49 +53,51 @@
 											<p><strong> 위탁돌봄금액 : ${requestScope.profile.sitter.givePrice }</strong></p>
 										</div>
 										<div class="col-lg-3">
-										<p><strong><span class="glyphicon glyphicon-th-list"></span>시터 스킬 : <br></strong></p>
+										<p><strong><span class="glyphicon glyphicon-th-list"></span>보유 능력 : <br></strong></p>
 										<p>	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
 													<c:if test="${fn:contains(skill.code.category, '시터')}">
 														<strong>${skill.code.codeName } </strong><br>
 													</c:if>		
 											</c:forEach></p>
 										</div>
-										<div class="col-lg-2">
-										<p><strong><span class="glyphicon glyphicon-th-list"></span>시터 서비스 : <br></strong></p>
+										<div class="col-lg-3">
+										<p><strong><span class="glyphicon glyphicon-th-list"></span>제공 가능한 서비스 : <br></strong></p>
 										<p>	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
 													<c:if test="${fn:contains(skill.code.category, '서비스')}">
 														<strong>${skill.code.codeName } </strong><br>
 													</c:if>		
 											</c:forEach></p>
 										</div>
-										<div class="col-lg-4">
-											<p><strong><span class="glyphicon glyphicon-th-list"></span>시터 환경 : <br></strong></p>
+										<div class="col-lg-3">
+											<p><strong><span class="glyphicon glyphicon-th-list"></span>보유 환경 : <br></strong></p>
 											<p>	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
 														<c:if test="${fn:contains(skill.code.category, '환경')}">
 															<strong>${skill.code.codeName } </strong><br>
 														</c:if>
 												</c:forEach></p>
-											<button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#dogId">시터의 강아지 보기</button><br>
-											
-											<form action="${initParam.rootPath }/member/checkSitter.do">
-											<input type="hidden" value="${requestScope.profile.email }" name="sitterEmail"/>
-											<button type="submit" class="btn btn-default">예약 신청</button>
-											</form>
-										</div>
 										
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+													<form action="${initParam.rootPath }/member/checkSitter.do">
+											<input type="hidden" value="${requestScope.profile.email }" name="sitterEmail"/>
+											<button type="submit" class="btn btn-warning btn-lg btn-block">예약 신청</button>
+											</form>
+											</div>
+										</div>
 										</div>
 							</div> <!-- panel 바디 -->
 							<div class="panel-footer">
-									<div class="collapse" id="dogId">
 									<c:forEach items="${requestScope.profile.dogList }" var="dog" >
 									<div class="row">
 										<div class="col-lg-4">
 											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
 											<c:forEach items="${dog.dogImage }" var="dogImage">
-											 	강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="200px"><br>
+											 	<img class="img-circle" src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="200px"><br>
 											</c:forEach>
 										</div>
 										<div class="col-lg-4">
+											
 											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
 											<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName}</strong></p>
 											<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
@@ -108,13 +110,13 @@
 											<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
 											<c:forEach items="${dog.dogInfoList }" var="dogInfo">
 												<ol>
-													<li><strong>${dogInfo.code.codeName }</strong></li>
+													<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</ol>
 											</c:forEach>
 										</div>
 									</div>
+									<hr>
 									</c:forEach>
-									</div>
 							</div> <!-- 판넬 푸터 -->
 						</div><!-- panel 폼-->
 				</div>

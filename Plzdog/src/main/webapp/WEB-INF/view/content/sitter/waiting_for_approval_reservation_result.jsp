@@ -68,8 +68,11 @@ function reject(sitterEmail, memberEmail){
 										<p></p>
 											<label>강아지 이름</label>
 											<c:forEach items="${res.resDetailList}" var="resDetail">
-											<p><span class="glyphicon glyphicon-tag"></span>${resDetail.dog.dogName }</p>	
+											<p>${resDetail.dog.dogName }</p>	
 											</c:forEach>
+											<c:if test="${res.price > 0 }">
+												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
+											</c:if>
 									</div>
 									<div class="col-lg-6">
 										<p></p>
@@ -85,13 +88,13 @@ function reject(sitterEmail, memberEmail){
 								</div>
 								<div class="row">
 								<!-- 다음 줄 시작 -->
-									<div class="col-lg-8"></div>
-									<div class="col-lg-4">
-										<button type="button" class="btn btn-info btn-sm"
-											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
+									<div class="col-lg-10"></div>
+									<div class="col-lg-2">
 											<!-- 문자 처리 ("")-->
-											<button type="button" class="btn btn-info btn-sm" id ='approveId' onclick='approve("${res.sitterEmail}","${res.memberEmail}")'>승인</button>
-											<button type="button" class="btn btn-info btn-sm" id ='rejectId' onclick='reject("${res.sitterEmail}","${res.memberEmail}")'>거절</button>
+											<button type="button" class="btn btn-success btn-sm" id ='approveId' onclick='approve("${res.sitterEmail}","${res.memberEmail}")'>승인</button>
+											<button type="button" class="btn btn-danger btn-sm" id ='rejectId' onclick='reject("${res.sitterEmail}","${res.memberEmail}")'>거절</button>
+											<button type="button" class="btn btn-info btn-sm"
+											data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 									</div>
 								</div>
 							</div> <!-- END OF panel 헤드 -->
@@ -108,6 +111,7 @@ function reject(sitterEmail, memberEmail){
 												 <span class="glyphicon glyphicon-calendar"></span><label>서비스 시작 :
 												<fmt:formatDate value="${res.resSDate }"
 													pattern="yyyy-MM-dd HH시 mm분" /></label>
+													<br>
 											<c:if test="${res.price > 0 }">
 												 <span class="glyphicon glyphicon-piggy-bank"></span><label> ${res.price }원</label>
 											</c:if>
@@ -160,6 +164,7 @@ function reject(sitterEmail, memberEmail){
 										<div class="col-lg-4">
 											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
 											<p><strong><span class="glyphicon glyphicon-search"></span>${resDetail.dog.dogName }</strong></p>
+											<hr>
 											<p><strong><span class="glyphicon glyphicon-filter"></span>${resDetail.dog.species }</strong></p>
 											<p><strong><span class="glyphicon glyphicon-heart"></span>${resDetail.dog.gender }</strong></p>
 											<p><strong>무게  ${resDetail.dog.weight }kg</strong></p>

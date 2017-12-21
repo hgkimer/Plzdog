@@ -58,7 +58,6 @@ function cancelProposal(resId){
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
 			<div class="row">
-				<p></p>
 				<c:if test="${errorMessage != null }">
 					<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
 					<p style="text-align: center">
@@ -66,12 +65,10 @@ function cancelProposal(resId){
 					<p>
 				</c:if>
 				<c:forEach items="${requestScope.list }" var="res">
-					<br>
-					<br>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="col-lg-4">
-								<img style="width: 200px" alt="강아지 사진"
+								<img class="img-circle" style="width: 200px" alt="강아지 사진"
 									src="${initParam.rootPath }/dogImage/${res.resDogList[0].dogImage[0].dogImage}">
 							</div>
 							<!-- 하나의 예약에 묶여 있는 강아지 리스트 반복 출력-->
@@ -102,18 +99,10 @@ function cancelProposal(resId){
 							</div>
 							<div class="row">
 								<!-- 다음 줄 시작 -->
-								<div class="col-lg-8"></div>
-								<div class="col-lg-4">
-									<c:choose>
-										<c:when test="${res.sitterEmail != null}">
-											<button type="button" class="btn btn-danger btn-sm"
-												onclick="cancelProposal(${res.resId});">견적 신청 취소</button>
-										</c:when>
-										<c:otherwise>
+								<div class="col-lg-9"></div>
+								<div class="col-lg-3">
 											<button type="button" class="btn btn-success btn-sm"
 												onclick="goToProposal(${res.resId});">견적 신청 하기</button>
-										</c:otherwise>
-									</c:choose>
 									<button type="button" class="btn btn-info btn-sm"
 										data-toggle="collapse" data-target="#${res.resId }">상세보기</button>
 								</div>
@@ -159,9 +148,9 @@ function cancelProposal(resId){
 										<p></p>
 									</div>
 								</div>
-								<div class="row" style="border-bottom: 1px, black;">
+								<div class="row">
 									<div class="col-lg-4">
-										<img style="width: 200px" alt="회원사진"
+										<img class="img-thumbnail" style="width: 200px; height: 150px;" alt="회원사진"
 											src="${initParam.rootPath }/memberImage/${res.member.memberImage}">
 									</div>
 									<div class="col-lg-4">
@@ -183,11 +172,12 @@ function cancelProposal(resId){
 											사항</label><br>
 										<ol>
 											<c:forEach items="${res.demandList }" var="demand">
-												<li><strong>${demand.code.codeName }</strong></li>
+												<li><strong>${demand.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 											</c:forEach>
 										</ol>
 									</div>
 								</div>
+								<hr>
 								<c:forEach items="${res.resDogList }" var="dog">
 									<div class="row">
 										<div class="col-lg-4">
@@ -201,6 +191,7 @@ function cancelProposal(resId){
 											<p>
 												<strong><span class="glyphicon glyphicon-search"></span>${dog.dogName }</strong>
 											</p>
+											<hr>
 											<p>
 												<strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong>
 											</p>
@@ -221,11 +212,12 @@ function cancelProposal(resId){
 												상세 정보</label><br>
 											<c:forEach items="${dog.dogInfoList }" var="dogInfo">
 												<ol>
-													<li><strong>${dogInfo.code.codeName }</strong></li>
+													<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
 												</ol>
 											</c:forEach>
 										</div>
 									</div>
+									<hr>
 								</c:forEach>
 								<div class="row">
 									<div class="col-lg-5"></div>
@@ -241,6 +233,7 @@ function cancelProposal(resId){
 										</div>
 									</div>
 								</div>
+								<hr>
 
 								<div class="row">
 									<div class="col-lg-10"></div>
@@ -253,30 +246,7 @@ function cancelProposal(resId){
 										<div class="col-lg-4"></div>
 									</div>
 								</div>
-								<!--  --------- TODO: 여기서 부턴 시터 정보 입력 -----------		-->
-								<!--  
-										<div class="row">
-										<div class="col-lg-4">
-											<img
-												src="${initParam.rootPath }/memberImage/${res.member.imageMember}">
-										</div>
-										<div class="col-lg-4">
-											<p>시터 이메일 : ${res.member.email }</p>
-											<p>시터 이름 : ${res.member.memberName }</p>
-											<p>시터 전화번호 ${res.member.phoneNum }</p>
-										</div>
-										<div class="col-lg-4">
-											<p>※요구 사항※</p>
-											<ul>
-												<c:forEach items="${res.demandList }" var="demand">
-													<li>${demand.code.codeName }</li>
-												</c:forEach>
-											</ul>
-										</div>
-										
-										-->
 							</div>
-
 						</div>
 						<!-- panel 바디 -->
 					</div>
