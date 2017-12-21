@@ -285,6 +285,12 @@
 		order by res_id desc
 	</select>
 	
+	<!-- 예약 전체 조회 -->
+	<select id="selectAllReservation" parameterType="string" resultMap="reservation-resultmap">
+		<include refid="reservation-sql"/>
+		order by res_status asc
+	</select>
+	
 	<!-- lee su il -->
 	
 	<!-- 
@@ -432,11 +438,6 @@
 			<result column="sales_Date" property="salesDate"/>
 		</association>
 	</resultMap>
-	
-	<!-- 예약 전체 조회 -->
-	<select id="selectAllReservation" parameterType="string" resultMap="reservation-resultmap">
-		<include refid="reservation-sql"/>
-	</select>
 	
 	<!-- 예약 id로 예약 조회 -->
 	<select id="selectReservationById" resultMap="reservation-join-sales-resultmap">

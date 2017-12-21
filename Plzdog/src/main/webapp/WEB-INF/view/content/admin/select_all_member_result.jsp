@@ -7,14 +7,19 @@
 
 
 <script type="text/javascript">
-	/* $(document).ready(function(){
-	 $("#profileId").on("click", function(){
-	
-	 });
-	 }); */
 
-	/* 우선 자바스크립트는 어디에 위치하는가?
-	 결론은 <TD></TD> 사이만 아니라면 어느 곳이든지 가능합니다. 그러나 가급적이면 <HEAD></HEAD> 사이에 사용하는 것이 좋습니다. */
+	/* var checkboxValues = new Array();
+	
+	$("input[name='checkSitter']:checked").each(function() {
+	    checkboxValues.push($(this).val());
+	});
+	
+	 $(document).ready(function(){
+	 $("#sortId").on("click", function(){
+		  	
+	 	});
+	 });  */
+
 	function popupProfile(email) {
 		var url = '${initParam.rootPath }/member/goToProfile.do?email=' + email
 		window.open(url, "newProfileForm", "width = 1000, height = 1000");
@@ -69,7 +74,7 @@
 			<table class="table col-sm-12" style="background-color: ghostWhite;">
 				<thead>
 					<tr>
-						<td>회원 권한</td>
+						<td id='sortId' style="cursor:pointer">회원 권한</td>
 						<td>회원 이메일</td>
 						<td>회원 이름</td>
 						<td>주소</td>
@@ -109,13 +114,13 @@
 							
 							<!-- 권한을 3개 가지고 있으면 관리자. -->
 							<c:if test="${fn:length(member.authorityList) == 3}">
-								<td>관리자</td>
+								<td id='authorityId'>관리자</td>
 							</c:if>
 							<c:if test="${fn:length(member.authorityList) == 2}">
-								<td>시터</td>
+								<td id='authorityId'>시터</td>
 							</c:if>
 							<c:if test="${fn:length(member.authorityList) == 1}">
-								<td>회원</td>
+								<td id='authorityId'>회원</td>
 							</c:if>
 							<td>${member.email }</td>
 							<td>${member.memberName }</td>
@@ -124,9 +129,9 @@
 							<td>${member.memberEnable == 1 ? '회원이 탈퇴 안함' : '회원이 탈퇴함'}</td>
 							<!-- td에서는 javascript함수를 사용하기 위해서 "data"형식으로 값을 넣는다. -->
 							<td onclick='javascript:popupProfile("${member.email}");' style="cursor:pointer">
-								프로필로 가기</td>
+								<button type="button" class="btn btn-default" >프로필로 가기</button></td>
 							<td onclick='javascript:removeMember("${member.email}");' style="cursor:pointer">
-								회원 관련 정보 삭제</td>
+								<button type="button" class="btn btn-warning" >회원 관련 정보 삭제</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>

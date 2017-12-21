@@ -65,7 +65,7 @@ public class MemberController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
 		//권한을 지운다
-		aService.removeAuthority(email);
+		//aService.removeAuthority(email);
 		Member member = ((Member)authentication.getPrincipal());
 		
 		//0이면 탈퇴

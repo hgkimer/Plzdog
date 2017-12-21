@@ -70,6 +70,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> findAllMemberJoinAuthority(){
 		return dao.selectAllMemberJoinAuthority();
 	}
+	
+	@Override
+	public Member findMemberJoinAuthorityByEmail(String email) {
+		return dao.selectMemberJoinAuthorityByEmail(email);
+	}
 
 	@Override
 	public Member findMemberByEmail(String email) {

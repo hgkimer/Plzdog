@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.MemberService;
+import com.plz.service.ReservationService;
 import com.plzdog.vo.Member;
+import com.plzdog.vo.Reservation;
 
 @Controller
 @RequestMapping("/admin/")
@@ -26,6 +28,9 @@ public class AdminManageController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private ReservationService rService;
 
 	/**
 	 * 관리자를 등록하는 메소드.
@@ -50,6 +55,11 @@ public class AdminManageController {
 		return new ModelAndView("redirect:/join_success.do","email", member.getEmail());
 	}
 	
+	/**
+	 * 모든 회원을 조회
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("select_all_member")
 	public String selectAllMember(Model model) {
 		
@@ -76,5 +86,39 @@ public class AdminManageController {
 		
 		model.addAttribute("memberList", memberList);
 		return "admin/select_all_member_result.tiles";
+	}
+	
+	/**
+	 * 모든 예약 조회
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("select_all_reservation")
+	public String selectAllReservation(Model model) {
+		
+		List<Reservation> resList = rService.findAllReservation();
+		//회원을 저장할 변수
+		Member member = new Member();
+		//시터를 저장할 변수
+		Member sitter = new Member();
+		
+		for(Reservation res : resList) {
+			
+			//회원의 기본정보 조회
+			member = service.findMemberJoinAuthorityByEmail(res.getMemberEmail());
+			
+			//res-1은 시터 이메일이 없다.
+			if(!res.getResStatus().equals("res-1")) {
+				//시터의 기본 정보 조회
+				sitter = service.findMemberJoinAuthorityByEmail(res.getSitterEmail());
+			}
+			
+			//예약에 회원과 시터 기본정보 추가
+			res.setMember(member);
+			res.setSitter(sitter);
+		}
+		
+		model.addAttribute("resList", resList);
+		return "admin/select_all_reservation_result.tiles";
 	}
 }
