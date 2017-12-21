@@ -476,6 +476,39 @@ where 			res_status = 'res_2'
 		
 		select * from care_image
 		
+		select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.password,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable,
+				a.authority
+		from	member m, authority a
+		where m.email = a.email
 		
-		
+		select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.password,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable,
+				a.authority,
+				d.dog_name,
+				d.species,
+				d.gender,
+				d.weight,
+				d.birth,
+				i.dog_image
+		from	member m, authority a, dog d, DOG_IMAGE i
+		where m.email = 'lee@naver.com'
+		and	  m.email = a.email
+		and   m.email = d.email(+)
+		and	  d.dog_id = i.dog_id(+) 
+		and   m.member_enable = '1'
 		

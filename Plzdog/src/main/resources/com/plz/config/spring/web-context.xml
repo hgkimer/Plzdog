@@ -76,8 +76,12 @@
    <mvc:view-controller path="/sitter/waiting_payment_reservation_result.do" view-name="sitter/waiting_payment_reservation_result.tiles"/>
    <!-- 결제 완료 된 예약 조회 -->
    <mvc:view-controller path="/sitter/complete_payment_reservation_result.do" view-name="sitter/complete_payment_reservation_result.tiles"/>
-   <!-- 관리자 예약상태 조회 -->
+   <!-- 관리자 전체예약 조회 -->
    <mvc:view-controller path="/admin/select_all_reservation_result.do" view-name="admin/select_all_reservation_result.tiles" />
+   <!-- 관리자 전체회원 조회 -->
+   <mvc:view-controller path="/admin/select_all_memeber_result.do" view-name="admin/select_all_memeber_result.tiles" />
+   <!-- 관리자 전체매출 조회 -->
+    <mvc:view-controller path="/admin/select_all_sales_result.do" view-name="admin/select_all_sales_result.tiles" /> 
    <!-- 관리자 등록 -->
    <mvc:view-controller path="/admin/register_admin_form.do" view-name="admin/register_admin_form.tiles" />
    

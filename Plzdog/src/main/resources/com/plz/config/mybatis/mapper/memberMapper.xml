@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.config.mybatis.mapper.memberMapper">
 	
+	<sql id="member-authority-sql">
+		select	m.email,
+				m.member_name,
+				m.main_address,
+				m.sub_address,
+				m.password,
+				m.zipcode,
+				m.member_image,
+				m.phonenum,
+				m.member_enable,
+				a.authority
+		from	member m, authority a
+	</sql>
+	
 	<sql id="member-dog-select-sql">
 		select	m.email,
 				m.member_name,
@@ -40,6 +54,23 @@
 			<result column="email_sitter" property="sitterEmail" />
 		</collection>
 	</resultMap> -->
+	
+	
+	<!-- 관리자가 전체 회원 조회 할 때 데이터가 많아서 느려서 만듬 -->
+	<resultMap type="Member" id="member-authority-resultmap">
+		<id column="email" property="email" />
+		<result column="member_name" property="memberName" />
+		<result column="main_address" property="mainAddress" />
+		<result column="password" property="password" />
+		<result column="sub_address" property="subAddress" />
+		<result column="zipcode" property="zipcode" />
+		<result column="member_image" property="memberImage" />
+		<result column="phonenum" property="phoneNum" />
+		<result column="member_enable" property="memberEnable" />
+		<collection property="authorityList" ofType="Authority">
+			<result column="authority" property="authority"/>
+		</collection>
+	</resultMap>
 	
 	<!-- member-resultmap -->
 	<resultMap type="member" id="member-dog-resultmap">
@@ -111,16 +142,29 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 전체 회원을 조회(탈퇴한 회원 포함) -->
+	<select id="selectAllMemberJoinAuthority" resultMap="member-authority-resultmap">
+		<include refid="member-authority-sql"/>
+		where m.email = a.email
+	</select>
+	
+	<select id="selectAllMemberJoinAuthorityByEmail" parameterType="string" resultMap="member-authority-resultmap">
+		<include refid="member-authority-sql"/>
+		where m.email = a.email
+		and m.email = #{email}
+	</select>
+	
 	<!-- 전체 회원과 강아지를 조회 -->
 	<select id="selectAllMemberJoinDog" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
-		and   m.member_enable = '1'
+		where   m.member_enable = '1'
 	</select>
 	
 	<!--이메일로 회원과 강아지를 조회 -->
 	<select id="selectMemberJoinDogByEmail" parameterType="string" resultMap="member-dog-resultmap">
 		<include refid="member-dog-select-sql"/>
 		where m.email = #{email}
+		and	  m.email = a.email
 		and   m.email = d.email(+)
 		and	  d.dog_id = i.dog_id(+) 
 		and   m.member_enable = '1'
@@ -136,6 +180,7 @@
 	<select id="selectAllMemberJoinSitterSkillAuthority" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
 		<include refid="member-sitter-skill-authority-select-sql"/>
 		where 	m.email = s.email
+		and	    m.email = a.email
 		and		s.email = sk.email(+)
 		and		sk.code_skill = c.code(+)
 		and 	m.member_enable = '1'
@@ -146,6 +191,7 @@
 	<select id="selectMemberJoinSitterSkillAuthorityByEmail" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
 		<include refid="member-sitter-skill-authority-select-sql"/>
 		where 	m.email = s.email
+		and	    m.email = a.email
 		and		s.email = sk.email
 		and		sk.code_skill = c.code
 		and 	m.member_enable = '1'
@@ -156,15 +202,14 @@
 	<!-- 이름으로 시터의 회원정보, 시터정보, 강아지 정보, 스킬 정보 조회 -->
 	<select id="selectMemberJoinSitterSkillAuthorityByName" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
 		<include refid="member-sitter-skill-authority-select-sql"/>
-		where	m.member_name like '%'||#{value}||'%' 
+		where	m.member_name like '%'||#{value}||'%'
+		and	    m.email = a.email 
 		and 	m.email = s.email
 		and		s.email = sk.email
 		and		sk.code_skill = c.code
 		and 	m.member_enable = '1'
 		and 	m.email = a.email	
 	</select>
-
-	
 
 	<sql id="member-review-sql">
 		select	s.email,

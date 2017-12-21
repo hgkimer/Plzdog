@@ -102,9 +102,9 @@ $(document).ready(function(){
          <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="sub"><a href="${initParam.rootPath }/admin/select_waiting.do">시터 등록</a></li>
             <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">전체 회원 조회</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">전체 예약 조회</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">전체 매출 조회</a></li>
+            <li class="sub"><a href="${initParam.rootPath }/admin/select_all_member.do">전체 회원 조회</a></li>
+            <li class="sub"><a href="${initParam.rootPath }/admin/#.do">전체 예약 조회</a></li>
+            <li class="sub"><a href="${initParam.rootPath }/admin/#.do">전체 매출 조회</a></li>
          </sec:authorize>
          
          <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>

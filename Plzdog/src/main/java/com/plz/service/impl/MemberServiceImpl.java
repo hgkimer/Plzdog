@@ -62,8 +62,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> selectAllMember() {
+	public List<Member> findAllMember() {
 		return dao.selectAllMember();
+	}
+	
+	@Override
+	public List<Member> findAllMemberJoinAuthority(){
+		return dao.selectAllMemberJoinAuthority();
 	}
 
 	@Override

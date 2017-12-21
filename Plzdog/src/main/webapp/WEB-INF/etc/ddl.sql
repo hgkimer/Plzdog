@@ -465,7 +465,7 @@ INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
 INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo1@naver.com');
 
 --예약
-insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-1','lee@naver.com','soo1@naver.com');
+insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-5','lee@naver.com','soo1@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',20000,'의뢰내용2','res-1','lee@naver.com','soo2@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',30000,'의뢰내용3','res-1','lee@naver.com','soo3@naver.com');
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',40000,'의뢰내용4','res-1','jang@naver.com','soo4@naver.com');

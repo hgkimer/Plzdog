@@ -25,7 +25,7 @@ public interface MemberService{
 	 * 모든 회원의 정보를 조회하는 메소드
 	 * @return
 	 */
-	List<Member> selectAllMember();
+	List<Member> findAllMember();
 	/**
 	 * 매개변수로 받은 email로 회원을 조회하는 메소드
 	 * @param email
@@ -64,6 +64,10 @@ public interface MemberService{
 	 */
 	List<Review> selectReviewByEmail(String email);
 	
-	
+	/**
+	 * 전체 회원 정보 + 권한 조회
+	 * @return
+	 */
+	List<Member> findAllMemberJoinAuthority();
 	
 }

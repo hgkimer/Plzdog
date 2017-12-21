@@ -68,5 +68,11 @@ public interface MemberDao {
 	 * @return
 	 */
 	List<Review> selectReviewByEmail(String email);
+	
+	/**
+	 * 전체 회원 + 권한 조회
+	 * @return
+	 */
+	List<Member> selectAllMemberJoinAuthority();
 
 }

@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -91,8 +92,14 @@ public class MemberController {
 	public String goToProfile(@RequestParam String email, Model model, HttpSession session) {
 		//먼저 sitter에 등록되어 있는지 확인한다.
 		System.out.println(email);
-		Member member = service.selectSitterByEmail(email);
-		if(member.getSitter().getEmail() != null) {//시터라면,
+		
+		//일반 회원으로 조회를 할 경우 mapper에서 sitter테이블이 없으므로 null값이 출력 된다.
+		Member member = service.findMemberByEmail(email);
+		System.out.println(member);
+		
+		if(member.getAuthorityList().size() == 2) { //시터라면
+		//if(member.ggtSitter().getEmail() != null) {//시터라면,
+			member = service.selectSitterByEmail(email);
 			//시터임을 나타내는 flag를 scope에 저장
 			model.addAttribute("sitterFlag", true);
 			//강아지들 정보 저장.
