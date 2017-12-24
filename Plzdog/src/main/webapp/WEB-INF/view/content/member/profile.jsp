@@ -42,6 +42,7 @@
 									</div>
 								</div>
 							</div> <!-- END OF panel 헤드 -->
+							<c:if test="${requestScope.profile.sitter != null }">
 							<div class="panel-body">
 									<div class="row">
 										<div class="col-lg-3">
@@ -87,6 +88,7 @@
 										</div>
 										</div>
 							</div> <!-- panel 바디 -->
+							</c:if>
 							<div class="panel-footer">
 									<c:forEach items="${requestScope.profile.dogList }" var="dog" >
 									<div class="row">
