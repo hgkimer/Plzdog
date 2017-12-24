@@ -11,7 +11,20 @@ $(document).ready(function(){
       $("#my_more").on("click", function(){
          $(".much").slideToggle();
       });
+      
+      $("#my_most").on("click", function(){
+          $(".many").slideToggle();
+       });
 	});
+
+function outMember(email){
+	if(confirm("정말로 탈퇴 하시겠습니까?")){
+		var url="${initParam.rootPath }/member/deleteMember.do?email="+email;
+		location.href=url; 
+	} else{ 
+		return false;
+	} 
+}
 </script>
 <style>
 	#mySidebar {
@@ -48,11 +61,11 @@ $(document).ready(function(){
       height:30px;
    }
 
-   .afew, .much, ::-webkit-scrollbar {
+   .afew, .much, .many, ::-webkit-scrollbar {
       display:none;
    }
    
-   .much, .afew {
+   .much, .afew, .many {
       width:100%;
       height:30px;
       font-size:15px;
@@ -100,18 +113,22 @@ $(document).ready(function(){
          
          <%--관리자 메뉴 /admin 으로 시작--%>
          <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <li class="sub"><a href="${initParam.rootPath }/admin/select_waiting.do">시터 등록</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/select_all_member.do">전체 회원 조회</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/#.do">전체 예약 조회</a></li>
-            <li class="sub"><a href="${initParam.rootPath }/admin/#.do">전체 매출 조회</a></li>
+         	<li class="sub"><a id="my_most" style="cursor: pointer;">관리자 기능</a>
+         	<ul class="little">
+	            <li class="many"><a href="${initParam.rootPath }/admin/select_waiting.do">시터 등록</a></li>
+	            <li class="many"><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
+	            <li class="many"><a href="${initParam.rootPath }/admin/select_all_member.do">전체 회원 조회</a></li>
+	            <li class="many"><a href="${initParam.rootPath }/admin/select_all_reservation.do">전체 예약 조회</a></li>
+	            <li class="many"><a href="${initParam.rootPath }/admin/#.do">전체 매출 조회</a></li>
+             </ul>
+            </li>
          </sec:authorize>
          
          <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
          
          <%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
          <sec:authorize access="isAuthenticated()">
-            <li class="sub"><a href="${initParam.rootPath }/member/deleteMember.do?email=<sec:authentication property="principal.email"/>">회원탈퇴</a>
+            <li class="sub"><a onclick="outMember('<sec:authentication property="principal.email"/>')">회원탈퇴</a>
          </sec:authorize>
       </ul>
 </div>

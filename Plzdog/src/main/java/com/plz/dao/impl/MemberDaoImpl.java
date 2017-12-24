@@ -47,6 +47,11 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
+	public Member selectMemberJoinAuthorityByEmail(String email){
+		return session.selectOne(makeSqlId("selectMemberJoinAuthorityByEmail"),email);
+	}
+	
+	@Override
 	public Member selectMemberByEmail(String email) {
 		return session.selectOne("selectMemberJoinDogByEmail", email);
 	}
@@ -75,4 +80,5 @@ public class MemberDaoImpl implements MemberDao{
 	public List<Review> selectReviewByEmail(String email) {
 		return session.selectList(makeSqlId("selectReviewByEmail"), email);
 	}
+	
 }

@@ -148,7 +148,7 @@
 		where m.email = a.email
 	</select>
 	
-	<select id="selectAllMemberJoinAuthorityByEmail" parameterType="string" resultMap="member-authority-resultmap">
+	<select id="selectMemberJoinAuthorityByEmail" parameterType="string" resultMap="member-authority-resultmap">
 		<include refid="member-authority-sql"/>
 		where m.email = a.email
 		and m.email = #{email}

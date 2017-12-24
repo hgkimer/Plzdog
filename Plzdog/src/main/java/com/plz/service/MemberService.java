@@ -70,4 +70,11 @@ public interface MemberService{
 	 */
 	List<Member> findAllMemberJoinAuthority();
 	
+	/**
+	 * 회원 정보 + 권한 조회
+	 * @param email
+	 * @return
+	 */
+	Member findMemberJoinAuthorityByEmail(String email);
+	
 }

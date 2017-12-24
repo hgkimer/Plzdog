@@ -285,6 +285,8 @@ update reservation set res_status = 'res-5' where res_id = '13';
 update reservation set res_status = 'res-5' where res_id = '11';
 update reservation set res_status = 'res-5' where res_id = '1';
 
+update member set member_enable = 1 where email='kim@naver.com';
+
 select * from care_image
 
 select * from reservation
@@ -487,7 +489,8 @@ where 			res_status = 'res_2'
 				m.member_enable,
 				a.authority
 		from	member m, authority a
-		where m.email = a.email
+		where   m.email = a.email
+		order by a.authority asc
 		
 		select	m.email,
 				m.member_name,
