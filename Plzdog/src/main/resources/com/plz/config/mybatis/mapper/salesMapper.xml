@@ -11,6 +11,14 @@
 		from 	sales
 	</sql>
 	
+	<resultMap type="Sales" id="sales-resultmap">
+		<id column="res_id" property="resId" />
+		<result column="total" property="total" />
+		<result column="pay" property="pay" />
+		<result column="commission" property="commission" />
+		<result column="sales_date" property="salesDate" />
+	</resultMap>
+	
 	<!-- total 금액 합계 -->
 	<select id="selectAllToTal" resultType="_int">
 		select sum(total) from sales
@@ -22,19 +30,19 @@
 	</select>
 	
 	<!-- sales테이블의 모든 내용 조회 -->
-	<select id="selectAllSales" resultType="Sales">
+	<select id="selectAllSales" resultMap="sales-resultmap">
 		<include refid="sales-select-sql"/>
 		order by sales_date desc
 	</select>
 	
 	<!-- 기간별 조회 -->
-	<select id="selectSalesByDate" parameterType="map" resultType="Sales">
+	<select id="selectSalesByDate" parameterType="map" resultMap="sales-resultmap">
 		<include refid="sales-select-sql"/>
 		where sales_date > #{sDay} and #{eDay} > sales_date
 	</select>
 	
 	<!-- 예약 ID별 조회 -->
-	<select id="selectSalesByResId" parameterType="string" resultType="Sales">
+	<select id="selectSalesByResId" parameterType="string" resultMap="sales-resultmap">
 		<include refid="sales-select-sql"/>
 		where res_id = #{value}
 	</select>

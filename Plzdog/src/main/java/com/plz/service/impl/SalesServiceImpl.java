@@ -1,5 +1,7 @@
 package com.plz.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +32,28 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public void deleteSales(int resId) {
 		salesDao.deleteSales(resId);
+	}
+	
+	@Override
+	public List<Sales> findAllSales() {
+		return salesDao.selectAllSales();
+	}
+	
+	@Override
+	public int findAllToTal() {
+		return salesDao.selectAllToTal();
+	}
+	
+	@Override
+	public int findAllCommission() {
+		return salesDao.selectAllCommission();
+	}
+	
+	@Override
+	public List<Sales> findSalesByDate(Date sDay, Date eDay) {
+		HashMap<String, Date> map = new HashMap<>();
+		map.put("sDay", sDay);
+		map.put("eDay", eDay);
+		return salesDao.selectSalesByDate(map);
 	}
 }

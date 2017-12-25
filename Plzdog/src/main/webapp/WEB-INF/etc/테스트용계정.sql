@@ -515,3 +515,7 @@ where 			res_status = 'res_2'
 		and	  d.dog_id = i.dog_id(+) 
 		and   m.member_enable = '1'
 		
+		select sum(commission) from sales
+		
+		select sum(total) from sales
+		

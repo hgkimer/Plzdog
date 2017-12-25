@@ -119,7 +119,7 @@ function outMember(email){
 	            <li class="many"><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
 	            <li class="many"><a href="${initParam.rootPath }/admin/select_all_member.do">전체 회원 조회</a></li>
 	            <li class="many"><a href="${initParam.rootPath }/admin/select_all_reservation.do">전체 예약 조회</a></li>
-	            <li class="many"><a href="${initParam.rootPath }/admin/#.do">전체 매출 조회</a></li>
+	            <li class="many"><a href="${initParam.rootPath }/admin/select_all_sales.do">전체 매출 조회</a></li>
              </ul>
             </li>
          </sec:authorize>

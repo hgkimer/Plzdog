@@ -1,6 +1,7 @@
 package com.plz.dao.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,5 +33,25 @@ public class SalesDaoImpl implements SalesDao{
 	@Override
 	public int deleteSales(int resId) {
 		return session.insert(makeSqlId("deleteSales"), resId);
+	}
+	
+	@Override
+	public List<Sales> selectAllSales() {
+		return session.selectList(makeSqlId("selectAllSales"));
+	}
+	
+	@Override
+	public int selectAllToTal() {
+		return session.selectOne(makeSqlId("selectAllToTal"));
+	}
+	
+	@Override
+	public int selectAllCommission() {
+		return session.selectOne(makeSqlId("selectAllCommission"));
+	}
+	
+	@Override
+	public List<Sales> selectSalesByDate(HashMap<String, Date> map) {
+		return session.selectOne(makeSqlId("selectSalesByDate"), map);
 	}
 }

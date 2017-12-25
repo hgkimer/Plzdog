@@ -2,6 +2,7 @@ package com.plz.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
+import com.plz.service.SalesService;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
+import com.plzdog.vo.Sales;
 
 @Controller
 @RequestMapping("/admin/")
@@ -31,6 +34,9 @@ public class AdminManageController {
 	
 	@Autowired
 	private ReservationService rService;
+	
+	@Autowired
+	private SalesService sService;
 
 	/**
 	 * 관리자를 등록하는 메소드.
@@ -120,5 +126,45 @@ public class AdminManageController {
 		
 		model.addAttribute("resList", resList);
 		return "admin/select_all_reservation_result.tiles";
+	}
+	
+	/**
+	 * 모든 매출 조회
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("select_all_sales")
+	public String selectAllSales(Model model) {
+		List<Sales> salesList = sService.findAllSales();
+		
+		for(Sales s : salesList) {
+			System.out.println(s);
+		}
+		
+		int total = sService.findAllToTal();
+		
+		int commission = sService.findAllCommission();
+		
+		model.addAttribute("salesList",salesList);
+		model.addAttribute("allTotal",total);
+		model.addAttribute("allCommission", commission);
+		
+		return "admin/select_all_sales_result.tiles";
+	}
+	
+	/**
+	 * 기간별 매출 조회
+	 * @param sDay
+	 * @param eDay
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("select_sales_date")
+	public String selectSalesByDate(@RequestParam Date sDay,@RequestParam Date eDay ,Model model) {
+		List<Sales> salesList = sService.findSalesByDate(sDay, eDay);
+		
+		model.addAttribute("salesList",salesList);
+		
+		return "admin/select_all_sales_result.tiles";
 	}
 }

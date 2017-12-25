@@ -1,6 +1,7 @@
 package com.plz.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.plzdog.vo.Sales;
@@ -27,5 +28,14 @@ public interface SalesDao {
 	 * @return
 	 */
 	int deleteSales(int resId);
+
+
+	int selectAllCommission();
+
+	int selectAllToTal();
+
+	List<Sales> selectAllSales();
+
+	List<Sales> selectSalesByDate(HashMap<String, Date> map);
 
 }
