@@ -301,6 +301,12 @@ public class ReservationController {
 		}
 		return "member/search_reservation_res1.tiles";
 	}
+	/**
+	 * 매개변수로 받은 이메일로 res-2인 예약을 사용자에게 보여주는 컨트롤러.
+	 * @param email
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/member/search_reservation_res2")
 	public String findReservationRes2Member(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findReservationRes2(email);
@@ -350,7 +356,11 @@ public class ReservationController {
 	public void removeReservation(@RequestParam int resId) {
 		rService.removeReservation(resId);
 	}
-	
+	@RequestMapping("/member/payment")
+	public String findReservationRes4Member(@RequestParam String email, Model model) {
+		//List<Reservation> list = ;
+		return null;
+	}
 	
 	/**
 	 * 결제 완료 (res-5)들을 조회하는 컨트롤러

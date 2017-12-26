@@ -201,7 +201,15 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findReservationRes2(String email);
-	
+	/**
+	 * 의뢰자 이메일로 예약에 해당하는 강아지 정보를 조회한다.
+	 * 1. res-4(결제대기) 중인 예약들을 ㅈ너체 조회
+	 * 2. 의뢰자, 시터, 강아지, 요구사항을 해당 예약객체에 세팅한다.
+	 * 3. 해당 예약 리스트를 리턴한다.
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> findReservationRes4(String email);
 	/**
 	 * 의뢰자에게 견적을 보내기 위해 견적 대기중인 예약(res-1)상태인 예약 들을 조회해 온다.
 	 * 	1. res-1인 예약들을 전체 조회

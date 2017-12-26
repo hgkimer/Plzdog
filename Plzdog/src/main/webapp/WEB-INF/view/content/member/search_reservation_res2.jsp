@@ -32,15 +32,14 @@ function deleteRes(resId){
 function acceptRes(resId){
 	var dCheck = confirm("견적을 수락하시겠습니까?");
 	if(dCheck){
-		var reCheck = confirm("견적을 수락하게 되면 결제페이지로 이동합니다.");
+		var reCheck = confirm("견적을 수락하게 되면 결제 대기 페이지로 이동합니다.");
 		if(reCheck){
 			$.ajax({
 				"url" : "${initParam.rootPath}/member/accept_reservation.do",
 				"type" : "get",
 				"data" : {"resId" : resId},
 				"success" : function(){
-					location.reload();
-					alert("견적 수락이 완료되었습니다.");
+					location.replace('${initParam.rootPath}/member/payment.do');
 				},//end of success
 				"error" : function(xhr, status, errorMsg){
 					alert("오류가 발생했습니다. - " + status +", " + errorMsg);

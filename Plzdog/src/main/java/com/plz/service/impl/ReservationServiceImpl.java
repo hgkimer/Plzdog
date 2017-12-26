@@ -383,7 +383,33 @@ public class ReservationServiceImpl implements ReservationService {
 		// 모든 정보를 저장한 예약 타입의 리스트들을 리턴.
 		return resList;
 	}
-
+	
+	@Override
+	public List<Reservation> findReservationRes4(String email) {
+		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
+		List<Reservation> resList = dao.selectReservationRes5JoinResDetailAndDog(email);
+		//2. 의뢰자, 시터, 강아지 요구사항 정보를 각 예약 겍체에 세팅한다.
+		for(Reservation r : resList) {
+			//의뢰자 정보 세팅
+			r.setMember(mDao.selectMemberByEmail(email));
+			//의뢰를 접수하기 희망하는 시터의 정보 세팅
+			r.setSitter(mDao.selectSitterByEmail(r.getSitterEmail()));
+			//예약 상세 리스트를 반복문을 돌려 해당하는 강아지의 ID를 통해 강아지 상세 정보와 이미지들을 반복해서 세팅.
+			ArrayList<Dog> dogList = new ArrayList<>();
+			for(ResDetail rd : r.getResDetailList()) {
+				rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
+				//정보를 저장한 강아지들을 리스트에 담는다.
+				dogList.add(rd.getDog());
+			}
+			r.setResDogList(dogList);
+			//강아지의 전체 정보를 담은 리스트를 각 예약 객체에 세팅
+			Reservation res = dao.selectReservationDemandCodeByResId(r.getResId());
+			r.setDemandList(res.getDemandList());
+		}
+		//모든 정보를 저장한 예약 타입의 리스트들을 리턴.
+		return resList;
+	}
+	
 	@Override
 	public List<Reservation> findReservationAllRes1Sitter() {
 		// 1. res-1 상태인 예약 전체 조회
@@ -467,7 +493,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public void acceptReservation(int resId) {
 		Reservation res = dao.selectReservationById(resId);
-		res.setResStatus("res-5");
+		res.setResStatus("res-4");
 		dao.updateReservation(res);
 	}
 	
@@ -478,6 +504,8 @@ public class ReservationServiceImpl implements ReservationService {
 		res.setSitterEmail(null);
 		dao.updateReservation(res);
 	}
+
+	
 
 	// ----------------------------------------------------------------------
 }

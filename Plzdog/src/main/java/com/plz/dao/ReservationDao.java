@@ -194,6 +194,13 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectReservationRes2JoinResDetailAndDog(String email);
 	/**
+	 * 매개변수로 받은 email과 일치하는 예약정보와 강아지정보를 조회하는 메소드.
+	 * res-4(결제 대기)
+	 * @param email
+	 * @return
+	 */
+	List<Reservation> selectReservationRes4JoinResDetailAndDog(String email);
+	/**
 	 * 매개변수로 받은 예약아이디와 일치하는 예약의 요구사항을 조회하는 메소드.
 	 * @param resId
 	 * @return
