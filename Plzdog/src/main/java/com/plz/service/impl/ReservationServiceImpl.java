@@ -388,12 +388,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<Reservation> findReservationRes4(String email) {
 		//1. 자신의 이메일을 통해 예약과 강아지 정보를 조회
 		List<Reservation> resList = dao.selectReservationRes4JoinResDetailAndDog(email);
-		System.out.println(resList);
 		//2. 의뢰자, 시터, 강아지 요구사항 정보를 각 예약 겍체에 세팅한다.
 		for(Reservation r : resList) {
 			//의뢰자 정보 세팅
 			r.setMember(mDao.selectMemberByEmail(email));
-			//의뢰를 접수하기 희망하는 시터의 정보 세팅
+			//의뢰를 접수한 시터의 정보 세팅
 			r.setSitter(mDao.selectSitterByEmail(r.getSitterEmail()));
 			//예약 상세 리스트를 반복문을 돌려 해당하는 강아지의 ID를 통해 강아지 상세 정보와 이미지들을 반복해서 세팅.
 			ArrayList<Dog> dogList = new ArrayList<>();

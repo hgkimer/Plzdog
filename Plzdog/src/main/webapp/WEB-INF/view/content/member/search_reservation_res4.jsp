@@ -2,40 +2,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript">
-$document.ready(function(){
-	var IMP = window.IMP;
-	IMP.init('imp17685781');
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 14000,
-	    buyer_email : '${requestScope.list[0].member.email}',
-	    buyer_name : '${requestScope.list[0].member.name}',
-	    buyer_tel : '${requestScope.list[0].member.phoneNum}',
-	    buyer_addr : '${requestScope.list[0].member.mainAddress}'+' ${initParam.rootPath.list[0].member.subAddress}',
-	    buyer_postcode : '${requestScope.list[0].member.zipcode}',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        /*
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	        */
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	});
-});
-
+<script>
+function payRes(resId){
+	var payCheck = confirm('결제하시겠습니까? 확인을 누르면 결제페이지로 이동합니다.');
+	if(payCheck){
+		location.replace('${initParam.rootPath}/member/payment.do');
+	}else{
+		alert("취소합니다.")
+	}
+}
+function deleteRes(resId){
+	var dCheck = confirm("예약을 삭제하시겠어요?");
+	if(dCheck){
+		var reCheck = confirm("지워진 예약은 복구가 불가능 합니다. 그래도 진행 하시겠어요?");
+		if(reCheck){
+			$.ajax({
+				"url" : "${initParam.rootPath}/member/delete_reservation.do",
+				"type" : "get",
+				"data" : {"resId" : resId},
+				"success" : function(){
+					location.reload();
+					alert("예약이 삭제되었습니다.");
+				},//end of success
+				"error" : function(xhr, status, errorMsg){
+					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
+				}//end of error
+			});//end of ajax
+		}else{
+			alert("취소되었습니다.");
+		}
+	}else{
+		alert("취소되었습니다.");
+		location.reload();
+	}
+}
 </script>
 
 
@@ -44,15 +44,15 @@ $document.ready(function(){
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
 			<div class="row">
-				<c:if test="${errorMessage != null }">
-					<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
+				<c:if test="${errorMessage != null}">
+					<h2 style="color: tomato; text-align: center;">${errorMessage}</h2>
 					<p style="text-align: center">
 						<strong>예약 등록을 하시려면 아래의 링크를 클릭하세요!</strong>
 					<p>
 						<a href="${initParam.rootPath }/member/search_sitter.do"
 							class="btn btn-info btn-block btn-lg">나에게 맞는 시터 찾기</a>
 				</c:if>
-				<c:forEach items="${requestScope.list }" var="res">
+				<c:forEach items="${requestScope.list}" var="res">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="col-lg-4">
@@ -95,8 +95,7 @@ $document.ready(function(){
 								<!-- 다음 줄 시작 -->
 								<div class="col-lg-8"></div>
 								<div class="col-lg-4">
-									<button type="button" class="btn btn-success btn-sm" onclick="acceptRes(${res.resId});">수락하기</button>
-									<button type="button" class="btn btn-warning btn-sm" onclick="denyRes(${res.resId});">거절하기</button>
+									<button type="button" class="btn btn-success btn-sm" onclick="payRes(${res.resId});">결제하기</button>
 									<button type="button" class="btn btn-danger btn-sm"
 										onclick="deleteRes(${res.resId});">삭제하기</button>
 									<button type="button" class="btn btn-info btn-sm"
@@ -255,7 +254,7 @@ $document.ready(function(){
 												${res.sitter.phoneNum }</strong>
 										</p>
 									</div>
-d									<div class="col-lg-4">
+									<div class="col-lg-4">
 										<span class="glyphicon glyphicon-th-list"></span><label>보유 능력 리스트</label><br>
 										<ol>
 											<c:forEach items="${res.sitter.sitter.skillList }" var="skill">

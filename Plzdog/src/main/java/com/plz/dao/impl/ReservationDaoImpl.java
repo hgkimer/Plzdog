@@ -203,7 +203,7 @@ public class ReservationDaoImpl implements ReservationDao {
 	
 	@Override
 	public List<Reservation> selectReservationRes4JoinResDetailAndDog(String email) {
-		return session.selectList(makeSqlId("selectReservationRes4JoinResDetailAndDog"));
+		return session.selectList(makeSqlId("selectReservationRes4JoinResDetailAndDog"),email);
 	}
 	
 	@Override

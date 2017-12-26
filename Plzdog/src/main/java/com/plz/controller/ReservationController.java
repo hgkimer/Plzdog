@@ -365,7 +365,6 @@ public class ReservationController {
 	@RequestMapping("/member/search_reservation_res4")
 	public String findReservationRes4Member(@RequestParam String email, Model model) {
 		List<Reservation> list = rService.findReservationRes4(email);
-		System.out.println(list);
 		if(list.isEmpty()) {
 			model.addAttribute("errorMessage", "결제 대기중인 예약이 없습니다.");
 		}else {

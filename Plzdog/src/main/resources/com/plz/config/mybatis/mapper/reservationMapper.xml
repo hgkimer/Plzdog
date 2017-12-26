@@ -347,7 +347,7 @@
 	<!-- 의뢰자의 마이페이지 - 견적 승인대기 예약(res-2) - 강아지 정보 -->
 	<select id="selectReservationRes2JoinResDetailAndDog" parameterType="string" resultMap="simple-sitter-res-resdetail-dog-resulmap">
 		<include refid="simple-sitter-res-resdetail-dog-sql"/>
-		where r.email = #{email}
+		where r.email = #{value}
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
 		and	r.res_status = 'res-2' 
