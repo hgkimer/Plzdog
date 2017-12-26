@@ -210,15 +210,6 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findReservationRes4(String email);
-	/**
-	 * 의뢰자에게 견적을 보내기 위해 견적 대기중인 예약(res-1)상태인 예약 들을 조회해 온다.
-	 * 	1. res-1인 예약들을 전체 조회
-	 * 	2. 의뢰자, 강아지, 요구사항을 해당 예약 객체에 세팅한다.
-	 * 	3. list return
-	 * @return
-	 */
-	List<Reservation> findReservationAllRes1Sitter();
-
 	
 	/**
 	 * 의뢰자 견적 완료 예약(res-5)상태인 예약 들을 조회해 온다.
@@ -227,6 +218,15 @@ public interface ReservationService {
 	 */
 	List<Reservation> findReservationRes5(String email);
 
+	/**
+	 * 의뢰자에게 견적을 보내기 위해 견적 대기중인 예약(res-1)상태인 예약 들을 조회해 온다.
+	 * 	1. res-1인 예약들을 전체 조회
+	 * 	2. 의뢰자, 강아지, 요구사항을 해당 예약 객체에 세팅한다.
+	 * 	3. list return
+	 * @return
+	 */
+	List<Reservation> findReservationAllRes1Sitter();
+	
 	/**
 	 * 매개변수로 받은 시터의 이메일과 예약 아이디를 통해 시터의 견적 신청 및 취소 요구를 업데이트 하는 서비스 메소드.
 	 * 

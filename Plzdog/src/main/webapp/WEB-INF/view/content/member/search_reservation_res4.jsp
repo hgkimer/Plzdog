@@ -2,84 +2,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-function deleteRes(resId){
-	var dCheck = confirm("예약을 삭제하시겠어요?");
-	if(dCheck){
-		var reCheck = confirm("지워진 예약은 복구가 불가능 합니다. 그래도 진행 하시겠어요?");
-		if(reCheck){
-			$.ajax({
-				"url" : "${initParam.rootPath}/member/delete_reservation.do",
-				"type" : "get",
-				"data" : {"resId" : resId},
-				"success" : function(){
-					location.reload();
-					alert("예약이 삭제되었습니다.");
-				},//end of success
-				"error" : function(xhr, status, errorMsg){
-					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
-				}//end of error
-			});//end of ajax
-		}else{
-			alert("취소되었습니다.");
-		}
-	}else{
-		alert("취소되었습니다.");
-		location.reload();
-	}
-}
+$document.ready(function(){
+	var IMP = window.IMP;
+	IMP.init('imp17685781');
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 14000,
+	    buyer_email : '${requestScope.list[0].member.email}',
+	    buyer_name : '${requestScope.list[0].member.name}',
+	    buyer_tel : '${requestScope.list[0].member.phoneNum}',
+	    buyer_addr : '${requestScope.list[0].member.mainAddress}'+' ${initParam.rootPath.list[0].member.subAddress}',
+	    buyer_postcode : '${requestScope.list[0].member.zipcode}',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        /*
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        */
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+});
 
-function acceptRes(resId){
-	var dCheck = confirm("견적을 수락하시겠습니까?");
-	if(dCheck){
-		var reCheck = confirm("견적을 수락하게 되면 결제 대기 페이지로 이동합니다.");
-		if(reCheck){
-			$.ajax({
-				"url" : "${initParam.rootPath}/member/accept_reservation.do",
-				"type" : "get",
-				"data" : {"resId" : resId},
-				"success" : function(){
-					location.replace('${initParam.rootPath}/member/search_reservation_res4.do?email=${requestScope.list[0].member.email}');
-				},//end of success
-				"error" : function(xhr, status, errorMsg){
-					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
-				}//end of error
-			});//end of ajax
-		}else{
-			alert("취소되었습니다.");
-		}
-	}else{
-		alert("취소되었습니다.");
-		location.reload();
-	}
-}
-
-function denyRes(resId){
-	var dCheck = confirm("견적을 거절하시겠습니까?");
-	if(dCheck){
-		var reCheck = confirm("견적을 거절하게 되면 첫 단계인 견적 대기 상태로 돌아가게 됩니다.");
-		if(reCheck){
-			$.ajax({
-				"url" : "${initParam.rootPath}/member/deny_reservation.do",
-				"type" : "get",
-				"data" : {"resId" : resId},
-				"success" : function(){
-					alert("견적 거절이 완료되었습니다.");
-					location.reload();
-				},//end of success
-				"error" : function(xhr, status, errorMsg){
-					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
-				}//end of error
-			});//end of ajax
-		}else{
-			alert("취소되었습니다.");
-		}
-	}else{
-		alert("취소되었습니다.");
-		location.reload();
-	}
-}
 </script>
+
 
 <div class="container">
 	<div class="row" style="margin-top: 20px;">
@@ -297,7 +255,7 @@ function denyRes(resId){
 												${res.sitter.phoneNum }</strong>
 										</p>
 									</div>
-									<div class="col-lg-4">
+d									<div class="col-lg-4">
 										<span class="glyphicon glyphicon-th-list"></span><label>보유 능력 리스트</label><br>
 										<ol>
 											<c:forEach items="${res.sitter.sitter.skillList }" var="skill">
@@ -332,7 +290,4 @@ function denyRes(resId){
 		<div class="col-lg-3"></div>
 	</div>
 </div>
-
-
-
 

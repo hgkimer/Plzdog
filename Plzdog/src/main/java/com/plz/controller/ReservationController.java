@@ -356,10 +356,22 @@ public class ReservationController {
 	public void removeReservation(@RequestParam int resId) {
 		rService.removeReservation(resId);
 	}
-	@RequestMapping("/member/payment")
+	/**
+	 * 결제 대기상태(res-4)들을 조회하는 컨트롤러
+	 * @param email
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/search_reservation_res4")
 	public String findReservationRes4Member(@RequestParam String email, Model model) {
-		//List<Reservation> list = ;
-		return null;
+		List<Reservation> list = rService.findReservationRes4(email);
+		System.out.println(list);
+		if(list.isEmpty()) {
+			model.addAttribute("errorMessage", "결제 대기중인 예약이 없습니다.");
+		}else {
+			model.addAttribute("list", list);
+		}
+		return "member/search_reservation_res4.tiles";
 	}
 	
 	/**
