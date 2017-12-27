@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">		<!-- 장치 width에 맞춰라 / 모바일로 처음 접속했을 때 크기(100%)-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tiles Exam</title>
+<title>Plz Dog</title>
 <%--Bootsrap/jQuery 등록 --%>
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>

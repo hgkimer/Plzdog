@@ -2,7 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script type="text/javascript">
+<script>
+function payRes(resId){
+	var payCheck = confirm('결제하시겠습니까? 확인을 누르면 결제페이지로 이동합니다.');
+	if(payCheck){
+		location.replace('${initParam.rootPath}/member/payment.do?resId='+resId);
+	}else{
+		alert("취소합니다.")
+	}
+}
 function deleteRes(resId){
 	var dCheck = confirm("예약을 삭제하시겠어요?");
 	if(dCheck){
@@ -28,73 +36,23 @@ function deleteRes(resId){
 		location.reload();
 	}
 }
-
-function acceptRes(resId){
-	var dCheck = confirm("견적을 수락하시겠습니까?");
-	if(dCheck){
-		var reCheck = confirm("견적을 수락하게 되면 결제 대기 페이지로 이동합니다.");
-		if(reCheck){
-			$.ajax({
-				"url" : "${initParam.rootPath}/member/accept_reservation.do",
-				"type" : "get",
-				"data" : {"resId" : resId},
-				"success" : function(){
-					location.replace('${initParam.rootPath}/member/search_reservation_res4.do?email=${requestScope.list[0].member.email}');
-				},//end of success
-				"error" : function(xhr, status, errorMsg){
-					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
-				}//end of error
-			});//end of ajax
-		}else{
-			alert("취소되었습니다.");
-		}
-	}else{
-		alert("취소되었습니다.");
-		location.reload();
-	}
-}
-
-function denyRes(resId){
-	var dCheck = confirm("견적을 거절하시겠습니까?");
-	if(dCheck){
-		var reCheck = confirm("견적을 거절하게 되면 첫 단계인 견적 대기 상태로 돌아가게 됩니다.");
-		if(reCheck){
-			$.ajax({
-				"url" : "${initParam.rootPath}/member/deny_reservation.do",
-				"type" : "get",
-				"data" : {"resId" : resId},
-				"success" : function(){
-					alert("견적 거절이 완료되었습니다.");
-					location.reload();
-				},//end of success
-				"error" : function(xhr, status, errorMsg){
-					alert("오류가 발생했습니다. - " + status +", " + errorMsg);
-				}//end of error
-			});//end of ajax
-		}else{
-			alert("취소되었습니다.");
-		}
-	}else{
-		alert("취소되었습니다.");
-		location.reload();
-	}
-}
 </script>
+
 
 <div class="container">
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
 			<div class="row">
-				<c:if test="${errorMessage != null }">
-					<h2 style="color: tomato; text-align: center;">${errorMessage }</h2>
+				<c:if test="${errorMessage != null}">
+					<h2 style="color: tomato; text-align: center;">${errorMessage}</h2>
 					<p style="text-align: center">
 						<strong>예약 등록을 하시려면 아래의 링크를 클릭하세요!</strong>
 					<p>
 						<a href="${initParam.rootPath }/member/search_sitter.do"
 							class="btn btn-info btn-block btn-lg">나에게 맞는 시터 찾기</a>
 				</c:if>
-				<c:forEach items="${requestScope.list }" var="res">
+				<c:forEach items="${requestScope.list}" var="res">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="col-lg-4">
@@ -137,8 +95,7 @@ function denyRes(resId){
 								<!-- 다음 줄 시작 -->
 								<div class="col-lg-8"></div>
 								<div class="col-lg-4">
-									<button type="button" class="btn btn-success btn-sm" onclick="acceptRes(${res.resId});">수락하기</button>
-									<button type="button" class="btn btn-warning btn-sm" onclick="denyRes(${res.resId});">거절하기</button>
+									<button type="button" class="btn btn-success btn-sm" onclick="payRes(${res.resId});">결제하기</button>
 									<button type="button" class="btn btn-danger btn-sm"
 										onclick="deleteRes(${res.resId});">삭제하기</button>
 									<button type="button" class="btn btn-info btn-sm"
@@ -332,7 +289,4 @@ function denyRes(resId){
 		<div class="col-lg-3"></div>
 	</div>
 </div>
-
-
-
 

@@ -99,7 +99,6 @@
    
    <!-- 돌봄일지 테스트 -->
    <mvc:view-controller path="/sitter/care_test.do" view-name="sitter/care_test.jsp" /> 
-   
    <!-- ################################### tiles 대신에 viewResolver 사용 ################################### -->
    <!-- 견적 팝업 -->
    <mvc:view-controller path="/sitter/proposal_form.do" view-name="/WEB-INF/view/content/sitter/proposal_form.jsp"/>
