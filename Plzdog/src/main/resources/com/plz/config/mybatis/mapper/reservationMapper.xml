@@ -350,7 +350,7 @@
 		where r.email = #{email}
 		and r.res_id = t.res_id
 		and t.dog_id = d.dog_id
-		and	r.res_status = 'res-2' 
+		and	r.res_status = res-2
 		order by res_id desc
 	</select> 
 	

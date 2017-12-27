@@ -490,6 +490,30 @@ insert into demand values (5,'sitter-1');
 insert into demand values (11,'sitter-1');
 insert into demand values (11,'sitter-2');
 
+insert into DEMAND values (1,'service-1');
+insert into DEMAND values (1,'sitterEn-2'); 
+insert into DEMAND values (2,'service-1');
+insert into DEMAND values (2,'sitterEn-2'); 
+insert into DEMAND values (3,'service-1');
+insert into DEMAND values (3,'sitterEn-2'); 
+insert into DEMAND values (4,'service-1');
+insert into DEMAND values (4,'sitterEn-2'); 
+insert into DEMAND values (5,'service-1');
+insert into DEMAND values (5,'sitterEn-2'); 
+insert into DEMAND values (6,'service-1');
+insert into DEMAND values (6,'sitterEn-2'); 
+insert into DEMAND values (7,'service-1');
+insert into DEMAND values (7,'sitterEn-2'); 
+insert into DEMAND values (8,'service-1');
+insert into DEMAND values (8,'sitterEn-2'); 
+insert into DEMAND values (9,'service-1');
+insert into DEMAND values (9,'sitterEn-2'); 
+insert into DEMAND values (10,'service-1');
+insert into DEMAND values (10,'sitterEn-2'); 
+insert into DEMAND values (11,'service-1');
+insert into DEMAND values (11,'sitterEn-2'); 
+
+
 insert into res_detail values('10','10');
 insert into res_detail values('11','9');
 -- yoon : dogId = 8,9,10

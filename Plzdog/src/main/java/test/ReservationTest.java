@@ -128,7 +128,11 @@ public class ReservationTest {
 		
 		resList = dao.selectCompletePaymentReservationMemberByEmail("soo1@naver.com");
 		System.out.println(resList);
+		
+		Reservation r = dao.selectReservationDemandCodeByResId(22);
+		System.out.println(r);
 		}
+	
 	
 	
 	public static void printReservation(List<Reservation> list,String label) {

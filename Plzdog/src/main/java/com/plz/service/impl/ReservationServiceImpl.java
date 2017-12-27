@@ -466,6 +466,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public void acceptReservation(int resId) {
+		//매출을 추가
 		Reservation res = dao.selectReservationById(resId);
 		res.setResStatus("res-5");
 		dao.updateReservation(res);

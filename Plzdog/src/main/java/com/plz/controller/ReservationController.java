@@ -303,6 +303,7 @@ public class ReservationController {
 	}
 	@RequestMapping("/member/search_reservation_res2")
 	public String findReservationRes2Member(@RequestParam String email, Model model) {
+		//res-2하고 res-4상태를 조회
 		List<Reservation> list = rService.findReservationRes2(email);
 		if(list.isEmpty()) {
 			model.addAttribute("errorMessage","시터로부터 견적이 들어온 예약이 없습니다.");
