@@ -364,8 +364,14 @@
 		and	r.res_status = 'res-4' 
 		order by res_id desc
 	</select>
-		
 	
+	<!-- 예약아이디로 예약+예약상세+강아지를 조회하는 select -->
+	<select id="selectReservationJoinResDetailAndDogByResId" parameterType="_int" resultMap="simple-sitter-res-resdetail-dog-resulmap">
+		<include refid="simple-sitter-res-resdetail-dog-sql"></include>
+		where r.res_id = #{value}
+		and r.res_id = t.res_id
+		and t.dog_id = d.dog_id
+	</select>
 	
 	<!-- 왜 안나오는지 도저히 모르겠음 ㅈㅅ 강사님한테 물어보겠음-->
 	<!-- 의뢰자의 마이페이지 - 견적 결제완료 예약(res-5) - 강아지 정보 -->

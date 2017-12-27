@@ -6,11 +6,13 @@
 function payRes(resId){
 	var payCheck = confirm('결제하시겠습니까? 확인을 누르면 결제페이지로 이동합니다.');
 	if(payCheck){
-		location.replace('${initParam.rootPath}/member/payment.do?resId='+resId);
+		var payment = '${initParam.rootPath}/member/payment.do?resId='+resId;
+		location.replace(payment);
 	}else{
 		alert("취소합니다.")
 	}
 }
+
 function deleteRes(resId){
 	var dCheck = confirm("예약을 삭제하시겠어요?");
 	if(dCheck){

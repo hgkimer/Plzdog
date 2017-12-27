@@ -210,7 +210,12 @@ public interface ReservationService {
 	 * @return
 	 */
 	List<Reservation> findReservationRes4(String email);
-	
+	/**
+	 * 매개변수로 받은 예약아이디로 해당하는 결제하려는 예약 객체를 찾아주는 서비스 메소드.
+	 * @param resId
+	 * @return
+	 */
+	Reservation payment(int resId);
 	/**
 	 * 의뢰자 견적 완료 예약(res-5)상태인 예약 들을 조회해 온다.
 	 * @param email

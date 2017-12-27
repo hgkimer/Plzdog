@@ -372,10 +372,17 @@ public class ReservationController {
 		}
 		return "member/search_reservation_res4.tiles";
 	}
+	/**
+	 * 결제 페이지로 전달하는 메소드
+	 * - 매개변수로 예약 아이디를 받는다.
+	 * @param resId
+	 * @return
+	 */
 	@RequestMapping("/member/payment")
-	public String payment(@RequestParam String resId) {
-		
-		return "member/payment.do";
+	public String payment(@RequestParam int resId, Model model) {
+		Reservation res = rService.payment(resId);
+		model.addAttribute("res", res);
+		return "member/payment.tiles";
 	}
 	/**
 	 * 결제 완료 (res-5)들을 조회하는 컨트롤러
