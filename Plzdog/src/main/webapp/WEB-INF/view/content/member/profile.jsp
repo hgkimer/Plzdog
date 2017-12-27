@@ -86,10 +86,15 @@
 											</form>
 											</div>
 										</div>
+										<button type="button" class="btn btn-info btn-sm"
+											data-toggle="collapse" data-target="#dogId">강아지 상세보기</button>
+										<button type="button" class="btn btn-info btn-sm"
+											data-toggle="collapse" data-target="#reviewId">리뷰 상세보기</button>
 										</div>
 							</div> <!-- panel 바디 -->
 							</c:if>
 							<div class="panel-footer">
+									<div class="collapse" id="dogId">
 									<c:forEach items="${requestScope.profile.dogList }" var="dog" >
 									<div class="row">
 										<div class="col-lg-4">
@@ -99,7 +104,6 @@
 											</c:forEach>
 										</div>
 										<div class="col-lg-4">
-											
 											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
 											<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName}</strong></p>
 											<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
@@ -119,57 +123,13 @@
 									</div>
 									<hr>
 									</c:forEach>
+									</div>
+									<div class="collapse" id="reviewId">
+										리뷰 상세 보기
+									</div>
 							</div> <!-- 판넬 푸터 -->
 						</div><!-- panel 폼-->
 				</div>
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
-	
-<%-- <div class="container">
-	<div class="row">
-		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
-			<h1>${requestScope.profile.memberName }</h1>
-<p>이메일 : ${requestScope.profile.email }</p>
-<p>프로필 사진 : <img src="${initParam.rootPath }/memberImage/${profile.memberImage }" width="350px"><br>
-<p>우편번호 : ${requestScope.profile.zipcode }</p>
-<p>주소 : ${requestScope.profile.mainAddress }</p>
-<p>전화번호 : ${requestScope.profile.phoneNum }</p>
-<p>개 :<br>
-	<c:forEach items="${requestScope.profile.dogList }" var="dog" >
-		 강아지 이름 : ${dog.dogName}<br>
-		 강아지 종 : ${dog.species }<br>
-		 강아지 성별 : ${dog.gender }<br>
-		 강아지 몸무게 : ${dog.weight }<br>
-		 강아지 생년월일 : ${dog.birth }<br>
-		 강아지 상세 정보 : <br>
-		 <c:forEach items="${dog.dogInfoList }" var="dogInfo">
-		 	${dogInfo.code.codeName } (O) <br>
-		 </c:forEach>
-		 <c:forEach items="${dog.dogImage }" var="dogImage">
-		 		강아지 이미지 : <img src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="350px"><br>
-		 	</c:forEach>
-	</c:forEach>
-</p>
-
-<h1>Sitter 정보</h1>
-<p>학교 : ${requestScope.profile.sitter.school }</p>
-<p>서비스지역 : ${requestScope.profile.sitter.serviceAddress }</p>
-<p>시터평점 : ${requestScope.profile.sitter.sitterRate }</p>
-<p>방문돌봄금액 : ${requestScope.profile.sitter.visitPrice }</p>
-<p>위탁돌봄금액 : ${requestScope.profile.sitter.givePrice }</p>
-
-<p>스킬 리스트 : <br>
-	<c:forEach var="skill" items="${requestScope.profile.sitter.skillList }">
-		★${skill.code.codeName }<br>
-	</c:forEach></p>
-
-<form action="${initParam.rootPath }/member/checkSitter.do">
-	<input type="hidden" value="${requestScope.profile.email }" name="sitterEmail"/>
-	<button type="submit" class="btn btn-warning btn-block" style="margin-bottom: 20px;">예약 신청</button>
-</form>
-		</div>
-		<div class="col-lg-4"></div>
-	</div>
-</div> --%>
