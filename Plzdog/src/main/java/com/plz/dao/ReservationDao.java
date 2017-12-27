@@ -213,6 +213,7 @@ public interface ReservationDao {
 	 */
 	List<Reservation> selectReservationAllRes1();
 	
+	Reservation selectReservationbyResId(int resId);
 
 	/**
 	 * 결제가 완료된 상태 조회

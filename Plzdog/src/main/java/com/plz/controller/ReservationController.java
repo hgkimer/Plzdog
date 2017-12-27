@@ -372,7 +372,11 @@ public class ReservationController {
 		}
 		return "member/search_reservation_res4.tiles";
 	}
-	
+	@RequestMapping("/member/payment")
+	public String payment(@RequestParam String resId) {
+		
+		return "member/payment.do";
+	}
 	/**
 	 * 결제 완료 (res-5)들을 조회하는 컨트롤러
 	 * @param email

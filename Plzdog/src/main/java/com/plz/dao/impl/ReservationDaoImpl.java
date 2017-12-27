@@ -211,6 +211,12 @@ public class ReservationDaoImpl implements ReservationDao {
 		return session.selectList(makeSqlId("selectReservationRes5JoinResDetailAndDog"), email);
 	}
 
+	@Override
+	public Reservation selectReservationbyResId(int resId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	// ------------------------------------------
