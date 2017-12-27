@@ -212,9 +212,8 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 
 	@Override
-	public Reservation selectReservationbyResId(int resId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Reservation selectReservationJoinResDetailAndDogByResId(int resId) {
+		return session.selectOne(makeSqlId("selectReservationJoinResDetailAndDogByResId"), resId);
 	}
 
 	

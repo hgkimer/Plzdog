@@ -212,8 +212,13 @@ public interface ReservationDao {
 	 * @return
 	 */
 	List<Reservation> selectReservationAllRes1();
-	
-	Reservation selectReservationbyResId(int resId);
+	/**
+	 * 매개변수로 받은 예약 아이디로 예약을 조회하는 메소드.
+	 * - 예약 상세와 강아지 Join
+	 * @param resId
+	 * @return
+	 */
+	Reservation selectReservationJoinResDetailAndDogByResId(int resId);
 
 	/**
 	 * 결제가 완료된 상태 조회
