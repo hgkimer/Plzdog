@@ -2,6 +2,7 @@ package com.plz.controller;
 
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -383,7 +384,20 @@ public class ReservationController {
 	public String payment(@RequestParam int resId, Model model) {
 		Reservation res = rService.payment(resId);
 		model.addAttribute("res", res);
+		//예약시간의 전체 시간 총 합을 구해  Scope에 저장한다.
+		long totalTime = totalTimeCal(res.getResSDate(), res.getResEDate());
+		model.addAttribute("totalTime", totalTime);
 		return "member/payment.tiles";
+	}
+	/**
+	 * 매개변수로 받은 예약의 시작날짜와 끝 날짜를 밀리초로 바꾸어 그 차를 구한 뒤,
+	 * 시간 단위로 바꾸어 리턴해 주는 메소드.
+	 * @param sTime
+	 * @param eTime
+	 * @return
+	 */
+	private long totalTimeCal(Date sTime, Date eTime) {
+		return (eTime.getTime()-sTime.getTime())*1000*60*60;
 	}
 	/**
 	 * 결제 완료 (res-5)들을 조회하는 컨트롤러
