@@ -404,6 +404,7 @@ public class ReservationServiceImpl implements ReservationService {
 			r.setResDogList(dogList);
 			//강아지의 전체 정보를 담은 리스트를 각 예약 객체에 세팅
 			Reservation res = dao.selectReservationDemandCodeByResId(r.getResId());
+			//요구사항 세팅
 			r.setDemandList(res.getDemandList());
 		}
 		//모든 정보를 저장한 예약 타입의 리스트들을 리턴.
@@ -412,21 +413,25 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Override
 	public Reservation payment(int resId) {
-		Reservation res = dao.selectReservationJoinResDetailAndDogByResId(resId);
+		Reservation r = dao.selectReservationJoinResDetailAndDogByResId(resId);
 		//예약 객체의 회원 정보 세팅
-		res.setMember(mDao.selectMemberByEmail(res.getMemberEmail()));
+		r.setMember(mDao.selectMemberByEmail(r.getMemberEmail()));
 		//예약 객체에 담당 시터 정보 세팅
-		res.setSitter(mDao.selectSitterByEmail(res.getSitterEmail()));
+		r.setSitter(mDao.selectSitterByEmail(r.getSitterEmail()));
 		//강아지들의 상세정보를 담을 Dog 객체 리스트 생성
 		ArrayList<Dog> dogList = new ArrayList<>();
-		for(ResDetail rd : res.getResDetailList()) {
+		for(ResDetail rd : r.getResDetailList()) {
 			//하나의 예약 상세정보에 들어있는 강아지의 아이디를 통해 강아지 들의 상세정보를 객체에 저장
 			rd.setDog(dDao.selectDogJoinDogInfoDogImageByDogId(rd.getDogId()));
-			//저아된 강아지들을 위에서 만든 강아지 리스트에 
+			//저장된 강아지들을 위에서 만든 강아지 리스트에 
 			dogList.add(rd.getDog());
 		}
-		res.setResDogList(dogList);
-		return res;
+		//강아지 정보를 저장한 뒤 세팅
+		r.setResDogList(dogList);
+		Reservation res = dao.selectReservationDemandCodeByResId(r.getResId());
+		//요구사항 저장
+		r.setDemandList(res.getDemandList());
+		return r;
 	}
 	
 	@Override

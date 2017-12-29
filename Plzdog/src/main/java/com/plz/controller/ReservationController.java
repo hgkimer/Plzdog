@@ -389,6 +389,10 @@ public class ReservationController {
 		model.addAttribute("totalTime", totalTime);
 		return "member/payment.tiles";
 	}
+	@RequestMapping("/member/payment_success")
+	public String payment() {
+		return null;
+	}
 	/**
 	 * 매개변수로 받은 예약의 시작날짜와 끝 날짜를 밀리초로 바꾸어 그 차를 구한 뒤,
 	 * 시간 단위로 바꾸어 리턴해 주는 메소드.
@@ -397,7 +401,7 @@ public class ReservationController {
 	 * @return
 	 */
 	private long totalTimeCal(Date sTime, Date eTime) {
-		return (eTime.getTime()-sTime.getTime())*1000*60*60;
+		return (eTime.getTime()-sTime.getTime())/(1000*60*60);
 	}
 	/**
 	 * 결제 완료 (res-5)들을 조회하는 컨트롤러
