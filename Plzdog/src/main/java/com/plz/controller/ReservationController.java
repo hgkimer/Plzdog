@@ -389,9 +389,23 @@ public class ReservationController {
 		model.addAttribute("totalTime", totalTime);
 		return "member/payment.tiles";
 	}
-	@RequestMapping("/member/payment_success")
-	public String payment() {
-		return null;
+	/**
+	 * 결제가 완료되면 
+	 * @param resId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/member/payment_result")
+	public String paymentResult(@RequestParam int resId, @RequestParam int status, Model model) {
+		Reservation res = rService.payment(resId);
+		if(status == 1) {
+			res.setResStatus("res-5");
+			rService.updateReservation(res);
+			model.addAttribute("res", res);
+		}else {
+			model.addAttribute("paymentFail", "결제가 취소되었습니다.");
+		}
+		return "member/payment_result.tiles";
 	}
 	/**
 	 * 매개변수로 받은 예약의 시작날짜와 끝 날짜를 밀리초로 바꾸어 그 차를 구한 뒤,
