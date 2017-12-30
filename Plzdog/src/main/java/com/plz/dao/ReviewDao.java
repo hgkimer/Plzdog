@@ -1,8 +1,17 @@
 package com.plz.dao;
 
+import java.util.List;
+
 import com.plzdog.vo.Review;
 
 public interface ReviewDao {
+	
+	/**
+	 * 리뷰 조회
+	 * @param sitterEmail
+	 * @return
+	 */
+	List<Review> selectReviewBySitterEmail(String sitterEmail);
 	
 	/**
 	 * 리뷰 등록

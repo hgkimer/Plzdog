@@ -17,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,12 +26,14 @@ import com.plz.service.CareService;
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
 import com.plz.service.ReservationService;
+import com.plz.service.ReviewService;
 import com.plz.service.SitterService;
 import com.plz.service.WaitingService;
 import com.plzdog.vo.Authority;
 import com.plzdog.vo.Care;
 import com.plzdog.vo.Member;
 import com.plzdog.vo.Reservation;
+import com.plzdog.vo.Review;
 import com.plzdog.vo.Sitter;
 
 @Controller
@@ -59,6 +60,9 @@ public class SitterController {
 	@Autowired
 	private DogService dogService;
 
+	@Autowired
+	private ReviewService reviewService;
+	
 	@RequestMapping("/admin/select_waiting")
 	public ModelAndView selectWaiting(HttpServletRequest request) {
 		List<String> waitingList = waitingService.selectAllWaiting();
@@ -132,11 +136,7 @@ public class SitterController {
 		}
 	}
 	
-	/*@RequestMapping("/sitter/select_res")
-	public String selectResId(@RequestParam String email, Model model) {
-		model.addAttribute("res", rService.findMemberReservationByEmail(email));
-		return null;
-	}*/
+	
 	
 	/**
 	 * 돌봄 일지 등록

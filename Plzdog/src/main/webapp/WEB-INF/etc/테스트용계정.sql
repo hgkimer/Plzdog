@@ -551,3 +551,13 @@ where 			res_status = 'res_2'
 		where res_status in('res-2','res-4')
 		order by res_id desc
 		
+		
+		select	review_id,
+				review_rate,
+				review_contents,
+				email,
+				email_sitter,
+				review_date
+		from	review
+		where email_sitter = 'soo1@naver.com'  
+		order by review_date desc

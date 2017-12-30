@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Care implements Serializable{
@@ -12,7 +13,7 @@ public class Care implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int careId;
 	private int resId;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE, pattern="yyyy-MM-dd")
 	private Date careDate;
 	private String careMeal;
 	private String careWalking;

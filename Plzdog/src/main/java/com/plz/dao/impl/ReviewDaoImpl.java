@@ -1,5 +1,7 @@
 package com.plz.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,5 +32,10 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	public int deleteReview(int reviewId) {
 		return session.delete(makeSqlId("deleteReview"), reviewId);
+	}
+
+	@Override
+	public List<Review> selectReviewBySitterEmail(String sitterEmail) {
+		return session.selectList(makeSqlId("selectReviewBySitterEmail"), sitterEmail);
 	}
 }

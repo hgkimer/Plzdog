@@ -6,6 +6,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
+function popupRegisterReview(sitterEmail) {
+	var url = '${initParam.rootPath}/member/review_register_form.do?sitterEmail='+sitterEmail;
+	window.open(url,"newReviewManageForm","width = 500, height = 500");
+}
+
+function popupUpdateReview(sitterEmail) {
+	var url = '${initParam.rootPath}/member/review_edit_form.do?sitterEmail='+sitterEmail;
+	window.open(url,"newReviewManageForm","width = 1000, height = 1000");
+}
+
+function deleteReview(reviewId) {
+	
+	opener.parent.location="/WEB-INF/view/content/member/profile.jsp";
+	opener.parent.location.reload();
+}
 
 </script>
 
@@ -86,50 +101,84 @@
 											</form>
 											</div>
 										</div>
-										<button type="button" class="btn btn-info btn-sm"
-											data-toggle="collapse" data-target="#dogId">강아지 상세보기</button>
-										<button type="button" class="btn btn-info btn-sm"
-											data-toggle="collapse" data-target="#reviewId">리뷰 상세보기</button>
-										</div>
+									</div>
 							</div> <!-- panel 바디 -->
 							</c:if>
 							<div class="panel-footer">
-									<div class="collapse" id="dogId">
-									<c:forEach items="${requestScope.profile.dogList }" var="dog" >
-									<div class="row">
-										<div class="col-lg-4">
-											<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
-											<c:forEach items="${dog.dogImage }" var="dogImage">
-											 	<img class="img-circle" src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="200px"><br>
+									<c:choose>
+											<c:when test="${empty requestScope.profile.dogList   }">
+											<h4 style="color: tomato; text-align: center;">회원님의 강아지가 없습니다!</h4>
+											</c:when>
+										<c:otherwise>
+											<c:forEach items="${requestScope.profile.dogList }" var="dog" >
+											<div class="row">
+												<div class="col-lg-4">
+													<!-- 각 강아지들의 첫번쨰 사진을 출력 -->
+													<c:forEach items="${dog.dogImage }" var="dogImage">
+													 	<img class="img-circle" src="${initParam.rootPath }/dogImage/${dogImage.dogImage }" width="200px"><br>
+													</c:forEach>
+												</div>
+												<div class="col-lg-4">
+													<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
+													<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName}</strong></p>
+													<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
+													<p><strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong></p>
+													<p><strong>무게  ${dog.weight }kg</strong></p>
+													<p><strong><span class="glyphicon glyphicon-gift"></span> <fmt:formatDate value="${dog.birth }" pattern="yyyy-MM-dd"/></strong></p>
+												</div>
+												<div class="col-lg-4">
+													<!-- 강아지 상세 정보 -->
+													<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
+													<c:forEach items="${dog.dogInfoList }" var="dogInfo">
+														<ol>
+															<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
+														</ol>
+													</c:forEach>
+												</div>
+											</div>
+											<hr>
 											</c:forEach>
-										</div>
-										<div class="col-lg-4">
-											<!-- 강아지들의 기본정보 출력(이름, 종 ,성별, 무게, 생일) -->
-											<p><strong><span class="glyphicon glyphicon-search"></span>${dog.dogName}</strong></p>
-											<p><strong><span class="glyphicon glyphicon-filter"></span>${dog.species }</strong></p>
-											<p><strong><span class="glyphicon glyphicon-heart"></span>${dog.gender }</strong></p>
-											<p><strong>무게  ${dog.weight }kg</strong></p>
-											<p><strong><span class="glyphicon glyphicon-gift"></span> <fmt:formatDate value="${dog.birth }" pattern="yyyy-MM-dd"/></strong></p>
-										</div>
-										<div class="col-lg-4">
-											<!-- 강아지 상세 정보 -->
-											<span class="glyphicon glyphicon-th-list"></span><label>강아지 상세 정보</label><br>
-											<c:forEach items="${dog.dogInfoList }" var="dogInfo">
-												<ol>
-													<li><strong>${dogInfo.code.codeName } <span class="glyphicon glyphicon-ok"></span></strong></li>
-												</ol>
+										</c:otherwise>
+									</c:choose>
+									
+									<!-- 리뷰 -->
+										<c:choose>
+											<c:when test="${empty requestScope.profile.reviewList }">
+											<h4 style="color: tomato; text-align: center;">등록된 리뷰가 없습니다!</h4>
+											<button type="button" class="btn btn-info btn-sm" 
+														onclick='javascript:popupRegisterReview("${requestScope.profile.email}")'>리뷰 등록</button>
+											</c:when>
+										<c:otherwise>
+											<h2 style="color: blue; text-align: center; font-family: courier; background-color:powderblue;">리뷰</h2>
+											<c:forEach items="${requestScope.profile.reviewList }" var="review" >
+											<div class="row">
+												<div class="col-lg-12">
+													<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 : </label>
+													<strong><fmt:formatDate value='${review.reviewDate }' type="date" pattern="yyyy-MM-dd HH시 mm분" /></strong> &nbsp; 
+													<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 : </label>
+													<strong>${review.memberName}</strong> &nbsp; 
+													<span class="glyphicon glyphicon-user"></span><label for="pName"> 평점 : </label>
+													<strong>${review.reviewRate}</strong>
+													<div style="width:80%; height: 100px; border: 1px solid orange;">
+													${review.reviewContents }	
+													</div>
+													<button type="button" class="btn btn-info btn-sm"
+														onclick='javascript:popupUpdateReview("${requestScope.profile.email}")'>리뷰 수정</button>
+													<button type="button" class="btn btn-info btn-sm"
+														onclick='javascript:deleteReview("${review.reviewId}")'>리뷰 삭제</button>
+												</div>
+											</div>
+											<hr>
 											</c:forEach>
-										</div>
-									</div>
-									<hr>
-									</c:forEach>
-									</div>
-									<div class="collapse" id="reviewId">
-										리뷰 상세 보기
-									</div>
+												<button type="button" class="btn btn-info btn-sm" 
+														onclick='javascript:popupRegisterReview("${requestScope.profile.email}")'>리뷰 등록</button>
+										</c:otherwise>
+									</c:choose>
+								
 							</div> <!-- 판넬 푸터 -->
 						</div><!-- panel 폼-->
 				</div>
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
+		

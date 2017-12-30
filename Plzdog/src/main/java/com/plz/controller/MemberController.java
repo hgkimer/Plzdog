@@ -3,6 +3,7 @@ package com.plz.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,9 +30,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.plz.service.AuthorityService;
 import com.plz.service.DogService;
 import com.plz.service.MemberService;
-import com.plzdog.vo.Authority;
+import com.plz.service.ReviewService;
 import com.plzdog.vo.Member;
-import com.plzdog.vo.Sitter;
+import com.plzdog.vo.Review;
 
 @Controller
 @RequestMapping("/member/")
@@ -45,6 +46,9 @@ public class MemberController {
 	
 	@Autowired
 	private DogService dService;
+	
+	@Autowired
+	private ReviewService rService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -91,11 +95,10 @@ public class MemberController {
 	@RequestMapping("goToProfile")
 	public String goToProfile(@RequestParam String email, Model model, HttpSession session) {
 		//먼저 sitter에 등록되어 있는지 확인한다.
-		System.out.println(email);
+		//System.out.println(email);
 		
 		//일반 회원으로 조회를 할 경우 mapper에서 sitter테이블이 없으므로 null값이 출력 된다.
 		Member member = service.findMemberByEmail(email);
-		System.out.println(member);
 		
 		if(member.getAuthorityList().size() == 2) { //시터라면
 		//if(member.ggtSitter().getEmail() != null) {//시터라면,
@@ -104,6 +107,20 @@ public class MemberController {
 			model.addAttribute("sitterFlag", true);
 			//강아지들 정보 저장.
 			member.setDogList(dService.selectDogByEmail(email));
+			
+			List<Review> reviewList = rService.findReviewBySitterEmail(email);
+			
+			//작성자 이름 저장
+			if(reviewList != null) {
+				for(Review review : reviewList) {
+					review.setMemberName(service.findMemberByEmail(review.getMemberEmail()).getMemberName());
+				}
+			}
+			
+			//해당 시터의 리뷰 정보 저장.
+			member.setReviewList(reviewList);
+			
+			
 		}else {
 			//일반회원의 경우
 			member = service.findMemberByEmail(email);
@@ -263,6 +280,108 @@ public class MemberController {
 			}
 		}
 		return sitterList;
+	}
+	
+	/**
+	 * 리뷰 등록
+	 * reviewDate를 받지를 못한다.
+	 * Date는 @ModelAttrubute를 사용해야 한다.
+	 * @param review
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("insert_review")
+	@Transactional
+	public String registerReview(@ModelAttribute Review review,Model model) {
+		
+		rService.addReview(review);
+		System.out.println(review);
+		
+		Member member = service.selectSitterByEmail(review.getSitterEmail());
+		//강아지들 정보 저장.
+		member.setDogList(dService.selectDogByEmail(review.getSitterEmail()));
+		//해당 시터의 리뷰 정보 조회
+		List<Review> reviewList = rService.findReviewBySitterEmail(review.getSitterEmail());
+		System.out.println(reviewList);
+		
+		//작성자 이름 저장
+		if(reviewList != null) {
+			for(Review r : reviewList) {
+				r.setMemberName(service.findMemberByEmail(r.getMemberEmail()).getMemberName());
+			}
+		}
+		
+		//해당 시터의 리뷰 정보 저장.
+		member.setReviewList(reviewList);
+		
+		model.addAttribute("profile", member);
+		return "member/profile.tiles";
+	}
+	
+	/**
+	 * 리뷰 등록
+	 * @param review
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("update_review")
+	@Transactional
+	public String updateReview(@ModelAttribute Review review, Model model) {
+		rService.updateReview(review);
+		
+		Member member = service.selectSitterByEmail(review.getSitterEmail());
+		//시터임을 나타내는 flag를 scope에 저장
+		model.addAttribute("sitterFlag", true);
+		//강아지들 정보 저장.
+		member.setDogList(dService.selectDogByEmail(review.getSitterEmail()));
+		//해당 시터의 리뷰 정보 조회
+		List<Review> reviewList = rService.findReviewBySitterEmail(review.getSitterEmail());
+		
+		//작성자 이름 저장
+		if(reviewList != null) {
+			for(Review r : reviewList) {
+				r.setMemberName(service.findMemberByEmail(r.getMemberEmail()).getMemberName());
+			}
+		}
+		
+		//해당 시터의 리뷰 정보 저장.
+		member.setReviewList(reviewList);
+		
+		model.addAttribute("profile", member);
+		return "member/profile.tiles";
+	}
+	
+	/**
+	 * 리뷰 등록
+	 * @param review
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("delete_review")
+	@Transactional
+	public String deleteReview(@RequestParam int reviewId,@RequestParam String sitterEmail , Model model) {
+		rService.removeReview(reviewId);
+		
+		Member member = service.selectSitterByEmail(sitterEmail);
+		//시터임을 나타내는 flag를 scope에 저장
+		model.addAttribute("sitterFlag", true);
+		//강아지들 정보 저장.
+		member.setDogList(dService.selectDogByEmail(sitterEmail));
+		//해당 시터의 리뷰 정보 조회
+		List<Review> reviewList = rService.findReviewBySitterEmail(sitterEmail);
+		
+		//작성자 이름 저장
+		if(reviewList != null) {
+			for(Review r : reviewList) {
+				r.setMemberName(service.findMemberByEmail(r.getMemberEmail()).getMemberName());
+			}
+		}
+		
+		//해당 시터의 리뷰 정보 저장.
+		member.setReviewList(reviewList);
+		
+		model.addAttribute("profile", member);
+		return "member/profile.tiles";
 	}
 
 }

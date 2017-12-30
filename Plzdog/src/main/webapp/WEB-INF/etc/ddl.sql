@@ -154,11 +154,12 @@ CREATE TABLE SKILL (
 	CONSTRAINT FK_SKILL_CODE FOREIGN KEY(CODE_SKILL) REFERENCES CODE on delete cascade
 );
 
-/* 리뷰 */
+/* 리뷰 작성일 속성 추가 하였습니다.*/
 CREATE TABLE REVIEW (
 	REVIEW_ID NUMBER(10) PRIMARY KEY, /* 리뷰ID */
 	REVIEW_RATE NUMBER(1), /* 별점 */
 	REVIEW_CONTENTS CLOB NOT NULL, /* 내용 */
+	REVIEW_DATE DATE NOT NULL, /* 작성일 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 견주_이메일 */
 	EMAIL_SITTER VARCHAR2(100) NOT NULL, /* 시터_이메일 */
 	CONSTRAINT FK_REVIEW_MEMBER FOREIGN KEY(EMAIL) REFERENCES member on delete cascade,
@@ -239,8 +240,11 @@ create sequence RESERVATION_id_seq;
 
 --돌봄일지 시퀀스 생성
 drop sequence CARE_id_seq;
-create sequence CARE_id_seq;	
+create sequence CARE_id_seq;
 
+-- 리뷰 시퀀스 생성
+drop sequence review_id_seq;
+create sequence review_id_seq;
 ---------------------------------------------------
 -- INSERT
 
@@ -461,8 +465,9 @@ insert into SKILL values('soo10@naver.com','service-1');
 insert into SKILL values('soo10@naver.com','service-2');
 
 --리뷰
-INSERT INTO REVIEW VALUES (1,3.5,'좋아요1','yoon@naver.com','kim@naver.com');
-INSERT INTO REVIEW VALUES (2,3.5,'좋아요1','lee@naver.com','soo1@naver.com');
+INSERT INTO REVIEW VALUES (1,3.5,'좋아요1', sysdate ,'yoon@naver.com','kim@naver.com');
+INSERT INTO REVIEW VALUES (2,3.5,'좋아요2', sysdate,'lee@naver.com','soo1@naver.com');
+INSERT INTO REVIEW VALUES (3,3.5,'좋아요3', sysdate,'lee@naver.com','soo1@naver.com');
 
 --예약
 insert into RESERVATION values(RESERVATION_id_seq.NEXTVAL,'2010/07/01','2010/07/02',10000,'의뢰내용1','res-5','lee@naver.com','soo1@naver.com');

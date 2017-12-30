@@ -21,7 +21,7 @@
 	 });  */
 
 	function popupProfile(email) {
-		var url = '${initParam.rootPath }/member/goToProfile.do?email=' + email
+		var url = '${initParam.rootPath }/member/goToProfile.do?email=' + email;
 		window.open(url, "newProfileForm", "width = 1000, height = 1000");
 	}
 
