@@ -64,13 +64,6 @@ $("#serachBtn").on("click", function(){
 </script>
 
 <style type="text/css">
-table td{
-	border: 1px solid gray;
-	padding: 5px;
-}
-table{
-	border-collapse: collapse;
-}
 
 #mySidebar {
 	display:none;
@@ -79,8 +72,8 @@ table{
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
 			필요한 서비스 : 
 			<select name="selectService" id="selectServiceId" required="required">
 				<option value="">모든 서비스</option>
@@ -97,11 +90,16 @@ table{
 			
 			<button id="serachBtn">검색하기</button>
 		</div>
-		<div class="col-lg-4"></div>
+		<div class="col-lg-2"></div>
 	</div>
 </div>
 
-<table border='1' style="width: 1000px;">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<h2></h2>
+			<table class="table col-sm-12" style="background-color: ghostWhite;">
 	<thead>
 		<tr>
 			<td>시터이미지</td>
@@ -123,7 +121,7 @@ table{
 		<c:otherwise>
 			<c:forEach items="${requestScope.sitterList }" var="member">
 				<tr id="sitterTr" onclick="location.href='goToProfile.do?email=${member.email }'" style="cursor:pointer">
-					<td><img src="${initParam.rootPath }/memberImage/${member.memberImage }" width="150px"></td>
+					<td><img class="img-circle" src="${initParam.rootPath }/memberImage/${member.memberImage }" width="150px"></td>
 					<td>${member.memberName }</td>
 					<td>${member.mainAddress } ${member.subAddress }</td>
 					<td>${member.sitter.serviceAddress }</td>
@@ -142,3 +140,7 @@ table{
 	</c:choose>
 	</tbody>
 </table>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>

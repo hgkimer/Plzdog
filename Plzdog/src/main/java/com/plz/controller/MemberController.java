@@ -3,6 +3,7 @@ package com.plz.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -293,6 +296,8 @@ public class MemberController {
 	@Transactional
 	public String registerReview(@ModelAttribute Review review,Model model) {
 		
+		//현재 시간으로 변환
+		review.setReviewDate(new Date());
 		rService.addReview(review);
 		System.out.println(review);
 		
@@ -318,24 +323,33 @@ public class MemberController {
 	}
 	
 	/**
-	 * 리뷰 등록
+	 * 리뷰 수정
 	 * @param review
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("update_review")
 	@Transactional
-	public String updateReview(@RequestParam(name="reviewRate") List<Integer> reviewRate, Model model) {
-		//rService.updateReview(review);
+	public String updateReview(@RequestParam(name="reviewRate") List<Integer> reviewRate,String reviewContents,
+			String sitterEmail,String memberEmail,int reviewId, Model model) {
+		
+		Review review = new Review(reviewId,reviewRate.get(0),reviewContents,sitterEmail,memberEmail,new Date());
+		rService.updateReview(review);
 		//System.out.println(review);
 		//@RequestParam String reviewContents,
-		System.out.println("업데이트");
+		/*System.out.println("업데이트");
 		System.out.println(reviewRate);
-		/*Member member = service.selectSitterByEmail(review.getSitterEmail());
+		System.out.println(reviewContents);
+		System.out.println(sitterEmail);
+		System.out.println(memberEmail);
+		System.out.println(reviewDate);*/
+		System.out.println(review);
+		
+		Member member = service.selectSitterByEmail(sitterEmail);
 		//강아지들 정보 저장.
-		member.setDogList(dService.selectDogByEmail(review.getSitterEmail()));
+		member.setDogList(dService.selectDogByEmail(sitterEmail));
 		//해당 시터의 리뷰 정보 조회
-		List<Review> reviewList = rService.findReviewBySitterEmail(review.getSitterEmail());
+		List<Review> reviewList = rService.findReviewBySitterEmail(sitterEmail);
 		
 		//작성자 이름 저장
 		if(reviewList != null) {
@@ -347,7 +361,7 @@ public class MemberController {
 		//해당 시터의 리뷰 정보 저장.
 		member.setReviewList(reviewList);
 		
-		model.addAttribute("profile", member);*/
+		model.addAttribute("profile", member);
 		return "member/profile.tiles";
 	}
 	

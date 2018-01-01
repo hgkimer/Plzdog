@@ -6,15 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
-/* function popupRegisterReview(sitterEmail) {
-	var url = '${initParam.rootPath}/member/review_register_form.do?sitterEmail='+sitterEmail;
-	window.open(url,"newReviewManageForm","width = 500, height = 500");
-}
-
-function popupUpdateReview(sitterEmail) {
-	var url = '${initParam.rootPath}/member/review_edit_form.do?sitterEmail='+sitterEmail;
-	window.open(url,"newReviewManageForm","width = 1000, height = 1000");
-} */
 
 function deleteReview(reviewId, sitterEmail) {
 	
@@ -28,41 +19,51 @@ function deleteReview(reviewId, sitterEmail) {
 
 var number;
 
-var form;
+var reviewRateId;
+
+var target;
+
+function change(count){
+	// foreach문에 selectId와 reviewRateId를 구분하기 위해 count사용
+	
+	reviewRateId = "reviewRate"+count;
+	selectedId = "selectUpdateReviewScoreId"+count;
+	
+	target = document.getElementById(selectedId);
+	target1 = document.getElementById(reviewRateId);
+	
+	target1.value = target.options[target.selectedIndex].value;
+	
+	//alert(target1.value);
+}   
 
 $(document).ready(function(){
+	
 	$("#selectReviewScoreId").on("change", function(){
 		number = $("#selectReviewScoreId").val();
 		document.registerReviewForm.reviewRate.value=number;
 	});
 	
-	$("#selectUpdateReviewScoreId").on("change", function(){
+	/* $("#selectUpdateReviewScoreId").on("change", function(){
 		number = $("#selectUpdateReviewScoreId").val();
-		//document.updateReviewForm.reviewRate.value=number;
-	}); 
+		alert(number);
+		$("#reviewRate").val(number);
+	}); */
 });
 
-function submit(count){
-	alert(number);
-	alert(count);
-	if(confirm("전송 하시겠습니까?")){
-		//action="${initParam.rootPath }/member/update_review.do"
-		var url='${initParam.rootPath }/member/update_review.do';
-		location.href=url; 
-	} else{ 
-		return false;
-	} 
-	
-	form = eval("updateReviewForm"+count);
-	document.form.reviewRate.value=number;
-} 
 
 
 </script>
 
 	<div class="container">
+		
 		<div class="row" style="margin-top:20px">
-			<div class="col-lg-2"></div>
+			<div class="col-lg-2">
+				<!-- 현재 사용자의 이메일 가져옴 -->
+				<sec:authorize access="isAuthenticated()">
+								<sec:authentication property="principal.email" var="email" />
+				</sec:authorize>
+			</div>
 			<div class="col-lg-8">
 						<div class="panel panel-info">
 							<div class="panel-heading">
@@ -182,8 +183,6 @@ function submit(count){
 										<c:choose>
 											<c:when test="${empty requestScope.profile.reviewList }">
 											<h4 style="color: tomato; text-align: center;">등록된 리뷰가 없습니다!</h4>
-											<button type="button" class="btn btn-info btn-sm" 
-														data-toggle="collapse" data-target="#reviewId">리뷰 등록</button>
 											</c:when>
 										<c:otherwise>
 											<h2 style="color: blue; text-align: center; font-family: courier; background-color:powderblue;">리뷰</h2>
@@ -195,34 +194,37 @@ function submit(count){
 													<strong><fmt:formatDate value='${review.reviewDate }' type="date" pattern="yyyy-MM-dd HH시 mm분" /></strong> &nbsp; 
 													<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 : </label>
 													<strong>${review.memberName}</strong> &nbsp; 
-													<span class="glyphicon glyphicon-user"></span><label for="pName"> 평점 : </label>
+													<span class="glyphicon glyphicon-pencil"></span><label for="pName"> 평점 : </label>
 													<strong>${review.reviewRate}</strong>
 													<div style="width:80%; height: 100px; border: 1px solid orange;">
 													${review.reviewContents }	
 													</div>
-													<button type="button" class="btn btn-info btn-sm"
-														data-toggle="collapse" data-target="#${review.reviewId}">리뷰 수정</button>
-													<button type="button" class="btn btn-info btn-sm"
-														onclick='javascript:deleteReview("${review.reviewId}","${requestScope.profile.email}")'>리뷰 삭제</button>
-													
+													<!-- 로그인한 사용자의 리뷰만 수정, 삭제 가능 -->
+													<c:if test="${review.memberEmail eq email}">
+														<button type="button" class="btn btn-info btn-sm"
+															data-toggle="collapse" data-target="#${review.reviewId}">리뷰 수정</button>
+														<button type="button" class="btn btn-info btn-sm"
+															onclick='javascript:deleteReview("${review.reviewId}","${requestScope.profile.email}")'>리뷰 삭제</button>
+													</c:if>
 														<div class="collapse" id="${review.reviewId}">
-															<form name="updateReviewForm${k.count }" method="post">
+														
+															<form name="updateReviewForm${k.count }" action="${initParam.rootPath }/member/update_review.do" method="post">
 																<sec:csrfInput/><%-- csrf 토큰 --%>
 																<input type="hidden" name="sitterEmail" value="${requestScope.profile.email}" />
-																<input type="hidden" name="reviewId" value=0 />
+																<input type="hidden" name="reviewId" value="${review.reviewId }"/>
 																
-																	<div class="form-group">
+																	<!-- <div class="form-group">
 																		<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
-																		<input type="date" name="reviewDate" class="form-control" required="required"/><br>
-																	</div>
+																		<input type="date" name="reviewDate" class="form-control" required="required" value=""/><br>
+																	</div> -->
 																	<div class="form-group">
 																		<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
 																		<sec:authentication property="principal.memberName"/>
 																		<input type="hidden" name="memberEmail" class="form-control" value='<sec:authentication property="principal.email"/>' required="required">
 																	</div>
 																	<div class="form-group" >
-																		<span class="glyphicon glyphicon-pancil"></span><label for="pName"> 별점 </label>
-																		<select name="selectReviewScore" id="selectUpdateReviewScoreId">
+																		<span class="glyphicon glyphicon-pencil"></span><label for="pName"> 평점 </label>
+																		<select name="selectReviewScore" id="selectUpdateReviewScoreId${k.count }" onchange="change(${k.count })">
 																			<option value="">별점을 선택하세요</option>
 																			<c:forEach var="i" varStatus="count" begin="1" end="5" >
 																				<option value="<c:out value='${i}'/>"><c:out value="${i}"/></option>
@@ -232,12 +234,14 @@ function submit(count){
 																	</div>
 																	<div class="form-group">
 																		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 내용 </label>
-																		<textarea rows="5" cols="30" id="reviewContents" name="reviewContents" class="form-control" required="required">${review.reviewContents }</textarea>
+																		<textarea rows="5" cols="30" id="reviewContents" name="reviewContents" class="form-control" required="required">${review.reviewContents } </textarea>
 																	</div>
 																
 																<div class="form-group">
-																	<!-- <input type="submit" value="전송" class="btn btn-info btn-sm" id="btn" > -->
-																	<input type="button" value="전송" onclick="submit(${k.count})" class="btn btn-info btn-sm">
+																	<input type="submit" value="전송" class="btn btn-info btn-sm" id="btn" > 
+																	<%-- <input type="button" onclick="javascript:submit('${k.count}')" class="btn btn-info btn-sm" id="btn${k.count }"> --%>
+																	<%-- <button type="button" class="btn btn-info btn-sm"
+																		onclick="javascript:submit('${k.count}')">전송</button> --%>
 																</div>
 														    </form>
 													</div><!-- 수정 부분 div -->	
@@ -260,18 +264,20 @@ function submit(count){
 										<sec:csrfInput/><%-- csrf 토큰 --%>
 										<input type="hidden" name="sitterEmail" value="${requestScope.profile.email}" />
 										<input type="hidden" name="reviewId" value=0 />
+										<input type="hidden" name="reviewDate" value=""/>
 										
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
-												<input type="date" name="reviewDate" class="form-control" required="required"/><br>
-											</div>
+												<input type="date" name="reviewDate" class="form-control" required="required" value=""/><br>
+											</div> -->
+											
 											<div class="form-group">
 												<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
 												<sec:authentication property="principal.memberName"/>
 												<input type="hidden" name="memberEmail" class="form-control" value='<sec:authentication property="principal.email"/>' required="required">
 											</div>
 											<div class="form-group" >
-												<span class="glyphicon glyphicon-pancil"></span><label for="pName"> 별점 </label>
+												<span class="glyphicon glyphicon-pencil"></span><label for="pName"> 평점 </label>
 												<select name="selectReviewScore" id="selectReviewScoreId">
 													<option value="">별점을 선택하세요</option>
 													<c:forEach var="i" begin="1" end="5" >

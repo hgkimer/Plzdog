@@ -20,7 +20,6 @@
 
 function pclose() {
 	opener.parent.location="/WEB-INF/view/content/sitter/care_select_form.jsp";
-	
 	opener.parent.location.reload();
 	window.close();
 }
