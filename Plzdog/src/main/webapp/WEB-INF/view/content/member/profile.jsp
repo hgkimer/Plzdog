@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
-function popupRegisterReview(sitterEmail) {
+/* function popupRegisterReview(sitterEmail) {
 	var url = '${initParam.rootPath}/member/review_register_form.do?sitterEmail='+sitterEmail;
 	window.open(url,"newReviewManageForm","width = 500, height = 500");
 }
@@ -14,13 +14,49 @@ function popupRegisterReview(sitterEmail) {
 function popupUpdateReview(sitterEmail) {
 	var url = '${initParam.rootPath}/member/review_edit_form.do?sitterEmail='+sitterEmail;
 	window.open(url,"newReviewManageForm","width = 1000, height = 1000");
+} */
+
+function deleteReview(reviewId, sitterEmail) {
+	
+	if(confirm("삭제 하시겠습니까?")){
+		var url='${initParam.rootPath }/member/delete_review.do?reviewId='+reviewId+'&sitterEmail='+sitterEmail;
+		location.href=url; 
+	} else{ 
+		return false;
+	} 
 }
 
-function deleteReview(reviewId) {
+var number;
+
+var form;
+
+$(document).ready(function(){
+	$("#selectReviewScoreId").on("change", function(){
+		number = $("#selectReviewScoreId").val();
+		document.registerReviewForm.reviewRate.value=number;
+	});
 	
-	opener.parent.location="/WEB-INF/view/content/member/profile.jsp";
-	opener.parent.location.reload();
-}
+	$("#selectUpdateReviewScoreId").on("change", function(){
+		number = $("#selectUpdateReviewScoreId").val();
+		//document.updateReviewForm.reviewRate.value=number;
+	}); 
+});
+
+function submit(count){
+	alert(number);
+	alert(count);
+	if(confirm("전송 하시겠습니까?")){
+		//action="${initParam.rootPath }/member/update_review.do"
+		var url='${initParam.rootPath }/member/update_review.do';
+		location.href=url; 
+	} else{ 
+		return false;
+	} 
+	
+	form = eval("updateReviewForm"+count);
+	document.form.reviewRate.value=number;
+} 
+
 
 </script>
 
@@ -102,9 +138,11 @@ function deleteReview(reviewId) {
 											</div>
 										</div>
 									</div>
+									
 							</div> <!-- panel 바디 -->
 							</c:if>
 							<div class="panel-footer">
+							
 									<c:choose>
 											<c:when test="${empty requestScope.profile.dogList   }">
 											<h4 style="color: tomato; text-align: center;">회원님의 강아지가 없습니다!</h4>
@@ -140,17 +178,17 @@ function deleteReview(reviewId) {
 											</c:forEach>
 										</c:otherwise>
 									</c:choose>
-									
 									<!-- 리뷰 -->
 										<c:choose>
 											<c:when test="${empty requestScope.profile.reviewList }">
 											<h4 style="color: tomato; text-align: center;">등록된 리뷰가 없습니다!</h4>
 											<button type="button" class="btn btn-info btn-sm" 
-														onclick='javascript:popupRegisterReview("${requestScope.profile.email}")'>리뷰 등록</button>
+														data-toggle="collapse" data-target="#reviewId">리뷰 등록</button>
 											</c:when>
 										<c:otherwise>
 											<h2 style="color: blue; text-align: center; font-family: courier; background-color:powderblue;">리뷰</h2>
-											<c:forEach items="${requestScope.profile.reviewList }" var="review" >
+											
+											<c:forEach items="${requestScope.profile.reviewList }" var="review" varStatus="k">
 											<div class="row">
 												<div class="col-lg-12">
 													<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 : </label>
@@ -163,18 +201,97 @@ function deleteReview(reviewId) {
 													${review.reviewContents }	
 													</div>
 													<button type="button" class="btn btn-info btn-sm"
-														onclick='javascript:popupUpdateReview("${requestScope.profile.email}")'>리뷰 수정</button>
+														data-toggle="collapse" data-target="#${review.reviewId}">리뷰 수정</button>
 													<button type="button" class="btn btn-info btn-sm"
-														onclick='javascript:deleteReview("${review.reviewId}")'>리뷰 삭제</button>
-												</div>
+														onclick='javascript:deleteReview("${review.reviewId}","${requestScope.profile.email}")'>리뷰 삭제</button>
+													
+														<div class="collapse" id="${review.reviewId}">
+															<form name="updateReviewForm${k.count }" method="post">
+																<sec:csrfInput/><%-- csrf 토큰 --%>
+																<input type="hidden" name="sitterEmail" value="${requestScope.profile.email}" />
+																<input type="hidden" name="reviewId" value=0 />
+																
+																	<div class="form-group">
+																		<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
+																		<input type="date" name="reviewDate" class="form-control" required="required"/><br>
+																	</div>
+																	<div class="form-group">
+																		<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
+																		<sec:authentication property="principal.memberName"/>
+																		<input type="hidden" name="memberEmail" class="form-control" value='<sec:authentication property="principal.email"/>' required="required">
+																	</div>
+																	<div class="form-group" >
+																		<span class="glyphicon glyphicon-pancil"></span><label for="pName"> 별점 </label>
+																		<select name="selectReviewScore" id="selectUpdateReviewScoreId">
+																			<option value="">별점을 선택하세요</option>
+																			<c:forEach var="i" varStatus="count" begin="1" end="5" >
+																				<option value="<c:out value='${i}'/>"><c:out value="${i}"/></option>
+																			</c:forEach>
+																		</select><br>
+																		<input type="hidden" id="reviewRate${k.count }" name="reviewRate" value=''/>
+																	</div>
+																	<div class="form-group">
+																		<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 내용 </label>
+																		<textarea rows="5" cols="30" id="reviewContents" name="reviewContents" class="form-control" required="required">${review.reviewContents }</textarea>
+																	</div>
+																
+																<div class="form-group">
+																	<!-- <input type="submit" value="전송" class="btn btn-info btn-sm" id="btn" > -->
+																	<input type="button" value="전송" onclick="submit(${k.count})" class="btn btn-info btn-sm">
+																</div>
+														    </form>
+													</div><!-- 수정 부분 div -->	
+												</div><!-- 리뷰 부분 div -->
 											</div>
 											<hr>
 											</c:forEach>
-												<button type="button" class="btn btn-info btn-sm" 
-														onclick='javascript:popupRegisterReview("${requestScope.profile.email}")'>리뷰 등록</button>
+												<%-- <button type="button" class="btn btn-info btn-sm" 
+														onclick='javascript:popupRegisterReview("${requestScope.profile.email}")'>리뷰 등록</button> --%>
+												
 										</c:otherwise>
 									</c:choose>
-								
+									
+									<button type="button" class="btn btn-info btn-sm" 
+														data-toggle="collapse" data-target="#reviewId">리뷰 등록</button>
+																			
+									<div class="collapse" id="reviewId">
+									<p></p>
+									<form name="registerReviewForm" action="${initParam.rootPath }/member/insert_review.do" method="post" >
+										<sec:csrfInput/><%-- csrf 토큰 --%>
+										<input type="hidden" name="sitterEmail" value="${requestScope.profile.email}" />
+										<input type="hidden" name="reviewId" value=0 />
+										
+											<div class="form-group">
+												<span class="glyphicon glyphicon-calendar"></span><label for="pId"> 작성일 </label>
+												<input type="date" name="reviewDate" class="form-control" required="required"/><br>
+											</div>
+											<div class="form-group">
+												<span class="glyphicon glyphicon-user"></span><label for="pName"> 작성자 </label>
+												<sec:authentication property="principal.memberName"/>
+												<input type="hidden" name="memberEmail" class="form-control" value='<sec:authentication property="principal.email"/>' required="required">
+											</div>
+											<div class="form-group" >
+												<span class="glyphicon glyphicon-pancil"></span><label for="pName"> 별점 </label>
+												<select name="selectReviewScore" id="selectReviewScoreId">
+													<option value="">별점을 선택하세요</option>
+													<c:forEach var="i" begin="1" end="5" >
+														<option value="<c:out value='${i}'/>"><c:out value="${i}"/></option>
+													</c:forEach>
+												</select><br>
+												<input type="hidden" name="reviewRate" value=""/>
+											</div>
+											<div class="form-group">
+												<span class="glyphicon glyphicon-pencil"></span><label for="pPwd"> 내용 </label>
+												<textarea rows="5" cols="30" id="reviewContents" name="reviewContents" class="form-control" required="required"></textarea>
+											</div>
+										
+										<div class="form-group">
+											<input type="submit" value="전송" class="btn btn-info btn-sm" id="btn" >
+										</div>
+									</form>
+									
+									</div>
+										
 							</div> <!-- 판넬 푸터 -->
 						</div><!-- panel 폼-->
 				</div>

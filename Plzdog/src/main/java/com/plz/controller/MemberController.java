@@ -3,7 +3,6 @@ package com.plz.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -326,12 +325,13 @@ public class MemberController {
 	 */
 	@RequestMapping("update_review")
 	@Transactional
-	public String updateReview(@ModelAttribute Review review, Model model) {
-		rService.updateReview(review);
-		
-		Member member = service.selectSitterByEmail(review.getSitterEmail());
-		//시터임을 나타내는 flag를 scope에 저장
-		model.addAttribute("sitterFlag", true);
+	public String updateReview(@RequestParam(name="reviewRate") List<Integer> reviewRate, Model model) {
+		//rService.updateReview(review);
+		//System.out.println(review);
+		//@RequestParam String reviewContents,
+		System.out.println("업데이트");
+		System.out.println(reviewRate);
+		/*Member member = service.selectSitterByEmail(review.getSitterEmail());
 		//강아지들 정보 저장.
 		member.setDogList(dService.selectDogByEmail(review.getSitterEmail()));
 		//해당 시터의 리뷰 정보 조회
@@ -347,7 +347,7 @@ public class MemberController {
 		//해당 시터의 리뷰 정보 저장.
 		member.setReviewList(reviewList);
 		
-		model.addAttribute("profile", member);
+		model.addAttribute("profile", member);*/
 		return "member/profile.tiles";
 	}
 	
