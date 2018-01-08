@@ -36,6 +36,9 @@ $("#serachBtn").on("click", function(){
 		},
 		"success" : function(list){
 			var txt = "";
+			if(list == null) {
+				alert('해당되는 시터가 없습니다.');	
+			}
 			$(list).each(function(){
 				var skillList = this.sitter.skillList;
 				var visitName ='-';

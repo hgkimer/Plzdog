@@ -306,17 +306,18 @@ delete from code;
 -- 전체 코드 등록
 --------시터의 스킬(= 견주 요구사항)-------------------------------------------
 insert into code values('sitter-1','반려동물 경험 유무','시터');
-insert into code values('sitter-2','펫트너 집에서 보살필 수 있어요','시터');
-insert into code values('sitter-3','고객의 집에서 보살필 수 있어요','시터');
+insert into code values('sitter-2','동물 병원 근무 경험','시터');
+insert into code values('sitter-3','퍼피 케어 가능','시터');
 insert into code values('sitter-4','투약가능','시터');
 insert into code values('sitter-5','노령견 케어 가능','시터');
-insert into code values('sitter-6','퍼피 케어 가능','시터');
+insert into code values('sitter-6','당료 환자 가능','시터');
 insert into code values('sitter-7','환자 모니터링 가능','시터');
 --------시터의 환경 (프로필에서 시터 환경과 시터 스킬을 구분하기 위해 카테고리에서 환경을 수정)---------
 insert into code values('sitterEn-1','아파트','환경');
 insert into code values('sitterEn-2','주택','환경');
 insert into code values('sitterEn-3','마당유무','환경');
 insert into code values('sitterEn-4','흡연자 유무','환경');
+insert into code values('sitterEn-5','가족 동거 유무','환경');
 --------강아지 정보-----------------------------------------------------------
 INSERT INTO CODE VALUES('dog-1','유기견 출신 여부','강아지');
 INSERT INTO CODE VALUES('dog-2','접종여부','강아지');
@@ -407,16 +408,16 @@ INSERT INTO DOG_IMAGE VALUES('2.jpg','12');
 INSERT INTO DOG_IMAGE VALUES('3.jpg','13');
 
 --시터
-INSERT INTO SITTER VALUES('soo1@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
-INSERT INTO SITTER VALUES('soo2@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
-INSERT INTO SITTER VALUES('soo3@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
-INSERT INTO SITTER VALUES('soo4@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
-INSERT INTO SITTER VALUES('soo5@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
-INSERT INTO SITTER VALUES('soo6@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
-INSERT INTO SITTER VALUES('soo7@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
-INSERT INTO SITTER VALUES('soo8@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
-INSERT INTO SITTER VALUES('soo9@naver.com','가천대학교','이미지경로1','서울,경기',3.6,35000,30000);
-INSERT INTO SITTER VALUES('soo10@naver.com','대전대학교','이미지경로2','서울,천안',3.1,35000,30000);
+INSERT INTO SITTER VALUES('soo1@naver.com','가천대학교','이미지경로1','서울,경기',3.6,3000,3000);
+INSERT INTO SITTER VALUES('soo2@naver.com','대전대학교','이미지경로2','서울,천안',3.1,3000,3000);
+INSERT INTO SITTER VALUES('soo3@naver.com','가천대학교','이미지경로1','서울,경기',3.6,3000,3000);
+INSERT INTO SITTER VALUES('soo4@naver.com','대전대학교','이미지경로2','서울,천안',3.1,3000,3000);
+INSERT INTO SITTER VALUES('soo5@naver.com','가천대학교','이미지경로1','서울,경기',3.6,3000,3000);
+INSERT INTO SITTER VALUES('soo6@naver.com','대전대학교','이미지경로2','서울,천안',3.1,3000,3000);
+INSERT INTO SITTER VALUES('soo7@naver.com','가천대학교','이미지경로1','서울,경기',3.6,3000,3000);
+INSERT INTO SITTER VALUES('soo8@naver.com','대전대학교','이미지경로2','서울,천안',3.1,3000,3000);
+INSERT INTO SITTER VALUES('soo9@naver.com','가천대학교','이미지경로1','서울,경기',3.6,3000,3000);
+INSERT INTO SITTER VALUES('soo10@naver.com','대전대학교','이미지경로2','서울,천안',3.1,3000,3000);
 
 --스킬
 INSERT INTO SKILL VALUES('soo1@naver.com','sitter-1');
