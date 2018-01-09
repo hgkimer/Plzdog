@@ -28,8 +28,6 @@ $(document).ready(function(){
 function deleteImage(form){
 	$(form).parent().remove();
 }
-
-
 </script>
 </head>
 <body>
@@ -39,6 +37,8 @@ function deleteImage(form){
 	<div class="row">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8">
+		<h2>돌봄일지 수정 </h2>
+		<hr style="border: solid 1px black;">
 <c:if test="${not empty requestScope.errorMessage}">
 	<div class="well text-danger">
 		${requestScope.errorMessage }

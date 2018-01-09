@@ -46,7 +46,8 @@ function reject(sitterEmail, memberEmail){
 		<div class="row">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
-				<a href=""></a>
+				<h2 style="text-align: center">승인 대기 중인 예약</h2>
+				<hr style="border: solid 1px black;">
 				<div class="row" style="margin-top:20px">
 				<c:if test="${empty sessionScope.resList }">
 					<h2 style="color: tomato; text-align: center;">나의 승인을 기다리는 예약이 없습니다!</h2>

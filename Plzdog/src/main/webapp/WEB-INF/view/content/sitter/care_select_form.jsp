@@ -32,8 +32,6 @@ function deleteCare(careId ,resId){
 	} 
 }
 
-//setTimeout("history.go(0);", 10000); // 1초는 1000 입니다.
-
 </script>
 </head>
 <body>
@@ -56,7 +54,8 @@ function deleteCare(careId ,resId){
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<a href=""></a>
+				<h2>돌봄일지 조회</h2>
+			<hr style="border: solid 1px black;">
 				<div class="row">
 					<c:forEach items="${requestScope.careList}" var="care" varStatus="status">
 						<div class="panel panel-default">
@@ -75,7 +74,7 @@ function deleteCare(careId ,resId){
 										<p></p>
 										<p>
 											 <span class="glyphicon glyphicon-calendar"></span><label>작성일
-											<fmt:formatDate value="${care.careDate}" pattern="yyyy-MM-dd HH시 mm분"/></label>
+											<fmt:formatDate value="${care.careDate}" pattern="yyyy-MM-dd"/></label>
 										</p>
 									</div>
 								</div>

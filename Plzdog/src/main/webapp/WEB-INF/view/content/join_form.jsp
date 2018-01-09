@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#btn").on("click",function(){
@@ -74,7 +75,8 @@ function inputCheck(){
 	<div class="row">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
-			<h2></h2>
+			<h2>회원 가입 </h2>
+			<hr style="border: solid 1px black;">
 <form name="regForm" action="${initParam.rootPath }/join_member.do" method="post" id="regForm" enctype="multipart/form-data" onsubmit="return inputCheck();">
 	<sec:csrfInput/>
 	<div class="form-group">
@@ -124,6 +126,32 @@ function inputCheck(){
 		<div class="col-lg-4"></div>
 	</div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

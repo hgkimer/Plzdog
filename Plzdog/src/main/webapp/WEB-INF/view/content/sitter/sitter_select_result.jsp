@@ -87,7 +87,7 @@ $("#serachBtn").on("click", function(){
 			<br>
 			
 			시터 세부사항 : <br>
-			<c:forEach items="${applicationScope.skillList }" var="sitterSkill" begin='3'>
+			<c:forEach items="${applicationScope.skillList }" var="sitterSkill" begin='0'>
 				<input type="checkbox" name="checkSitter" id="checkSitterId" value=${sitterSkill.code } />${sitterSkill.codeName }<br>
 			</c:forEach>
 			

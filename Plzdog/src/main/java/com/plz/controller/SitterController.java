@@ -57,18 +57,12 @@ public class SitterController {
 	@Autowired
 	private ReservationService rService;
 	
-	@Autowired
-	private DogService dogService;
-
-	@Autowired
-	private ReviewService reviewService;
-	
 	@RequestMapping("/admin/select_waiting")
 	public ModelAndView selectWaiting(HttpServletRequest request) {
 		List<String> waitingList = waitingService.selectAllWaiting();
 		List<Member> memberList = new ArrayList<>();
 			for(int i =0; i < waitingList.size(); i++) {
-				memberList.add(memberService.findMemberByEmail(waitingList.get(i)));
+				memberList.add(memberService.selectSitterByEmail(waitingList.get(i)));
 		}
 		return new ModelAndView("admin/select_waiting_result.tiles", "memberList", memberList);
 	}
@@ -81,18 +75,35 @@ public class SitterController {
 	@RequestMapping("/admin/enroll_sitter")
 	public String enrollSitter(@ModelAttribute Authority authority, ModelMap model) {
 		authorityService.addAuthority(authority);
-		
 		waitingService.deleteWaiting(authority.getEmail());
 		
-		model.addAttribute("email", authority.getEmail());
-		return "admin/sitter_enroll_result.tiles";
+		String approveMessage = memberService.findMemberJoinAuthorityByEmail(authority.getEmail()).getMemberName() +"님의 시터신청을 승인었습니다.";
+		//다시 조회
+		List<String> waitingList = waitingService.selectAllWaiting();
+		List<Member> memberList = new ArrayList<>();
+			for(int i =0; i < waitingList.size(); i++) {
+				memberList.add(memberService.selectSitterByEmail(waitingList.get(i)));
+		}
+		model.addAttribute("approveMessage", approveMessage);
+		return "admin/select_waiting_result.tiles";
 	}
 	
 	@RequestMapping("/admin/delete_sitter")
 	public String deleteSitter(@RequestParam String email, Model model) {
-		memberService.deleteMember(email);
-		model.addAttribute(email);
-		return "sitter/sitter_delete_result.tiles";
+		sitterService.removeSitter(email);
+		waitingService.deleteWaiting(email);
+		
+		String rejectMessage = memberService.findMemberJoinAuthorityByEmail(email).getMemberName() +"님의 시터신청을 거절었습니다.";
+		
+		//다시 조회
+		List<String> waitingList = waitingService.selectAllWaiting();
+		List<Member> memberList = new ArrayList<>();
+			for(int i =0; i < waitingList.size(); i++) {
+				memberList.add(memberService.selectSitterByEmail(waitingList.get(i)));
+		}
+		model.addAttribute("rejectMessage", rejectMessage);
+		
+		return "admin/select_waiting_result.tiles";
 	}
 	
 	//------------- lee su il -------------------------
@@ -136,8 +147,6 @@ public class SitterController {
 		}
 	}
 	
-	
-	
 	/**
 	 * 돌봄 일지 등록
 	 * 돌봄 일지의 등록과 여러개의 이미지 처리
@@ -164,12 +173,10 @@ public class SitterController {
 	@Transactional
 	public String updateCare(@ModelAttribute Care care , 
 			HttpServletRequest request, ModelMap model) throws IllegalStateException, IOException {
-			
-			System.out.println(care);
+	
 			careService.updateCare(care,request);
 			model.addAttribute("resId",care.getResId());
 			return "/WEB-INF/view/content/sitter/care_edit_result_form.jsp";
-			//return "/sitter/select_care.do";
 	}
 	
 	@RequestMapping("/sitter/delete_care")

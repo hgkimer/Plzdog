@@ -44,7 +44,6 @@ public class AdminManageController {
 	 * @param user
 	 * @return
 	*/
-	
 	@RequestMapping("register_admin")
 	public ModelAndView registerAdmin(@ModelAttribute Member member,HttpServletRequest request) throws IllegalStateException, IOException {
 		MultipartFile ImageMember = member.getImageMember();

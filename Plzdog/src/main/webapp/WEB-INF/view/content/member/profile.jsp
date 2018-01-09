@@ -43,12 +43,7 @@ $(document).ready(function(){
 		number = $("#selectReviewScoreId").val();
 		document.registerReviewForm.reviewRate.value=number;
 	});
-	
-	/* $("#selectUpdateReviewScoreId").on("change", function(){
-		number = $("#selectUpdateReviewScoreId").val();
-		alert(number);
-		$("#reviewRate").val(number);
-	}); */
+
 });
 
 
@@ -128,7 +123,6 @@ $(document).ready(function(){
 															<strong>${skill.code.codeName } </strong><br>
 														</c:if>
 												</c:forEach></p>
-										
 										</div>
 										<div class="row">
 											<div class="col-lg-12">
@@ -185,8 +179,8 @@ $(document).ready(function(){
 											<h4 style="color: tomato; text-align: center;">등록된 리뷰가 없습니다!</h4>
 											</c:when>
 										<c:otherwise>
-											<h2 style="color: blue; text-align: center; font-family: courier; background-color:powderblue;">리뷰</h2>
-											
+											<button type="button" class="btn btn-success btn-lg btn-block">리뷰</button>
+											<!-- <h2 style="color: blue; text-align: center; font-family: courier; background-color:powderblue;">리뷰</h2> -->
 											<c:forEach items="${requestScope.profile.reviewList }" var="review" varStatus="k">
 											<div class="row">
 												<div class="col-lg-12">
@@ -227,7 +221,7 @@ $(document).ready(function(){
 																		<select name="selectReviewScore" id="selectUpdateReviewScoreId${k.count }" onchange="change(${k.count })">
 																			<option value="">별점을 선택하세요</option>
 																			<c:forEach var="i" varStatus="count" begin="1" end="5" >
-																				<option value="<c:out value='${i}'/>"><c:out value="${i}"/></option>
+																			      <option value="<c:out value='${i}'/>"><c:out value="${i}"/></option>
 																			</c:forEach>
 																		</select><br>
 																		<input type="hidden" id="reviewRate${k.count }" name="reviewRate" value=''/>

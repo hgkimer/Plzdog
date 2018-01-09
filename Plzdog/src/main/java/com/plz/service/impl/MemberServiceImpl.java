@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
 				}
 			}
 		}
-	}
+	}	
 
 	@Override
 	@Transactional

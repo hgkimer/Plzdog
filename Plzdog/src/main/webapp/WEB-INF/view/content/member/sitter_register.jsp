@@ -30,7 +30,7 @@
 					<input type="hidden" name="email"
 						value="<sec:authentication property="principal.email"/>">
 					<div class="form-group">
-						<label for="school">소속이름 : </label> <input type="text"
+						<label for="school">학교이름 : </label> <input type="text"
 							name="school" id="school" class="form-control"
 							required="required">
 					</div>
@@ -55,7 +55,7 @@
 							class="form-control" required="required">
 					</div>
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<div class="form-group">
 						<label>보유 기술 목록 :</label>
 						<div class="checkbox">
@@ -68,13 +68,25 @@
 						</div>
 					</div>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<div class="form-group">
 						<label>보유 환경 목록 : </label>
 						<div class="checkbox">
 							<c:forEach var="en" items="${applicationScope.enList }">
 								<label><input type="checkbox" name="skill"
 									value="${en.code }" class="form-check-input">${en.codeName }</label>
+								<br>
+							</c:forEach>
+						</div>
+					</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+						<label>보유 서비스 목록 : </label>
+						<div class="checkbox">
+							<c:forEach var="service" items="${applicationScope.serviceList }">
+								<label><input type="checkbox" name="skill"
+									value="${service.code }" class="form-check-input">${service.codeName }</label>
 								<br>
 							</c:forEach>
 						</div>

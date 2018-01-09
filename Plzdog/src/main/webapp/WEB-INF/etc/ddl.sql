@@ -127,7 +127,7 @@ CREATE TABLE DOGINFO (
 
 --강아지 이미지
 CREATE TABLE DOG_IMAGE (
-	DOG_IMAGE VARCHAR2(100) NOT NULL, /* 이미지이름(경로) */
+	DOG_IMAGE VARCHAR2(100) NULL, /* 이미지이름(경로) */
 	DOG_ID NUMBER(5) NOT NULL, /* 강아지ID */
 	CONSTRAINT FK_DOG_IMAGE_DOG FOREIGN KEY(DOG_ID) REFERENCES DOG on delete cascade
 );
@@ -267,6 +267,8 @@ insert into member values('soo10@naver.com','오시터','1111','서울','연희�
 
 -- 비밀번호 1111 통일
 update member set password = '$2a$10$L0NFXewNsSA71F18CWumiOeTdegchXuVtA.tUJk8reEHlFCRLMp2u';
+
+update member set MEMBER_IMAGE = '시터9.jpg';
 
 -- 권한
 -- 관리자ㄴ

@@ -31,5 +31,11 @@ public class SitterServiceImpl implements SitterService {
 		}
 		
 	}
+	
+	@Override
+	@Transactional
+	public void removeSitter(String email) {
+		sitterDao.deleteSitter(email);
+	}
 
 }

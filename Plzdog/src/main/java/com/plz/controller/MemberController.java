@@ -216,33 +216,6 @@ public class MemberController {
 		return "sitter/sitter_select_result.tiles";
 	}
 	
-	//지우지 마세용
-	/*@RequestMapping("select_sitter")
-	public @ResponseBody List<Member> selectSitter(@RequestParam String serviceName){
-		
-		List<Member> sitterList = new ArrayList<>();
-		String codeName;
-		
-		System.out.println(serviceName);
-		for(Member member : service.selectAllSitter()) {
-			//ROLE_MEMBER, ROLE_SITTER
-			if(member.getAuthorityList().size() == 2) {
-				for(int i=0; i< member.getSitter().getSkillList().size() ; i++) {
-					codeName = member.getSitter().getSkillList().get(i).getCode().getCodeName();
-					if(codeName.equals(serviceName)) {
-						sitterList.add(member);
-					}
-				}
-			}
-		}
-		for(Member member : sitterList) { `
-			System.out.println(member);
-		}
-		return sitterList;
-	}*/
-	
-	//List<String> arrayParams, @RequestParam(value="selectService") String selectService
-	
 	@RequestMapping("find_sitter")
 	public @ResponseBody List<Member> findSitter(@RequestParam(value="checkArray[]") List<String> checkArray,
 				@RequestParam(value="selectService") String selectService ){
@@ -299,24 +272,8 @@ public class MemberController {
 		//현재 시간으로 변환
 		review.setReviewDate(new Date());
 		rService.addReview(review);
-		System.out.println(review);
 		
-		Member member = service.selectSitterByEmail(review.getSitterEmail());
-		//강아지들 정보 저장.
-		member.setDogList(dService.selectDogByEmail(review.getSitterEmail()));
-		//해당 시터의 리뷰 정보 조회
-		List<Review> reviewList = rService.findReviewBySitterEmail(review.getSitterEmail());
-		System.out.println(reviewList);
-		
-		//작성자 이름 저장
-		if(reviewList != null) {
-			for(Review r : reviewList) {
-				r.setMemberName(service.findMemberByEmail(r.getMemberEmail()).getMemberName());
-			}
-		}
-		
-		//해당 시터의 리뷰 정보 저장.
-		member.setReviewList(reviewList);
+		Member member = rService.refreshProfile(review);
 		
 		model.addAttribute("profile", member);
 		return "member/profile.tiles";
@@ -335,15 +292,6 @@ public class MemberController {
 		
 		Review review = new Review(reviewId,reviewRate.get(0),reviewContents,sitterEmail,memberEmail,new Date());
 		rService.updateReview(review);
-		//System.out.println(review);
-		//@RequestParam String reviewContents,
-		/*System.out.println("업데이트");
-		System.out.println(reviewRate);
-		System.out.println(reviewContents);
-		System.out.println(sitterEmail);
-		System.out.println(memberEmail);
-		System.out.println(reviewDate);*/
-		System.out.println(review);
 		
 		Member member = service.selectSitterByEmail(sitterEmail);
 		//강아지들 정보 저장.
@@ -366,7 +314,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * 리뷰 등록
+	 * 리뷰 삭제
 	 * @param review
 	 * @param model
 	 * @return

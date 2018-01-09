@@ -8,18 +8,6 @@
 
 <script type="text/javascript">
 
-	/* var checkboxValues = new Array();
-	
-	$("input[name='checkSitter']:checked").each(function() {
-	    checkboxValues.push($(this).val());
-	});
-	
-	 $(document).ready(function(){
-	 $("#sortId").on("click", function(){
-		  	
-	 	});
-	 });  */
-
 	function popupProfile(email) {
 		var url = '${initParam.rootPath }/member/goToProfile.do?email=' + email;
 		window.open(url, "newProfileForm", "width = 1000, height = 1000");
@@ -35,30 +23,6 @@
 		}
 	}
 </script>
-
-<%-- <div class="container">
-	<div class="row">
-		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
-			필요한 서비스 : 
-			<select name="selectService" id="selectServiceId" required="required">
-				<option value="">모든 서비스</option>
-				<c:forEach items="${applicationScope.serviceList}" var="category">
-					<option value="${category.code}">${category.codeName }</option>
-				</c:forEach>
-			</select><br>
-			<br>
-			
-			시터 세부사항 : <br>
-			<c:forEach items="${applicationScope.skillList }" var="sitterSkill" begin='3'>
-				<input type="checkbox" name="checkSitter" id="checkSitterId" value=${sitterSkill.code } />${sitterSkill.codeName }<br>
-			</c:forEach>
-			
-			<button id="serachBtn">검색하기</button>
-		</div>
-		<div class="col-lg-4"></div>
-	</div>
-</div> --%>
 
 <style>
 #mySidebar {
@@ -88,30 +52,6 @@
 					<c:forEach items="${requestScope.memberList }" var="member">
 						<tr>
 							<c:set var="doneLoop" value="false" />
-							<%-- true이면 값을 출력 하지 않음 --%>
-							
-							<%-- <c:forEach items="${member.authorityList }" var="authority">
-
-								<c:if test="${fn:contains(authority.authority, 'ROLE_ADMIN')}">
-									<td>관리자</td>
-									<c:set var="doneLoop" value="true" />
-								</c:if>
-
-								<c:if test="${not doneLoop}">
-									<c:if test="${fn:contains(authority.authority, 'ROLE_SITTER')}">
-										<td>시터</td>
-										<c:set var="doneLoop" value="true" />
-										
-										<c:if test="${not doneLoop}">
-											<c:if
-												test="${fn:contains(authority.authority, 'ROLE_MEMBER')}">
-												<td>회원</td>
-											</c:if>
-										</c:if>
-									</c:if>
-								</c:if>
-							</c:forEach> --%>
-							
 							<!-- 권한을 3개 가지고 있으면 관리자. -->
 							<c:if test="${fn:length(member.authorityList) == 3}">
 								<td id='authorityId'>관리자</td>

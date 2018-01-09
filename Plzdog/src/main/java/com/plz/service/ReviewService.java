@@ -2,6 +2,7 @@ package com.plz.service;
 
 import java.util.List;
 
+import com.plzdog.vo.Member;
 import com.plzdog.vo.Review;
 
 public interface ReviewService {
@@ -33,4 +34,11 @@ public interface ReviewService {
 	 * @return
 	 */
 	int removeReview(int reviewId);
+	
+	/**
+	 * 프로필을 다시 조회 하는 역할
+	 * @param review
+	 * @return
+	 */
+	Member refreshProfile(Review review);
 }

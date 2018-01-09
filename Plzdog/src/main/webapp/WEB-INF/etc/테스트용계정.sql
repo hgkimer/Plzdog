@@ -432,7 +432,9 @@ where 			res_status = 'res_2'
 		insert into res_detail values(36,21);
 		insert into res_detail values(36,22);
 		
-		
+		delete from sitter where email = 'jang@naver.com'
+		delete from sitter where email = 'lee@naver.com'
+		delete from sitter where email = 'suil1@naver.com'
 		
 		select  r.res_id,
 				r.res_sdate,

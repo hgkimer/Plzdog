@@ -4,6 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script>
+function deleteDog(dogId){
+	if(confirm("정말 삭제 하시겠습니까?")){
+		var url="${initParam.rootPath }/dog/delete_dog.do?dogId="+dogId;
+		location.href=url; 
+	} else{ 
+		return false;
+	} 
+}
+</script>
+
 <style>
 .form-group {
 	width: auto;
@@ -48,9 +59,12 @@
 											<button
 												onclick="location.href='select_dog_dogInfo_dogImage.do?dogId=${dog.dogId}'"
 												class="btn btn-default btn-sm" disabled>강아지 수정</button>
-											<button
+											<%-- <button
 												onclick="location.href='delete_dog.do?dogId=${dog.dogId}'"
-												class="btn btn-danger btn-sm">강아지 삭제</button>
+												class="btn btn-danger btn-sm">강아지 삭제</button> --%>
+											<button
+											onclick="deleteDog(${dog.dogId})"
+											class="btn btn-danger btn-sm">강아지 삭제</button>
 											<button type="button" class="btn btn-info btn-sm"
 												data-toggle="collapse" data-target="#${dog.dogId }">상세보기</button>
 										</div>
@@ -110,8 +124,7 @@
 						</div>
 					</div>
 				</c:forEach>
-				<button onclick="location.href='mydog_register_form.do'"
-					class="btn btn-warning btn-lg btn-block">강아지 등록</button>
+				<button onclick="location.href='mydog_register_form.do'" class="btn btn-warning btn-lg btn-block">강아지 등록</button>
 			</div>
 			<div class="col-lg-3"></div>
 		</div>

@@ -14,5 +14,7 @@ public interface SitterService {
 	 * @param enList
 	 */
 	void insertSitter(Sitter sitter, List<String> skillList);
+
+	void removeSitter(String email);
 	
 }

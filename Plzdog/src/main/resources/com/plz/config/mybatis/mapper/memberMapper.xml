@@ -179,7 +179,7 @@
 	<!-- 시터의 전체 회원정보, 시터정보, 스킬 정보 조회 -->
 	<select id="selectAllMemberJoinSitterSkillAuthority" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
 		<include refid="member-sitter-skill-authority-select-sql"/>
-		where 	m.email = s.email
+		where 	m.email = s.email(+)
 		and	    m.email = a.email
 		and		s.email = sk.email(+)
 		and		sk.code_skill = c.code(+)
@@ -190,10 +190,10 @@
 	<!-- 이메일로 시터의 회원정보, 시터정보 스킬 정보 조회 -->
 	<select id="selectMemberJoinSitterSkillAuthorityByEmail" parameterType="string" resultMap="member-sitter-skill-authority-resultmap">
 		<include refid="member-sitter-skill-authority-select-sql"/>
-		where 	m.email = s.email
+		where 	m.email = s.email(+)
 		and	    m.email = a.email
-		and		s.email = sk.email
-		and		sk.code_skill = c.code
+		and		s.email = sk.email(+)
+		and		sk.code_skill = c.code(+)
 		and 	m.member_enable = '1'
 		and 	m.email = a.email	
 		and  	m.email = #{email}
